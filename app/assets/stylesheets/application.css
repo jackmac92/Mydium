@@ -25,9 +25,14 @@ h1, h2, h3, p, li {
   color: inherit;
   text-decoration: inherit;
   text-align: inherit;
-  
+
   vertical-align: inherit;
   box-sizing: inherit;
 
   background: transparent;
+}
+
+#main-editor {
+  width: 500px;
+  height: 50px;
 }
