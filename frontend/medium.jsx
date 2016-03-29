@@ -13,9 +13,11 @@ var App = React.createClass({
     return (
       <div>
         <header>
-          <h1>Podium</h1>
+          <h1 id="logo">Podium</h1>
         </header>
-        {this.props.children}
+        <content>
+          {this.props.children}
+        </content>
       </div>
     );
   }
