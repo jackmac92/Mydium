@@ -42,18 +42,18 @@ the API.
 - [x] create `Article` model
 - [x] seed the database with a small amount of test data
 - [x] CRUD API for articles (`ArticlesController`)
-- [ ] jBuilder views for articles
-- [ ] setup Webpack & Flux scaffold
-- [ ] setup `APIUtil` to interact with the API
-- [ ] test out API interaction in the console.
+- [x] jBuilder views for articles
+- [x] setup Webpack & Flux scaffold
+- [x] setup `APIUtil` to interact with the API
+- [x] test out API interaction in the console.
 
 ### Phase 3: Flux Architecture and Router (1.5 days)
 
 **Objective:** Articles can be created, read, edited and destroyed with the
 user interface.
 
-- [ ] setup the flux loop with skeleton files
-- [ ] setup React Router
+- [x] setup the flux loop with skeleton files
+- [x] setup React Router
 - implement each article component, building out the flux loop as needed.
   - [ ] `ArticlesIndex`
   - [ ] `ArticleIndexItem`
