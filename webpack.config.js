@@ -3,7 +3,7 @@ var webpack = require('webpack');
 
 module.exports = {
   context: __dirname,
-  entry: "./frontend/medium.cjsx",
+  entry: "./frontend/medium.jsx",
   output: {
     path: path.join(__dirname, 'app', 'assets', 'javascripts'),
     filename: "bundle.js",
@@ -23,7 +23,7 @@ module.exports = {
           presets: ["react"]
         }
       },
-      { test: /\.cjsx$/, loaders: ["coffee", "cjsx"]},
+      { test: /\.cjsx$/, loaders: ["coffee-loader", "cjsx"]},
       { test: /\.coffee$/,   loader: "coffee-loader"}
     ]
   },

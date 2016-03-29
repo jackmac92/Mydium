@@ -1,0 +1,2 @@
+module.exports =
+  ARTICLES_RECEIVED: "ARTICLES_RECEIVED"

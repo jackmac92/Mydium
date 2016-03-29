@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
-  def root    
+  before_action :authenticate_user!
+  def root
   end
 end
