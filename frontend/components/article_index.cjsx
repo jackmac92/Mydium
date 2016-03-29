@@ -1,14 +1,16 @@
 React = require 'react'
 ArticleIndexItem = require './article_index_item'
+ArticleForm = require './article_form'
 ArticleStore = require '../stores/articles'
 ApiUtil = require '../util/api_util'
 
 ArticleIndex = React.createClass
   stateFromStore: ->
     { articles: ArticleStore.all() }
+
   __onChange: ->
-    console.log "Change event"
     @setState @stateFromStore()
+
   getInitialState: ->
     @stateFromStore()
 
@@ -23,7 +25,10 @@ ArticleIndex = React.createClass
     articles = @state.articles.map (article) ->
       <ArticleIndexItem key={article.id} article={article} />
     <div>
-      {articles}
+      <ArticleForm />
+      <ul className="article-index">
+        {articles}
+      </ul>
     </div>
 
 module.exports = ArticleIndex

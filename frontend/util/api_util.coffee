@@ -10,6 +10,10 @@ ApiUtil = {
         ApiActions.receiveAllArticles articles
       error: ->
         console.log "ApiUtil#fetchArticles error"
+
+  
+  fetchArticleDetail: ->
+  fetchUser: (id) ->
 }
 
 module.exports = ApiUtil

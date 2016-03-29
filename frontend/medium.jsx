@@ -1,12 +1,12 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Router = require ('react-router').Router;
-var Route = require ('react-router').Route;
-var IndexRoute = require ('react-router').IndexRoute;
-var hashHistory = require ('react-router').hashHistory;
+var React = require('react'),
+    ReactDOM = require('react-dom'),
+    Router = require ('react-router').Router,
+    Route = require ('react-router').Route,
+    IndexRoute = require ('react-router').IndexRoute,
+    hashHistory = require ('react-router').hashHistory,
 
-var ArticleIndex = require('./components/article_index');
-
+    UserShow = require('./components/user_show'),
+    ArticleIndex = require('./components/article_index');
 
 var App = React.createClass({
   render: function () {
@@ -22,6 +22,7 @@ var App = React.createClass({
 var routes = (
     <Route path="/" component={App}>
       <IndexRoute component={ArticleIndex} />
+      <Route path="user/:id" component={UserShow} />
     </Route>
   );
 
