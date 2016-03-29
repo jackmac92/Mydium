@@ -14,4 +14,3 @@
 .DS_STORE
 node_modules/*
 bundle.js*
-secrets.yml
