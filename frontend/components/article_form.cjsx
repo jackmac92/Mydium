@@ -1,12 +1,13 @@
 React = require 'react'
 ReactQuill = require 'react-quill'
 
-
 ArticleForm = React.createClass
   render: ->
-  	<section>
-	  	<ReactQuill value="Hello" />	
-  	</section>
+    	<section>
+  	  	<ReactQuill className="editor" value="Hello" />	
+    	</section>
+	getInitialState: ->
+		{value: ""}
 
 	
 

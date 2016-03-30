@@ -14,7 +14,7 @@
  *= require_self
  *= require foundation_and_overrides
  */
-/*
+
  h1, h2, h3, p, li {
   border: 0;
   outline: 0;
@@ -36,24 +36,44 @@ ul {
   list-style: none;
 }
 
-#logo {
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 2;
+.group:after {
+  content: "";
   display: block;
-}
-header {
-  border-bottom: 2px solid green;
+  clear: both;
 }
 
-#main-editor {
-  width: 500px;
-  height: 50px;
-  display: block;
-  margin: 10px auto;
+header {
+  border-bottom: 2px solid green;
+  width: 100%;
+  margin: 0 0 20px 0;
 }
+
+.header-nav {
+  width: 90%;
+  margin: 0 auto;
+  display: block;
+}
+
+#logo {
+  font-size: 48px;
+  font-weight: bold;
+  float: left;
+}
+#header-search {
+  width: 200px;
+  float: right;
+  position: relative;
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
 content {
   display: block;
   width: 900px;
   margin: 0 auto;
-*/}
+}
+
+.editor {
+  width: 95%;
+  margin: 0 auto;
+}

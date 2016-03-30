@@ -6,20 +6,14 @@ var React = require('react'),
     hashHistory = require ('react-router').hashHistory,
 
     UserShow = require('./components/user_show'),
+    Header = require('./components/header'),
     ArticleIndex = require('./components/article_index');
 
 var App = React.createClass({
   render: function () {
     return (
       <div>
-        <header>  
-          <header-nav>
-            <h1 className="header-logo">
-              Podium
-            </h1>
-          </header-nav>
-        </header>
-        
+        <Header />
         <content>
           {this.props.children}
         </content>
@@ -27,6 +21,10 @@ var App = React.createClass({
     );
   }
 });
+
+// header
+// logo home top bookmarks            search write badge prof
+// logo              search badge prof
 
 
 var routes = (
