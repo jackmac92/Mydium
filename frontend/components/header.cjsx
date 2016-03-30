@@ -5,9 +5,7 @@ Header = React.createClass
 	render: ->
     <header>
       <nav className="header-nav group">
-        <h1 id="logo">
-          Podium
-        </h1>
+        <Img id="logo" src="/assets/logo.png" />
         <Search />
       </nav>
     </header>
