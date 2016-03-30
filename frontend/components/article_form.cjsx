@@ -1,14 +1,14 @@
 React = require 'react'
+ReactQuill = require 'react-quill'
+
 
 ArticleForm = React.createClass
-	# needs user icon in side of input
+  render: ->
+  	<section>
+	  	<ReactQuill value="Hello" />	
+  	</section>
 
 	
-  render: ->
-  	<div>
-	    <textarea placeholder="Write here...">
-  	  </textarea>
-  	</div>
-
 
 module.exports = ArticleForm
+

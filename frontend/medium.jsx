@@ -12,10 +12,14 @@ var App = React.createClass({
   render: function () {
     return (
       <div>
-        <header>
-          <h1 id="logo">Podium</h1>
-
+        <header>  
+          <header-nav>
+            <h1 className="header-logo">
+              Podium
+            </h1>
+          </header-nav>
         </header>
+        
         <content>
           {this.props.children}
         </content>

@@ -33,6 +33,7 @@
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-foundation-apps": "^0.6.1",
+    "react-quill": "^0.4.1",
     "react-responsive-mixin": "^0.3.5",
     "react-router": "^2.0.1",
     "webpack": "^1.12.14"

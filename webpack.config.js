@@ -14,6 +14,7 @@ module.exports = {
     extensions: ["", ".coffee", ".js", ".jsx", ".cjsx" ]
   },
   module: {
+    noParse: /node_modules\/quill\/dist/,
     loaders: [
       {
         test: /\.jsx?$/,
