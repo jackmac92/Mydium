@@ -44,6 +44,7 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'pry-rails'
   gem 'better_errors'
+  gem 'faker'
   gem 'binding_of_caller'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
