@@ -14,6 +14,7 @@ var App = React.createClass({
       <div>
         <header>
           <h1 id="logo">Podium</h1>
+
         </header>
         <content>
           {this.props.children}
@@ -22,6 +23,7 @@ var App = React.createClass({
     );
   }
 });
+
 
 var routes = (
     <Route path="/" component={App}>

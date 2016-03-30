@@ -32,5 +32,25 @@ ApiUtil =
       error: ->
         console.log "ApiUtil#fetchSingleArticle error"
 
+  createNewArticle: (article) ->
+    $.ajax
+      type: "POST"
+      dataType: "json"
+      url: "api/articles"
+      success: (article) ->
+        ApiActions.receiveSingleArticle article
+      error: ->
+        console.log "ApiUtil#createNewArticle error"
+  createNewArticle: (article) ->
+    $.ajax
+      type: "PATCH"
+      dataType: "json"
+      url: "api/articles"
+      success: (article) ->
+        ApiActions.receiveSingleArticle article
+      error: ->
+        console.log "ApiUtil#createNewArticle error"
+        
+
 
 module.exports = ApiUtil
