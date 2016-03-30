@@ -21,13 +21,18 @@
     "babel-core": "^6.7.4",
     "babel-loader": "^6.2.4",
     "babel-preset-react": "^6.5.0",
+    "bower": "^1.7.7",
     "cjsx-loader": "^2.1.0",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.10.0",
     "flux": "^2.1.1",
     "jsx-loader": "^0.13.2",
+    "object-assign": "^2.1.1",
+    "pubsub-js": "^1.5.3",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-foundation-apps": "^0.6.1",
+    "react-responsive-mixin": "^0.3.5",
     "react-router": "^2.0.1",
     "webpack": "^1.12.14"
   }
