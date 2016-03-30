@@ -55,22 +55,43 @@ header {
 }
 
 #logo {
-  font-size: 48px;
+  width: 200px;
+  height: auto;
+  margin: 10px;
   font-weight: bold;
   float: left;
 }
 #header-search {
   width: 200px;
   float: right;
+  transform: translateY(60%);
   position: relative;
-  margin-top: 15px;
-  margin-right: 15px;
 }
 
-content {
-  display: block;
-  width: 900px;
+body {
   margin: 0 auto;
+  width: 900px;
+}
+
+.content-main {
+  float: left;
+  display: block;
+  width: 600px;
+  margin: 0 auto;
+}
+.content-sidebar {
+  display: block;
+  float: right;
+  margin-top: 10px;
+  background: rebeccapurple;
+}
+
+.article-index {
+  background: blue;
+}
+.article-index-item {
+  background: orange;
+  margin: 20px;
 }
 
 .editor {

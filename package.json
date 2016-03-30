@@ -36,6 +36,7 @@
     "react-quill": "^0.4.1",
     "react-responsive-mixin": "^0.3.5",
     "react-router": "^2.0.1",
+    "react-stickydiv": "^3.4.18",
     "webpack": "^1.12.14"
   }
 }

@@ -1,10 +1,12 @@
 React = require 'react'
+Sticky = require 'react-stickydiv'
+
 
 ApiUtil = require '../util/api_util'
 ArticleStore = require '../stores/articles'
 
-ArticleForm = require './article_form'
 ArticleIndexItem = require './article_index_item'
+Sidebar = require './sidebar'
 
 ArticleIndex = React.createClass
   stateFromStore: ->
@@ -27,21 +29,20 @@ ArticleIndex = React.createClass
     articles = @state.articles.map (article) ->
       <ArticleIndexItem key={article.id} article={article} />
 
-    <div>
+    <main>
       <section className="content-main">
-        <ArticleForm />
+        <input type="text" placeholder="Write here..." />
         <ul className="article-index">
           {articles}
         </ul>
       </section>
-    </div>
+      <section>
+        <Sticky>
+          <Sidebar />
+        </Sticky>
+      </section>
+    </main>
 
 module.exports = ArticleIndex
 
-# write here
-# top picks for you, closable
-# regular index
 
-# component for sidebar pieces? or overall component
-# ajax progress bar
-# a lot of the next aspects rely on user auth? likes, follows, save for later, profile pic

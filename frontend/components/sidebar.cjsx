@@ -3,7 +3,7 @@ React = require('react')
 Sidebar = React.createClass
 
 	render: ->
-		<section>
+		<section className="content-sidebar">
 			<ul>
 				<li>Featured Tags</li>
 				<li>Your Tags</li>
