@@ -33,6 +33,7 @@ ActiveRecord::Base.transaction do
   )
 
   15.times do
-    User.all.sample.articles.create title:Faker::Hacker.say_something_smart, body:Faker::Hipster.paragraphs(4).join(" ")
+    article = User.all.sample.articles.create title:Faker::Hacker.say_something_smart, body:Faker::Hipster.paragraphs(4).join(" ")
+    article.tags.create(name:Faker::Hipster.word)
   end
 end
