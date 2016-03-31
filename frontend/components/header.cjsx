@@ -1,8 +1,28 @@
 React = require 'react'
 Search = require './search'
-Header = React.createClass
+ActionSheet = require '../react-foundation-apps/lib/action-sheet'
+ApiUtil = require '../util/api_util'
 
-	render: ->
+Header = React.createClass
+  contextTypes: 
+    router: React.PropTypes.object.isRequired
+  render: ->
+    if @props.currentUser
+      userActionSheet = (
+          <ActionSheet>
+            <ActionSheet.Button title="Me" />
+            <ActionSheet.Content>
+              <p>{"Hi "+@props.currentUser.email}</p>
+              <ul>
+                <li><button>New Story</button></li>
+                <li><button>Profile</button></li>
+                <li><button onClick={@logOutUser}>Logout</button></li>
+              </ul>
+            </ActionSheet.Content>
+          </ActionSheet>
+
+        )
+
     <header>
       <div id="logo" />
       <nav className="header-nav group">        
@@ -14,11 +34,14 @@ Header = React.createClass
         <div className="header-nav-right">
           <Search />
           <a href="/#/editor">Write Something</a>
-          <a href="#/me/notifications">Notification Badge</a>
-          <a href="#/me">User info</a>
+          <a href="#/me/notifications"><span className="success badge">1</span></a>
+          {userActionSheet}
         </div>
       </nav>
     </header>
 
+  logOutUser: ->
+    ApiUtil.logOutUser()
+    @context.router.push '/login'
 
 module.exports = Header

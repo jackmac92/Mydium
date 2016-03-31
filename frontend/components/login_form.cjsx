@@ -1,5 +1,7 @@
-React = require('react')
+React = require 'react'
 ApiUtil = require '../util/api_util'
+
+
 LoginForm = React.createClass
 	contextTypes:
 		router: React.PropTypes.object.isRequired

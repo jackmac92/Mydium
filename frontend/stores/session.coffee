@@ -24,9 +24,10 @@ SessionStore.__onDispatch = (payload) ->
 			SessionStore.__emitChange()
 		when SessionConstants.LOGOUT
 			_currentUser = null
+			_currentUserHasBeenFetched = false
 			SessionStore.__emitChange()
 
 
 module.exports = SessionStore
 		
-	
+# csrf issues, can't login and logout w/o reload

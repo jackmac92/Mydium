@@ -58,25 +58,25 @@ ApiUtil =
       url: "api/auth"
       dataType: "json"
       success: (currentUser) ->
-        console.log "Got Current User"
         SessionActions.currentUserReceived currentUser
       complete: ->
         completion && completion()
       error: ->
         console.log "Done gone wrong tryna fetch current user"
 
-  logOutUser: ->
+  logOutUser: (callback) ->
     $.ajax
       type: "DELETE"
-      url: "users/sign_out"
+      url: "api/users/sign_out"
       dataType: "json"
       success: ->
         SessionActions.logout()
+        callback && callback()
 
   logInUser: (userCredentials, callback) ->
     $.ajax
       type: "POST"
-      url: "users/sign_in"
+      url: "api/users/sign_in"
       dataType: "json"
       data: {user: userCredentials}
       success: (currentUser) ->

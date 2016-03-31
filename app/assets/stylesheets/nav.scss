@@ -25,10 +25,10 @@ header {
 }
 
 .header-nav-right * {
-  float: left;
+  // float: left;
   color:black;
   margin: 10px;
-  margin-top: 20px;
+  // margin-top: 20px;
 
 }
 
@@ -39,9 +39,4 @@ header {
   height: 50px;
   margin: 10px 20px;
   float: left;
-}
-#header-search {
-  width: 200px;
-  // transform: translateY(60%);
-  position: relative;
 }
