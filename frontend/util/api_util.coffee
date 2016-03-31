@@ -1,4 +1,5 @@
 ApiActions = require '../actions/api'
+SessionActions = require '../actions/session'
 
 ApiUtil =
   fetchArticles: () ->
@@ -50,7 +51,43 @@ ApiUtil =
         ApiActions.receiveSingleArticle article
       error: ->
         console.log "ApiUtil#createNewArticle error"
+
+  fetchCurrentUser: (completion) ->
+    $.ajax
+      type: "GET"
+      url: "api/auth"
+      dataType: "json"
+      success: (currentUser) ->
+        console.log "Got Current User"
+        SessionActions.currentUserReceived currentUser
+      complete: ->
+        completion && completion()
+      error: ->
+        console.log "Done gone wrong tryna fetch current user"
+
+  logOutUser: ->
+    $.ajax
+      type: "DELETE"
+      url: "users/sign_out"
+      dataType: "json"
+      success: ->
+        SessionActions.logout()
+
+  logInUser: (userCredentials, callback) ->
+    $.ajax
+      type: "POST"
+      url: "users/sign_in"
+      dataType: "json"
+      data: {user: userCredentials}
+      success: (currentUser) ->
+        SessionActions.currentUserReceived currentUser
+        callback && callback()
+      error: (e) ->
+        console.log "Done gone wrong when loggin in"
+        console.log e
+    
+
         
 
-
+window.ApiUtil = ApiUtil
 module.exports = ApiUtil
