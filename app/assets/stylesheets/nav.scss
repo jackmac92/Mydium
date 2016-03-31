@@ -1,0 +1,47 @@
+header {
+  border-bottom: 2px solid green;
+  width: 100%;
+  margin: 0 0 20px 0;
+}
+
+.header-nav {
+  width: 90%;
+  margin: 0 auto;
+  display: block;
+}
+.header-nav-left {
+  float: left;
+}
+
+.header-nav-left > a {
+  float: left;
+  margin: 10px;
+  margin-top: 20px;
+  color: black;
+}
+
+.header-nav-right {
+  float: right;
+}
+
+.header-nav-right * {
+  float: left;
+  color:black;
+  margin: 10px;
+  margin-top: 20px;
+
+}
+
+#logo {
+  background-image: image-url('logo.png');
+  background-size: 100%;
+  width: 100px;
+  height: 50px;
+  margin: 10px 20px;
+  float: left;
+}
+#header-search {
+  width: 200px;
+  // transform: translateY(60%);
+  position: relative;
+}

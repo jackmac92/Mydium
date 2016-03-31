@@ -42,31 +42,6 @@ ul {
   clear: both;
 }
 
-header {
-  border-bottom: 2px solid green;
-  width: 100%;
-  margin: 0 0 20px 0;
-}
-
-.header-nav {
-  width: 90%;
-  margin: 0 auto;
-  display: block;
-}
-
-#logo {
-  width: 200px;
-  height: auto;
-  margin: 10px;
-  font-weight: bold;
-  float: left;
-}
-#header-search {
-  width: 200px;
-  float: right;
-  transform: translateY(60%);
-  position: relative;
-}
 
 body {
   background: #eee;
@@ -74,19 +49,19 @@ body {
 
 main {
   margin: 0 auto;
-  width: 900px;
+  width: 1040px;
 }
 
 .content-main {
   float: left;
   display: block;
-  width: 600px;
+  width: 640px;
   margin: 0 auto;
 }
 .content-sidebar {
   display: block;
   float: right;
-  width: 300px;
+  width: 400px;
   background: blue;
   margin-top: 10px;
 }
