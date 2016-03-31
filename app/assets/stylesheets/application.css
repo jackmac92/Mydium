@@ -69,6 +69,10 @@ header {
 }
 
 body {
+  background: #eee;
+}
+
+main {
   margin: 0 auto;
   width: 900px;
 }
@@ -83,16 +87,15 @@ body {
   display: block;
   float: right;
   margin-top: 10px;
-  background: rebeccapurple;
 }
 
-.article-index {
-  background: blue;
-}
 .article-index-item {
-  background: orange;
+  background: white;
+  padding: 10px;
   margin: 20px;
+  border: 1px solid gray;
 }
+
 .article-index-item > h2 {
   font-size: 24px;
   font-weight: bold;

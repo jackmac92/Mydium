@@ -4,10 +4,10 @@ ArticleIndexItem = React.createClass
 
   render: ->
     <li className="article-index-item">
-    	<img src={@props.article.author.avatar} />
-    	<p>{@props.article.author.email}</p>
+    	<img className="author-thumb" src={@props.article.author.avatar} />
+    	<p className="author-email">{@props.article.author.email}</p>
       <h2>{@props.article.title}</h2>
-      <p>{@props.article.body}</p>
+      <p className="article-index-item-body">{@props.article.body}</p>
     </li>
 
 module.exports = ArticleIndexItem
