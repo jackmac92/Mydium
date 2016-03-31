@@ -26,6 +26,10 @@ class Api::ArticlesController < ApplicationController
     end
   end
 
+  def publish
+    
+  end
+
   def destroy
     @article = Article.find(params[:id])
     @article.destroy

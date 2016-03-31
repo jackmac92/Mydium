@@ -93,6 +93,16 @@ body {
   background: orange;
   margin: 20px;
 }
+.article-index-item > h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.article-index-item > img {
+  width: 60px;
+  height: 60px;
+  z-index: 2;
+}
 
 .editor {
   width: 95%;

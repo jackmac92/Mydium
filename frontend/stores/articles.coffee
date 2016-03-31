@@ -16,6 +16,7 @@ addArticle = (article) ->
   _articles.push(article)
 
 ArticleStore.__onDispatch = (payload) ->
+
   switch payload.actionType
     when ArticleConstants.ARTICLES_RECEIVED
       resetArticles(payload.articles)
