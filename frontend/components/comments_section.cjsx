@@ -13,7 +13,7 @@ Comments = React.createClass
 			<ul>
 				{comments}
 			</ul>
-			<CommentForm />
+			<CommentForm article_id={@props.article_id}/>
 		</section>
 
 module.exports = Comments

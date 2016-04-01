@@ -22,28 +22,18 @@ ApiUtil =
       error: ->
         console.log "Error fetching article"
 
-  fetchUser: (id) ->
+  createArticleComment: (commentData) ->
     $.ajax
-    type: "GET"
-    dataType: "json"
-    url: "api/users/" + id
-    success: (user) ->
-      ApiActions.receiveUserInfo user
-    error: ->
-      console.log "ApiUtil#fetchSingleArticle error"
+      type: "POST"
+      dataType: "json"
+      url: "api/comments"
+      data: {comment: commentData}
+      success: (comment) ->
+        ApiActions.receiveNewComment comment
 
   createNewArticle: (article) ->
     $.ajax
       type: "POST"
-      dataType: "json"
-      url: "api/articles"
-      success: (article) ->
-        ApiActions.receiveSingleArticle article
-      error: ->
-        console.log "ApiUtil#createNewArticle error"
-  createNewArticle: (article) ->
-    $.ajax
-      type: "PATCH"
       dataType: "json"
       url: "api/articles"
       success: (article) ->
@@ -85,6 +75,15 @@ ApiUtil =
         console.log "Done gone wrong when loggin in"
         console.log e
     
+  # fetchUser: (id) ->
+  #   $.ajax
+  #   type: "GET"
+  #   dataType: "json"
+  #   url: "api/users/" + id
+  #   success: (user) ->
+  #     ApiActions.receiveUserInfo user
+  #   error: ->
+  #     console.log "ApiUtil#fetchSingleArticle error"
 
         
 

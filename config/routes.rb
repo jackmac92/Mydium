@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     resources :articles, only:[:index, :create, :update, :show, :destroy]
     resource :auth, only:[:show]
     resources :users, only:[:show]
+    resources :comments, only:[:create]
   end
 end
