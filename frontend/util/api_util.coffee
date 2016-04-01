@@ -67,7 +67,7 @@ ApiUtil =
   logOutUser: (callback) ->
     $.ajax
       type: "DELETE"
-      url: "api/users/sign_out"
+      url: "users/sign_out"
       dataType: "json"
       success: ->
         SessionActions.logout()
@@ -76,7 +76,7 @@ ApiUtil =
   logInUser: (userCredentials, callback) ->
     $.ajax
       type: "POST"
-      url: "api/users/sign_in"
+      url: "users/sign_in"
       dataType: "json"
       data: {user: userCredentials}
       success: (currentUser) ->
