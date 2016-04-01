@@ -13,7 +13,7 @@ ActiveRecord::Base.transaction do
   p3 = User.create(email:"guy@gmail.com", password:"password")
   p4 = User.create(email:"friend@gmail.com", password:"password")
   p5 = User.create(email:"pal@gmail.com", password:"password")
-  20.times do
+  10.times do
     User.create email:Faker::Internet.safe_email, password:"password", avatar:Faker::Avatar.image
   end
 
@@ -31,9 +31,15 @@ ActiveRecord::Base.transaction do
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     BODY
   )
+  tags = %w(meh roof banjo scenester selvage normcore artisan YOLO park helvetica neutra tousled)
 
-  15.times do
-    article = User.all.sample.articles.create title:Faker::Hacker.say_something_smart, body:Faker::Hipster.paragraphs(4).join(" ")
-    article.tags.create(name:Faker::Hipster.word)
+  25.times do
+    article = User.all.sample.articles.create title:Faker::StarWars.quote, body:Faker::Hipster.paragraphs(7).join(" ")
+    3.times do
+      article.tags.create(name:tags.sample)
+    end
+    7.times do
+      User.all.sample.comments.create(body:Faker::Hacker.say_something_smart, article_id:article.id)
+    end
   end
 end

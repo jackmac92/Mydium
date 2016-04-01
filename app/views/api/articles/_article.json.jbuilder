@@ -1,4 +1,4 @@
-json.extract! article, :id, :title, :body, :user_id
+json.extract! article, :id, :title, :body
 
 json.tags do
 	json.array! article.tags do |tag|
@@ -8,6 +8,5 @@ json.tags do
 end
  
 json.author do
-	json.avatar asset_url(article.user.avatar.url)
-	json.email article.user.email
+	json.partial! '/api/users/user', user: article.user
 end
