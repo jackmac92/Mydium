@@ -8,29 +8,25 @@ header {
   width: 90%;
   margin: 0 auto;
   display: block;
+  color:black;
 }
+
 .header-nav-left {
   float: left;
 }
 
-.header-nav-left > a {
+.header-nav-right {
+  float: right;
+
+}
+.header-nav-left > span {
   float: left;
-  margin: 10px;
-  margin-top: 20px;
-  color: black;
 }
 
-.header-nav-right {
+.header-nav-right > span {
   float: right;
 }
 
-.header-nav-right * {
-  // float: left;
-  color:black;
-  margin: 10px;
-  // margin-top: 20px;
-
-}
 
 #logo {
   background-image: image-url('logo.png');

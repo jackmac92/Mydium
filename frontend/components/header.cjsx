@@ -27,15 +27,15 @@ Header = React.createClass
       <div id="logo" />
       <nav className="header-nav group">        
         <div className="header-nav-left">
-          <a href="#">Home</a>
-          <a href="#/top_articles">Top Articles</a>
-          <a href="#/me/bookmarks">Bookmarks</a>
+          <span><a href="#">Home</a></span>
+          <span><a href="#/top_articles">Top Articles</a></span>
+          <span><a href="#/me/bookmarks">Bookmarks</a></span>
         </div>
         <div className="header-nav-right">
-          <Search />
-          <a href="/#/editor">Write Something</a>
-          <a href="#/me/notifications"><span className="success badge">1</span></a>
-          {userActionSheet}
+          <span><Search /></span>
+          <span><a href="/#/editor">Write Something</a></span>
+          <span><a href="#/me/notifications"><span className="success badge">1</span></a></span>
+          <span>{userActionSheet}</span>
         </div>
       </nav>
     </header>
