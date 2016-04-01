@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
   has_many :articles, dependent: :destroy
 
   has_many :comments, dependent: :destroy
+
+  def recent_articles_excluding article_id
+  	articles.order(:created_at).limit(5).where.not(id: article_id)
+  end
 end

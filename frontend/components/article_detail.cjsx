@@ -31,6 +31,9 @@ ArticleDetail = React.createClass
   	if @state.article.tags
 	  	tags = @state.article.tags.map (t) -> 
   			<Tag key={t.id} tag={t} />
+  	if @state.article.authors_recent_articles
+  		other_articles = @state.article.authors_recent_articles.map (article) ->
+  			<li>{article.title}</li>
   	<content>
 	  	<article>
 		  	<img className="author-thumb" src={@state.article.author.avatar} />
@@ -41,15 +44,14 @@ ArticleDetail = React.createClass
 	  		<h1>{@state.article.title}</h1>
 	  		<p>{@state.article.body}</p>
 	  	</article>
+	  	<hr />
 	  	<section>
 		  	<h3>Other posts by author</h3>
 		  	<ul>
-		  		<li>Article</li>
-		  		<li>other</li>
-		  		<li>more</li>
-		  		<li>and again</li>
+		  		{other_articles}
 		  	</ul>
 	  	</section>
+	  	<hr />
   		<Comments comments={@state.article.comments} />
   	</content>		
 

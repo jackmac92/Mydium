@@ -78,11 +78,13 @@ main {
   font-weight: bold;
 }
 
-.article-index-item > img {
+
+.author-thumb {
   width: 60px;
   height: 60px;
   z-index: 2;
   border-radius: 50%;
+
 }
 
 .editor {
