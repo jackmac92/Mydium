@@ -1,14 +1,29 @@
 React = require 'react'
 Tag = require './tag'
+
 ArticleIndexItem = React.createClass
 
-  render: ->
+	contextTypes:
+		router: React.PropTypes.object.isRequired
+	viewArticle: ->
+		@context.router.push 'article/' + @props.article.id
 
-    <li className="article-index-item">
+ render: ->
+
+  	if @props.article.tags
+	  	tags = @props.article.tags.map (t) -> 
+  			<Tag key={t.id} tag={t} />
+				
+		
+    <li onClick={@viewArticle} className="article-index-item">
     	<img className="author-thumb" src={@props.article.author.avatar} />
     	<p className="author-email">{@props.article.author.email}</p>
+    	<ul>
+    		{tags}
+    	</ul>
       <h2>{@props.article.title}</h2>
       <p className="article-index-item-body">{@props.article.body}</p>
     </li>
+
 
 module.exports = ArticleIndexItem

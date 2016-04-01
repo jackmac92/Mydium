@@ -12,3 +12,16 @@ todo
 top picks for you in index view (closable)
 /me/ route
 
+
+questions
+should i hardcode featured tags?
+should I deal with drafts later on?
+should user profile edit be the same as user show page or its own component?
+	one component
+
+
+article detail view
+medium routes these under /@username/article title
+
+should article index only receive first few lines of article?
+

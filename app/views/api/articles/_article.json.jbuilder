@@ -3,6 +3,7 @@ json.extract! article, :id, :title, :body, :user_id
 json.tags do
 	json.array! article.tags do |tag|
 		json.name tag.name
+		json.id tag.id
 	end
 end
  

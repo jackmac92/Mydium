@@ -4,22 +4,31 @@ ArticleConstants = require '../constants/article'
 
 ArticleStore = new Store AppDispatcher
 
-_articles = []
+`_articles = []`
+`_articleDetail = null`
 
 ArticleStore.all = ->
   _articles.slice()
 
-resetArticles = (articles) ->
-  _articles = articles
+ArticleStore.getDetail = ->
+  _articleDetail
 
-addArticle = (article) ->
-  _articles.push(article)
+resetArticles = (articles) ->
+  `_articles = articles`
+  null
+
+setDetail = (article) ->
+  `_articleDetail = article`
+  null
 
 ArticleStore.__onDispatch = (payload) ->
 
   switch payload.actionType
     when ArticleConstants.ARTICLES_RECEIVED
-      resetArticles(payload.articles)
-      ArticleStore.__emitChange()
+    	resetArticles payload.articles
+    	ArticleStore.__emitChange()
+    when ArticleConstants.ARTICLE_DETAIL_RECEIVED
+    	setDetail payload.article
+    	ArticleStore.__emitChange()
 
 module.exports = ArticleStore

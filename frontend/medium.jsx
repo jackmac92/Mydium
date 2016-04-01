@@ -10,6 +10,7 @@ var React = require('react'),
     UserShow = require('./components/user_show'),
     LoginForm = require('./components/login_form'),
     Header = require('./components/header'),
+    ArticleDetail = require('./components/article_detail.cjsx'),
     ArticleIndex = require('./components/article_index');
 
 var App = React.createClass({
@@ -73,6 +74,7 @@ $(document).ready(function () {
       <Route path="/" component={App}>
         <IndexRoute component={ArticleIndex} />
         <Route path="user/:id" component={UserShow} />
+        <Route path="article/:id" component={ArticleDetail} />
         <Route path="me" component={UserShow} />
       </Route>
       <Route path="/login" component={LoginForm}/>

@@ -12,6 +12,15 @@ ApiUtil =
       error: ->
         console.log "ApiUtil#fetchArticles error"
 
+  fetchArticle: (id) ->
+    $.ajax
+      type: "GET"
+      dataType: "json"
+      url: "api/articles/" + id
+      success: (article) ->
+        ApiActions.receiveSingleArticle article
+      error: ->
+        console.log "Error fetching article"
 
   fetchUser: (id) ->
     $.ajax
@@ -20,18 +29,8 @@ ApiUtil =
     url: "api/users/" + id
     success: (user) ->
       ApiActions.receiveUserInfo user
-      error: ->
-        console.log "ApiUtil#fetchSingleArticle error"
-
-  fetchArticleDetail: (id) ->
-    $.ajax
-      type: "GET"
-      dataType: "json"
-      url: "api/articles/" + id
-      success: (article) ->
-        ApiActions.receiveSingleArticle article
-      error: ->
-        console.log "ApiUtil#fetchSingleArticle error"
+    error: ->
+      console.log "ApiUtil#fetchSingleArticle error"
 
   createNewArticle: (article) ->
     $.ajax
