@@ -10,14 +10,14 @@ class User < ActiveRecord::Base
   has_many :articles, dependent: :destroy
 
   has_many :comments, dependent: :destroy
-  
+
   has_many :favorites
 
   has_many :bookmarks
 
-  has_many :followers, className: "Follows", foreign_key: :followee_id
+  has_many :followers, class_name: "Follows", foreign_key: :followee_id
 
-  has_many :followed_users, className: "Follows", foreign_key: :follower_id
+  has_many :followed_users, class_name: "Follows", foreign_key: :follower_id
 
 
   def recent_articles_excluding article_id
