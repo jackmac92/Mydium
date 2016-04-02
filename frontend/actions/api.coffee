@@ -1,5 +1,6 @@
 AppDispatcher = require '../dispatchers/dispatcher'
 ArticleConstants = require '../constants/article'
+TagConstants = require '../constants/tag'
 
 ApiActions =
   receiveAllArticles: (articles) ->
@@ -11,6 +12,12 @@ ApiActions =
     AppDispatcher.dispatch
       actionType: ArticleConstants.ARTICLE_DETAIL_RECEIVED
       article: article
+
+  receiveAllTags: (tags) ->
+    AppDispatcher.dispatch
+      actionType: TagConstants.TAGS_RECEIVED
+      tags: tags
+  
 
   receiveNewComment: (comment) ->
   	AppDispatcher.dispatch

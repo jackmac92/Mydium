@@ -8,7 +8,8 @@ Header = React.createClass
     router: React.PropTypes.object.isRequired
   render: ->
     if @props.currentUser
-      userActionSheet = (
+      userNotifications = <a href="#/me/notifications" className="success badge">1</a>
+      userAction = (
           <ActionSheet>
             <ActionSheet.Button title="Me" />
             <ActionSheet.Content>
@@ -20,23 +21,25 @@ Header = React.createClass
               </ul>
             </ActionSheet.Content>
           </ActionSheet>
-
         )
+    else
+      # userAction = <button class="create-session">Sign in/ Sign up</button>
+        userAction = <a href="/#/login">Sign in/ Sign up</a>
 
-    <header>
+    <header className="header">
       <div id="logo" />
       <nav className="header-nav group">        
-        <div className="header-nav-left">
-          <span><a href="#">Home</a></span>
-          <span><a href="#/top_articles">Top Articles</a></span>
-          <span><a href="#/me/bookmarks">Bookmarks</a></span>
-        </div>
-        <div className="header-nav-right">
-          <span><Search /></span>
-          <span><a href="/#/editor">Write Something</a></span>
-          <span><a href="#/me/notifications"><span className="success badge">1</span></a></span>
-          <span>{userActionSheet}</span>
-        </div>
+        <ul className="header-nav-left">
+          <li><a href="#">Home</a></li>
+          <li><a href="#/top_articles">Top Articles</a></li>
+          <li><a href="#/me/bookmarks">Bookmarks</a></li>
+        </ul>
+        <ul className="header-nav-right">
+          <li><Search /></li>
+          <li><a href="/#/editor">Write Something</a></li>
+          <li>{userNotifications}</li>
+          <li>{userAction}</li>
+        </ul>
       </nav>
     </header>
 

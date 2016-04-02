@@ -2,7 +2,7 @@ ApiActions = require '../actions/api'
 SessionActions = require '../actions/session'
 
 ApiUtil =
-  fetchArticles: () ->
+  fetchArticles: ->
     $.ajax
       type: "GET"
       dataType: "json"
@@ -11,6 +11,16 @@ ApiUtil =
         ApiActions.receiveAllArticles articles
       error: ->
         console.log "ApiUtil#fetchArticles error"
+  
+  fetchTagsIndex: ->
+    $.ajax
+      type: "GET"
+      dataType: "json"
+      url: "api/tags"
+      success: (tags) ->
+        ApiActions.receiveAllTags tags
+      error: ->
+        console.log "ApiUtil#fetchTags error"
 
   fetchArticle: (id) ->
     $.ajax

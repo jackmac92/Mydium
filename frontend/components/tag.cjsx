@@ -3,7 +3,7 @@ React = require('react')
 Tag = React.createClass
 
 	render: ->
-		<li>
+		<li className="tag">
 			{@props.tag.name}
 		</li>
 

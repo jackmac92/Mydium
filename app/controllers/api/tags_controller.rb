@@ -1,26 +1,28 @@
 class Api::TagsController < ApplicationController
 	def index
-    @tags = Tag.all
+    @featured_tags = Tag.all.shuffle[0..10]
+    @user_tags = Tag.all.shuffle[0..3]    
+    @all_tags = Tag.all
   end
 
-  def create
-    @tag = Tag.new(tag_params)
-    if @tag.valid?
-      @tag.save!
-      render :show
-    else
-      render json: @tag.errors.full_messages, status: 422
-    end
-  end
+  # def create
+  #   @tag = Tag.new(tag_params)
+  #   if @tag.valid?
+  #     @tag.save!
+  #     render :show
+  #   else
+  #     render json: @tag.errors.full_messages, status: 422
+  #   end
+  # end
 
-  def update
-    @tag = Tag.find(params[:id])
-    if @tag.update(tag_params)
-      render :show
-    else
-      render json: @tag.errors.full_messages, status: 422
-    end
-  end
+  # def update
+  #   @tag = Tag.find(params[:id])
+  #   if @tag.update(tag_params)
+  #     render :show
+  #   else
+  #     render json: @tag.errors.full_messages, status: 422
+  #   end
+  # end
 
   def destroy
     @tag = Tag.find(params[:id])

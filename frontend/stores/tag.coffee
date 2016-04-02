@@ -4,21 +4,24 @@ TagConstants = require '../constants/tag'
 
 TagStore = new Store AppDispatcher
 
-`_tags = []`
+`_tags = {
+	featured_tags: [],
+	user_tags: []
+	}`
 
-TagStore.all = ->
-  `_tags.slice()`
+TagStore.featured = ->
+	`_tags.featured_tags.slice()`
+
+TagStore.user = ->
+	`_tags.user_tags.slice()`
 
 resetTags = (tags) ->
   `_tags = tags`
 
-addTag = (tag) ->
-  `_tags.push(tag)`
-
 TagStore.__onDispatch = (payload) ->
   switch payload.actionType
     when TagConstants.TAGS_RECEIVED
-      resetTags(payload.tags)
+      resetTags payload.tags
       TagStore.__emitChange()
 
 module.exports = TagStore

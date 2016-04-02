@@ -49,7 +49,7 @@ body {
 
 main {
   margin: 0 auto;
-  width: 1040px;
+  width: 1060px;
 }
 
 .content-main {
@@ -62,8 +62,8 @@ main {
   display: block;
   float: right;
   width: 400px;
-  background: blue;
   margin-top: 10px;
+  margin-left: 20px;
 }
 
 .article-index-item {
@@ -84,10 +84,4 @@ main {
   height: 60px;
   z-index: 2;
   border-radius: 50%;
-
-}
-
-.editor {
-  width: 95%;
-  margin: 0 auto;
 }

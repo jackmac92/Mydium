@@ -1,11 +1,7 @@
 React = require 'react'
-Sticky = require 'react-stickydiv'
-
-
 ApiUtil = require '../util/api_util'
 ArticleStore = require '../stores/articles'
 SessionStore = require '../stores/session'
-
 ArticleIndexItem = require './article_index_item'
 Sidebar = require './sidebar'
 
@@ -21,7 +17,6 @@ ArticleIndex = React.createClass
 
   componentDidMount: ->
     # @sessionStoreToken = SessionStore.addListener(@__onChange)
-    # ApiUtil.fetchCurrentUser()
     @articleStoreToken = ArticleStore.addListener(@__onChange)
     ApiUtil.fetchArticles()
 
@@ -40,11 +35,7 @@ ArticleIndex = React.createClass
           {articles}
         </ul>
       </section>
-      <section>
-        <Sticky>
-          <Sidebar />
-        </Sticky>
-      </section>
+      <Sidebar />
     </main>
 
 module.exports = ArticleIndex

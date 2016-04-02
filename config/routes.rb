@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resource :auth, only:[:show]
     resources :users, only:[:show]
     resources :comments, only:[:create]
+    resources :tags, only:[:index]
   end
 end

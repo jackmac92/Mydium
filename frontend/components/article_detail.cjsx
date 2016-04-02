@@ -33,7 +33,7 @@ ArticleDetail = React.createClass
   			<Tag key={t.id} tag={t} />
   	if @state.article.authors_recent_articles
   		other_articles = @state.article.authors_recent_articles.map (article) ->
-  			<li key={article.id}>{article.title}</li>
+  			<li key={article.id}><a href={"/#/article/"+article.id}>{article.title}</a></li>
   		author_recent_posts = <section><h3>Author Recent Posts</h3><ul>{other_articles}</ul></section>
 
 
