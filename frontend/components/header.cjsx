@@ -1,6 +1,5 @@
 React = require 'react'
 Search = require './search'
-ActionSheet = require '../react-foundation-apps/lib/action-sheet'
 ApiUtil = require '../util/api_util'
 
 Header = React.createClass
@@ -10,17 +9,14 @@ Header = React.createClass
     if @props.currentUser
       userNotifications = <a href="#/me/notifications" className="success badge">1</a>
       userAction = (
-          <ActionSheet>
-            <ActionSheet.Button title="Me" />
-            <ActionSheet.Content>
+          <div>
               <p>{"Hi "+@props.currentUser.email}</p>
               <ul>
                 <li><button>New Story</button></li>
                 <li><button>Profile</button></li>
                 <li><button onClick={@logOutUser}>Logout</button></li>
               </ul>
-            </ActionSheet.Content>
-          </ActionSheet>
+          </div>
         )
     else
       # userAction = <button class="create-session">Sign in/ Sign up</button>

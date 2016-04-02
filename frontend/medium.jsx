@@ -7,7 +7,7 @@ var React = require('react'),
     
     // browserHistory = require('history/lib/createBrowserHistory'),
     // browserHistory = require('react-router').browserHistory,
-
+    Button = require('react-toolbox/lib/button').Button,
     ApiUtil = require('./util/api_util'),
     SessionStore = require('./stores/session'),
     UserShow = require('./components/user_show'),
@@ -15,6 +15,7 @@ var React = require('react'),
     Header = require('./components/header'),
     ArticleDetail = require('./components/article_detail.cjsx'),
     ArticleIndex = require('./components/article_index');
+
 
 var App = React.createClass({
   contextTypes: {
@@ -52,10 +53,6 @@ var App = React.createClass({
   }
 });
 
-// header
-// logo home top bookmarks            search write badge prof
-// logo              search badge prof
-
 function _requireLoggedIn(nextState, replace, asyncCompletionCallback) {
   if (!SessionStore.currentUserHasBeenFetched()) {
     ApiUtil.fetchCurrentUser(_redirectIfNotLoggedIn);
@@ -66,7 +63,6 @@ function _requireLoggedIn(nextState, replace, asyncCompletionCallback) {
     if (!SessionStore.isLoggedIn()) {
       replace("/login")
     }
-
     asyncCompletionCallback();
   }
 }

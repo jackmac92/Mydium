@@ -12,7 +12,6 @@
  *
  *= require_tree .
  *= require_self
- *= require foundation_and_overrides
  */
 
  h1, h2, h3, p, li {
