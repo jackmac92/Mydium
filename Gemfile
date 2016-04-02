@@ -24,7 +24,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'aws-sdk', '>= 2.0'
 gem 'figaro'
 gem "paperclip", '5.0.0.beta1'
-
+gem 'socialization'
 gem 'devise'
 
 gem 'foundation-rails'
