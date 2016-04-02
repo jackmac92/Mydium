@@ -25,3 +25,25 @@ medium routes these under /@username/article title
 
 should article index only receive first few lines of article?
 
+
+editor
+https://github.com/sofish/pen
+https://github.com/ajaxorg/ace #multiple cursors and such
+https://github.com/JedWatson/react-input-autosize
+https://github.com/JedWatson/react-select
+
+autocomplete
+https://github.com/gragland/instatype
+https://github.com/moroshko/react-autosuggest
+
+progressbar
+https://github.com/lightningtgc/MProgress.js
+
+forms
+https://github.com/quri/react-form-builder/blob/master/docs/FormHandler.md
+
+https://github.com/andrewhathaway/Winterfell
+https://github.com/christianalfoni/formsy-react
+https://github.com/wingspan/wingspan-forms
+https://github.com/erikras/redux-form
+https://github.com/jquense/react-formal

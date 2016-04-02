@@ -7,6 +7,11 @@ class Article < ActiveRecord::Base
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
 
+  has_many :bookmarks, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
+
+  acts_as_likeable
+  acts_as_mentioner
 
 end

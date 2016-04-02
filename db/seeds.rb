@@ -44,5 +44,13 @@ ActiveRecord::Base.transaction do
       User.all.sample.comments.create(body:Faker::Hacker.say_something_smart, article_id:article.id)
     end
   end
-  
+
+  User.all.each do |user|
+    3.times do
+      user.like!(Article.all.sample)
+      user.follow!(User.all.sample)
+      Article.all.sample.mention! user
+    end
+  end
+
 end

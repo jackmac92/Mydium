@@ -11,15 +11,18 @@ class User < ActiveRecord::Base
 
   has_many :comments, dependent: :destroy
 
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
 
-  has_many :bookmarks
+  has_many :bookmarks, dependent: :destroy
 
-  has_many :followers, class_name: "Follows", foreign_key: :followee_id
+  acts_as_liker
+  acts_as_mentionable
+  acts_as_follower
+  acts_as_followable
 
-  has_many :followed_users, class_name: "Follows", foreign_key: :follower_id
-
-
+  def mentioned_users
+  end
+  
   def recent_articles_excluding article_id
   	articles.order(:created_at).limit(5).where.not(id: article_id)
   end

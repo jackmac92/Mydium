@@ -5,6 +5,9 @@ var React = require('react'),
     IndexRoute = require ('react-router').IndexRoute,
     hashHistory = require ('react-router').hashHistory,
     
+    // browserHistory = require('history/lib/createBrowserHistory'),
+    // browserHistory = require('react-router').browserHistory,
+
     ApiUtil = require('./util/api_util'),
     SessionStore = require('./stores/session'),
     UserShow = require('./components/user_show'),
