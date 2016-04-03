@@ -47,6 +47,7 @@
     "react-toolbox": "^0.15.0",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
-    "webpack": "^1.12.14"
+    "webpack": "^1.12.14",
+    "webpack-combine-loaders": "^2.0.0"
   }
 }

@@ -1,6 +1,7 @@
 React = require 'react'
 Tag = require './tag'
 
+
 ArticleIndexItem = React.createClass
 
 	contextTypes:

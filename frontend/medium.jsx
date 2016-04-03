@@ -7,7 +7,7 @@ var React = require('react'),
     
     // browserHistory = require('history/lib/createBrowserHistory'),
     // browserHistory = require('react-router').browserHistory,
-    Button = require('react-toolbox/lib/button').Button,
+    MaterialIndex = require('./components/article_index_item_material')
     ApiUtil = require('./util/api_util'),
     SessionStore = require('./stores/session'),
     UserShow = require('./components/user_show'),
@@ -45,6 +45,7 @@ var App = React.createClass({
     return (
       <div>
         <Header currentUser={this.state.currentUser} />
+        <MaterialIndex title="Title" subtitle="subtitle"/>
         <content>
           {this.props.children}
         </content>
