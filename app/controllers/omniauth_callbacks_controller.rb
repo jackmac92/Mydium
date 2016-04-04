@@ -1,8 +1,8 @@
-class Api::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 	clear_respond_to
 	respond_to :json
 	require "uuidtools"
-	
+
   def facebook
     oauthorize "Facebook"
   end

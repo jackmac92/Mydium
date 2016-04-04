@@ -1,9 +1,6 @@
 var React = require('react');
 import Autocomplete from 'react-toolbox/lib/autocomplete';
 
-
-
-
 var Search = React.createClass({
 	getInitialState: function() {
 		return {
