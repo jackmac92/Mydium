@@ -18,9 +18,6 @@ class User < ActiveRecord::Base
   acts_as_mentionable
   acts_as_follower
   acts_as_followable
-
-  def mentioned_users
-  end
   
   def recent_articles_excluding article_id
   	articles.order(:created_at).limit(5).where.not(id: article_id)

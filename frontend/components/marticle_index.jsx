@@ -8,6 +8,8 @@ import Input from 'react-toolbox/lib/input'
 
 var ArticleIndex = React.createClass ({
 
+  contextTypes: {router: React.PropTypes.object.isRequired},
+
   stateFromStore: function () {
     return ({ articles: ArticleStore.all() });
   },
@@ -29,6 +31,10 @@ var ArticleIndex = React.createClass ({
     this.articleStoreToken.remove();
   },
 
+  sendToFullEditor: function (text) {
+    this.context.router.push('editor')
+  },
+
   render: function () {
     var articles;
     if (this.state.articles) {
@@ -39,7 +45,7 @@ var ArticleIndex = React.createClass ({
     return (
       <main>
         <section className="content-main">
-          <Input type="text" label="Write here..." />
+          <Input onFocus={this.sendToFullEditor} type="text" label="Write here..." />
           <ul className="article-index">
             {articles}
           </ul>

@@ -4,42 +4,51 @@ var ApiUtil = require('../util/api_util');
 import Input from 'react-toolbox/lib/input'
 import Header from './mheader'
 import Button from 'react-toolbox/lib/button'
-import Checkbox from 'react-toolbox/lib/checkbox'
 
 var LoginForm = React.createClass({
 
 	contextTypes: {router: React.PropTypes.object.isRequired},
 
 	getInitialState: function () {
-		return { email: "", password: "", remember_me:false };
+		return { 
+			email: "", 
+			password: "",
+			password_confirm: "",
+			username: ""
+			};
 	},
 
 	handleSubmit: function (e) {
 		e.preventDefault();
 		var router = this.context.router;
-		ApiUtil.logInUser(this.state, function () {router.push('/');})
 
+		ApiUtil.createNewUser(this.state, function () {router.push('/');})
 	},
 
 	updateEmail: function (e) {
 		this.setState({email:e})
 	},
-	updateRememberStatus: function (e) {
-		this.setState({remember_me: (!this.state.remember_me)})
+	updateUsername: function (e) {
+		this.setState({username:e})
 	},
+
 	updatePassword: function (e) {
 		this.setState({password:e})
 	},
-
+	updatePasswordConfirm: function (e) {
+		this.setState({password_confirm:e})
+	},
+	
 	passwordErrors: function () {
-		if (this.state.password.length > 6) {
+		if (this.state.password.length == 0 || this.state.password_confirm.length == 0 ) return "";
+		if (this.state.password.length > 6 && this.state.password === this.state.password_confirm) {
 			return "";
 		} else {
-			return "Password err"
+			return "Passwords Don't Match"
 		}
 	},
 	emailErrors: function () {
-		if (this.state.email.length > 6) {
+		if (this.state.email.length > 6 || this.state.email.length == 0) {
 			return "";
 		} else {
 			return "Email err"
@@ -47,7 +56,7 @@ var LoginForm = React.createClass({
 	},
 
 	formReady: function () {
-		if (this.passwordErrors().length == 0 && this.emailErrors().length == 0) {
+		if (!this.passwordErrors() && this.state.email.length > 0 && this.state.username.length > 0) {
 			return true
 		} 
 		return false;
@@ -63,8 +72,9 @@ var LoginForm = React.createClass({
 		return (		
 			<div>				
 				<Input error={this.emailErrors()} type="email" onChange={this.updateEmail} label="Email" value={this.state.email}/>
-				<Input error={this.passwordErrors()} label="Password" type="password" onChange={this.updatePassword} value={this.state.password}/>
-				<Checkbox onChange={this.updateRememberStatus} checked={this.state.remember_me} />
+				<Input type="text" onChange={this.updateUsername} label="Username" value={this.state.username}/>
+				<Input label="Password" type="password" onChange={this.updatePassword} value={this.state.password}/>
+				<Input label="Password" error={this.passwordErrors()} type="password" onChange={this.updatePasswordConfirm} value={this.state.password_confirm}/>
 				{button}
 			</div>
 		)	

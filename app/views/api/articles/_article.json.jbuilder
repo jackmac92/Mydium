@@ -12,6 +12,9 @@ end
 json.author do
 	json.partial! '/api/users/user', user: article.user
 end
+
+json.num_responses article.comments.count
+
 json.read_time article.body.split.length / 275
 if user_signed_in?
 	json.user do

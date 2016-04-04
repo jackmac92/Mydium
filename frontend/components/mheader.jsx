@@ -4,6 +4,7 @@ import ApiUtil from '../util/api_util'
 import AppBar from 'react-toolbox/lib/app_bar'
 import Navigation from 'react-toolbox/lib/navigation'
 import Link from 'react-toolbox/lib/link'
+import {IconMenu, MenuItem, MenuDivider} from 'react-toolbox/lib/menu'
 import Input from 'react-toolbox/lib/input'
 
 var Header = React.createClass({
@@ -15,9 +16,23 @@ var Header = React.createClass({
 		var userNotifications, userAction;
 		if (this.props.currentUser) {
       userNotifications = <Link href="#/me/notifications" className="success badge" label="1" />;
-			userAction = <Link href="#/me" icon="account_circle" label={this.props.currentUser.email} />
+			userAction = (
+				<IconMenu icon="account_circle" position="top-right" menuRipple >
+					<MenuItem caption={this.props.currentUser.email} />
+					<MenuItem caption="New Story"/>
+					<MenuItem caption="Import Story"/>
+					<MenuItem caption="Drafts and Stories"/>
+					<MenuItem caption="Stats"/>
+					<MenuItem caption="Publications"/>
+					<MenuDivider />
+					<MenuItem caption="Profile"/>
+					<MenuItem caption="Settings"/>
+					<MenuItem onClick={() => ApiUtil.logOutUser()} caption="Sign Out"/>
+				</ IconMenu>
+				)
+
 		} else {
-			userAction = <Link href="#/login" label="Sign up/ Log in" />
+			userAction = <Link href="#/login" icon="account_circle" label="Sign up/ Log in" />
 		}
 		return (
 	    <AppBar className="header group">
@@ -29,7 +44,6 @@ var Header = React.createClass({
 	          <Link href="#/me/bookmarks" label="Bookmarks" />
 	        </Navigation>
 	        <Navigation type="horizontal" className="header-nav-right">
-
 	          <Link href="/#/editor" label="Write Something"/>
 	          {userNotifications}
 	          {userAction}

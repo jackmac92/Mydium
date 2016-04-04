@@ -15,7 +15,7 @@ api endpoints for like/unlike follow/unfollow
 signup page
 search
 editor
-
+article images?
 
 
 questions
@@ -27,8 +27,6 @@ should user profile edit be the same as user show page or its own component?
 
 article detail view
 medium routes these under /@username/article title
-
-should article index only receive first few lines of article?
 
 
 editor

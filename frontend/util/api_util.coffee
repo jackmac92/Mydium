@@ -41,15 +41,44 @@ ApiUtil =
       success: (comment) ->
         ApiActions.receiveNewComment comment
 
-  createNewArticle: (article) ->
+
+  createNewArticle: (article, callback) ->
     $.ajax
       type: "POST"
       dataType: "json"
       url: "api/articles"
+      data: article: article
       success: (article) ->
         ApiActions.receiveSingleArticle article
       error: ->
         console.log "ApiUtil#createNewArticle error"
+      complete: ->
+        callback && callback()
+
+  toggleFavorite: (article) ->
+    $.ajax
+      type: "POST"
+      dataType: "json"
+      url: "api/"
+      success: () ->
+      error: () ->
+      complete: () ->
+  toggleBookmark: (article) ->
+    $.ajax
+      type: "POST"
+      dataType: "json"
+      url: "api/"
+      success: () ->
+      error: () ->
+      complete: () ->
+  toggleFollow: (user) ->
+    $.ajax
+      type: "POST"
+      dataType: "json"
+      url: "api/"
+      success: () ->
+      error: () ->
+      complete: () ->
 
   fetchCurrentUser: (completion) ->
     $.ajax
@@ -85,6 +114,18 @@ ApiUtil =
         console.log "Done gone wrong when loggin in"
         console.log e
     
+  createNewUser: (userForm, callback) ->
+    $.ajax
+      type: "POST"
+      url: "users/"
+      dataType: "json"
+      data: {user: userForm}
+      success: (currentUser) ->
+        SessionActions.currentUserReceived currentUser
+        callback && callback()
+      error: (e) ->
+        console.log "Done gone wrong when making new user"
+        console.log e
   # fetchUser: (id) ->
   #   $.ajax
   #   type: "GET"
