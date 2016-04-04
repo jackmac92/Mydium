@@ -75,10 +75,13 @@ section.content-sidebar {
   border-radius: 50%;
 }
 .tag {
-  font-size: 24px;
-  padding: 5px 15px;
+  font-size: 18px;
+  padding: 2px 15px;
   background: white;
 }
 .tag > a {
   color: black;
+}
+nav > a.tag {
+  margin: 5px 7px;
 }

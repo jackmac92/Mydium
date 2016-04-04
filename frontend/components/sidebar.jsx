@@ -33,7 +33,7 @@ var Sidebar = React.createClass({
 		var featured_tags, user_tags;
 		if (this.state.featured.length > 0) {
 			featured_tags = this.state.featured.map (t => <Tag key={t.id} tag={t}/> )
-			user_tags = this.state.user.map (t => <Tag key={t.id} tag={t}/> )
+			user_tags = this.state.user.map (t => <Tag className="sidebar-tag" key={t.id} tag={t}/> )
 		}
 			
 		return (
