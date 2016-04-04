@@ -1,13 +1,11 @@
-.header {
-  border-bottom: 2px solid green;
-  width: 100%;
-  // margin: 0 0 20px 0;
+header.header {
+  background: white;
 }
-
 .header-nav {
   height: 60px;
   width: 90%;
   display: block;
+  font-size: 24px;
 }
 
 .header-nav-left {
@@ -16,28 +14,15 @@
 
 .header-nav-right {
   float: right;
-
-}
-.header-nav a {
-  color: black;
-}
-.header-nav-right a {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 25px;
-}
-.header-nav li {
-  float: left;
-  padding: 20px 10px;
-  height: 60px;
 }
 
-#header-search {
-  border-radius: 25px;
-  width: 200px;
-  padding-right: 10px;
-  margin-top: -8px;
-}
+
+// .header-searchbar {
+//   border-radius: 25px;
+//   width: 200px;
+//   padding-right: 10px;
+//   margin-top: -8px;
+// }
 
 #logo {
   background-image: image-url('logo.png');

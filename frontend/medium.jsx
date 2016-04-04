@@ -1,58 +1,16 @@
-var React = require('react'),
-    ReactDOM = require('react-dom'),
-    Router = require ('react-router').Router,
-    Route = require ('react-router').Route,
-    IndexRoute = require ('react-router').IndexRoute,
-    hashHistory = require ('react-router').hashHistory,
-    
-    // browserHistory = require('history/lib/createBrowserHistory'),
-    // browserHistory = require('react-router').browserHistory,
-    MaterialIndex = require('./components/article_index_item_material')
-    ApiUtil = require('./util/api_util'),
-    SessionStore = require('./stores/session'),
-    UserShow = require('./components/user_show'),
-    LoginForm = require('./components/login_form'),
-    Header = require('./components/header'),
-    ArticleDetail = require('./components/article_detail.cjsx'),
-    ArticleIndex = require('./components/article_index');
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {Router, Route, IndexRoute, hashHistory} from 'react-router'
 
+import ApiUtil from './util/api_util'
+import SessionStore from './stores/session'
 
-var App = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.object.isRequired
-  },
-  getInitialState: function() {
-    return {
-      currentUser: null
-    };
-  },
-  componentDidMount: function() {
-    this.sessionStoreToken = SessionStore.addListener(this.handleChange);
-    ApiUtil.fetchCurrentUser();
-  },
-  componentWillUnmount: function() {
-    this.sessionStoreToken.remove();
-  },
-  handleChange: function () {
-    if (SessionStore.isLoggedIn()) {
-      this.setState({currentUser: SessionStore.currentUser()});
-    } else {
-      this.context.router.push("/login");
-    }
-  },
+import App from './components/app'
+import LoginForm from './components/login_form'
+import UserShow from './components/user_show'
+import ArticleIndex from './components/marticle_index'
+import ArticleDetail from './components/article_detail'
 
-  render: function () {
-    return (
-      <div>
-        <Header currentUser={this.state.currentUser} />
-        <MaterialIndex title="Title" subtitle="subtitle"/>
-        <content>
-          {this.props.children}
-        </content>
-      </div>
-    );
-  }
-});
 
 function _requireLoggedIn(nextState, replace, asyncCompletionCallback) {
   if (!SessionStore.currentUserHasBeenFetched()) {
@@ -70,15 +28,15 @@ function _requireLoggedIn(nextState, replace, asyncCompletionCallback) {
 
 $(document).ready(function () {
   ReactDOM.render(
-    <Router history={hashHistory}>
-      <Route path="/" component={App}>
-        <IndexRoute component={ArticleIndex} />
-        <Route path="user/:id" component={UserShow} />
-        <Route path="article/:id" component={ArticleDetail} />
-        <Route path="me" component={UserShow} />
-      </Route>
-      <Route path="/login" component={LoginForm}/>
-    </Router>,
+      <Router history={hashHistory}>
+        <Route path="/" component={App}>
+          <IndexRoute component={ArticleIndex} />
+          <Route path="user/:id" component={UserShow} />
+          <Route path="article/:id" component={ArticleDetail} />
+          <Route path="me" component={UserShow} />
+        </Route>
+        <Route path="/login" component={LoginForm}/>
+      </Router>,
     $('#root')[0]
   );
 });

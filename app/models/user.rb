@@ -11,9 +11,8 @@ class User < ActiveRecord::Base
 
   has_many :comments, dependent: :destroy
 
-  has_many :favorites, dependent: :destroy
-
   has_many :bookmarks, dependent: :destroy
+  has_many :bookmarked_articles, through: :bookmarks, source: :article
 
   acts_as_liker
   acts_as_mentionable

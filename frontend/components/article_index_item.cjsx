@@ -17,7 +17,6 @@ ArticleIndexItem = React.createClass
 				
 		
     <li onClick={@viewArticle} className="article-index-item">
-    	<img className="author-thumb" src={@props.article.author.avatar} />
     	<p className="author-email">{@props.article.author.email}</p>
     	<ul>
     		{tags}

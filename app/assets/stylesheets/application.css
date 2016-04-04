@@ -65,7 +65,7 @@ main {
   margin-left: 20px;
 }
 
-.article-index-item {
+/*.article-index-item {
   background: white;
   padding: 10px;
   margin: 20px;
@@ -76,11 +76,14 @@ main {
   font-size: 24px;
   font-weight: bold;
 }
-
+*/
 
 .author-thumb {
   width: 60px;
   height: 60px;
   z-index: 2;
   border-radius: 50%;
+}
+.tag > a {
+  color: black;
 }

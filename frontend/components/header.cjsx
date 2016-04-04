@@ -22,7 +22,7 @@ Header = React.createClass
       # userAction = <button class="create-session">Sign in/ Sign up</button>
         userAction = <a href="/#/login">Sign in/ Sign up</a>
 
-    <header className="header">
+    <div className="header">
       <div id="logo" />
       <nav className="header-nav group">        
         <ul className="header-nav-left">
@@ -37,7 +37,7 @@ Header = React.createClass
           <li>{userAction}</li>
         </ul>
       </nav>
-    </header>
+    </div>
 
   logOutUser: ->
     ApiUtil.logOutUser()

@@ -10,22 +10,22 @@ module.exports = {
     devtoolModuleFilenameTemplate: '[resourcePath]',
     devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
   },
+  resolveLoader: {
+    moduleDirectories: ['..','node_modules']
+  },
   resolve: {
     extensions: ["", ".scss", ".coffee", ".js", ".jsx", ".cjsx", "json" ]
   },
   module: {
     noParse: /node_modules\/quill\/dist/,
     loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel',
-        query: {
-          presets: ["react"]
-        }
-      },
       { test: /\.cjsx$/, loaders: ["coffee-loader", "cjsx"]},
       { test: /\.coffee$/, loader: "coffee-loader"},
+      {
+        test: /(\.js|\.jsx)$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel'
+      },
       { test: /(\.scss|\.css)$/, loaders: 
           [ 
             require.resolve('style-loader'), 
@@ -37,8 +37,6 @@ module.exports = {
   },
   devtool: 'source-maps',
   plugins: [
-    new webpack.ProvidePlugin({
-      'React':'react'
-    })
+    new webpack.ProvidePlugin({'React':'react'})
   ]
 }

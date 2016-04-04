@@ -1,4 +1,4 @@
-json.partial! '/api/articles/article', article: @article
+json.partial! '/api/articles/article', article: @article, minified: false
 
 json.comments @article.comments, partial: '/api/comments/comment', as: :comment
 
