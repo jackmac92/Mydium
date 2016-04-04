@@ -37,7 +37,7 @@ ActiveRecord::Base.transaction do
     article = User.all.sample.articles.create title:Faker::StarWars.quote, body:Faker::Hipster.paragraphs(7).join(" ")
     3.times do
       article.tags.create(name:tags.sample)
-      User.all.sample.favorites.create(article_id: article.id)
+      User.all.sample.like! article
       User.all.sample.bookmarks.create(article_id: article.id)
     end
     7.times do
