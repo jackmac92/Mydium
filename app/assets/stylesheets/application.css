@@ -14,7 +14,7 @@
  *= require_self
  */
 
- h1, h2, h3, p, li {
+ h1, a, h2, h3, p, li {
   border: 0;
   outline: 0;
   margin: 0;
@@ -44,6 +44,7 @@ ul {
 
 body {
   background: #eee;
+  font-family: roboto;
 }
 
 main {
@@ -57,11 +58,11 @@ main {
   width: 640px;
   margin: 0 auto;
 }
-.content-sidebar {
+section.content-sidebar {
   display: block;
   float: right;
   width: 400px;
-  margin-top: 10px;
+  margin-top: 40px;
   margin-left: 20px;
 }
 
@@ -83,6 +84,11 @@ main {
   height: 60px;
   z-index: 2;
   border-radius: 50%;
+}
+.tag {
+  font-size: 24px;
+  padding: 5px 15px;
+  background: white;
 }
 .tag > a {
   color: black;
