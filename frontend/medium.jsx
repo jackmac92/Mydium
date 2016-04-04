@@ -9,7 +9,7 @@ import App from './components/app'
 import LoginForm from './components/login_form'
 import SignUpForm from './components/signup_form'
 import UserShow from './components/user_show'
-import ArticleIndex from './components/marticle_index'
+import ArticleIndex from './components/article_index'
 import ArticleDetail from './components/article_detail'
 import ArticleForm from './components/article_form'
 

@@ -2,7 +2,6 @@ var React = require('react');
 var ApiUtil = require('../util/api_util');
 
 import Input from 'react-toolbox/lib/input'
-import Header from './mheader'
 import Button from 'react-toolbox/lib/button'
 import Checkbox from 'react-toolbox/lib/checkbox'
 

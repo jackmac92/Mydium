@@ -19,7 +19,6 @@ module.exports = {
   module: {
     noParse: /node_modules\/quill\/dist/,
     loaders: [
-      { test: /\.cjsx$/, loaders: ["coffee-loader", "cjsx"]},
       { test: /\.coffee$/, loader: "coffee-loader"},
       {
         test: /(\.js|\.jsx)$/,

@@ -1,6 +1,6 @@
 var ApiUtil = require('../util/api_util');
 var SessionStore = require('../stores/session');
-var Header = require('../components/mheader');
+var Header = require('../components/header');
 import ToolboxApp from 'react-toolbox/lib/app'
 
 

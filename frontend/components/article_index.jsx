@@ -2,7 +2,7 @@ import React from 'react'
 import ApiUtil from '../util/api_util'
 import ArticleStore from '../stores/articles'
 import SessionStore from '../stores/session'
-import ArticleIndexItem from './marticle_index_item'
+import ArticleIndexItem from './article_index_item'
 import Sidebar from './sidebar'
 import Input from 'react-toolbox/lib/input'
 
