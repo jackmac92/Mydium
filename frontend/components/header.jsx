@@ -29,7 +29,7 @@ var Header = React.createClass({
 					<MenuItem caption="Profile"/>
 					<MenuItem caption="Settings"/>
 					<MenuItem onClick={() => ApiUtil.logOutUser()} caption="Sign Out"/>
-				</ IconMenu>
+				</IconMenu>
 				)
 
 		} else {
@@ -38,7 +38,7 @@ var Header = React.createClass({
 		return (
 	    <AppBar className="header group">
 	      <div id="logo" />
-	      <nav className="header-nav group">        
+	      <Navigation className="header-nav group">        
 	        <Navigation type="horizontal" className="header-nav-left">
 	          <Link href="#" active label="Home" />
 	          <Link href="#/top_articles" label="Top Articles" />
@@ -49,7 +49,7 @@ var Header = React.createClass({
 	          {userNotifications}
 	          {userAction}
 	        </Navigation>
-	      </nav>
+	      </Navigation>
 	    </AppBar>
 		);
 	}

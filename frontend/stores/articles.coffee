@@ -2,6 +2,8 @@ Store = require('flux/utils').Store
 AppDispatcher = require '../dispatchers/dispatcher'
 ArticleConstants = require '../constants/article'
 
+x = {b:{c:{val:true}}}
+
 ArticleStore = new Store AppDispatcher
 
 `_articles = []`
@@ -12,6 +14,19 @@ ArticleStore.all = ->
 
 ArticleStore.getDetail = ->
   _articleDetail
+
+ArticleStore.indexOf = (id) ->
+  indices = _articles.map (article) -> article.id
+  indices.indexOf id
+
+ArticleStore.update = (id,newArticle) ->
+  _articles[ArticleStore.indexOf(id)] = newArticle
+
+ArticleStore.updateArticleLike = (id, value) ->
+  _articles[ArticleStore.indexOf(id)].user.faved_article = value
+
+ArticleStore.updateArticleBookmark = (id, value) ->
+  _articles[ArticleStore.indexOf(id)].user.bookmarked_article = value
 
 resetArticles = (articles) ->
   `_articles = articles`

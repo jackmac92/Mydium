@@ -55,14 +55,13 @@ ApiUtil =
       complete: ->
         callback && callback()
 
-  toggleFavorite: (article) ->
+  toggleFavorite: (article_id) ->
     $.ajax
-      type: "POST"
+      type: "PATCH"
       dataType: "json"
-      url: "api/"
-      success: () ->
-      error: () ->
-      complete: () ->
+      url: "api/article"
+      success: (article) ->
+        console.log "worked"
   toggleBookmark: (article) ->
     $.ajax
       type: "POST"

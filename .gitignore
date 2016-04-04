@@ -16,5 +16,7 @@ node_modules
 bower_components
 bundle.js*
 notes
+todos
+questions
 # Ignore application configuration
 /config/application.yml
