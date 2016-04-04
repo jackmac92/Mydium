@@ -4,6 +4,7 @@ import ApiUtil from '../util/api_util'
 import AppBar from 'react-toolbox/lib/app_bar'
 import Navigation from 'react-toolbox/lib/navigation'
 import Link from 'react-toolbox/lib/link'
+import Button from 'react-toolbox/lib/button'
 import {IconMenu, MenuItem, MenuDivider} from 'react-toolbox/lib/menu'
 import Input from 'react-toolbox/lib/input'
 
@@ -15,7 +16,7 @@ var Header = React.createClass({
 	render: function() {
 		var userNotifications, userAction;
 		if (this.props.currentUser) {
-      userNotifications = <Link href="#/me/notifications" className="success badge" label="1" />;
+      userNotifications = <Button icon="notifications_none" />;
 			userAction = (
 				<IconMenu icon="account_circle" position="top-right" menuRipple >
 					<MenuItem caption={this.props.currentUser.email} />

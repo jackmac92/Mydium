@@ -75,7 +75,7 @@ section.content-sidebar {
   border-radius: 50%;
 }
 .tag {
-  font-size: 18px;
+  /*font-size: 18px;*/
   padding: 2px 15px;
   background: white;
 }

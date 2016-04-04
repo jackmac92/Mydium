@@ -3,6 +3,7 @@ import {Card,CardMedia,CardTitle,CardText,CardActions} from 'react-toolbox/lib/c
 import Button from 'react-toolbox/lib/button'
 import Link from 'react-toolbox/lib/link'
 import Tag from './tag'
+import ApiUtil from '../util/api_util'
 
 
 const ArticleCard = React.createClass({
@@ -10,6 +11,12 @@ const ArticleCard = React.createClass({
 
  	viewArticle: function () {
  		this.context.router.push('article/' + this.props.article.id);
+ 	},
+ 	toggleFavorite: function (article_id) {
+ 		ApiUtil.toggleFavorite(article_id)
+ 	},
+ 	toggleBookmark: function (article_id) {
+ 		ApiUtil.toggleBookmark(article_id)
  	},
 
  	render: function() {
@@ -23,10 +30,9 @@ const ArticleCard = React.createClass({
  		} else {
  			tags = <div />
  		}
- 		// debugger
+
  		return (
-	    <li onClick={this.viewArticle} className="article-index-item">
-			  <Card style={{width: '720px'}}>
+			  <Card onClick={this.viewArticle} style={{width: '720px'}}>
 					<CardTitle 
 						avatar={this.props.article.author.avatar}
 						title={this.props.article.author.email}
@@ -47,7 +53,6 @@ const ArticleCard = React.createClass({
 		    		{tags}
 			    </CardActions>
 			  </Card>
-	    </li>
 
  		);
  	}

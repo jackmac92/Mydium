@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Router, Route, IndexRoute, hashHistory} from 'react-router'
+import {Router, Route, IndexRoute, useRouterHistory} from 'react-router'
+import { createHashHistory } from 'history'
 
 import ApiUtil from './util/api_util'
 import SessionStore from './stores/session'
@@ -29,8 +30,9 @@ function _requireLoggedIn(nextState, replace, asyncCompletionCallback) {
 }
 
 $(document).ready(function () {
+  const appHistory = useRouterHistory(createHashHistory)({queryKey:false})
   ReactDOM.render(
-      <Router history={hashHistory}>
+      <Router history={appHistory}>
         <Route path="/" component={App}>
           <IndexRoute component={ArticleIndex} />
           <Route path="user/:id" component={UserShow} />

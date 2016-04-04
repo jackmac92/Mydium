@@ -5,7 +5,8 @@ import SessionStore from '../stores/session'
 import ArticleIndexItem from './article_index_item'
 import Sidebar from './sidebar'
 import Input from 'react-toolbox/lib/input'
-
+import Navigation from 'react-toolbox/lib/navigation'
+import Ripple from 'react-toolbox/lib/ripple'
 var ArticleIndex = React.createClass ({
 
   contextTypes: {router: React.PropTypes.object.isRequired},
@@ -38,17 +39,15 @@ var ArticleIndex = React.createClass ({
   render: function () {
     var articles;
     if (this.state.articles) {
-        articles = this.state.articles.map(function(article) {
-          return <ArticleIndexItem key={article.id} article={article} />;
-        });
+        articles = this.state.articles.map( article => <ArticleIndexItem key={article.id} article={article} />);
     }
     return (
       <main>
         <section className="content-main">
           <Input onFocus={this.sendToFullEditor} type="text" label="Write here..." />
-          <ul className="article-index">
+          <Navigation type="vertical" className="article-index">
             {articles}
-          </ul>
+          </Navigation>
         </section>
         <Sidebar />
       </main>

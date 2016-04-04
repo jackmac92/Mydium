@@ -46,17 +46,15 @@ var Sidebar = React.createClass({
 							{featured_tags}
 						</Navigation>
 					</li>
-					<Sticky>
-						<li>
-							<h3>Your Tags</h3>
-							<hr />
-							<Navigation>
-								{user_tags}
-							</Navigation>
-						</li>
-						<li>Top Stories</li>
+					<li>
+						<h3>Your Tags</h3>
 						<hr />
-					</Sticky>
+						<Navigation>
+							{user_tags}
+						</Navigation>
+					</li>
+					<li>Top Stories</li>
+					<hr />
 				</ul>
 
 			</section>
