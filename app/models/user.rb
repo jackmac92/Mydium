@@ -21,10 +21,10 @@ class User < ActiveRecord::Base
   acts_as_followable
 
   # attr_accessible :email, :name, :password, :password_confirmation, :remember_me
-  def favorites
+  def favorite_articles
     Article.where(id: likees(Article).map(&:id))
   end
-  
+
   def recent_articles_excluding article_id
   	articles.order(:created_at).limit(5).where.not(id: article_id)
   end
