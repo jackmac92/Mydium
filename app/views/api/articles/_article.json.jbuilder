@@ -13,6 +13,8 @@ json.author do
 	json.partial! '/api/users/user', user: article.user
 end
 
+json.picture asset_url(article.picture.url)
+
 json.num_responses article.comments.count
 
 json.read_time article.body.split.length / 275

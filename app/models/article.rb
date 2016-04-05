@@ -2,6 +2,9 @@ class Article < ActiveRecord::Base
   validates :body, :user_id, :title, presence: :true
   validates :published, inclusion:{in:[true, false]}
 
+  has_attached_file :picture, styles: { large: "800x800>", thumb: "100x100>" }, default_url: "missing.jpg"
+  validates_attachment_content_type :picture, content_type: /\Aimage\/.*\Z/
+
   belongs_to :user
 
   has_many :taggings, dependent: :destroy

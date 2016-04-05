@@ -16,7 +16,6 @@ const ArticleCard = React.createClass({
  	componentDidMount: function() {
  	},
  	toggleFavorite: function (article_id, e) {
- 		console.log("Toggling favorite")
  		e.preventDefault()
  		ApiUtil.toggleFavorite(article_id)
  	},
@@ -36,8 +35,6 @@ const ArticleCard = React.createClass({
  		} else {
  			tags = <div />
  		}
- 		if (this.props.article.id == 272) console.log(this.props.article.user);
-
  		return (
 			  <Card className="article-card" >
 			  	<CardTitle
@@ -47,6 +44,10 @@ const ArticleCard = React.createClass({
 						avatar={this.props.article.author.avatar}
 						title={this.props.article.author.email}
 						subtitle={"Published " + this.props.article.created_at + " ago • " + this.props.article.read_time + " minute read"}
+					/>
+					<CardMedia>
+					  <img src={this.props.article.picture} />
+					</CardMedia>
 					/>
 					<CardTitle 
 						onClick={this.viewArticle}
