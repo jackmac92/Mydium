@@ -3,6 +3,8 @@ import ArticleStore from '../stores/articles'
 import ApiUtil from '../util/api_util'
 import Tag from './tag'
 import Comments from './comment_section'
+import Navigation from 'react-toolbox/lib/navigation'
+import { List,ListItem,ListSubHeader,ListDivider,ListCheckbox } from 'react-toolbox/lib/list'
 
 var ArticleDetail = React.createClass({
   stateFromStore: function () {
@@ -25,7 +27,7 @@ var ArticleDetail = React.createClass({
     this.articleStoreToken.remove();
   },
   render: function() {
-    var tags = [], other_articles, recent_posts_tmp, recent_posts;
+    var tags = [], other_articles, recent_posts_view, recent_posts;
     if (!this.state.article) {
       return (<h2>Loading...</h2>);
     }
@@ -33,25 +35,32 @@ var ArticleDetail = React.createClass({
       tags = this.state.article.tags.map( t => <Tag key={t.id} tag={t} /> )
     }
     if (this.state.article.authors_recent_articles) {
-      recent_posts_tmp = this.state.article.authors_recent_articles.map(article => <li key={article.id}>{article.title}</li>)
-      recent_posts = <section><h3>Recent Posts</h3><ul>{recent_posts_tmp}</ul></section>
+      recent_posts_view = (
+        <List selectable ripple>
+          <ListSubHeader caption="Author's Recent Articles" />
+          <ListItem caption={this.state.article.authors_recent_articles[0].title} />
+          <ListItem caption={this.state.article.authors_recent_articles[1].title} />
+          <ListItem caption={this.state.article.authors_recent_articles[2].title} />
+          <ListCheckbox caption={"Follow " + this.state.article.author.email} />
+        </List>
+      )
     }
     return (
-      <content>
-        <article>
+      <main>
+        <article className="article-detail">
           <img className="author-thumb" src={this.state.article.author.avatar} />
           <p className="author-email">{this.state.article.author.email}</p>
-          <ul>
+          <Navigation>
             {tags}
-          </ul>
+          </Navigation>
           <h1>{this.state.article.title}</h1>
           <p>{this.state.article.body}</p>
         </article>
         <hr />
-        {recent_posts}
+        {recent_posts_view}
         <hr />
         <Comments article_id={this.state.article.id} comments={this.state.article.comments} />
-      </content>
+      </main>
     );
   }
 

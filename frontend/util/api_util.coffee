@@ -11,7 +11,13 @@ ApiUtil =
         ApiActions.receiveAllArticles articles
       error: ->
         console.log "ApiUtil#fetchArticles error"
-  
+  fetchBookmarkedArticles: ->
+    $.ajax
+      type: "GET"
+      dataType: "json"
+      url: "api/articles"
+      success: ->
+        console.log "Yay"      
   fetchTagsIndex: ->
     $.ajax
       type: "GET"
@@ -135,7 +141,30 @@ ApiUtil =
   #   error: ->
   #     console.log "ApiUtil#fetchSingleArticle error"
 
-        
+# uploadCallback: (evt) -> 
+#   if evt.lengthComputable 
+#     percentComplete = evt.loaded / evt.total;
+    
+# xhr: (evt) -> 
+#   xhr = new window.XMLHttpRequest();
+#   # Upload progress
+#   xhr.upload.addEventListener "progress", @uploadCallback, false
+#   # //Download progress
+#   xhr.addEventListener("progress", function(evt) {
+#     if (evt.lengthComputable) {
+#       var percentComplete = evt.loaded / evt.total;
+#       # //Do something with download progress
+#       console.log(percentComplete);
+#       }
+#     }, false);
+#     xhr
+# type: 'POST',
+# url: "/",
+# data: {},
+# success: ->
+  
+# });
+
 
 window.ApiUtil = ApiUtil
 module.exports = ApiUtil

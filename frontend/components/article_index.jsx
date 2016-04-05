@@ -33,7 +33,7 @@ var ArticleIndex = React.createClass ({
   },
 
   sendToFullEditor: function (text) {
-    this.context.router.push('editor')
+    this.context.router.push('/editor')
   },
 
   render: function () {

@@ -10,9 +10,6 @@ module.exports = {
     devtoolModuleFilenameTemplate: '[resourcePath]',
     devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
   },
-  resolveLoader: {
-    moduleDirectories: ['..','node_modules']
-  },
   resolve: {
     extensions: ["", ".scss", ".coffee", ".js", ".jsx", ".cjsx", "json" ]
   },

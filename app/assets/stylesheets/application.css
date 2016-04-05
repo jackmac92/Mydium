@@ -85,3 +85,30 @@ section.content-sidebar {
 nav > a.tag {
   margin: 5px 7px;
 }
+
+.article-card {
+  margin: 10px;
+}
+
+.auth-form {
+  width: 90%;
+  margin: 20px auto;
+}
+
+.article-detail {
+  width: 90%;
+  margin: 15px auto;
+  font-size: 19px;
+  background: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  line-height: 1.77777;
+}
+
+.article-card button {
+  width: 30px;
+}
+
+button.article-index-bookmark {
+  float: right;
+} 

@@ -3,6 +3,7 @@ var ApiUtil = require('../util/api_util');
 
 import Input from 'react-toolbox/lib/input'
 import Button from 'react-toolbox/lib/button'
+import Link from 'react-toolbox/lib/link'
 import Checkbox from 'react-toolbox/lib/checkbox'
 
 var LoginForm = React.createClass({
@@ -10,7 +11,13 @@ var LoginForm = React.createClass({
 	contextTypes: {router: React.PropTypes.object.isRequired},
 
 	getInitialState: function () {
-		return { email: "", password: "", remember_me:false };
+		return { 
+			email: "", 
+			password: "", 
+			remember_me:false,
+			emailError:"",
+			passwordError:""
+		};
 	},
 
 	handleSubmit: function (e) {
@@ -21,32 +28,36 @@ var LoginForm = React.createClass({
 	},
 
 	updateEmail: function (e) {
-		this.setState({email:e})
+		this.setState({email:e});
 	},
 	updateRememberStatus: function (e) {
-		this.setState({remember_me: (!this.state.remember_me)})
+		this.setState({remember_me: (!this.state.remember_me)});
 	},
 	updatePassword: function (e) {
-		this.setState({password:e})
+		this.setState({password:e});
 	},
 
-	passwordErrors: function () {
+	passwordNoErrors: function () {
+		if (this.state.password.length == 0) return true;
 		if (this.state.password.length > 6) {
-			return "";
+			return true;
 		} else {
-			return "Password err"
+			return false;
 		}
 	},
-	emailErrors: function () {
-		if (this.state.email.length > 6) {
-			return "";
+
+	emailNoErrors: function () {
+		if (this.state.email.length == 0) return true;
+		if (this.state.email.includes("@")) {
+			return true;
 		} else {
-			return "Email err"
+			return false;
 		}
 	},
 
 	formReady: function () {
-		if (this.passwordErrors().length == 0 && this.emailErrors().length == 0) {
+		if (this.state.password.length < 4 || this.state.email.length < 4) return false;
+		if (this.passwordNoErrors() && this.emailNoErrors()) {
 			return true
 		} 
 		return false;
@@ -57,14 +68,17 @@ var LoginForm = React.createClass({
 		if (this.formReady()) {
 			button = <Button raised accent ripple onClick={this.handleSubmit} label="Submit" />
 		} else {
-			button = <Button disabled onClick={this.handleSubmit} label="Submit" />
+			button = <Button raised disabled onClick={this.handleSubmit} label="Submit" />
 		}
-		return (		
-			<div>				
-				<Input error={this.emailErrors()} type="email" onChange={this.updateEmail} label="Email" value={this.state.email}/>
-				<Input error={this.passwordErrors()} label="Password" type="password" onChange={this.updatePassword} value={this.state.password}/>
-				<Checkbox onChange={this.updateRememberStatus} checked={this.state.remember_me} />
-				{button}
+		return (
+			<div>
+				<form className="auth-form" >
+					<Input type="email" onChange={this.updateEmail} label="Email" value={this.state.email}/>
+					<Input label="Password" type="password" onChange={this.updatePassword} value={this.state.password}/>
+					<Checkbox label="Remember Me" onChange={this.updateRememberStatus} checked={this.state.remember_me} />
+					{button}
+				</form>
+				<Link label="Don't have an account? Create a new one!" href="#/signup" />
 			</div>
 		)	
 	}

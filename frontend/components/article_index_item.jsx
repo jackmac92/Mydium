@@ -32,24 +32,23 @@ const ArticleCard = React.createClass({
  		}
 
  		return (
-			  <Card onClick={this.viewArticle} style={{width: '720px'}}>
+			  <Card className="article-card group" onClick={this.viewArticle} >
 					<CardTitle 
 						avatar={this.props.article.author.avatar}
 						title={this.props.article.author.email}
-						subtitle={this.props.article.created_at + " ago"}
+						subtitle={"Published " + this.props.article.created_at + " ago • " + this.props.article.read_time + " minute read"}
 					/>
 					<CardTitle 
 						title={this.props.article.title}
-						subtitle={this.props.article.read_time + " minute read"}
 					/>
 			    <CardText>{this.props.article.body}</CardText>
 			    <Link label="Read More" href={"#/articles/"+this.props.article.id} />
 			    <CardActions>
-			      <Button icon={"favorite"+bookmark_style} />
-			      <Link label={this.props.article.num_responses + " responses"} />
-			      <Button icon={"bookmark"+fav_style}  />
+			      <Button className="article-index-favorite" icon={"favorite"+bookmark_style} />
+			      <Button className="article-index-bookmark" icon={"bookmark"+fav_style}  />
 			    </CardActions>
 			    <CardActions>
+			    	<h5>Tags</h5>
 		    		{tags}
 			    </CardActions>
 			  </Card>

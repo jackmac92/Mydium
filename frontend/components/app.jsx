@@ -32,7 +32,7 @@ var App = React.createClass({
     return (
       <ToolboxApp>
         <Header currentUser={this.state.currentUser}/>
-        <content>
+        <content className="curr-page-content">
           {this.props.children}
         </content>
       </ToolboxApp>
