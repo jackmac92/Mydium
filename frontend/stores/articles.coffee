@@ -76,6 +76,9 @@ ArticleStore.__onDispatch = (payload) ->
     when ArticleConstants.ARTICLE_DETAIL_RECEIVED
       setDetail payload.article
       ArticleStore.__emitChange()
+    when ArticleConstants.ARTICLE_UPDATE_RECEIVED
+      ArticleStore.update payload.article.id, payload.article
+      ArticleStore.__emitChange()
     when ArticleConstants.NEW_COMMENT_RECEIVED
       addComment payload.comment
       ArticleStore.__emitChange()

@@ -1,3 +1,10 @@
+working buttons for like, bookmark and follow
+switch to material-ui
+hide buttons unless user logged in
+search
+infinite scroll
+notifications
+
 article 
 	view count
 	subtitle
@@ -7,17 +14,7 @@ article
 		cover photo
 	scheduling publish time
 
-hide buttons unless user logged in
-
-omniauth
-infinite scroll
-search
-notifications
-
-working buttons for like, bookmark and follow
-
 fun
 	write or die muthafucka
 
-
-CWRP falling one behind
+bookmark finish vs remove

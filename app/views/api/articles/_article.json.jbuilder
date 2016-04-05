@@ -19,6 +19,6 @@ json.read_time article.body.split.length / 275
 if user_signed_in?
 	json.user do
 		json.faved_article current_user.likes? article
-		json.bookmarked_article current_user.bookmarked_articles.include? article
+		json.bookmarked_article current_user.bookmarks.where(article_id: article.id).any?
 	end
 end

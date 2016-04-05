@@ -24,6 +24,10 @@ ApiActions =
     AppDispatcher.dispatch
       actionType: ArticleConstants.ARTICLE_DETAIL_RECEIVED
       article: article
+  receiveUpdatedArticle: (article) ->
+    AppDispatcher.dispatch
+      actionType: ArticleConstants.ARTICLE_UPDATE_RECEIVED
+      article: article
 
   receiveAllTags: (tags) ->
     AppDispatcher.dispatch

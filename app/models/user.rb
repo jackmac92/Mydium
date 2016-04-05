@@ -26,6 +26,11 @@ class User < ActiveRecord::Base
     Article.where(id: likees(Article).map(&:id))
   end
 
+  def toggle_bookmark article_id
+    bookmark = bookmarks.find_by(article_id: article_id)
+    bookmark ? bookmark.destroy : bookmarks.create(article_id: article_id)
+  end
+
   def recent_articles_excluding article_id
   	articles.order(:created_at).limit(5).where.not(id: article_id)
   end

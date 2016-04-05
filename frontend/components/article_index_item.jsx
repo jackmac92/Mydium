@@ -13,10 +13,15 @@ const ArticleCard = React.createClass({
  	viewArticle: function () {
  		this.context.router.push('article/' + this.props.article.id);
  	},
- 	toggleFavorite: function (article_id) {
+ 	componentDidMount: function() {
+ 	},
+ 	toggleFavorite: function (article_id, e) {
+ 		console.log("Toggling favorite")
+ 		e.preventDefault()
  		ApiUtil.toggleFavorite(article_id)
  	},
- 	toggleBookmark: function (article_id) {
+ 	toggleBookmark: function (article_id, e) {
+ 		e.preventDefault()
  		ApiUtil.toggleBookmark(article_id)
  	},
 
@@ -31,9 +36,10 @@ const ArticleCard = React.createClass({
  		} else {
  			tags = <div />
  		}
+ 		if (this.props.article.id == 272) console.log(this.props.article.user);
 
  		return (
-			  <Card className="article-card" onClick={this.viewArticle} >
+			  <Card className="article-card" >
 			  	<CardTitle
 			  		subtitle="Some tag name"
 			  	/>
@@ -43,13 +49,14 @@ const ArticleCard = React.createClass({
 						subtitle={"Published " + this.props.article.created_at + " ago • " + this.props.article.read_time + " minute read"}
 					/>
 					<CardTitle 
+						onClick={this.viewArticle}
 						title={this.props.article.title}
 					/>
 			    <CardText>{this.props.article.body}</CardText>
 			    <Link label="Read More" href={"#/articles/"+this.props.article.id} />
 			    <CardActions>
-			      <Button className="article-index-favorite" icon={"favorite"+bookmark_style} />
-			      <Button className="article-index-bookmark" icon={"bookmark"+fav_style}  />
+			      <Button onClick={this.toggleFavorite.bind(this, this.props.article.id)} className="article-index-favorite" icon={"favorite"+fav_style} />
+			      <Button onClick={this.toggleBookmark.bind(this, this.props.article.id)} className="article-index-bookmark" icon={"bookmark"+bookmark_style}  />
 			    </CardActions>
 			    <CardActions>
 			    	<h5>Tags</h5>

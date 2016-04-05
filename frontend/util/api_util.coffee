@@ -103,15 +103,25 @@ ApiUtil =
     $.ajax
       type: "PATCH"
       dataType: "json"
-      url: "api/article"
+      url: "api/user"
+      data:
+        receiver: "article"
+        id: article_id
+        user_action: "toggle_favorite"
       success: (article) ->
-        console.log "worked"
-  toggleBookmark: (article) ->
+        ApiActions.receiveUpdatedArticle article
+
+  toggleBookmark: (article_id) ->
     $.ajax
-      type: "POST"
+      type: "PATCH"
       dataType: "json"
-      url: "api/"
-      success: () ->
+      url: "api/user"
+      data:
+        receiver: "article"
+        id: article_id
+        user_action: "toggle_bookmark"
+      success: (article) ->
+        ApiActions.receiveUpdatedArticle article
       error: () ->
       complete: () ->
   toggleFollow: (user) ->
