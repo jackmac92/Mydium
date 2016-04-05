@@ -85,7 +85,7 @@ var LoginForm = React.createClass({
 					{button}
 				</form>
 				<Link label="Don't have an account? Create a new one!" href="#/signup" />
-				<Button label="Try With Demo Account" />
+				<Button label="Try With Demo Account" onClick={this.demoStart}/>
 			</div>
 		)	
 	}
