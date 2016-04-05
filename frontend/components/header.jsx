@@ -41,7 +41,7 @@ var Header = React.createClass({
 	      <Navigation className="header-nav group">        
 	        <Navigation type="horizontal" className="header-nav-left">
 	          <Link href="#" active label="Home" />
-	          <Link href="#/top_articles" label="Top Articles" />
+	          <Link href="#/popular" label="Top Articles" />
 	          <Link href="#/me/bookmarks" label="Bookmarks" />
 	        </Navigation>
 	        <Navigation type="horizontal" className="header-nav-right">

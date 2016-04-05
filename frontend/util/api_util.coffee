@@ -1,23 +1,46 @@
 ApiActions = require '../actions/api'
 SessionActions = require '../actions/session'
+# xhr: -> 
+#   xhr = new window.XMLHttpRequest()
+#   xhr.addEventListener("progress", ((evt) -> statusCallback(evt.loaded / evt.total)), false)
+#   xhr
 
 ApiUtil =
-  fetchArticles: ->
+  fetchArticles: (completionCallback) ->
     $.ajax
       type: "GET"
       dataType: "json"
       url: "api/articles"
       success: (articles) ->
         ApiActions.receiveAllArticles articles
+      error: (e) ->
+        console.log "ApiUtil#fetchArticles error"
+        console.log e
+      complete: ->
+        completionCallback && completionCallback()
+
+  fetchTopArticles: ->
+    $.ajax
+      type: "GET"
+      dataType: "json"
+      url: "api/articles"
+      data:
+        article_type: "popular"
+      success: (articles) ->
+        ApiActions.receiveTopArticles articles
       error: ->
         console.log "ApiUtil#fetchArticles error"
+
   fetchBookmarkedArticles: ->
     $.ajax
       type: "GET"
       dataType: "json"
       url: "api/articles"
+      data:
+        article_type: "user_bookmarks"
       success: ->
-        console.log "Yay"      
+        console.log "Yay"
+
   fetchTagsIndex: ->
     $.ajax
       type: "GET"
@@ -141,30 +164,15 @@ ApiUtil =
   #   error: ->
   #     console.log "ApiUtil#fetchSingleArticle error"
 
-# uploadCallback: (evt) -> 
-#   if evt.lengthComputable 
-#     percentComplete = evt.loaded / evt.total;
-    
-# xhr: (evt) -> 
-#   xhr = new window.XMLHttpRequest();
-#   # Upload progress
-#   xhr.upload.addEventListener "progress", @uploadCallback, false
-#   # //Download progress
-#   xhr.addEventListener("progress", function(evt) {
-#     if (evt.lengthComputable) {
-#       var percentComplete = evt.loaded / evt.total;
-#       # //Do something with download progress
-#       console.log(percentComplete);
-#       }
-#     }, false);
-#     xhr
-# type: 'POST',
-# url: "/",
-# data: {},
-# success: ->
-  
-# });
+  progressCallback: (callback, evt) -> 
+    if evt.lengthComputable 
+      percentComplete = evt.loaded / evt.total
 
+
+  type: 'POST',
+  url: "/",
+  data: {},
+  success: (result) ->
 
 window.ApiUtil = ApiUtil
 module.exports = ApiUtil

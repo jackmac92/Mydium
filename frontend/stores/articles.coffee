@@ -2,8 +2,6 @@ Store = require('flux/utils').Store
 AppDispatcher = require '../dispatchers/dispatcher'
 ArticleConstants = require '../constants/article'
 
-x = {b:{c:{val:true}}}
-
 ArticleStore = new Store AppDispatcher
 
 `_articles = []`
@@ -35,6 +33,7 @@ resetArticles = (articles) ->
 setDetail = (article) ->
   `_articleDetail = article`
   null
+
 addComment = (comment) ->
   _articleDetail.comments.push comment
 
@@ -42,6 +41,12 @@ ArticleStore.__onDispatch = (payload) ->
 
   switch payload.actionType
     when ArticleConstants.ARTICLES_RECEIVED
+      resetArticles payload.articles
+      ArticleStore.__emitChange()
+    when ArticleConstants.TOP_ARTICLES_RECEIVED
+      resetArticles payload.articles
+      ArticleStore.__emitChange()
+    when ArticleConstants.BOOKMARKED_ARTICLES_RECEIVED
       resetArticles payload.articles
       ArticleStore.__emitChange()
     when ArticleConstants.ARTICLE_DETAIL_RECEIVED

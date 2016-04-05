@@ -13,7 +13,8 @@ import UserShow from './components/user_show'
 import ArticleIndex from './components/article_index'
 import ArticleDetail from './components/article_detail'
 import ArticleForm from './components/article_form'
-
+import UserBookmarks from './components/user_bookmarks'
+import TopArticles from './components/top_articles'
 
 function _requireLoggedIn(nextState, replace, asyncCompletionCallback) {
   if (!SessionStore.currentUserHasBeenFetched()) {
@@ -38,9 +39,11 @@ $(document).ready(function () {
           <Route path="user/:id" component={UserShow} />
           <Route path="article/:id" component={ArticleDetail} />
           <Route path="editor" component={ArticleForm} />
+          <Route path="me/bookmarks" component={UserBookmarks}/>
           <Route path="me" component={UserShow} />
-          <Route path="/login" component={LoginForm}/>
-          <Route path="/signup" component={SignUpForm}/>
+          <Route path="popular" component={TopArticles} />
+          <Route path="login" component={LoginForm}/>
+          <Route path="signup" component={SignUpForm}/>
         </Route>
       </Router>,
     $('#root')[0]

@@ -11,7 +11,7 @@ module.exports = {
     devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
   },
   resolve: {
-    extensions: ["", ".scss", ".coffee", ".js", ".jsx", ".cjsx", "json" ]
+    extensions: ["", ".scss", ".coffee", ".js", ".jsx" ]
   },
   module: {
     noParse: /node_modules\/quill\/dist/,
@@ -31,7 +31,7 @@ module.exports = {
       }  
     ],
   },
-  devtool: 'source-maps',
+  devtool: 'eval-cheap-source-map',
   plugins: [
     new webpack.ProvidePlugin({'React':'react'})
   ]

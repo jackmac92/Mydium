@@ -7,29 +7,26 @@ import Sidebar from './sidebar'
 import Input from 'react-toolbox/lib/input'
 import Navigation from 'react-toolbox/lib/navigation'
 import Ripple from 'react-toolbox/lib/ripple'
-import ProgressBar from 'react-toolbox/lib/progress_bar'
-var ArticleIndex = React.createClass ({
+
+var TopArticles = React.createClass({
 
   contextTypes: {router: React.PropTypes.object.isRequired},
 
   stateFromStore: function () {
-    return ({ articles: ArticleStore.all() });
+    return ({ articles: ArticleStore.topArticles() });
   },
 
   __onChange: function () {
     return this.setState(this.stateFromStore());
   },
 
-  getInitialState: function () {
-    var init = this.stateFromStore();
-    init.fetching = true;
-    return init
+  getInitialState: function () { 
+    return this.stateFromStore();
   },
 
   componentDidMount: function () {
     this.articleStoreToken = ArticleStore.addListener(this.__onChange);
-    var completeCB = () => this.setState({fetching: false}) 
-    ApiUtil.fetchArticles(completeCB);
+    ApiUtil.fetchTopArticles();
   },
 
   componentWillUnmount: function () {
@@ -41,16 +38,12 @@ var ArticleIndex = React.createClass ({
   },
 
   render: function () {
-    var articles, progress;
+    var articles;
     if (this.state.articles) {
         articles = this.state.articles.map( article => <ArticleIndexItem key={article.id} article={article} />);
     }
-    if (this.state.fetching) {
-      progress = <ProgressBar type="circular" mode="indeterminate" /> 
-    }
     return (
       <main>
-        {progress}
         <section className="content-main">
           <Input onFocus={this.sendToFullEditor} type="text" label="Write here..." />
           <Navigation type="vertical" className="article-index">
@@ -63,6 +56,4 @@ var ArticleIndex = React.createClass ({
   }
 
 });
-module.exports = ArticleIndex
-
-
+module.exports = TopArticles;

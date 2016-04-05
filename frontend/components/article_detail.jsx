@@ -26,8 +26,9 @@ var ArticleDetail = React.createClass({
   componentWillUnmount: function () {
     this.articleStoreToken.remove();
   },
+
   render: function() {
-    var tags = [], other_articles, recent_posts_view, recent_posts;
+    var tags = [], recent_posts_view;
     if (!this.state.article) {
       return (<h2>Loading...</h2>);
     }
@@ -35,12 +36,11 @@ var ArticleDetail = React.createClass({
       tags = this.state.article.tags.map( t => <Tag key={t.id} tag={t} /> )
     }
     if (this.state.article.authors_recent_articles) {
+      var article_items = this.state.article.authors_recent_articles.map( recent_article => (<ListItem key={recent_article.id} caption={recent_article.title} />) );
       recent_posts_view = (
         <List selectable ripple>
           <ListSubHeader caption="Author's Recent Articles" />
-          <ListItem caption={this.state.article.authors_recent_articles[0].title} />
-          <ListItem caption={this.state.article.authors_recent_articles[1].title} />
-          <ListItem caption={this.state.article.authors_recent_articles[2].title} />
+          {article_items}
           <ListCheckbox caption={"Follow " + this.state.article.author.email} />
         </List>
       )
