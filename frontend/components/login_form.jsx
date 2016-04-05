@@ -62,6 +62,12 @@ var LoginForm = React.createClass({
 		} 
 		return false;
 	},
+
+	demoStart: function (e) {
+		e.preventDefault()
+		var router = this.context.router
+		ApiUtil.logInUser({email:"jackmac79@gmail.com", password:"password"}, () => router.push('/'))
+	}
 	
 	render: function () {
 		var button;
@@ -79,6 +85,7 @@ var LoginForm = React.createClass({
 					{button}
 				</form>
 				<Link label="Don't have an account? Create a new one!" href="#/signup" />
+				<Button label="Try With Demo Account" />
 			</div>
 		)	
 	}
