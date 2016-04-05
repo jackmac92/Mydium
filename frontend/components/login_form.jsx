@@ -67,7 +67,7 @@ var LoginForm = React.createClass({
 		e.preventDefault()
 		var router = this.context.router
 		ApiUtil.logInUser({email:"jackmac79@gmail.com", password:"password"}, () => router.push('/'))
-	}
+	},
 	
 	render: function () {
 		var button;
