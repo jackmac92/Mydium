@@ -14,7 +14,7 @@ var ArticlesWithTag = React.createClass ({
   contextTypes: {router: React.PropTypes.object.isRequired},
 
   stateFromStore: function () {
-    return ({ articles: ArticleStore.taggedArticles() });
+    return ({ articles: ArticleStore.all() });
   },
 
   __onChange: function () {
@@ -36,7 +36,7 @@ var ArticlesWithTag = React.createClass ({
     this.articleStoreToken.remove();
   },
   componentWillReceiveProps: function(nextProps) {
-    ApiUtil.fetchArticlesByTag(this.props.params.tag_name, () => this.setState({fetching: false}));    
+    ApiUtil.fetchArticlesByTag(nextProps.params.tag_name, () => this.setState({fetching: false}));    
   },
 
   sendToFullEditor: function (text) {

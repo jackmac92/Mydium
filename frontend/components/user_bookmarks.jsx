@@ -1,18 +1,17 @@
 import React from 'react'
-import ApiUtil from '../util/api_util'
-import ArticleStore from '../stores/articles'
-import SessionStore from '../stores/session'
-import ArticleIndexItem from './article_index_item'
 import Sidebar from './sidebar'
 import Input from 'react-toolbox/lib/input'
 import Navigation from 'react-toolbox/lib/navigation'
-import Ripple from 'react-toolbox/lib/ripple'
+import ArticleIndexItem from './article_index_item'
+import ApiUtil from '../util/api_util'
+import SessionStore from '../stores/session'
+import ArticleStore from '../stores/articles'
 
 var UserBookmarks = React.createClass({
   contextTypes: {router: React.PropTypes.object.isRequired},
 
   stateFromStore: function () {
-    return ({ articles: ArticleStore.bookmarkedArticles() });
+    return ({ articles: ArticleStore.all() });
   },
 
   __onChange: function () {

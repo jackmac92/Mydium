@@ -13,7 +13,7 @@ var TopArticles = React.createClass({
   contextTypes: {router: React.PropTypes.object.isRequired},
 
   stateFromStore: function () {
-    return ({ articles: ArticleStore.topArticles() });
+    return ({ articles: ArticleStore.all() });
   },
 
   __onChange: function () {

@@ -1,9 +1,23 @@
-article view count
+article 
+	view count
+	subtitle
+	pics
+		main image
+		parallax
+		cover photo
+	scheduling publish time
 
+hide buttons unless user logged in
+
+omniauth
 infinite scroll
+search
+notifications
 
 working buttons for like, bookmark and follow
 
-write or die muthafucka
+fun
+	write or die muthafucka
 
 
+CWRP falling one behind

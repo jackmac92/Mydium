@@ -14,7 +14,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => kind
       session["devise.#{kind.downcase}_data"] = env["omniauth.auth"]
-      sign_in_and_redirect @user, :event => :authentication
+      sign_in @user
+      redirect_to "#/"
     end    
   end
 
@@ -28,7 +29,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
                     :token => access_token['credentials']['token'], 
                     :secret => nil, 
                     :name => access_token[:info][:name], 
-                    :link => access_token[:info][:urls]["Facebook"] 
                   }
     else
       raise 'Provider #{provider} not handled'

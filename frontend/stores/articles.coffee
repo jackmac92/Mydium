@@ -65,13 +65,13 @@ ArticleStore.__onDispatch = (payload) ->
       resetArticles payload.articles
       ArticleStore.__emitChange()
     when ArticleConstants.TOP_ARTICLES_RECEIVED
-      resetTopArticles payload.articles
+      resetArticles payload.articles
       ArticleStore.__emitChange()
     when ArticleConstants.TAG_ARTICLES_RECEIVED
-      resetTaggedArticles payload.articles
+      resetArticles payload.articles
       ArticleStore.__emitChange()
     when ArticleConstants.BOOKMARKED_ARTICLES_RECEIVED
-      resetBookmarkedArticles payload.articles
+      resetArticles payload.articles
       ArticleStore.__emitChange()
     when ArticleConstants.ARTICLE_DETAIL_RECEIVED
       setDetail payload.article
