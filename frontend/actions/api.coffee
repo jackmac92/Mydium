@@ -7,9 +7,17 @@ ApiActions =
     AppDispatcher.dispatch
       actionType: ArticleConstants.ARTICLES_RECEIVED
       articles: articles
+  receiveArticlesByTag: (articles) ->
+    AppDispatcher.dispatch
+      actionType: ArticleConstants.TAG_ARTICLES_RECEIVED
+      articles: articles
   receiveTopArticles: (articles) ->
     AppDispatcher.dispatch
       actionType: ArticleConstants.TOP_ARTICLES_RECEIVED
+      articles: articles
+  receiveBookmarkedArticles: (articles) ->
+    AppDispatcher.dispatch
+      actionType: ArticleConstants.BOOKMARKED_ARTICLES_RECEIVED
       articles: articles
 
   receiveSingleArticle: (article) ->

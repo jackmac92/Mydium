@@ -1,7 +1,17 @@
 class Api::ArticlesController < ApplicationController
 
   def index
-    @articles = Article.all.order(created_at: :desc)
+    case params[:article_type]
+    when "popular"
+      @articles = Article.all.shuffle.sample 7
+    when "user_bookmarks"
+      @articles = current_user.bookmarked_articles
+    when "tag"
+      @articles = Article.all_with_tag params[:tag]
+    else
+      @articles = Article.all.order(created_at: :desc)
+    end
+    @articles
   end
   
   def show

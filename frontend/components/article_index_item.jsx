@@ -1,5 +1,6 @@
 import React from 'react'
-import {Card,CardMedia,CardTitle,CardText,CardActions} from 'react-toolbox/lib/card'
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/lib/card'
+// import {Card,CardMedia,CardTitle,CardText,CardActions} from 'react-toolbox/lib/card'
 import Button from 'react-toolbox/lib/button'
 import Link from 'react-toolbox/lib/link'
 import Tag from './tag'
@@ -32,8 +33,11 @@ const ArticleCard = React.createClass({
  		}
 
  		return (
-			  <Card className="article-card group" onClick={this.viewArticle} >
-					<CardTitle 
+			  <Card className="article-card" onClick={this.viewArticle} >
+			  	<CardTitle
+			  		subtitle="Some tag name"
+			  	/>
+					<CardHeader 
 						avatar={this.props.article.author.avatar}
 						title={this.props.article.author.email}
 						subtitle={"Published " + this.props.article.created_at + " ago • " + this.props.article.read_time + " minute read"}

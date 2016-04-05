@@ -6,9 +6,21 @@ ArticleStore = new Store AppDispatcher
 
 `_articles = []`
 `_articleDetail = null`
+`_topArticles = []`
+`_taggedArticles = []`
+`_bookmarkedArticles = []`
 
 ArticleStore.all = ->
   _articles.slice()
+
+ArticleStore.topArticles = ->
+  _topArticles.slice()
+
+ArticleStore.bookmarkedArticles = ->
+  _bookmarkedArticles.slice()
+
+ArticleStore.taggedArticles = ->
+  _taggedArticles.slice()
 
 ArticleStore.getDetail = ->
   _articleDetail
@@ -29,6 +41,15 @@ ArticleStore.updateArticleBookmark = (id, value) ->
 resetArticles = (articles) ->
   `_articles = articles`
   null
+resetTopArticles = (articles) ->
+  `_topArticles = articles`
+  null
+resetBookmarkedArticles = (articles) ->
+  `_bookmarkedArticles = articles`
+  null
+resetTaggedArticles = (articles) ->
+  `_taggedArticles = articles`
+  null
 
 setDetail = (article) ->
   `_articleDetail = article`
@@ -44,10 +65,13 @@ ArticleStore.__onDispatch = (payload) ->
       resetArticles payload.articles
       ArticleStore.__emitChange()
     when ArticleConstants.TOP_ARTICLES_RECEIVED
-      resetArticles payload.articles
+      resetTopArticles payload.articles
+      ArticleStore.__emitChange()
+    when ArticleConstants.TAG_ARTICLES_RECEIVED
+      resetTaggedArticles payload.articles
       ArticleStore.__emitChange()
     when ArticleConstants.BOOKMARKED_ARTICLES_RECEIVED
-      resetArticles payload.articles
+      resetBookmarkedArticles payload.articles
       ArticleStore.__emitChange()
     when ArticleConstants.ARTICLE_DETAIL_RECEIVED
       setDetail payload.article

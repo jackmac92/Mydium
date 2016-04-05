@@ -7,6 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 ActiveRecord::Base.transaction do
+  Tag.destroy_all
   User.destroy_all
   me = User.create(email:"jackmac79@gmail.com", password:"password")
   p2 = User.create(email:"buddy@gmail.com", password:"password")
@@ -35,8 +36,10 @@ ActiveRecord::Base.transaction do
 
   25.times do
     article = User.all.sample.articles.create title:Faker::StarWars.quote, body:Faker::Hipster.paragraphs(7).join(" ")
+    tags.sample(3).each do |tag|
+      article.add_tag(tag)
+    end
     3.times do
-      article.tags.create(name:tags.sample)
       User.all.sample.like! article
       User.all.sample.bookmarks.create(article_id: article.id)
     end

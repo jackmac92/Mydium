@@ -31,6 +31,21 @@ ApiUtil =
       error: ->
         console.log "ApiUtil#fetchArticles error"
 
+  fetchArticlesByTag: (tag, callback) ->
+    $.ajax
+      type: "GET"
+      dataType: "json"
+      url: "api/articles"
+      data:
+        article_type: "tag"
+        tag: tag
+      success: (articles) ->
+        ApiActions.receiveArticlesByTag articles
+      error: ->
+        console.log "ApiUtil#fetchArticles error"
+      complete: ->
+        callback && callback()
+
   fetchBookmarkedArticles: ->
     $.ajax
       type: "GET"
@@ -38,8 +53,8 @@ ApiUtil =
       url: "api/articles"
       data:
         article_type: "user_bookmarks"
-      success: ->
-        console.log "Yay"
+      success: (articles) ->
+        ApiActions.receiveBookmarkedArticles articles
 
   fetchTagsIndex: ->
     $.ajax

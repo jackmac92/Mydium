@@ -8,6 +8,8 @@ import Input from 'react-toolbox/lib/input'
 import Navigation from 'react-toolbox/lib/navigation'
 import Ripple from 'react-toolbox/lib/ripple'
 import ProgressBar from 'react-toolbox/lib/progress_bar'
+
+
 var ArticleIndex = React.createClass ({
 
   contextTypes: {router: React.PropTypes.object.isRequired},

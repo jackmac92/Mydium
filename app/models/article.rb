@@ -14,4 +14,14 @@ class Article < ActiveRecord::Base
   acts_as_likeable
   acts_as_mentioner
 
+  def add_tag tag_name
+    tag = Tag.where(name: tag_name)[0] || Tag.create(name: tag_name)
+    taggings.create(tag_id: tag.id)
+  end
+
+  def self.all_with_tag tag_name
+    tag = Tag.where(name: tag_name)[0]
+    where(id: Tagging.where(tag_id: tag.id).map(&:article_id))
+  end
+
 end

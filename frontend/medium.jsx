@@ -15,6 +15,7 @@ import ArticleDetail from './components/article_detail'
 import ArticleForm from './components/article_form'
 import UserBookmarks from './components/user_bookmarks'
 import TopArticles from './components/top_articles'
+import ArticlesWithTag from './components/articles_with_tag'
 
 function _requireLoggedIn(nextState, replace, asyncCompletionCallback) {
   if (!SessionStore.currentUserHasBeenFetched()) {
@@ -38,6 +39,7 @@ $(document).ready(function () {
           <IndexRoute component={ArticleIndex} />
           <Route path="user/:id" component={UserShow} />
           <Route path="article/:id" component={ArticleDetail} />
+          <Route path="tags/:tag_name" component={ArticlesWithTag} />
           <Route path="editor" component={ArticleForm} />
           <Route path="me/bookmarks" component={UserBookmarks}/>
           <Route path="me" component={UserShow} />

@@ -7,29 +7,36 @@ import Sidebar from './sidebar'
 import Input from 'react-toolbox/lib/input'
 import Navigation from 'react-toolbox/lib/navigation'
 import Ripple from 'react-toolbox/lib/ripple'
+import ProgressBar from 'react-toolbox/lib/progress_bar'
 
-var UserBookmarks = React.createClass({
+var ArticlesWithTag = React.createClass ({
+
   contextTypes: {router: React.PropTypes.object.isRequired},
 
   stateFromStore: function () {
-    return ({ articles: ArticleStore.bookmarkedArticles() });
+    return ({ articles: ArticleStore.taggedArticles() });
   },
 
   __onChange: function () {
     return this.setState(this.stateFromStore());
   },
 
-  getInitialState: function () { 
-    return this.stateFromStore();
+  getInitialState: function () {
+    var init = this.stateFromStore();
+    init.fetching = true;
+    return init
   },
 
   componentDidMount: function () {
-    this.articleStoreToken = ArticleStore.addListener(this.__onChange);
-    ApiUtil.fetchBookmarkedArticles();
+    this.articleStoreToken = ArticleStore.addListener(this.__onChange); 
+    ApiUtil.fetchArticlesByTag(this.props.params.tag_name, () => this.setState({fetching: false}));
   },
 
   componentWillUnmount: function () {
     this.articleStoreToken.remove();
+  },
+  componentWillReceiveProps: function(nextProps) {
+    ApiUtil.fetchArticlesByTag(this.props.params.tag_name, () => this.setState({fetching: false}));    
   },
 
   sendToFullEditor: function (text) {
@@ -37,13 +44,16 @@ var UserBookmarks = React.createClass({
   },
 
   render: function () {
-    var articles;
+    var articles, progress;
     if (this.state.articles) {
         articles = this.state.articles.map( article => <ArticleIndexItem key={article.id} article={article} />);
     }
+    if (this.state.fetching) {
+      progress = <ProgressBar type="circular" mode="indeterminate" /> 
+    }
     return (
       <main>
-      	<h2>Your Bookmarks...</h2>
+        {progress}
         <section className="content-main">
           <Input onFocus={this.sendToFullEditor} type="text" label="Write here..." />
           <Navigation type="vertical" className="article-index">
@@ -56,6 +66,6 @@ var UserBookmarks = React.createClass({
   }
 
 });
+module.exports = ArticlesWithTag
 
-module.exports = UserBookmarks;
 
