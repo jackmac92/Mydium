@@ -9,18 +9,18 @@
 ActiveRecord::Base.transaction do
   Tag.destroy_all
   User.destroy_all
-  me = User.create(email:"jackmac79@gmail.com", password:"password")
-  p2 = User.create(email:"buddy@gmail.com", password:"password")
-  p3 = User.create(email:"guy@gmail.com", password:"password")
-  p4 = User.create(email:"friend@gmail.com", password:"password")
-  p5 = User.create(email:"pal@gmail.com", password:"password")
-  10.times do
+  # me = User.create(email:"jackmac79@gmail.com", password:"password")
+  # p2 = User.create(email:"buddy@gmail.com", password:"password")
+  # p3 = User.create(email:"guy@gmail.com", password:"password")
+  # p4 = User.create(email:"friend@gmail.com", password:"password")
+  # p5 = User.create(email:"pal@gmail.com", password:"password")
+  20.times do
     User.create email:Faker::Internet.safe_email, password:"password", avatar:Faker::Avatar.image
   end
   article_pics = []
   pathtoimages = 'app/assets/images' 
   Dir.foreach(pathtoimages) do |pic|
-    if pic.split('.')[0] != 'missing' && pic.split('.')[0] != 'icon' && pic[0] != "."
+    if pic.split('.')[0] != 'missing' && pic.split('.')[0] != 'logo' && pic[0] != "."
       article_pics << "app/assets/images/#{pic}"
     end
   end
@@ -39,7 +39,7 @@ ActiveRecord::Base.transaction do
   #     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   #   BODY
   # )
-  tags = %w(meh roof banjo scenester selvage normcore artisan YOLO park helvetica neutra tousled)
+  tags = %w(tech fashion startups finance celebrity politics DIY offbeat funny satire design business economcis UX life)
 
   25.times do
     article = User.all.sample.articles.create title:Faker::StarWars.quote, body:Faker::Hipster.paragraphs(7).join(" "), picture:File.open(article_pics.pop)
@@ -48,8 +48,11 @@ ActiveRecord::Base.transaction do
     end
     3.times do
       User.all.sample.like! article
+    end
+    6.times do
       User.all.sample.bookmarks.create(article_id: article.id)
     end
+
     7.times do
       User.all.sample.comments.create(body:Faker::Hacker.say_something_smart, article_id:article.id)
     end
@@ -59,6 +62,7 @@ ActiveRecord::Base.transaction do
     3.times do
       user.like!(Article.all.sample)
       user.follow!(User.all.sample)
+      user.follow!(Tag.all.sample)
       Article.all.sample.mention! user
     end
   end

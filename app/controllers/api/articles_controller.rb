@@ -3,7 +3,7 @@ class Api::ArticlesController < ApplicationController
   def index
     case params[:article_type]
     when "popular"
-      articles = Article.all.sample 7
+      articles = Article.popular
     when "user_bookmarks"
       articles = current_user.bookmarked_articles
     when "tag"

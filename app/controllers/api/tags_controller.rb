@@ -1,7 +1,7 @@
 class Api::TagsController < ApplicationController
 	def index
     @featured_tags = Tag.all.shuffle[0..10]
-    @user_tags = Tag.all.shuffle[0..3]    
+    @user_tags = current_user.followed_tags if current_user
     @all_tags = Tag.all
   end
 

@@ -8,7 +8,7 @@ json.tags do
 		json.id tag.id
 	end
 end
- 
+json.num_views = article.view_count
 json.author do
 	json.partial! '/api/users/user', user: article.user
 end

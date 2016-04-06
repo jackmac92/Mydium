@@ -67,10 +67,7 @@ ArticleStore.__onDispatch = (payload) ->
   switch payload.actionType
     when ArticleConstants.ARTICLES_RECEIVED
       addArticles payload.articles
-      ArticleStore.__emitChange()
-    when ArticleConstants.ARTICLES_INFINITE_RECEIVED
       resetMeta payload.meta
-      addArticles payload.articles
       ArticleStore.__emitChange()
     when ArticleConstants.TOP_ARTICLES_RECEIVED
       addArticles payload.articles

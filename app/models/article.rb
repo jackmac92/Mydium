@@ -14,12 +14,23 @@ class Article < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  has_many :article_views
+  has_many :users_who_viewed, through: :article_views, source: :user
+
   acts_as_likeable
   acts_as_mentioner
 
   def add_tag tag_name
     tag = Tag.where(name: tag_name)[0] || Tag.create(name: tag_name)
     taggings.create(tag_id: tag.id)
+  end
+
+  def self.popular
+    Article.all.order(view_count: :desc).limit 5
+  end
+
+  def view_count
+    article_views.count
   end
 
   def self.all_with_tag tag_name

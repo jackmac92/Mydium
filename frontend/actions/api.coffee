@@ -3,22 +3,20 @@ ArticleConstants = require '../constants/article'
 TagConstants = require '../constants/tag'
 
 ApiActions =
-  receiveArticles: (articles) ->
+  receiveArticles: (response) ->
     AppDispatcher.dispatch
       actionType: ArticleConstants.ARTICLES_RECEIVED
-      articles: articles
-  receiveArticlesInfinite: (response) ->
-    AppDispatcher.dispatch
-      actionType: ArticleConstants.ARTICLES_INFINITE_RECEIVED
       articles: response.articles
       meta: response.meta
 
-  receiveTopArticles: (articles) ->
+  receiveTopArticles: (response) ->
     for article in articles
       article.topArticle = true
     AppDispatcher.dispatch
+      meta: response.meta
+      articles: respone.articles
       actionType: ArticleConstants.TOP_ARTICLES_RECEIVED
-      articles: articles
+
   receiveSingleArticle: (article) ->
     AppDispatcher.dispatch
       actionType: ArticleConstants.ARTICLE_DETAIL_RECEIVED

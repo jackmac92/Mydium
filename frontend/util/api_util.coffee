@@ -6,11 +6,13 @@ SessionActions = require '../actions/session'
 #   xhr
 
 ApiUtil =
-  fetchArticles: (completionCallback) ->
+  fetchArticles: (page, completionCallback) ->
     $.ajax
       type: "GET"
       dataType: "json"
       url: "api/articles"
+      data:
+        page: page
       success: (articles) ->
         ApiActions.receiveArticles articles
       error: (e) ->
@@ -18,36 +20,37 @@ ApiUtil =
         console.log e
       complete: ->
         completionCallback && completionCallback()
-  fetchArticlesInfinite: (page, completionCallback) ->
-    $.ajax
-      type: "GET"
-      dataType: "json"
-      url: "api/articles"
-      data:
-        page: page
-      success: (response) ->
-        ApiActions.receiveArticlesInfinite response
-      error: (e) ->
-        console.log "ApiUtil#fetchArticles error"
-        console.log e
-      complete: ->
-        completionCallback && completionCallback()
+  # fetchArticlesInfinite: (page, completionCallback) ->
+  #   $.ajax
+  #     type: "GET"
+  #     dataType: "json"
+  #     url: "api/articles"
+  #     data:
+  #       page: page
+  #     success: (response) ->
+  #       ApiActions.receiveArticlesInfinite response
+  #     error: (e) ->
+  #       console.log "ApiUtil#fetchArticles error"
+  #       console.log e
+  #     complete: ->
+  #       completionCallback && completionCallback()
 
-  fetchTopArticles: (callback) ->
+  fetchTopArticles: (page, callback) ->
     $.ajax
       type: "GET"
       dataType: "json"
       url: "api/articles"
       data:
         article_type: "popular"
-      success: (articles) ->
+        page: page
+      success: (response) ->
         ApiActions.receiveTopArticles articles
       error: ->
         console.log "ApiUtil#fetchTopArticles error"
       complete: ->
         callback && callback()
 
-  fetchArticlesByTag: (tag, callback) ->
+  fetchArticlesByTag: (tag, page, callback) ->
     $.ajax
       type: "GET"
       dataType: "json"
@@ -55,31 +58,34 @@ ApiUtil =
       data:
         article_type: "tag"
         tag: tag
+        page: page
       success: (articles) ->
         ApiActions.receiveArticles articles
       complete: ->
         callback && callback()
 
-  fetchBookmarkedArticles: (callback) ->
+  fetchBookmarkedArticles: (page, callback) ->
     $.ajax
       type: "GET"
       dataType: "json"
       url: "api/articles"
       data:
         article_type: "user_bookmarks"
+        page: page
       success: (articles) ->
         ApiActions.receiveArticles articles
       error: ->
         console.log "ApiUtil#fetch bookmarked"
       complete: ->
         callback && callback()
-  fetchFavoritedArticles: (callback) ->
+  fetchFavoritedArticles: (page, callback) ->
     $.ajax
       type: "GET"
       dataType: "json"
       url: "api/articles"
       data:
         article_type: "user_favorites"
+        page: page
       success: (articles) ->
         ApiActions.receiveArticles articles
       error: ->

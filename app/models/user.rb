@@ -16,14 +16,24 @@ class User < ActiveRecord::Base
   has_many :bookmarked_articles, through: :bookmarks, source: :article
   has_many :favorites, dependent: :destroy
   
+  has_many :article_views
+  has_many :viewed_articles, through: :article_views, source: :article
+
   acts_as_liker
   acts_as_mentionable
   acts_as_follower
   acts_as_followable
 
-  # attr_accessible :email, :name, :password, :password_confirmation, :remember_me
   def favorite_articles
     Article.where(id: likees(Article).map(&:id))
+  end
+
+  def followed_users
+    User.where(id: followees(User).map(&:id))
+  end
+
+  def followed_tags
+    Tag.where(id: followees(Tag).map(&:id))
   end
 
   def toggle_bookmark article_id

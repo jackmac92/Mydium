@@ -1,21 +1,19 @@
-search
-
-notifications
-
-progress bar through article
-
-
-article
+Necessary
+	users can publish articles
+	users can delete articles and comments
+	search
 	editor
-	view count
-	subtitle
-	main tag
-	scheduling publish time
+	sidebar footer
+
+https://github.com/filamentgroup/fixed-sticky
+bookmark finish vs remove, if on page long enough to read and scrolled to the bottom remove bookmark
 
 fun
 	reading speed measure?
 	write or die muthafucka
 
-bookmark finish vs remove
-
-if user logged in, need to refetch articles for info
+Nice
+	notifications
+	progress bar through article
+	scheduling publish time
+	friendly_id

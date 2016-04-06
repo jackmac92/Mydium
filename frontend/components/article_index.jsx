@@ -9,7 +9,8 @@ import Navigation from 'react-toolbox/lib/navigation'
 import Ripple from 'react-toolbox/lib/ripple'
 import ProgressBar from 'react-toolbox/lib/progress_bar'
 import Infinite from 'react-infinite'
-var dolla = require('react-query')
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+var dolla = require('react-query');
 
 var ArticleIndex = React.createClass ({
 
@@ -37,20 +38,20 @@ var ArticleIndex = React.createClass ({
   },
   articleFetcher: function (currProps, pageNum) {
     pageNum = pageNum || 1
-    var completionCallback = () => this.setState({fetching: false})
+    var completionCallback = () => this.setState({fetching: false, isInfiniteLoading: false})
     var currPath = currProps.location.pathname.split("/")[1]; 
     switch (currPath) {
       case "":
-        ApiUtil.fetchArticlesInfinite(pageNum, completionCallback);
+        ApiUtil.fetchArticles(pageNum, completionCallback);
         break;
       case "me":
-        ApiUtil.fetchBookmarkedArticles(completionCallback);
+        ApiUtil.fetchBookmarkedArticles(pageNum, completionCallback);
         break;
       case "popular":
-        ApiUtil.fetchTopArticles(completionCallback);
+        ApiUtil.fetchTopArticles(pageNum, completionCallback);
         break;
       case "tags":
-        ApiUtil.fetchArticlesByTag(currProps.params.tag_name, completionCallback);
+        ApiUtil.fetchArticlesByTag(currProps.params.tag_name, pageNum, completionCallback);
         break;
       }
   },
@@ -59,8 +60,7 @@ var ArticleIndex = React.createClass ({
     var that = this;
     this.setState({isInfiniteLoading: true});
     var meta = ArticleStore.meta()
-    var infinLoadCallback = () => that.setState({isInfiniteLoading: false})
-    ApiUtil.fetchArticlesInfinite(meta.page + 1, infinLoadCallback)
+    this.articleFetcher(this.props, meta.page + 1)
   },
 
   stateFromStore: function () {
@@ -118,7 +118,7 @@ var ArticleIndex = React.createClass ({
                     onInfiniteLoad={this.moreArticles}
                     isInfiniteLoading={this.state.isInfiniteLoading}
                     >
-            {articles}
+              {articles}
           </Infinite>
         </section>
         <Sidebar />
