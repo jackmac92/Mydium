@@ -18,10 +18,10 @@ ActiveRecord::Base.transaction do
     User.create email:Faker::Internet.safe_email, password:"password", avatar:Faker::Avatar.image
   end
   article_pics = []
-  pathtoimages = '/app/assets/images' 
+  pathtoimages = 'app/assets/images' 
   Dir.foreach(pathtoimages) do |pic|
-    if pic.split('.')[-1] != 'png' && pic.split('.')[0] != 'missing' && pic.length > 3 && pic[0] != "."
-      article_pics << pathtoimages+"/"+pic 
+    if pic.split('.')[0] != 'missing' && pic.split('.')[0] != 'icon' && pic[0] != "."
+      article_pics << "app/assets/images/#{pic}"
     end
   end
 
@@ -42,7 +42,7 @@ ActiveRecord::Base.transaction do
   tags = %w(meh roof banjo scenester selvage normcore artisan YOLO park helvetica neutra tousled)
 
   25.times do
-    article = User.all.sample.articles.create title:Faker::StarWars.quote, body:Faker::Hipster.paragraphs(7).join(" "), picture:article_pics.pop
+    article = User.all.sample.articles.create title:Faker::StarWars.quote, body:Faker::Hipster.paragraphs(7).join(" "), picture:File.open(article_pics.pop)
     tags.sample(3).each do |tag|
       article.add_tag(tag)
     end
@@ -63,4 +63,7 @@ ActiveRecord::Base.transaction do
     end
   end
 
+end
+Dir.foreach('./') do |f|
+  puts f
 end

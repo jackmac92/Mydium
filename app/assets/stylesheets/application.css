@@ -66,6 +66,7 @@ section.content-sidebar {
   /*background: blue;*/
   margin-top: 40px;
   margin-left: 20px;
+  height: 100%;
 }
 
 .author-thumb {
@@ -76,15 +77,16 @@ section.content-sidebar {
 }
 .tag {
   /*font-size: 18px;*/
-  padding: 2px 15px;
+  padding: 4px 15px;
   background: white;
+  text-align: center;
+  margin: 5px 10px;
+  display: inline-block;
 }
-.tag > a {
-  color: black;
-}
-nav > a.tag {
+
+/*nav > a.tag {
   margin: 5px 7px;
-}
+}*/
 
 .article-card {
   margin: 10px;
@@ -105,10 +107,20 @@ nav > a.tag {
   line-height: 1.77777;
 }
 
-.article-card button {
+.article-card button > span{
   width: 30px;
+  margin: auto;
 }
 
 button.article-index-bookmark {
   float: right;
-} 
+}
+
+.card-read-more {
+  left: 200px;  
+}
+
+#sidebar-sticky {
+  position: -webkit-sticky;
+  position: sticky; top: 20px;
+}

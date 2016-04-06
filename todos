@@ -7,10 +7,7 @@ notifications
 article 
 	view count
 	subtitle
-	pics
-		main image
-		parallax
-		cover photo
+	main tag
 	scheduling publish time
 
 fun

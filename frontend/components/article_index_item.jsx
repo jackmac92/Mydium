@@ -1,10 +1,11 @@
 import React from 'react'
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/lib/card'
 // import {Card,CardMedia,CardTitle,CardText,CardActions} from 'react-toolbox/lib/card'
-import Button from 'react-toolbox/lib/button'
 import Link from 'react-toolbox/lib/link'
 import Tag from './tag'
 import ApiUtil from '../util/api_util'
+import IconButton from 'material-ui/lib/icon-button'
+import FontIcon from 'material-ui/lib/font-icon'
 
 
 const ArticleCard = React.createClass({
@@ -54,14 +55,14 @@ const ArticleCard = React.createClass({
 						title={this.props.article.title}
 					/>
 			    <CardText>{this.props.article.body}</CardText>
-			    <Link label="Read More" href={"#/articles/"+this.props.article.id} />
+			    <Link className="card-read-more" label="Read More" href={"#/articles/"+this.props.article.id} />
 			    <CardActions>
-			      <Button onClick={this.toggleFavorite.bind(this, this.props.article.id)} className="article-index-favorite" icon={"favorite"+fav_style} />
-			      <Button onClick={this.toggleBookmark.bind(this, this.props.article.id)} className="article-index-bookmark" icon={"bookmark"+bookmark_style}  />
-			    </CardActions>
-			    <CardActions>
-			    	<h5>Tags</h5>
-		    		{tags}
+			      <IconButton tooltip="favorite" onClick={this.toggleFavorite.bind(this, this.props.article.id)} className="article-index-favorite">
+			      	<FontIcon className="material-icons">{"favorite"+fav_style}</FontIcon>
+			      </IconButton>
+			      <IconButton tooltip="bookmark" onClick={this.toggleBookmark.bind(this, this.props.article.id)} className="article-index-bookmark">
+			      	<FontIcon className="material-icons">{"bookmark"+bookmark_style}</FontIcon>
+			      </IconButton>
 			    </CardActions>
 			  </Card>
 

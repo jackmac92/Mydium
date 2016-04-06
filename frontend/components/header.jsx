@@ -1,12 +1,12 @@
 import React from 'react'
 import Search from './search'
 import ApiUtil from '../util/api_util'
-import AppBar from 'react-toolbox/lib/app_bar'
 import Navigation from 'react-toolbox/lib/navigation'
 import Link from 'react-toolbox/lib/link'
 import Button from 'react-toolbox/lib/button'
 import {IconMenu, MenuItem, MenuDivider} from 'react-toolbox/lib/menu'
 import Input from 'react-toolbox/lib/input'
+import AppBar from 'material-ui/lib/app-bar';
 
 var Header = React.createClass({
 	contextTypes: {
@@ -36,8 +36,11 @@ var Header = React.createClass({
 			userAction = <Link href="#/login" icon="account_circle" label="Sign up/ Log in" />
 		}
 		return (
-	    <AppBar className="header group">
-	      <div id="logo" />
+	    <div className="header group">
+	    	<AppBar 
+	    		style={{background:'white'}}
+	    		title={<div id="logo" />}
+	    	/>
 	      <Navigation className="header-nav group">        
 	        <Navigation type="horizontal" className="header-nav-left">
 	          <Link href="#" active label="Home" />
@@ -50,7 +53,7 @@ var Header = React.createClass({
 	          {userAction}
 	        </Navigation>
 	      </Navigation>
-	    </AppBar>
+	    </div>
 		);
 	}
 

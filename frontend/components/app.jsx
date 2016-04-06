@@ -30,12 +30,12 @@ var App = React.createClass({
 
   render: function () {
     return (
-      <ToolboxApp>
+      <div>
         <Header currentUser={this.state.currentUser}/>
         <content className="curr-page-content">
           {this.props.children}
         </content>
-      </ToolboxApp>
+      </div>
     );
   }
 });
