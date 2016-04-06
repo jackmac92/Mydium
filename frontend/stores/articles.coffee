@@ -9,7 +9,6 @@ ArticleStore = new Store AppDispatcher
 # Always render article index component (for bookmarks and top articles, differentiate with a prop?)
 
 # store in main object, function for _articles, bookmarked articles
-
 `_mainStore = {}`
 `_articles = []`
 `_articleDetail = null`
