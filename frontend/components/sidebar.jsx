@@ -1,6 +1,5 @@
 import React from 'react'
 import TagStore from '../stores/tag'
-import Sticky from 'react-stickydiv'
 import Tag from './tag'
 import ApiUtil from '../util/api_util'
 import Navigation from 'react-toolbox/lib/navigation'

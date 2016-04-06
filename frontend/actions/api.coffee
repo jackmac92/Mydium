@@ -7,6 +7,12 @@ ApiActions =
     AppDispatcher.dispatch
       actionType: ArticleConstants.ARTICLES_RECEIVED
       articles: articles
+  receiveArticlesInfinite: (response) ->
+    AppDispatcher.dispatch
+      actionType: ArticleConstants.ARTICLES_INFINITE_RECEIVED
+      articles: response.articles
+      meta: response.meta
+
   receiveTopArticles: (articles) ->
     for article in articles
       article.topArticle = true

@@ -5,6 +5,7 @@ ArticleConstants = require '../constants/article'
 ArticleStore = new Store AppDispatcher
 
 `_mainStore = {}`
+`_meta = {}`
 `_articleDetail = null`
 
 ArticleStore.all = ->
@@ -42,9 +43,16 @@ ArticleStore.updateArticleLike = (id, value) ->
 ArticleStore.updateArticleBookmark = (id, value) ->
   _mainStore[id].user.bookmarked_article = value
 
+ArticleStore.meta = ->
+  $.extend(true, {}, `_meta`);
+
+
 setDetail = (article) ->
   `_articleDetail = article`
   null
+
+resetMeta = (meta) ->
+  `_meta = meta`
 
 addArticles = (articles) ->
   for article in articles
@@ -58,6 +66,10 @@ ArticleStore.__onDispatch = (payload) ->
 
   switch payload.actionType
     when ArticleConstants.ARTICLES_RECEIVED
+      addArticles payload.articles
+      ArticleStore.__emitChange()
+    when ArticleConstants.ARTICLES_INFINITE_RECEIVED
+      resetMeta payload.meta
       addArticles payload.articles
       ArticleStore.__emitChange()
     when ArticleConstants.TOP_ARTICLES_RECEIVED

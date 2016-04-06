@@ -3,15 +3,15 @@ class Api::ArticlesController < ApplicationController
   def index
     case params[:article_type]
     when "popular"
-      @articles = Article.all.shuffle.sample 7
+      articles = Article.all.sample 7
     when "user_bookmarks"
-      @articles = current_user.bookmarked_articles
+      articles = current_user.bookmarked_articles
     when "tag"
-      @articles = Article.all_with_tag params[:tag]
+      articles = Article.all_with_tag params[:tag]
     else
-      @articles = Article.all.order(created_at: :desc)
+      articles = Article.all.order(created_at: :asc)
     end
-    @articles
+    @articles = articles.page(params[:page]).per(5)
   end
   
   def show

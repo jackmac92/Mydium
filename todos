@@ -1,16 +1,19 @@
-switch to material-ui
-hide buttons unless user logged in
 search
-infinite scroll
+
 notifications
 
-article 
+progress bar through article
+
+
+article
+	editor
 	view count
 	subtitle
 	main tag
 	scheduling publish time
 
 fun
+	reading speed measure?
 	write or die muthafucka
 
 bookmark finish vs remove

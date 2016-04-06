@@ -8,15 +8,13 @@ import Input from 'react-toolbox/lib/input'
 import Navigation from 'react-toolbox/lib/navigation'
 import Ripple from 'react-toolbox/lib/ripple'
 import ProgressBar from 'react-toolbox/lib/progress_bar'
-
+import Infinite from 'react-infinite'
+var dolla = require('react-query')
 
 var ArticleIndex = React.createClass ({
 
   contextTypes: {router: React.PropTypes.object.isRequired},
 
-  stateFromStore: function () {
-    return ({ articles: this.articleGrabber() });
-  },
 
   articleGrabber: function () {
     var currPath = this.props.location.pathname.split("/")[1]; 
@@ -37,12 +35,13 @@ var ArticleIndex = React.createClass ({
     }
     return currArticles;
   },
-  articleFetcher: function (currProps) {
+  articleFetcher: function (currProps, pageNum) {
+    pageNum = pageNum || 1
     var completionCallback = () => this.setState({fetching: false})
     var currPath = currProps.location.pathname.split("/")[1]; 
     switch (currPath) {
       case "":
-        ApiUtil.fetchArticles(completionCallback);
+        ApiUtil.fetchArticlesInfinite(pageNum, completionCallback);
         break;
       case "me":
         ApiUtil.fetchBookmarkedArticles(completionCallback);
@@ -54,6 +53,21 @@ var ArticleIndex = React.createClass ({
         ApiUtil.fetchArticlesByTag(currProps.params.tag_name, completionCallback);
         break;
       }
+  },
+
+  moreArticles: function () {
+    var that = this;
+    this.setState({isInfiniteLoading: true});
+    var meta = ArticleStore.meta()
+    var infinLoadCallback = () => that.setState({isInfiniteLoading: false})
+    ApiUtil.fetchArticlesInfinite(meta.page + 1, infinLoadCallback)
+  },
+
+  stateFromStore: function () {
+    return {
+      articles: this.articleGrabber(),
+      isInfiniteLoading: false 
+    };
   },
 
   __onChange: function () {
@@ -86,7 +100,9 @@ var ArticleIndex = React.createClass ({
   render: function () {
     var articles, progress;
     if (this.state.articles) {
-        articles = this.state.articles.map( article => <ArticleIndexItem key={article.id} article={article} />);
+        articles = this.state.articles.map( article => 
+          <ArticleIndexItem key={article.id} noUser={!SessionStore.currentUser()} article={article} />
+        );
     }
     if (this.state.fetching) {
       progress = <ProgressBar mode="indeterminate" /> 
@@ -96,9 +112,14 @@ var ArticleIndex = React.createClass ({
         {progress}
         <section className="content-main">
           <Input onFocus={this.sendToFullEditor} type="text" label="Write here..." />
-          <Navigation type="vertical" className="article-index">
+          <Infinite useWindowAsScrollContainer
+                    elementHeight={800}
+                    infiniteLoadBeginEdgeOffset={10}
+                    onInfiniteLoad={this.moreArticles}
+                    isInfiniteLoading={this.state.isInfiniteLoading}
+                    >
             {articles}
-          </Navigation>
+          </Infinite>
         </section>
         <Sidebar />
       </main>

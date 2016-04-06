@@ -43,7 +43,7 @@ ul {
 
 
 body {
-  background: #eee;
+  background: #FAFAFA;
   font-family: roboto;
 }
 
@@ -114,13 +114,9 @@ section.content-sidebar {
 
 button.article-index-bookmark {
   float: right;
+  height: 50px;
 }
 
 .card-read-more {
   left: 200px;  
-}
-
-#sidebar-sticky {
-  position: -webkit-sticky;
-  position: sticky; top: 20px;
 }

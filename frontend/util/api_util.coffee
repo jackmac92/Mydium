@@ -18,6 +18,20 @@ ApiUtil =
         console.log e
       complete: ->
         completionCallback && completionCallback()
+  fetchArticlesInfinite: (page, completionCallback) ->
+    $.ajax
+      type: "GET"
+      dataType: "json"
+      url: "api/articles"
+      data:
+        page: page
+      success: (response) ->
+        ApiActions.receiveArticlesInfinite response
+      error: (e) ->
+        console.log "ApiUtil#fetchArticles error"
+        console.log e
+      complete: ->
+        completionCallback && completionCallback()
 
   fetchTopArticles: (callback) ->
     $.ajax
@@ -53,6 +67,19 @@ ApiUtil =
       url: "api/articles"
       data:
         article_type: "user_bookmarks"
+      success: (articles) ->
+        ApiActions.receiveArticles articles
+      error: ->
+        console.log "ApiUtil#fetch bookmarked"
+      complete: ->
+        callback && callback()
+  fetchFavoritedArticles: (callback) ->
+    $.ajax
+      type: "GET"
+      dataType: "json"
+      url: "api/articles"
+      data:
+        article_type: "user_favorites"
       success: (articles) ->
         ApiActions.receiveArticles articles
       error: ->
