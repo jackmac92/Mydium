@@ -14,7 +14,7 @@ var ArticlesWithTag = React.createClass ({
   contextTypes: {router: React.PropTypes.object.isRequired},
 
   stateFromStore: function () {
-    return ({ articles: ArticleStore.all() });
+    return ({ articles: ArticleStore.taggedArticles(this.props.params.tag_name) });
   },
 
   __onChange: function () {

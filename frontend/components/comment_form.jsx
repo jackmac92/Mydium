@@ -17,7 +17,7 @@ var CommentForm = React.createClass({
 		e.preventDefault();
 		ApiUtil.createArticleComment(this.state);
 	},
-	render: function() { 
+	render: function() {
 		return (
 			<section>
 				<Input onChange={this.handleInput} label="Add Response" type="text" />

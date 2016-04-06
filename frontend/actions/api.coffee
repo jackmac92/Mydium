@@ -3,23 +3,16 @@ ArticleConstants = require '../constants/article'
 TagConstants = require '../constants/tag'
 
 ApiActions =
-  receiveAllArticles: (articles) ->
+  receiveArticles: (articles) ->
     AppDispatcher.dispatch
       actionType: ArticleConstants.ARTICLES_RECEIVED
       articles: articles
-  receiveArticlesByTag: (articles) ->
-    AppDispatcher.dispatch
-      actionType: ArticleConstants.TAG_ARTICLES_RECEIVED
-      articles: articles
   receiveTopArticles: (articles) ->
+    for article in articles
+      article.topArticle = true
     AppDispatcher.dispatch
       actionType: ArticleConstants.TOP_ARTICLES_RECEIVED
       articles: articles
-  receiveBookmarkedArticles: (articles) ->
-    AppDispatcher.dispatch
-      actionType: ArticleConstants.BOOKMARKED_ARTICLES_RECEIVED
-      articles: articles
-
   receiveSingleArticle: (article) ->
     AppDispatcher.dispatch
       actionType: ArticleConstants.ARTICLE_DETAIL_RECEIVED

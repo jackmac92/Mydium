@@ -15,7 +15,45 @@ var ArticleIndex = React.createClass ({
   contextTypes: {router: React.PropTypes.object.isRequired},
 
   stateFromStore: function () {
-    return ({ articles: ArticleStore.all() });
+    return ({ articles: this.articleGrabber() });
+  },
+
+  articleGrabber: function () {
+    var currPath = this.props.location.pathname.split("/")[1]; 
+    var currArticles = [];
+    switch (currPath) {
+      case "":
+        currArticles = ArticleStore.all()
+        break;
+      case "me":
+        currArticles = ArticleStore.bookmarkedArticles()
+        break;
+      case "popular":
+        currArticles = ArticleStore.topArticles()
+        break;
+      case "tags":
+        currArticles = ArticleStore.taggedArticles(this.props.params.tag_name)
+        break;
+    }
+    return currArticles;
+  },
+  articleFetcher: function (currProps) {
+    var completionCallback = () => this.setState({fetching: false})
+    var currPath = currProps.location.pathname.split("/")[1]; 
+    switch (currPath) {
+      case "":
+        ApiUtil.fetchArticles(completionCallback);
+        break;
+      case "me":
+        ApiUtil.fetchBookmarkedArticles(completionCallback);
+        break;
+      case "popular":
+        ApiUtil.fetchTopArticles(completionCallback);
+        break;
+      case "tags":
+        ApiUtil.fetchArticlesByTag(currProps.params.tag_name, completionCallback);
+        break;
+      }
   },
 
   __onChange: function () {
@@ -30,8 +68,11 @@ var ArticleIndex = React.createClass ({
 
   componentDidMount: function () {
     this.articleStoreToken = ArticleStore.addListener(this.__onChange);
-    var completeCB = () => this.setState({fetching: false}) 
-    ApiUtil.fetchArticles(completeCB);
+    this.articleFetcher(this.props)
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    this.articleFetcher(nextProps)
   },
 
   componentWillUnmount: function () {
@@ -48,7 +89,7 @@ var ArticleIndex = React.createClass ({
         articles = this.state.articles.map( article => <ArticleIndexItem key={article.id} article={article} />);
     }
     if (this.state.fetching) {
-      progress = <ProgressBar type="circular" mode="indeterminate" /> 
+      progress = <ProgressBar mode="indeterminate" /> 
     }
     return (
       <main>

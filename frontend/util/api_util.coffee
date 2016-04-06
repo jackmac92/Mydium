@@ -12,14 +12,14 @@ ApiUtil =
       dataType: "json"
       url: "api/articles"
       success: (articles) ->
-        ApiActions.receiveAllArticles articles
+        ApiActions.receiveArticles articles
       error: (e) ->
         console.log "ApiUtil#fetchArticles error"
         console.log e
       complete: ->
         completionCallback && completionCallback()
 
-  fetchTopArticles: ->
+  fetchTopArticles: (callback) ->
     $.ajax
       type: "GET"
       dataType: "json"
@@ -29,7 +29,9 @@ ApiUtil =
       success: (articles) ->
         ApiActions.receiveTopArticles articles
       error: ->
-        console.log "ApiUtil#fetchArticles error"
+        console.log "ApiUtil#fetchTopArticles error"
+      complete: ->
+        callback && callback()
 
   fetchArticlesByTag: (tag, callback) ->
     $.ajax
@@ -40,13 +42,11 @@ ApiUtil =
         article_type: "tag"
         tag: tag
       success: (articles) ->
-        ApiActions.receiveArticlesByTag articles
-      error: ->
-        console.log "ApiUtil#fetchArticles error"
+        ApiActions.receiveArticles articles
       complete: ->
         callback && callback()
 
-  fetchBookmarkedArticles: ->
+  fetchBookmarkedArticles: (callback) ->
     $.ajax
       type: "GET"
       dataType: "json"
@@ -54,7 +54,11 @@ ApiUtil =
       data:
         article_type: "user_bookmarks"
       success: (articles) ->
-        ApiActions.receiveBookmarkedArticles articles
+        ApiActions.receiveArticles articles
+      error: ->
+        console.log "ApiUtil#fetch bookmarked"
+      complete: ->
+        callback && callback()
 
   fetchTagsIndex: ->
     $.ajax
@@ -124,6 +128,7 @@ ApiUtil =
         ApiActions.receiveUpdatedArticle article
       error: () ->
       complete: () ->
+
   toggleFollow: (user) ->
     $.ajax
       type: "POST"
@@ -188,16 +193,6 @@ ApiUtil =
   #     ApiActions.receiveUserInfo user
   #   error: ->
   #     console.log "ApiUtil#fetchSingleArticle error"
-
-  progressCallback: (callback, evt) -> 
-    if evt.lengthComputable 
-      percentComplete = evt.loaded / evt.total
-
-
-  type: 'POST',
-  url: "/",
-  data: {},
-  success: (result) ->
 
 window.ApiUtil = ApiUtil
 module.exports = ApiUtil

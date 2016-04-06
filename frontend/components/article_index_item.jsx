@@ -39,7 +39,7 @@ const ArticleCard = React.createClass({
  		return (
 			  <Card className="article-card" >
 			  	<CardTitle
-			  		subtitle="Some tag name"
+			  		subtitle={this.props.article.tags.map(t => t.name).join(" - ")}
 			  	/>
 					<CardHeader 
 						avatar={this.props.article.author.avatar}

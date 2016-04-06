@@ -4,62 +4,51 @@ ArticleConstants = require '../constants/article'
 
 ArticleStore = new Store AppDispatcher
 
-# Main store by id, and fill arrays by meta?
-  # pass by reference?
-# Always render article index component (for bookmarks and top articles, differentiate with a prop?)
-
-# store in main object, function for _articles, bookmarked articles
 `_mainStore = {}`
-`_articles = []`
 `_articleDetail = null`
-`_topArticles = []`
-`_taggedArticles = []`
-`_bookmarkedArticles = []`
-`_currentStore = _articles`
 
 ArticleStore.all = ->
-  _articles.slice()
+  for id, article of _mainStore
+    article
 
 ArticleStore.topArticles = ->
-  _topArticles.slice()
+  articles = []
+  for id, article of _mainStore
+    articles.push article if article.topArticle
+  articles
 
 ArticleStore.bookmarkedArticles = ->
-  _bookmarkedArticles.slice()
+  articles = []
+  for id, article of _mainStore
+    articles.push article if article.user.bookmarked_article
+  articles
 
-ArticleStore.taggedArticles = ->
-  _taggedArticles.slice()
+ArticleStore.taggedArticles = (tag) ->
+  articles = []
+  for id, article of _mainStore
+    articleTags = article.tags.map (t) -> t.name
+    articles.push article if articleTags.includes(tag)
+  articles
 
 ArticleStore.getDetail = ->
   _articleDetail
 
-ArticleStore.indexOf = (id) ->
-  indices = _articles.map (article) -> article.id
-  indices.indexOf id
-
 ArticleStore.update = (id,newArticle) ->
-  _articles[ArticleStore.indexOf(id)] = newArticle
+  _mainStore[id] = newArticle
 
 ArticleStore.updateArticleLike = (id, value) ->
-  _articles[ArticleStore.indexOf(id)].user.faved_article = value
+  _mainStore[id].user.faved_article = value
 
 ArticleStore.updateArticleBookmark = (id, value) ->
-  _articles[ArticleStore.indexOf(id)].user.bookmarked_article = value
-
-resetArticles = (articles) ->
-  `_articles = articles`
-  null
-resetTopArticles = (articles) ->
-  `_topArticles = articles`
-  null
-resetBookmarkedArticles = (articles) ->
-  `_bookmarkedArticles = articles`
-  null
-resetTaggedArticles = (articles) ->
-  `_taggedArticles = articles`
-  null
+  _mainStore[id].user.bookmarked_article = value
 
 setDetail = (article) ->
   `_articleDetail = article`
+  null
+
+addArticles = (articles) ->
+  for article in articles
+    _mainStore[article.id] = article
   null
 
 addComment = (comment) ->
@@ -69,16 +58,16 @@ ArticleStore.__onDispatch = (payload) ->
 
   switch payload.actionType
     when ArticleConstants.ARTICLES_RECEIVED
-      resetArticles payload.articles
+      addArticles payload.articles
       ArticleStore.__emitChange()
     when ArticleConstants.TOP_ARTICLES_RECEIVED
-      resetArticles payload.articles
+      addArticles payload.articles
       ArticleStore.__emitChange()
     when ArticleConstants.TAG_ARTICLES_RECEIVED
-      resetArticles payload.articles
+      addArticles payload.articles
       ArticleStore.__emitChange()
     when ArticleConstants.BOOKMARKED_ARTICLES_RECEIVED
-      resetArticles payload.articles
+      addArticles payload.articles
       ArticleStore.__emitChange()
     when ArticleConstants.ARTICLE_DETAIL_RECEIVED
       setDetail payload.article

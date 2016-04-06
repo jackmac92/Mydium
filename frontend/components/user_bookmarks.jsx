@@ -11,7 +11,7 @@ var UserBookmarks = React.createClass({
   contextTypes: {router: React.PropTypes.object.isRequired},
 
   stateFromStore: function () {
-    return ({ articles: ArticleStore.all() });
+    return ({ articles: ArticleStore.bookmarkedArticles() });
   },
 
   __onChange: function () {

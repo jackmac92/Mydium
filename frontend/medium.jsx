@@ -13,9 +13,6 @@ import UserShow from './components/user_show'
 import ArticleIndex from './components/article_index'
 import ArticleDetail from './components/article_detail'
 import ArticleForm from './components/article_form'
-import UserBookmarks from './components/user_bookmarks'
-import TopArticles from './components/top_articles'
-import ArticlesWithTag from './components/articles_with_tag'
 
 function _requireLoggedIn(nextState, replace, asyncCompletionCallback) {
   if (!SessionStore.currentUserHasBeenFetched()) {
@@ -37,13 +34,15 @@ $(document).ready(function () {
       <Router history={appHistory}>
         <Route path="/" component={App}>
           <IndexRoute component={ArticleIndex} />
-          <Route path="user/:id" component={UserShow} />
+          <Route path="popular" component={ArticleIndex} />
+          <Route path="me/bookmarks" component={ArticleIndex}/>
+          <Route path="tags/:tag_name" component={ArticleIndex} />
+
           <Route path="article/:id" component={ArticleDetail} />
-          <Route path="tags/:tag_name" component={ArticlesWithTag} />
-          <Route path="editor" component={ArticleForm} />
-          <Route path="me/bookmarks" component={UserBookmarks}/>
+          
+          <Route path="user/:id" component={UserShow} />
           <Route path="me" component={UserShow} />
-          <Route path="popular" component={TopArticles} />
+          <Route path="editor" component={ArticleForm} />
           <Route path="login" component={LoginForm}/>
           <Route path="signup" component={SignUpForm}/>
         </Route>
