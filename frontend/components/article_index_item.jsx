@@ -55,7 +55,7 @@ const ArticleCard = React.createClass({
 						title={this.props.article.title}
 					/>
 			    <CardText>{this.props.article.body}</CardText>
-			    <Link className="card-read-more" label="Read More" href={"#/articles/"+this.props.article.id} />
+			    <Link className="card-read-more" label="Read More" href={"#/article/"+this.props.article.id} />
 			    <CardActions>
 			      <IconButton tooltip="favorite" onClick={this.toggleFavorite.bind(this, this.props.article.id)} className="article-index-favorite">
 			      	<FontIcon className="material-icons">{"favorite"+fav_style}</FontIcon>

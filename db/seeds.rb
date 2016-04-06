@@ -64,6 +64,3 @@ ActiveRecord::Base.transaction do
   end
 
 end
-Dir.foreach('./') do |f|
-  puts f
-end
