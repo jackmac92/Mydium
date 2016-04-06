@@ -1,0 +1,727 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs',
+1 verbose cli   '/usr/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '--save',
+1 verbose cli   'react-infinite' ]
+2 info using npm@1.4.21
+3 info using node@v0.10.25
+4 warn package.json podium@1.0.0 No repository field.
+5 warn package.json webpack-combine-loaders@2.0.0 No repository field.
+6 verbose readDependencies using package.json deps
+7 verbose cache add [ 'react-infinite', null ]
+8 verbose cache add name=undefined spec="react-infinite" args=["react-infinite",null]
+9 verbose parsed url { protocol: null,
+9 verbose parsed url   slashes: null,
+9 verbose parsed url   auth: null,
+9 verbose parsed url   host: null,
+9 verbose parsed url   port: null,
+9 verbose parsed url   hostname: null,
+9 verbose parsed url   hash: null,
+9 verbose parsed url   search: null,
+9 verbose parsed url   query: null,
+9 verbose parsed url   pathname: 'react-infinite',
+9 verbose parsed url   path: 'react-infinite',
+9 verbose parsed url   href: 'react-infinite' }
+10 silly lockFile df28ed7b-react-infinite react-infinite
+11 verbose lock react-infinite /home/jackmac/.npm/df28ed7b-react-infinite.lock
+12 silly lockFile df28ed7b-react-infinite react-infinite
+13 silly lockFile df28ed7b-react-infinite react-infinite
+14 verbose addNamed [ 'react-infinite', '' ]
+15 verbose addNamed [ null, '*' ]
+16 silly lockFile bb28fafb-react-infinite react-infinite@
+17 verbose lock react-infinite@ /home/jackmac/.npm/bb28fafb-react-infinite.lock
+18 silly addNameRange { name: 'react-infinite', range: '*', hasData: false }
+19 verbose request where is /react-infinite
+20 verbose request registry https://registry.npmjs.org/
+21 verbose request id 50fbb157feb96bd2
+22 verbose url raw /react-infinite
+23 verbose url resolving [ 'https://registry.npmjs.org/', './react-infinite' ]
+24 verbose url resolved https://registry.npmjs.org/react-infinite
+25 verbose request where is https://registry.npmjs.org/react-infinite
+26 info trying registry request attempt 1 at 00:34:26
+27 verbose etag "4UUAWIA87QKF7ZGVWCK7S6X2V"
+28 http GET https://registry.npmjs.org/react-infinite
+29 http 304 https://registry.npmjs.org/react-infinite
+30 silly registry.get cb [ 304,
+30 silly registry.get   { date: 'Wed, 06 Apr 2016 04:34:27 GMT',
+30 silly registry.get     via: '1.1 varnish',
+30 silly registry.get     'cache-control': 'max-age=300',
+30 silly registry.get     etag: '"4UUAWIA87QKF7ZGVWCK7S6X2V"',
+30 silly registry.get     age: '23',
+30 silly registry.get     connection: 'keep-alive',
+30 silly registry.get     'x-served-by': 'cache-jfk1049-JFK',
+30 silly registry.get     'x-cache': 'HIT',
+30 silly registry.get     'x-cache-hits': '1',
+30 silly registry.get     'x-timer': 'S1459917267.293953,VS0,VE0',
+30 silly registry.get     vary: 'Accept-Encoding' } ]
+31 verbose etag https://registry.npmjs.org/react-infinite from cache
+32 silly addNameRange number 2 { name: 'react-infinite', range: '*', hasData: true }
+33 silly addNameRange versions [ 'react-infinite',
+33 silly addNameRange   [ '0.1.0',
+33 silly addNameRange     '0.1.2',
+33 silly addNameRange     '0.1.3',
+33 silly addNameRange     '0.1.4',
+33 silly addNameRange     '0.1.5',
+33 silly addNameRange     '0.2.1',
+33 silly addNameRange     '0.2.2',
+33 silly addNameRange     '0.2.3',
+33 silly addNameRange     '0.2.4',
+33 silly addNameRange     '0.3.0',
+33 silly addNameRange     '0.3.1',
+33 silly addNameRange     '0.3.2',
+33 silly addNameRange     '0.3.3',
+33 silly addNameRange     '0.3.4',
+33 silly addNameRange     '0.4.0',
+33 silly addNameRange     '0.4.1',
+33 silly addNameRange     '0.5.1',
+33 silly addNameRange     '0.5.3',
+33 silly addNameRange     '0.5.4',
+33 silly addNameRange     '0.5.5',
+33 silly addNameRange     '0.5.6',
+33 silly addNameRange     '0.5.7',
+33 silly addNameRange     '0.5.8',
+33 silly addNameRange     '0.5.9',
+33 silly addNameRange     '0.5.10',
+33 silly addNameRange     '0.5.11',
+33 silly addNameRange     '0.6.0',
+33 silly addNameRange     '0.7.0',
+33 silly addNameRange     '0.7.1',
+33 silly addNameRange     '0.7.2',
+33 silly addNameRange     '0.6.1',
+33 silly addNameRange     '0.7.3',
+33 silly addNameRange     '0.8.0',
+33 silly addNameRange     '0.9.0' ] ]
+34 verbose addNamed [ 'react-infinite', '0.9.0' ]
+35 verbose addNamed [ '0.9.0', '0.9.0' ]
+36 silly lockFile 2fc60cad-react-infinite-0-9-0 react-infinite@0.9.0
+37 verbose lock react-infinite@0.9.0 /home/jackmac/.npm/2fc60cad-react-infinite-0-9-0.lock
+38 silly lockFile 2fc60cad-react-infinite-0-9-0 react-infinite@0.9.0
+39 silly lockFile 2fc60cad-react-infinite-0-9-0 react-infinite@0.9.0
+40 silly lockFile bb28fafb-react-infinite react-infinite@
+41 silly lockFile bb28fafb-react-infinite react-infinite@
+42 silly resolved [ { name: 'react-infinite',
+42 silly resolved     version: '0.9.0',
+42 silly resolved     description: 'A browser-ready efficient scrolling container based on UITableView',
+42 silly resolved     main: 'build/react-infinite.js',
+42 silly resolved     repository:
+42 silly resolved      { type: 'git',
+42 silly resolved        url: 'git+https://github.com/seatgeek/react-infinite.git' },
+42 silly resolved     keywords:
+42 silly resolved      [ 'react',
+42 silly resolved        'react-component',
+42 silly resolved        'scrolling',
+42 silly resolved        'uitableview',
+42 silly resolved        'infinite' ],
+42 silly resolved     author: { name: 'Gareth Tan' },
+42 silly resolved     license: 'BSD-3-Clause',
+42 silly resolved     bugs: { url: 'https://github.com/seatgeek/react-infinite/issues' },
+42 silly resolved     browser: 'build/react-infinite.js',
+42 silly resolved     scripts:
+42 silly resolved      { test: 'node ./node_modules/.bin/jest',
+42 silly resolved        lint: 'eslint ./src --ext .jsx --ext .js',
+42 silly resolved        fix: 'eslint --fix --ext .jsx --ext .js ./src ./__tests__ ./pipeline',
+42 silly resolved        typecheck: 'flow check',
+42 silly resolved        verify: 'npm test && npm run typecheck && npm run lint',
+42 silly resolved        preversion: 'npm run verify',
+42 silly resolved        prepublish: 'gulp release' },
+42 silly resolved     jest:
+42 silly resolved      { scriptPreprocessor: '<rootDir>/node_modules/babel-jest',
+42 silly resolved        testPathDirs: [Object],
+42 silly resolved        testPathIgnorePatterns: [Object],
+42 silly resolved        testFileExtensions: [Object],
+42 silly resolved        unmockedModulePathPatterns: [Object],
+42 silly resolved        collectCoverage: true,
+42 silly resolved        verbose: true },
+42 silly resolved     homepage: 'https://github.com/seatgeek/react-infinite',
+42 silly resolved     devDependencies:
+42 silly resolved      { 'babel-eslint': '^4.0.7',
+42 silly resolved        'babel-jest': '^5.3.0',
+42 silly resolved        babelify: '^6.3.0',
+42 silly resolved        browserify: '^9.0.3',
+42 silly resolved        coveralls: '^2.11.2',
+42 silly resolved        del: '2.0.2',
+42 silly resolved        envify: '3.4.0',
+42 silly resolved        eslint: '1.9.0',
+42 silly resolved        'eslint-config-semistandard': '^5.0.0',
+42 silly resolved        'eslint-config-standard': '^4.1.0',
+42 silly resolved        'eslint-plugin-react': '^3.2.3',
+42 silly resolved        'eslint-plugin-standard': '^1.2.0',
+42 silly resolved        'flow-bin': '0.22.0',
+42 silly resolved        gulp: '^3.8.8',
+42 silly resolved        'gulp-babel': '^5.2.1',
+42 silly resolved        'gulp-concat': '^2.4.3',
+42 silly resolved        'gulp-size': '^2.0.0',
+42 silly resolved        'gulp-sourcemaps': '^1.2.4',
+42 silly resolved        'gulp-uglify': '^1.0.1',
+42 silly resolved        'gulp-webserver': '^0.9.1',
+42 silly resolved        'jest-cli': '0.4.19',
+42 silly resolved        moment: '^2.10.6',
+42 silly resolved        'react-addons-test-utils': '15.0.0-rc.1',
+42 silly resolved        uglifyify: '3.0.1',
+42 silly resolved        'vinyl-buffer': '^1.0.0',
+42 silly resolved        'vinyl-source-stream': '^1.0.0',
+42 silly resolved        watch: '^0.16.0',
+42 silly resolved        watchify: '^3.4.0',
+42 silly resolved        yargs: '^1.3.2' },
+42 silly resolved     dependencies:
+42 silly resolved      { 'lodash.isarray': '3.0.4',
+42 silly resolved        'lodash.isfinite': '3.2.0',
+42 silly resolved        'object-assign': '4.0.1' },
+42 silly resolved     peerDependencies: { react: '15.0.0-rc.1', 'react-dom': '15.0.0-rc.1' },
+42 silly resolved     browserify: { transform: [Object] },
+42 silly resolved     gitHead: 'b2d377c8ed0afa98c043233e192222b256caa0b5',
+42 silly resolved     _id: 'react-infinite@0.9.0',
+42 silly resolved     _shasum: '09adf1f8665e1852c7a01f83ed212085163bf5ef',
+42 silly resolved     _from: 'react-infinite@',
+42 silly resolved     _npmVersion: '2.14.4',
+42 silly resolved     _nodeVersion: '0.10.42',
+42 silly resolved     _npmUser: { name: 'garetht', email: 'garethwtan@gmail.com' },
+42 silly resolved     maintainers: [ [Object] ],
+42 silly resolved     dist:
+42 silly resolved      { shasum: '09adf1f8665e1852c7a01f83ed212085163bf5ef',
+42 silly resolved        tarball: 'https://registry.npmjs.org/react-infinite/-/react-infinite-0.9.0.tgz' },
+42 silly resolved     _npmOperationalInternal:
+42 silly resolved      { host: 'packages-12-west.internal.npmjs.com',
+42 silly resolved        tmp: 'tmp/react-infinite-0.9.0.tgz_1457766564961_0.5506125048268586' },
+42 silly resolved     directories: {},
+42 silly resolved     _resolved: 'https://registry.npmjs.org/react-infinite/-/react-infinite-0.9.0.tgz',
+42 silly resolved     readme: 'ERROR: No README data found!' } ]
+43 info install react-infinite@0.9.0 into /home/jackmac/capstone
+44 info installOne react-infinite@0.9.0
+45 verbose node_modules/react-infinite unbuild
+46 info preuninstall react-infinite@0.9.0
+47 info uninstall react-infinite@0.9.0
+48 verbose true,/home/jackmac/capstone/node_modules,/home/jackmac/capstone/node_modules unbuild react-infinite@0.9.0
+49 info postuninstall react-infinite@0.9.0
+50 verbose tar unpack /home/jackmac/.npm/react-infinite/0.9.0/package.tgz
+51 silly lockFile 32e7e330-tone-node-modules-react-infinite tar:///home/jackmac/capstone/node_modules/react-infinite
+52 verbose lock tar:///home/jackmac/capstone/node_modules/react-infinite /home/jackmac/.npm/32e7e330-tone-node-modules-react-infinite.lock
+53 silly lockFile e162a061-react-infinite-0-9-0-package-tgz tar:///home/jackmac/.npm/react-infinite/0.9.0/package.tgz
+54 verbose lock tar:///home/jackmac/.npm/react-infinite/0.9.0/package.tgz /home/jackmac/.npm/e162a061-react-infinite-0-9-0-package-tgz.lock
+55 silly gunzTarPerm modes [ '775', '664' ]
+56 silly gunzTarPerm extractEntry package.json
+57 silly gunzTarPerm modified mode [ 'package.json', 420, 436 ]
+58 silly gunzTarPerm extractEntry .npmignore
+59 silly gunzTarPerm modified mode [ '.npmignore', 420, 436 ]
+60 silly gunzTarPerm extractEntry README.md
+61 silly gunzTarPerm modified mode [ 'README.md', 420, 436 ]
+62 silly gunzTarPerm extractEntry Gulpfile.js
+63 silly gunzTarPerm modified mode [ 'Gulpfile.js', 420, 436 ]
+64 silly gunzTarPerm extractEntry .travis.yml
+65 silly gunzTarPerm modified mode [ '.travis.yml', 420, 436 ]
+66 silly gunzTarPerm extractEntry .eslintrc
+67 silly gunzTarPerm modified mode [ '.eslintrc', 420, 436 ]
+68 silly gunzTarPerm extractEntry LICENSE.txt
+69 silly gunzTarPerm modified mode [ 'LICENSE.txt', 420, 436 ]
+70 silly gunzTarPerm extractEntry .flowconfig
+71 silly gunzTarPerm modified mode [ '.flowconfig', 420, 436 ]
+72 silly gunzTarPerm extractEntry __tests__/array_infinite_computer_test.js
+73 silly gunzTarPerm modified mode [ '__tests__/array_infinite_computer_test.js', 420, 436 ]
+74 silly gunzTarPerm extractEntry __tests__/binary_search_test.js
+75 silly gunzTarPerm modified mode [ '__tests__/binary_search_test.js', 420, 436 ]
+76 silly gunzTarPerm extractEntry __tests__/bottom_upwards_infinite_test.js
+77 silly gunzTarPerm modified mode [ '__tests__/bottom_upwards_infinite_test.js', 420, 436 ]
+78 silly gunzTarPerm extractEntry __tests__/constant_infinite_computer_test.js
+79 silly gunzTarPerm modified mode [ '__tests__/constant_infinite_computer_test.js', 420, 436 ]
+80 silly gunzTarPerm extractEntry __tests__/infinite_error_test.js
+81 silly gunzTarPerm modified mode [ '__tests__/infinite_error_test.js', 420, 436 ]
+82 silly gunzTarPerm extractEntry __tests__/infinite_styles_test.js
+83 silly gunzTarPerm modified mode [ '__tests__/infinite_styles_test.js', 420, 436 ]
+84 silly gunzTarPerm extractEntry __tests__/infinite_test.js
+85 silly gunzTarPerm modified mode [ '__tests__/infinite_test.js', 420, 436 ]
+86 silly gunzTarPerm extractEntry __tests__/helpers/renderHelpers.js
+87 silly gunzTarPerm modified mode [ '__tests__/helpers/renderHelpers.js', 420, 436 ]
+88 silly gunzTarPerm extractEntry bower.json
+89 silly gunzTarPerm modified mode [ 'bower.json', 420, 436 ]
+90 silly gunzTarPerm extractEntry .coveralls.yml
+91 silly gunzTarPerm modified mode [ '.coveralls.yml', 420, 436 ]
+92 silly gunzTarPerm extractEntry build/react-infinite.js
+93 silly gunzTarPerm modified mode [ 'build/react-infinite.js', 420, 436 ]
+94 silly gunzTarPerm extractEntry build/computers/arrayInfiniteComputer.js
+95 silly gunzTarPerm modified mode [ 'build/computers/arrayInfiniteComputer.js', 420, 436 ]
+96 silly gunzTarPerm extractEntry build/computers/constantInfiniteComputer.js
+97 silly gunzTarPerm modified mode [ 'build/computers/constantInfiniteComputer.js', 420, 436 ]
+98 silly gunzTarPerm extractEntry build/computers/infiniteComputer.js
+99 silly gunzTarPerm modified mode [ 'build/computers/infiniteComputer.js', 420, 436 ]
+100 silly gunzTarPerm extractEntry build/utils/binaryIndexSearch.js
+101 silly gunzTarPerm modified mode [ 'build/utils/binaryIndexSearch.js', 420, 436 ]
+102 silly gunzTarPerm extractEntry build/utils/checkProps.js
+103 silly gunzTarPerm modified mode [ 'build/utils/checkProps.js', 420, 436 ]
+104 silly gunzTarPerm extractEntry build/utils/establish-polyfills.js
+105 silly gunzTarPerm modified mode [ 'build/utils/establish-polyfills.js', 420, 436 ]
+106 silly gunzTarPerm extractEntry build/utils/infiniteHelpers.js
+107 silly gunzTarPerm modified mode [ 'build/utils/infiniteHelpers.js', 420, 436 ]
+108 silly gunzTarPerm extractEntry build/utils/scaleEnum.js
+109 silly gunzTarPerm modified mode [ 'build/utils/scaleEnum.js', 420, 436 ]
+110 silly gunzTarPerm extractEntry build/utils/types.js
+111 silly gunzTarPerm modified mode [ 'build/utils/types.js', 420, 436 ]
+112 silly gunzTarPerm extractEntry config/travis/test.sh
+113 silly gunzTarPerm modified mode [ 'config/travis/test.sh', 493, 509 ]
+114 silly gunzTarPerm extractEntry dist/react-infinite.js
+115 silly gunzTarPerm modified mode [ 'dist/react-infinite.js', 420, 436 ]
+116 silly gunzTarPerm extractEntry dist/react-infinite.min.js
+117 silly gunzTarPerm modified mode [ 'dist/react-infinite.min.js', 420, 436 ]
+118 silly gunzTarPerm extractEntry docs/developing.md
+119 silly gunzTarPerm modified mode [ 'docs/developing.md', 420, 436 ]
+120 silly gunzTarPerm extractEntry examples/borderless-window.html
+121 silly gunzTarPerm modified mode [ 'examples/borderless-window.html', 420, 436 ]
+122 silly gunzTarPerm extractEntry examples/borderless-window.jsx
+123 silly gunzTarPerm modified mode [ 'examples/borderless-window.jsx', 420, 436 ]
+124 silly gunzTarPerm extractEntry examples/chat.html
+125 silly gunzTarPerm modified mode [ 'examples/chat.html', 420, 436 ]
+126 silly gunzTarPerm extractEntry examples/chat.jsx
+127 silly gunzTarPerm modified mode [ 'examples/chat.jsx', 420, 436 ]
+128 silly gunzTarPerm extractEntry examples/example.html
+129 silly gunzTarPerm modified mode [ 'examples/example.html', 420, 436 ]
+130 silly gunzTarPerm extractEntry examples/index.jsx
+131 silly gunzTarPerm modified mode [ 'examples/index.jsx', 420, 436 ]
+132 silly gunzTarPerm extractEntry examples/window.html
+133 silly gunzTarPerm modified mode [ 'examples/window.html', 420, 436 ]
+134 silly gunzTarPerm extractEntry examples/window.jsx
+135 silly gunzTarPerm modified mode [ 'examples/window.jsx', 420, 436 ]
+136 silly gunzTarPerm extractEntry src/computers/arrayInfiniteComputer.js
+137 silly gunzTarPerm modified mode [ 'src/computers/arrayInfiniteComputer.js', 420, 436 ]
+138 silly gunzTarPerm extractEntry src/computers/constantInfiniteComputer.js
+139 silly gunzTarPerm modified mode [ 'src/computers/constantInfiniteComputer.js', 420, 436 ]
+140 silly gunzTarPerm extractEntry src/computers/infiniteComputer.js
+141 silly gunzTarPerm modified mode [ 'src/computers/infiniteComputer.js', 420, 436 ]
+142 silly gunzTarPerm extractEntry src/react-infinite.jsx
+143 silly gunzTarPerm modified mode [ 'src/react-infinite.jsx', 420, 436 ]
+144 silly gunzTarPerm extractEntry src/utils/binaryIndexSearch.js
+145 silly gunzTarPerm modified mode [ 'src/utils/binaryIndexSearch.js', 420, 436 ]
+146 silly gunzTarPerm extractEntry src/utils/checkProps.js
+147 silly gunzTarPerm modified mode [ 'src/utils/checkProps.js', 420, 436 ]
+148 silly gunzTarPerm extractEntry src/utils/establish-polyfills.js
+149 silly gunzTarPerm modified mode [ 'src/utils/establish-polyfills.js', 420, 436 ]
+150 silly gunzTarPerm extractEntry src/utils/infiniteHelpers.js
+151 silly gunzTarPerm modified mode [ 'src/utils/infiniteHelpers.js', 420, 436 ]
+152 silly gunzTarPerm extractEntry src/utils/scaleEnum.js
+153 silly gunzTarPerm modified mode [ 'src/utils/scaleEnum.js', 420, 436 ]
+154 silly gunzTarPerm extractEntry src/utils/types.js
+155 silly gunzTarPerm modified mode [ 'src/utils/types.js', 420, 436 ]
+156 silly gunzTarPerm extractEntry pipeline/browserify.js
+157 silly gunzTarPerm modified mode [ 'pipeline/browserify.js', 420, 436 ]
+158 silly gunzTarPerm extractEntry typelib/component/infinite_computer_types.js
+159 silly gunzTarPerm modified mode [ 'typelib/component/infinite_computer_types.js', 420, 436 ]
+160 silly gunzTarPerm extractEntry typelib/component/react_infinite_types.js
+161 silly gunzTarPerm modified mode [ 'typelib/component/react_infinite_types.js', 420, 436 ]
+162 silly lockFile 32e7e330-tone-node-modules-react-infinite tar:///home/jackmac/capstone/node_modules/react-infinite
+163 silly lockFile 32e7e330-tone-node-modules-react-infinite tar:///home/jackmac/capstone/node_modules/react-infinite
+164 silly lockFile e162a061-react-infinite-0-9-0-package-tgz tar:///home/jackmac/.npm/react-infinite/0.9.0/package.tgz
+165 silly lockFile e162a061-react-infinite-0-9-0-package-tgz tar:///home/jackmac/.npm/react-infinite/0.9.0/package.tgz
+166 info preinstall react-infinite@0.9.0
+167 verbose readDependencies using package.json deps
+168 verbose readDependencies using package.json deps
+169 verbose cache add [ 'lodash.isarray@3.0.4', null ]
+170 verbose cache add name=undefined spec="lodash.isarray@3.0.4" args=["lodash.isarray@3.0.4",null]
+171 verbose parsed url { protocol: null,
+171 verbose parsed url   slashes: null,
+171 verbose parsed url   auth: null,
+171 verbose parsed url   host: null,
+171 verbose parsed url   port: null,
+171 verbose parsed url   hostname: null,
+171 verbose parsed url   hash: null,
+171 verbose parsed url   search: null,
+171 verbose parsed url   query: null,
+171 verbose parsed url   pathname: 'lodash.isarray@3.0.4',
+171 verbose parsed url   path: 'lodash.isarray@3.0.4',
+171 verbose parsed url   href: 'lodash.isarray@3.0.4' }
+172 verbose cache add [ 'lodash.isfinite@3.2.0', null ]
+173 verbose cache add name=undefined spec="lodash.isfinite@3.2.0" args=["lodash.isfinite@3.2.0",null]
+174 verbose parsed url { protocol: null,
+174 verbose parsed url   slashes: null,
+174 verbose parsed url   auth: null,
+174 verbose parsed url   host: null,
+174 verbose parsed url   port: null,
+174 verbose parsed url   hostname: null,
+174 verbose parsed url   hash: null,
+174 verbose parsed url   search: null,
+174 verbose parsed url   query: null,
+174 verbose parsed url   pathname: 'lodash.isfinite@3.2.0',
+174 verbose parsed url   path: 'lodash.isfinite@3.2.0',
+174 verbose parsed url   href: 'lodash.isfinite@3.2.0' }
+175 verbose cache add name="lodash.isarray" spec="3.0.4" args=["lodash.isarray","3.0.4"]
+176 verbose parsed url { protocol: null,
+176 verbose parsed url   slashes: null,
+176 verbose parsed url   auth: null,
+176 verbose parsed url   host: null,
+176 verbose parsed url   port: null,
+176 verbose parsed url   hostname: null,
+176 verbose parsed url   hash: null,
+176 verbose parsed url   search: null,
+176 verbose parsed url   query: null,
+176 verbose parsed url   pathname: '3.0.4',
+176 verbose parsed url   path: '3.0.4',
+176 verbose parsed url   href: '3.0.4' }
+177 verbose addNamed [ 'lodash.isarray', '3.0.4' ]
+178 verbose addNamed [ '3.0.4', '3.0.4' ]
+179 silly lockFile 5e4218d2-lodash-isarray-3-0-4 lodash.isarray@3.0.4
+180 verbose lock lodash.isarray@3.0.4 /home/jackmac/.npm/5e4218d2-lodash-isarray-3-0-4.lock
+181 verbose cache add name="lodash.isfinite" spec="3.2.0" args=["lodash.isfinite","3.2.0"]
+182 verbose parsed url { protocol: null,
+182 verbose parsed url   slashes: null,
+182 verbose parsed url   auth: null,
+182 verbose parsed url   host: null,
+182 verbose parsed url   port: null,
+182 verbose parsed url   hostname: null,
+182 verbose parsed url   hash: null,
+182 verbose parsed url   search: null,
+182 verbose parsed url   query: null,
+182 verbose parsed url   pathname: '3.2.0',
+182 verbose parsed url   path: '3.2.0',
+182 verbose parsed url   href: '3.2.0' }
+183 verbose addNamed [ 'lodash.isfinite', '3.2.0' ]
+184 verbose addNamed [ '3.2.0', '3.2.0' ]
+185 silly lockFile 69c2bafc-lodash-isfinite-3-2-0 lodash.isfinite@3.2.0
+186 verbose lock lodash.isfinite@3.2.0 /home/jackmac/.npm/69c2bafc-lodash-isfinite-3-2-0.lock
+187 verbose cache add [ 'object-assign@4.0.1', null ]
+188 verbose cache add name=undefined spec="object-assign@4.0.1" args=["object-assign@4.0.1",null]
+189 verbose parsed url { protocol: null,
+189 verbose parsed url   slashes: null,
+189 verbose parsed url   auth: null,
+189 verbose parsed url   host: null,
+189 verbose parsed url   port: null,
+189 verbose parsed url   hostname: null,
+189 verbose parsed url   hash: null,
+189 verbose parsed url   search: null,
+189 verbose parsed url   query: null,
+189 verbose parsed url   pathname: 'object-assign@4.0.1',
+189 verbose parsed url   path: 'object-assign@4.0.1',
+189 verbose parsed url   href: 'object-assign@4.0.1' }
+190 verbose cache add name="object-assign" spec="4.0.1" args=["object-assign","4.0.1"]
+191 verbose parsed url { protocol: null,
+191 verbose parsed url   slashes: null,
+191 verbose parsed url   auth: null,
+191 verbose parsed url   host: null,
+191 verbose parsed url   port: null,
+191 verbose parsed url   hostname: null,
+191 verbose parsed url   hash: null,
+191 verbose parsed url   search: null,
+191 verbose parsed url   query: null,
+191 verbose parsed url   pathname: '4.0.1',
+191 verbose parsed url   path: '4.0.1',
+191 verbose parsed url   href: '4.0.1' }
+192 verbose addNamed [ 'object-assign', '4.0.1' ]
+193 verbose addNamed [ '4.0.1', '4.0.1' ]
+194 silly lockFile 315db0a1-object-assign-4-0-1 object-assign@4.0.1
+195 verbose lock object-assign@4.0.1 /home/jackmac/.npm/315db0a1-object-assign-4-0-1.lock
+196 verbose request where is /lodash.isarray
+197 verbose request registry https://registry.npmjs.org/
+198 verbose url raw /lodash.isarray
+199 verbose url resolving [ 'https://registry.npmjs.org/', './lodash.isarray' ]
+200 verbose url resolved https://registry.npmjs.org/lodash.isarray
+201 verbose request where is https://registry.npmjs.org/lodash.isarray
+202 info trying registry request attempt 1 at 00:34:27
+203 verbose etag "DD13L05CGB0BXKMJO8EVTLF3F"
+204 http GET https://registry.npmjs.org/lodash.isarray
+205 verbose request where is /lodash.isfinite
+206 verbose request registry https://registry.npmjs.org/
+207 verbose url raw /lodash.isfinite
+208 verbose url resolving [ 'https://registry.npmjs.org/', './lodash.isfinite' ]
+209 verbose url resolved https://registry.npmjs.org/lodash.isfinite
+210 verbose request where is https://registry.npmjs.org/lodash.isfinite
+211 info trying registry request attempt 1 at 00:34:27
+212 verbose etag "3B4B3YZOOYVK8TS4R62I29PGD"
+213 http GET https://registry.npmjs.org/lodash.isfinite
+214 verbose request where is /object-assign
+215 verbose request registry https://registry.npmjs.org/
+216 verbose url raw /object-assign
+217 verbose url resolving [ 'https://registry.npmjs.org/', './object-assign' ]
+218 verbose url resolved https://registry.npmjs.org/object-assign
+219 verbose request where is https://registry.npmjs.org/object-assign
+220 info trying registry request attempt 1 at 00:34:27
+221 verbose etag "65X2Q5N9UHXIOQC804Y02T4I2"
+222 http GET https://registry.npmjs.org/object-assign
+223 http 304 https://registry.npmjs.org/lodash.isarray
+224 silly registry.get cb [ 304,
+224 silly registry.get   { date: 'Wed, 06 Apr 2016 04:34:27 GMT',
+224 silly registry.get     via: '1.1 varnish',
+224 silly registry.get     'cache-control': 'max-age=300',
+224 silly registry.get     etag: '"DD13L05CGB0BXKMJO8EVTLF3F"',
+224 silly registry.get     age: '108',
+224 silly registry.get     connection: 'keep-alive',
+224 silly registry.get     'x-served-by': 'cache-jfk1045-JFK',
+224 silly registry.get     'x-cache': 'HIT',
+224 silly registry.get     'x-cache-hits': '4',
+224 silly registry.get     'x-timer': 'S1459917267.458688,VS0,VE0',
+224 silly registry.get     vary: 'Accept' } ]
+225 verbose etag https://registry.npmjs.org/lodash.isarray from cache
+226 silly lockFile 5e4218d2-lodash-isarray-3-0-4 lodash.isarray@3.0.4
+227 silly lockFile 5e4218d2-lodash-isarray-3-0-4 lodash.isarray@3.0.4
+228 http 304 https://registry.npmjs.org/lodash.isfinite
+229 silly registry.get cb [ 304,
+229 silly registry.get   { date: 'Wed, 06 Apr 2016 04:34:27 GMT',
+229 silly registry.get     via: '1.1 varnish',
+229 silly registry.get     'cache-control': 'max-age=300',
+229 silly registry.get     etag: '"3B4B3YZOOYVK8TS4R62I29PGD"',
+229 silly registry.get     age: '22',
+229 silly registry.get     connection: 'keep-alive',
+229 silly registry.get     'x-served-by': 'cache-jfk1028-JFK',
+229 silly registry.get     'x-cache': 'HIT',
+229 silly registry.get     'x-cache-hits': '1',
+229 silly registry.get     'x-timer': 'S1459917267.469170,VS0,VE0',
+229 silly registry.get     vary: 'Accept-Encoding' } ]
+230 verbose etag https://registry.npmjs.org/lodash.isfinite from cache
+231 silly lockFile 69c2bafc-lodash-isfinite-3-2-0 lodash.isfinite@3.2.0
+232 silly lockFile 69c2bafc-lodash-isfinite-3-2-0 lodash.isfinite@3.2.0
+233 http 304 https://registry.npmjs.org/object-assign
+234 silly registry.get cb [ 304,
+234 silly registry.get   { date: 'Wed, 06 Apr 2016 04:34:27 GMT',
+234 silly registry.get     via: '1.1 varnish',
+234 silly registry.get     'cache-control': 'max-age=300',
+234 silly registry.get     etag: '"65X2Q5N9UHXIOQC804Y02T4I2"',
+234 silly registry.get     age: '1',
+234 silly registry.get     connection: 'keep-alive',
+234 silly registry.get     'x-served-by': 'cache-jfk1029-JFK',
+234 silly registry.get     'x-cache': 'HIT',
+234 silly registry.get     'x-cache-hits': '1',
+234 silly registry.get     'x-timer': 'S1459917267.474503,VS0,VE0',
+234 silly registry.get     vary: 'Accept' } ]
+235 verbose etag https://registry.npmjs.org/object-assign from cache
+236 silly lockFile 315db0a1-object-assign-4-0-1 object-assign@4.0.1
+237 silly lockFile 315db0a1-object-assign-4-0-1 object-assign@4.0.1
+238 silly resolved [ { name: 'lodash.isarray',
+238 silly resolved     version: '3.0.4',
+238 silly resolved     description: 'The modern build of lodash’s `_.isArray` as a module.',
+238 silly resolved     homepage: 'https://lodash.com/',
+238 silly resolved     icon: 'https://lodash.com/icon.svg',
+238 silly resolved     license: 'MIT',
+238 silly resolved     keywords: [ 'lodash', 'lodash-modularized', 'stdlib', 'util' ],
+238 silly resolved     author:
+238 silly resolved      { name: 'John-David Dalton',
+238 silly resolved        email: 'john.david.dalton@gmail.com',
+238 silly resolved        url: 'http://allyoucanleet.com/' },
+238 silly resolved     contributors: [ [Object], [Object], [Object], [Object], [Object] ],
+238 silly resolved     repository: { type: 'git', url: 'git+https://github.com/lodash/lodash.git' },
+238 silly resolved     scripts: { test: 'echo "See https://travis-ci.org/lodash/lodash-cli for testing details."' },
+238 silly resolved     bugs: { url: 'https://github.com/lodash/lodash/issues' },
+238 silly resolved     _id: 'lodash.isarray@3.0.4',
+238 silly resolved     _shasum: '79e4eb88c36a8122af86f844aa9bcd851b5fbb55',
+238 silly resolved     _from: 'lodash.isarray@3.0.4',
+238 silly resolved     _npmVersion: '2.12.0',
+238 silly resolved     _nodeVersion: '0.12.5',
+238 silly resolved     _npmUser: { name: 'jdalton', email: 'john.david.dalton@gmail.com' },
+238 silly resolved     maintainers: [ [Object], [Object], [Object], [Object], [Object] ],
+238 silly resolved     dist:
+238 silly resolved      { shasum: '79e4eb88c36a8122af86f844aa9bcd851b5fbb55',
+238 silly resolved        tarball: 'http://registry.npmjs.org/lodash.isarray/-/lodash.isarray-3.0.4.tgz' },
+238 silly resolved     directories: {},
+238 silly resolved     _resolved: 'https://registry.npmjs.org/lodash.isarray/-/lodash.isarray-3.0.4.tgz',
+238 silly resolved     readme: 'ERROR: No README data found!' },
+238 silly resolved   { name: 'lodash.isfinite',
+238 silly resolved     version: '3.2.0',
+238 silly resolved     description: 'The modern build of lodash’s `_.isFinite` as a module.',
+238 silly resolved     homepage: 'https://lodash.com/',
+238 silly resolved     icon: 'https://lodash.com/icon.svg',
+238 silly resolved     license: 'MIT',
+238 silly resolved     keywords: [ 'lodash', 'lodash-modularized', 'stdlib', 'util' ],
+238 silly resolved     author:
+238 silly resolved      { name: 'John-David Dalton',
+238 silly resolved        email: 'john.david.dalton@gmail.com',
+238 silly resolved        url: 'http://allyoucanleet.com/' },
+238 silly resolved     contributors: [ [Object], [Object], [Object], [Object], [Object] ],
+238 silly resolved     repository: { type: 'git', url: 'git+https://github.com/lodash/lodash.git' },
+238 silly resolved     scripts: { test: 'echo "See https://travis-ci.org/lodash/lodash-cli for testing details."' },
+238 silly resolved     bugs: { url: 'https://github.com/lodash/lodash/issues' },
+238 silly resolved     _id: 'lodash.isfinite@3.2.0',
+238 silly resolved     _shasum: 'aa69ffb93a37e82fab0ce18862655f9174ced339',
+238 silly resolved     _from: 'lodash.isfinite@3.2.0',
+238 silly resolved     _npmVersion: '2.12.0',
+238 silly resolved     _nodeVersion: '0.12.5',
+238 silly resolved     _npmUser: { name: 'jdalton', email: 'john.david.dalton@gmail.com' },
+238 silly resolved     maintainers: [ [Object], [Object], [Object], [Object], [Object] ],
+238 silly resolved     dist:
+238 silly resolved      { shasum: 'aa69ffb93a37e82fab0ce18862655f9174ced339',
+238 silly resolved        tarball: 'https://registry.npmjs.org/lodash.isfinite/-/lodash.isfinite-3.2.0.tgz' },
+238 silly resolved     directories: {},
+238 silly resolved     _resolved: 'https://registry.npmjs.org/lodash.isfinite/-/lodash.isfinite-3.2.0.tgz',
+238 silly resolved     readme: 'ERROR: No README data found!' },
+238 silly resolved   { name: 'object-assign',
+238 silly resolved     version: '4.0.1',
+238 silly resolved     description: 'ES6 Object.assign() ponyfill',
+238 silly resolved     license: 'MIT',
+238 silly resolved     repository:
+238 silly resolved      { type: 'git',
+238 silly resolved        url: 'git+https://github.com/sindresorhus/object-assign.git' },
+238 silly resolved     author:
+238 silly resolved      { name: 'Sindre Sorhus',
+238 silly resolved        email: 'sindresorhus@gmail.com',
+238 silly resolved        url: 'http://sindresorhus.com' },
+238 silly resolved     engines: { node: '>=0.10.0' },
+238 silly resolved     scripts: { test: 'xo && mocha', bench: 'matcha bench.js' },
+238 silly resolved     files: [ 'index.js' ],
+238 silly resolved     keywords:
+238 silly resolved      [ 'object',
+238 silly resolved        'assign',
+238 silly resolved        'extend',
+238 silly resolved        'properties',
+238 silly resolved        'es6',
+238 silly resolved        'ecmascript',
+238 silly resolved        'harmony',
+238 silly resolved        'ponyfill',
+238 silly resolved        'prollyfill',
+238 silly resolved        'polyfill',
+238 silly resolved        'shim',
+238 silly resolved        'browser' ],
+238 silly resolved     devDependencies: { lodash: '^3.10.1', matcha: '^0.6.0', mocha: '*', xo: '*' },
+238 silly resolved     xo: { envs: [Object] },
+238 silly resolved     gitHead: 'b0c40d37cbc43e89ad3326a9bad4c6b3133ba6d3',
+238 silly resolved     bugs: { url: 'https://github.com/sindresorhus/object-assign/issues' },
+238 silly resolved     homepage: 'https://github.com/sindresorhus/object-assign#readme',
+238 silly resolved     _id: 'object-assign@4.0.1',
+238 silly resolved     _shasum: '99504456c3598b5cad4fc59c26e8a9bb107fe0bd',
+238 silly resolved     _from: 'object-assign@4.0.1',
+238 silly resolved     _npmVersion: '2.13.3',
+238 silly resolved     _nodeVersion: '3.0.0',
+238 silly resolved     _npmUser: { name: 'sindresorhus', email: 'sindresorhus@gmail.com' },
+238 silly resolved     dist:
+238 silly resolved      { shasum: '99504456c3598b5cad4fc59c26e8a9bb107fe0bd',
+238 silly resolved        tarball: 'https://registry.npmjs.org/object-assign/-/object-assign-4.0.1.tgz' },
+238 silly resolved     maintainers: [ [Object] ],
+238 silly resolved     directories: {},
+238 silly resolved     _resolved: 'https://registry.npmjs.org/object-assign/-/object-assign-4.0.1.tgz',
+238 silly resolved     readme: 'ERROR: No README data found!' } ]
+239 info install lodash.isarray@3.0.4 into /home/jackmac/capstone/node_modules/react-infinite
+240 info install lodash.isfinite@3.2.0 into /home/jackmac/capstone/node_modules/react-infinite
+241 info install object-assign@4.0.1 into /home/jackmac/capstone/node_modules/react-infinite
+242 info installOne lodash.isarray@3.0.4
+243 info installOne lodash.isfinite@3.2.0
+244 info installOne object-assign@4.0.1
+245 verbose node_modules/react-infinite/node_modules/lodash.isarray unbuild
+246 verbose node_modules/react-infinite/node_modules/lodash.isfinite unbuild
+247 verbose node_modules/react-infinite/node_modules/object-assign unbuild
+248 verbose tar unpack /home/jackmac/.npm/lodash.isarray/3.0.4/package.tgz
+249 silly lockFile 81f7d7ad-nite-node-modules-lodash-isarray tar:///home/jackmac/capstone/node_modules/react-infinite/node_modules/lodash.isarray
+250 verbose lock tar:///home/jackmac/capstone/node_modules/react-infinite/node_modules/lodash.isarray /home/jackmac/.npm/81f7d7ad-nite-node-modules-lodash-isarray.lock
+251 silly lockFile 4ecaabb4-lodash-isarray-3-0-4-package-tgz tar:///home/jackmac/.npm/lodash.isarray/3.0.4/package.tgz
+252 verbose lock tar:///home/jackmac/.npm/lodash.isarray/3.0.4/package.tgz /home/jackmac/.npm/4ecaabb4-lodash-isarray-3-0-4-package-tgz.lock
+253 verbose tar unpack /home/jackmac/.npm/lodash.isfinite/3.2.0/package.tgz
+254 silly lockFile 697d3690-ite-node-modules-lodash-isfinite tar:///home/jackmac/capstone/node_modules/react-infinite/node_modules/lodash.isfinite
+255 verbose lock tar:///home/jackmac/capstone/node_modules/react-infinite/node_modules/lodash.isfinite /home/jackmac/.npm/697d3690-ite-node-modules-lodash-isfinite.lock
+256 silly lockFile 4d7c4330-odash-isfinite-3-2-0-package-tgz tar:///home/jackmac/.npm/lodash.isfinite/3.2.0/package.tgz
+257 verbose lock tar:///home/jackmac/.npm/lodash.isfinite/3.2.0/package.tgz /home/jackmac/.npm/4d7c4330-odash-isfinite-3-2-0-package-tgz.lock
+258 verbose tar unpack /home/jackmac/.npm/object-assign/4.0.1/package.tgz
+259 silly lockFile cb6db983-inite-node-modules-object-assign tar:///home/jackmac/capstone/node_modules/react-infinite/node_modules/object-assign
+260 verbose lock tar:///home/jackmac/capstone/node_modules/react-infinite/node_modules/object-assign /home/jackmac/.npm/cb6db983-inite-node-modules-object-assign.lock
+261 silly lockFile 7aec4f76--object-assign-4-0-1-package-tgz tar:///home/jackmac/.npm/object-assign/4.0.1/package.tgz
+262 verbose lock tar:///home/jackmac/.npm/object-assign/4.0.1/package.tgz /home/jackmac/.npm/7aec4f76--object-assign-4-0-1-package-tgz.lock
+263 silly gunzTarPerm modes [ '775', '664' ]
+264 silly gunzTarPerm modes [ '775', '664' ]
+265 silly gunzTarPerm modes [ '775', '664' ]
+266 silly gunzTarPerm extractEntry package.json
+267 silly gunzTarPerm modified mode [ 'package.json', 420, 436 ]
+268 silly gunzTarPerm extractEntry package.json
+269 silly gunzTarPerm modified mode [ 'package.json', 420, 436 ]
+270 silly gunzTarPerm extractEntry package.json
+271 silly gunzTarPerm modified mode [ 'package.json', 420, 436 ]
+272 silly gunzTarPerm extractEntry README.md
+273 silly gunzTarPerm modified mode [ 'README.md', 420, 436 ]
+274 silly gunzTarPerm extractEntry LICENSE
+275 silly gunzTarPerm modified mode [ 'LICENSE', 420, 436 ]
+276 silly gunzTarPerm extractEntry README.md
+277 silly gunzTarPerm modified mode [ 'README.md', 420, 436 ]
+278 silly gunzTarPerm extractEntry LICENSE
+279 silly gunzTarPerm modified mode [ 'LICENSE', 420, 436 ]
+280 silly gunzTarPerm extractEntry index.js
+281 silly gunzTarPerm modified mode [ 'index.js', 420, 436 ]
+282 silly gunzTarPerm extractEntry license
+283 silly gunzTarPerm modified mode [ 'license', 420, 436 ]
+284 silly gunzTarPerm extractEntry index.js
+285 silly gunzTarPerm modified mode [ 'index.js', 420, 436 ]
+286 silly gunzTarPerm extractEntry index.js
+287 silly gunzTarPerm modified mode [ 'index.js', 420, 436 ]
+288 silly gunzTarPerm extractEntry readme.md
+289 silly gunzTarPerm modified mode [ 'readme.md', 420, 436 ]
+290 silly lockFile 697d3690-ite-node-modules-lodash-isfinite tar:///home/jackmac/capstone/node_modules/react-infinite/node_modules/lodash.isfinite
+291 silly lockFile 697d3690-ite-node-modules-lodash-isfinite tar:///home/jackmac/capstone/node_modules/react-infinite/node_modules/lodash.isfinite
+292 silly lockFile cb6db983-inite-node-modules-object-assign tar:///home/jackmac/capstone/node_modules/react-infinite/node_modules/object-assign
+293 silly lockFile cb6db983-inite-node-modules-object-assign tar:///home/jackmac/capstone/node_modules/react-infinite/node_modules/object-assign
+294 silly lockFile 4d7c4330-odash-isfinite-3-2-0-package-tgz tar:///home/jackmac/.npm/lodash.isfinite/3.2.0/package.tgz
+295 silly lockFile 4d7c4330-odash-isfinite-3-2-0-package-tgz tar:///home/jackmac/.npm/lodash.isfinite/3.2.0/package.tgz
+296 silly lockFile 7aec4f76--object-assign-4-0-1-package-tgz tar:///home/jackmac/.npm/object-assign/4.0.1/package.tgz
+297 silly lockFile 7aec4f76--object-assign-4-0-1-package-tgz tar:///home/jackmac/.npm/object-assign/4.0.1/package.tgz
+298 info preinstall object-assign@4.0.1
+299 info preinstall lodash.isfinite@3.2.0
+300 silly lockFile 81f7d7ad-nite-node-modules-lodash-isarray tar:///home/jackmac/capstone/node_modules/react-infinite/node_modules/lodash.isarray
+301 silly lockFile 81f7d7ad-nite-node-modules-lodash-isarray tar:///home/jackmac/capstone/node_modules/react-infinite/node_modules/lodash.isarray
+302 silly lockFile 4ecaabb4-lodash-isarray-3-0-4-package-tgz tar:///home/jackmac/.npm/lodash.isarray/3.0.4/package.tgz
+303 silly lockFile 4ecaabb4-lodash-isarray-3-0-4-package-tgz tar:///home/jackmac/.npm/lodash.isarray/3.0.4/package.tgz
+304 verbose readDependencies using package.json deps
+305 verbose readDependencies using package.json deps
+306 verbose readDependencies using package.json deps
+307 silly resolved []
+308 verbose about to build /home/jackmac/capstone/node_modules/react-infinite/node_modules/object-assign
+309 info build /home/jackmac/capstone/node_modules/react-infinite/node_modules/object-assign
+310 verbose linkStuff [ false,
+310 verbose linkStuff   false,
+310 verbose linkStuff   false,
+310 verbose linkStuff   '/home/jackmac/capstone/node_modules/react-infinite/node_modules' ]
+311 info linkStuff object-assign@4.0.1
+312 verbose linkBins object-assign@4.0.1
+313 verbose linkMans object-assign@4.0.1
+314 verbose rebuildBundles object-assign@4.0.1
+315 verbose readDependencies using package.json deps
+316 silly resolved []
+317 verbose about to build /home/jackmac/capstone/node_modules/react-infinite/node_modules/lodash.isfinite
+318 info build /home/jackmac/capstone/node_modules/react-infinite/node_modules/lodash.isfinite
+319 verbose linkStuff [ false,
+319 verbose linkStuff   false,
+319 verbose linkStuff   false,
+319 verbose linkStuff   '/home/jackmac/capstone/node_modules/react-infinite/node_modules' ]
+320 info linkStuff lodash.isfinite@3.2.0
+321 verbose linkBins lodash.isfinite@3.2.0
+322 verbose linkMans lodash.isfinite@3.2.0
+323 verbose rebuildBundles lodash.isfinite@3.2.0
+324 info install object-assign@4.0.1
+325 info install lodash.isfinite@3.2.0
+326 info preinstall lodash.isarray@3.0.4
+327 info postinstall object-assign@4.0.1
+328 info postinstall lodash.isfinite@3.2.0
+329 verbose readDependencies using package.json deps
+330 verbose readDependencies using package.json deps
+331 silly resolved []
+332 verbose about to build /home/jackmac/capstone/node_modules/react-infinite/node_modules/lodash.isarray
+333 info build /home/jackmac/capstone/node_modules/react-infinite/node_modules/lodash.isarray
+334 verbose linkStuff [ false,
+334 verbose linkStuff   false,
+334 verbose linkStuff   false,
+334 verbose linkStuff   '/home/jackmac/capstone/node_modules/react-infinite/node_modules' ]
+335 info linkStuff lodash.isarray@3.0.4
+336 verbose linkBins lodash.isarray@3.0.4
+337 verbose linkMans lodash.isarray@3.0.4
+338 verbose rebuildBundles lodash.isarray@3.0.4
+339 info install lodash.isarray@3.0.4
+340 info postinstall lodash.isarray@3.0.4
+341 verbose about to build /home/jackmac/capstone/node_modules/react-infinite
+342 info build /home/jackmac/capstone/node_modules/react-infinite
+343 verbose linkStuff [ false, false, false, '/home/jackmac/capstone/node_modules' ]
+344 info linkStuff react-infinite@0.9.0
+345 verbose linkBins react-infinite@0.9.0
+346 verbose linkMans react-infinite@0.9.0
+347 verbose rebuildBundles react-infinite@0.9.0
+348 verbose rebuildBundles [ 'lodash.isarray', 'lodash.isfinite', 'object-assign' ]
+349 info install react-infinite@0.9.0
+350 info postinstall react-infinite@0.9.0
+351 verbose readDependencies using package.json deps
+352 verbose already installed skipping react@15.0.0-rc.1 /home/jackmac/capstone
+353 verbose already installed skipping react-dom@15.0.0-rc.1 /home/jackmac/capstone
+354 silly resolved []
+355 error peerinvalid The package react does not satisfy its siblings' peerDependencies requirements!
+355 error peerinvalid Peer material-ui@0.15.0-alpha.2 wants react@^0.14.0
+355 error peerinvalid Peer react-addons-css-transition-group@0.14.8 wants react@^0.14.8
+355 error peerinvalid Peer react-dom@0.14.8 wants react@^0.14.8
+355 error peerinvalid Peer react-quill@0.4.1 wants react@>=0.14.0
+355 error peerinvalid Peer react-stickydiv@3.4.18 wants react@0.14.x
+355 error peerinvalid Peer react-tap-event-plugin@0.2.2 wants react@^0.14.0
+355 error peerinvalid Peer react-toolbox@0.15.0 wants react@^0.14
+355 error peerinvalid Peer react-infinite@0.9.0 wants react@15.0.0-rc.1
+355 error peerinvalid Peer r-dom@2.1.0 wants react@0.12.x - 0.14.x
+355 error peerinvalid Peer react-foundation-apps@0.6.1 wants react@*
+356 error System Linux 4.2.0-34-generic
+357 error command "/usr/bin/nodejs" "/usr/bin/npm" "install" "--save" "react-infinite"
+358 error cwd /home/jackmac/capstone
+359 error node -v v0.10.25
+360 error npm -v 1.4.21
+361 error code EPEERINVALID
+362 verbose exit [ 1, true ]

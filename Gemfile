@@ -31,6 +31,7 @@ gem 'devise'
 gem 'uuidtools'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'kaminari'
 
 
 # Use ActiveModel has_secure_password

@@ -14,3 +14,5 @@ fun
 	write or die muthafucka
 
 bookmark finish vs remove
+
+if user logged in, need to refetch articles for info

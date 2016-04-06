@@ -49,7 +49,6 @@ var ArticleForm = React.createClass({
   	return (
 			<div>
 				<Input type="text" onChange={this.updateTitle} label="Title" value={this.state.title}/>
-				<Input type="text" label="Write here..." multiline={true} onChange={this.updateBody} value={this.state.body}/>
 				{button}
   		</div>
   	)

@@ -21,3 +21,4 @@ questions
 .byebug_history
 # Ignore application configuration
 /config/application.yml
+npm-degbug.log

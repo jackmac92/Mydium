@@ -4,11 +4,19 @@ ArticleConstants = require '../constants/article'
 
 ArticleStore = new Store AppDispatcher
 
+# Main store by id, and fill arrays by meta?
+  # pass by reference?
+# Always render article index component (for bookmarks and top articles, differentiate with a prop?)
+
+# store in main object, function for _articles, bookmarked articles
+
+`_mainStore = {}`
 `_articles = []`
 `_articleDetail = null`
 `_topArticles = []`
 `_taggedArticles = []`
 `_bookmarkedArticles = []`
+`_currentStore = _articles`
 
 ArticleStore.all = ->
   _articles.slice()

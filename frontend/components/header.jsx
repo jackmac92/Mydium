@@ -7,6 +7,8 @@ import Button from 'react-toolbox/lib/button'
 import {IconMenu, MenuItem, MenuDivider} from 'react-toolbox/lib/menu'
 import Input from 'react-toolbox/lib/input'
 import AppBar from 'material-ui/lib/app-bar';
+import IconButton from 'material-ui/lib/icon-button';
+import FontIcon from 'material-ui/lib/font-icon';
 
 var Header = React.createClass({
 	contextTypes: {
@@ -37,9 +39,11 @@ var Header = React.createClass({
 		}
 		return (
 	    <div className="header group">
-	    	<AppBar 
-	    		style={{background:'white'}}
+	    	<AppBar
+	    		style={{background:"transparent"}}
 	    		title={<div id="logo" />}
+	    		iconElementRight={<IconButton><FontIcon className="material-icons">{"account_circle"}</FontIcon></IconButton>}
+
 	    	/>
 	      <Navigation className="header-nav group">        
 	        <Navigation type="horizontal" className="header-nav-left">
