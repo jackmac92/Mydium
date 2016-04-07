@@ -12,7 +12,11 @@
  *
  *= require_tree .
  *= require_self
+ *= require quill.snow.css
+ *= require quill.base.css
  */
+
+
 
  button, div, nav, header, span, h1, a, h2, h3, p, li {
   border: 0;
@@ -30,7 +34,8 @@
   box-sizing: inherit;
  
   background: transparent;
- } 
+} 
+
 ul {
   list-style: none;
 }
@@ -155,3 +160,31 @@ img.article-detail-image {
 .article-detail > h1 {
   font-size: 30px;
 }
+
+.user-action-button-header {
+  float: right;
+  margin: 20px 20px 0 0;
+}
+.user-action-button-header > * {
+  float: left;
+}
+
+#full-editor {
+  background: red;
+}
+
+.medium-editor-anchor-preview {
+  background: orange;
+  height: 300px;
+}
+
+.medium-editor-toolbar {
+  background: blue;
+}
+.medium-editor-toolboar > ul {
+  margin: 0 auto;
+}
+.medium-editor-toolbar > ul > li {
+  /*float: right;*/
+}
+

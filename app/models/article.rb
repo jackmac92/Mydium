@@ -33,8 +33,23 @@ class Article < ActiveRecord::Base
     taggings.create(tag_id: tag.id)
   end
 
+  def publish!
+    published = true
+    published_at = Time.now
+    save!
+  end
+  def unpublish!
+    published = false
+    published_at = nil
+    save!
+  end
+
   def view_count
     article_views.count
+  end
+
+  def favorite_count
+    likers(User).count
   end
 
   def self.all_with_tag tag_name

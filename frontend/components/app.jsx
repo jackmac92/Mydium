@@ -1,7 +1,7 @@
 var ApiUtil = require('../util/api_util');
 var SessionStore = require('../stores/session');
 var Header = require('../components/header');
-import ToolboxApp from 'react-toolbox/lib/app'
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
 var App = React.createClass({
@@ -14,6 +14,7 @@ var App = React.createClass({
     };
   },
   componentDidMount: function() {
+    injectTapEventPlugin();
     this.sessionStoreToken = SessionStore.addListener(this.handleChange);
     ApiUtil.fetchCurrentUser();
   },

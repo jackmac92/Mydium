@@ -36,6 +36,15 @@ var ArticleDetail = React.createClass({
     ApiUtil.toggleFollow(this.state.article.author.id)
   },
 
+  handleUnpublish: function () {
+    ApiUtil.ArticleUnpublish(this.state.article.id,alert("Unpublished fasho"))
+  },
+
+  rawBody: function () {
+    debugger
+    return { __html: this.state.article.body}
+  },
+
   render: function() {
     var tags = [], recent_posts_view, delete_button, follow_button;
     if (!this.state.article) {
@@ -46,7 +55,7 @@ var ArticleDetail = React.createClass({
     }
     if (SessionStore.isLoggedIn()) {
       if (this.state.article.author.id == SessionStore.currentUser().id) {
-        delete_button = <RaisedButton label="Unpublish" onClick={alert("Implement Unpublish")}/>
+        delete_button = <RaisedButton label="Unpublish" onClick={this.handleUnpublish}/>
       } else {
         follow_button = <ListCheckbox onClick={this.handleFollowAuthor} value={this.state.followsAuthor} caption={"Follow " + this.state.article.author.name} />
       }
@@ -71,7 +80,9 @@ var ArticleDetail = React.createClass({
           </Navigation>
           <h1>{this.state.article.title}</h1>
           <img className="article-detail-image" src={this.state.article.picture} />
-          <p>{this.state.article.body}</p>
+          <div
+            dangerouslySetInnerHTML={this.rawBody()}
+          />
         </article>
         <hr />
         {recent_posts_view}

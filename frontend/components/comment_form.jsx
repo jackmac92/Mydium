@@ -16,11 +16,12 @@ var CommentForm = React.createClass({
 	handleSubmit: function (e) {
 		e.preventDefault();
 		ApiUtil.createArticleComment(this.state);
+		this.setState({body:""})
 	},
 	render: function() {
 		return (
 			<section>
-				<Input onChange={this.handleInput} label="Add Response" type="text" />
+				<Input onChange={this.handleInput} value={this.state.body} label="Add Response" type="text" />
 				<Button onClick={this.handleSubmit} raised accent label="Publish" />
 			</section>
 		);

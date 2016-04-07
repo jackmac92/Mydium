@@ -20,20 +20,6 @@ ApiUtil =
         console.log e
       complete: ->
         completionCallback && completionCallback()
-  # fetchArticlesInfinite: (page, completionCallback) ->
-  #   $.ajax
-  #     type: "GET"
-  #     dataType: "json"
-  #     url: "api/articles"
-  #     data:
-  #       page: page
-  #     success: (response) ->
-  #       ApiActions.receiveArticlesInfinite response
-  #     error: (e) ->
-  #       console.log "ApiUtil#fetchArticles error"
-  #       console.log e
-  #     complete: ->
-  #       completionCallback && completionCallback()
 
   fetchTopArticles: (page, callback) ->
     $.ajax
@@ -92,6 +78,26 @@ ApiUtil =
         console.log "ApiUtil#fetch bookmarked"
       complete: ->
         callback && callback()
+  ArticleUnpublish: (article_id, callback) ->
+    $.ajax
+      type: "PATCH"
+      dataType: "json"
+      url: "api/articles/" + "unpublish"
+      success: ->
+        callback && callback()
+      error: ->
+        console.log "ApiUtil#fetchTags error"
+  ArticlePublish: (article_id, callback) ->
+    $.ajax
+      type: "PATCH"
+      dataType: "json"
+      url: "api/articles/publish"
+      data:
+        id: article_id
+      success: ->
+        callback && callback()
+      error: ->
+        console.log "ApiUtil#fetchTags error"
 
   fetchTagsIndex: ->
     $.ajax
@@ -121,6 +127,13 @@ ApiUtil =
       data: {comment: commentData}
       success: (comment) ->
         ApiActions.receiveNewComment comment
+  destroyArticleComment: (commentId) ->
+    $.ajax
+      type: "DELETE"
+      dataType: "json"
+      url: "api/comments/"+commentId
+      success: ->
+        ApiActions.commentDeleted commentId
 
 
   createNewArticle: (article, callback) ->
@@ -131,10 +144,10 @@ ApiUtil =
       data: article: article
       success: (article) ->
         ApiActions.receiveSingleArticle article
+        callback && callback(article.id)
       error: ->
         console.log "ApiUtil#createNewArticle error"
       complete: ->
-        callback && callback()
 
   toggleFavorite: (article_id) ->
     $.ajax

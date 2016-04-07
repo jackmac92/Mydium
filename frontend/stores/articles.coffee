@@ -62,6 +62,11 @@ addArticles = (articles) ->
 addComment = (comment) ->
   _articleDetail.comments.push comment
 
+removeComment = (commentId) ->
+  ids = _articleDetail.comments.map (c) -> c.id
+  idx = ids.indexOf(commentId)
+  _articleDetail.comments.splice(idx, 1)
+
 ArticleStore.__onDispatch = (payload) ->
 
   switch payload.actionType
@@ -86,6 +91,9 @@ ArticleStore.__onDispatch = (payload) ->
       ArticleStore.__emitChange()
     when ArticleConstants.NEW_COMMENT_RECEIVED
       addComment payload.comment
+      ArticleStore.__emitChange()
+    when ArticleConstants.COMMENT_DELETED
+      removeComment payload.commentId
       ArticleStore.__emitChange()
 
 

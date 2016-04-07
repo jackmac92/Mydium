@@ -14,7 +14,7 @@ var Sidebar = React.createClass({
 	stateFromStore: function () {
 		return {
 			featured: TagStore.featured(),
-			user: TagStore.user(),
+			user_tags: TagStore.user(),
 			top: ArticleStore.topArticles()
 			}
 		},
@@ -38,15 +38,22 @@ var Sidebar = React.createClass({
 		},
 
 	render: function () {
-		var featured_tags, user_tags, top_stories;
+		var featured_tags, user_tags_section, top_stories;
 		if (this.state.featured.length > 0) {
 			featured_tags = this.state.featured.map (t => <Tag key={t.id} tag={t}/> )
-			if (SessionStore.isLoggedIn()) {
-				user_tags = this.state.user.map (t => <Tag className="sidebar-tag" key={t.id} tag={t}/> )
+			if (SessionStore.isLoggedIn() && this.state.user_tags.length > 0) {
+				var user_tags = this.state.user_tags.map( ut => <Tag className="sidebar-tag" key={ut.id} tag={ut}/> )
+				user_tags_section = (
+					<li>
+						<h3>Your Tags</h3>
+						<hr />
+						{user_tags}
+					</li>
+					)
 			}
 		}
 		top_stories = this.state.top.map( a => 
-			<ListItem primaryText={a.title+" ("+a.num_views+")"} secondaryText={"By "+a.author.name+" in "+a.tags[0].name} /> 
+			<ListItem key={a.id} primaryText={a.title+" ("+a.num_views+")"} secondaryText={"By "+a.author.name+" in "+a.tags[0].name} /> 
 		)
 		return (
 			<section className="content-sidebar">
@@ -54,16 +61,10 @@ var Sidebar = React.createClass({
 					<li>
 						<h3>Featured Tags</h3>
 						<hr />
-						<Navigation>
 							{featured_tags}
-						</Navigation>
 					</li>
 					<div id="sidebar-sticky">
-						<li>
-							<h3>Your Tags</h3>
-							<hr />
-							{user_tags}
-						</li>
+						{user_tags_section}
 						<li>Top Stories</li>
 						<hr />
 						<List>

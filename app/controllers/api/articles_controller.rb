@@ -38,7 +38,14 @@ class Api::ArticlesController < ApplicationController
   end
 
   def publish
-    
+    @article = Article.find(params[:id])
+    @article.publish!
+    render json: {}
+  end
+  def unpublish
+    @article = Article.find(params[:id])
+    @article.unpublish!
+    render json: {}
   end
 
   def destroy

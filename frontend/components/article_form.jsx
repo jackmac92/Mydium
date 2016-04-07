@@ -1,43 +1,49 @@
 import React from 'react'
 import ReactQuill from 'react-quill'
+import ReactDOM from 'react-dom'
 
+import Paper from 'material-ui/lib/paper'
 import Input from 'react-toolbox/lib/input'
 import ApiUtil from '../util/api_util'
 import Button from 'react-toolbox/lib/button'
 
+var MediumEditor = require('react-medium-editor');
+
 var ArticleForm = React.createClass({
-
 	contextTypes: {router: React.PropTypes.object.isRequired},
-
 	getInitialState: function () {
 		return {
 			title: "",
-			body: "",
-			published: true
+			subTitle: "",
+			body_stylized: ""
 		}
+	},
+
+	componentDidMount: function() {
 	},
 
 	handleSubmit: function (e) {
 		e.preventDefault();
 		var router = this.context.router;
-		ApiUtil.createNewArticle(this.state, function () {router.push('/');})
-
+		var newArticle = this.state
+		newArticle.body_plain_text = $(".ql-editor")[0].innerText
+		ApiUtil.createNewArticle(newArticle, function (articleId) {router.push('/article/'+articleId);})
 	},
-
 	updateTitle: function (e) {
 		this.setState({title:e})
+	},
+	updateSubTitle: function (e) {
+		this.setState({subTitle:e})
 	},
 	updateBody: function (e) {
 		this.setState({body:e})
 	},
-
 	formReady: function () {
 		if (this.state.title.length != 0 && this.state.body.length != 0) {
 			return true
 		} 
 		return false;
-	},
-
+	},	
   render: function () {
   	var button;
 		if (this.formReady()) {
@@ -45,10 +51,14 @@ var ArticleForm = React.createClass({
 		} else {
 			button = <Button disabled onClick={this.handleSubmit} label="Submit" />
 		}
-
   	return (
-			<div>
-				<Input type="text" onChange={this.updateTitle} label="Title" value={this.state.title}/>
+  		<div>
+	  		<Input label="Title" value={this.state.title} onChange={this.updateTitle} />
+	  		<Input label="Subtitle" value={this.state.subTitle} onChange={this.updateSubTitle} />
+	  		<ReactQuill	theme="snow"
+	  								value={this.state.body}
+	  								onChange={this.updateBody}
+	  								/>
 				{button}
   		</div>
   	)
@@ -56,4 +66,4 @@ var ArticleForm = React.createClass({
 
 })
 module.exports = ArticleForm
-
+			// <MediumEditor value={this.state.body} onChange={this.updateBody}/>

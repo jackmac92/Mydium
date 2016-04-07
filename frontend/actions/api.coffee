@@ -31,6 +31,10 @@ ApiActions =
       actionType: TagConstants.TAGS_RECEIVED
       tags: tags
   
+  commentDeleted: (commentId) ->
+    AppDispatcher.dispatch
+      actionType: ArticleConstants.COMMENT_DELETED
+      commentId: commentId
 
   receiveNewComment: (comment) ->
   	AppDispatcher.dispatch
