@@ -142,3 +142,16 @@ button.article-index-bookmark {
   transform: translateY(500%);
   transition: opacity 500ms, transform 500ms;
 }
+
+#user-icon {
+  color:black;
+}
+
+img.article-detail-image {
+  position: relative;
+  width: 100%;
+}
+
+.article-detail > h1 {
+  font-size: 30px;
+}

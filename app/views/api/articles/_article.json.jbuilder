@@ -8,7 +8,10 @@ json.tags do
 		json.id tag.id
 	end
 end
-json.num_views = article.view_count
+
+
+
+json.num_views article.view_count
 json.author do
 	json.partial! '/api/users/user', user: article.user
 end
@@ -22,5 +25,6 @@ if user_signed_in?
 	json.user do
 		json.faved_article current_user.likes? article
 		json.bookmarked_article current_user.bookmarks.where(article_id: article.id).any?
+		json.follows_author current_user.follows? article.user
 	end
 end

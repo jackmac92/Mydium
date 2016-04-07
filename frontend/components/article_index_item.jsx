@@ -41,11 +41,11 @@ const ArticleCard = React.createClass({
 			  	/>
 					<CardHeader 
 						avatar={this.props.article.author.avatar}
-						title={this.props.article.author.email}
+						title={this.props.article.author.name}
 						subtitle={"Published " + this.props.article.created_at + " ago • " + this.props.article.read_time + " minute read"}
 					/>
-					<CardMedia>
-					  <img style={{height:"400px"}} src={this.props.article.picture} />
+					<CardMedia onClick={this.viewArticle}>
+					  <img style={{height:"400"}} src={this.props.article.picture} />
 					</CardMedia>
 					/>
 					<CardTitle 

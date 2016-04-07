@@ -9,13 +9,11 @@
 ActiveRecord::Base.transaction do
   Tag.destroy_all
   User.destroy_all
-  # me = User.create(email:"jackmac79@gmail.com", password:"password")
-  # p2 = User.create(email:"buddy@gmail.com", password:"password")
-  # p3 = User.create(email:"guy@gmail.com", password:"password")
-  # p4 = User.create(email:"friend@gmail.com", password:"password")
-  # p5 = User.create(email:"pal@gmail.com", password:"password")
-  20.times do
-    User.create email:Faker::Internet.safe_email, password:"password", avatar:Faker::Avatar.image
+  me = User.create(email:"jackmac79@gmail.com", password:"password")
+
+  300.times do
+    name = Faker::Name.name
+    User.create email:Faker::Internet.email(name), password:"password", avatar:Faker::Avatar.image, name:name, username:Faker::Internet.user_name(name)
   end
   article_pics = []
   pathtoimages = 'app/assets/images' 
@@ -41,30 +39,32 @@ ActiveRecord::Base.transaction do
   # )
   tags = %w(tech fashion startups finance celebrity politics DIY offbeat funny satire design business economcis UX life)
 
-  25.times do
-    article = User.all.sample.articles.create title:Faker::StarWars.quote, body:Faker::Hipster.paragraphs(7).join(" "), picture:File.open(article_pics.pop)
-    tags.sample(3).each do |tag|
+  90.times do
+    article = User.all.sample.articles.create!(title:Faker::StarWars.quote, subtitle:Faker::Hipster.sentence , body:Faker::Hipster.paragraphs(10+rand(35)).join("\n\n"), picture:File.open(article_pics.pop))
+    tags.sample(5).each do |tag|
       article.add_tag(tag)
     end
-    3.times do
-      User.all.sample.like! article
-    end
-    6.times do
+
+    10.times do
       User.all.sample.bookmarks.create(article_id: article.id)
     end
 
-    7.times do
+    12.times do
       User.all.sample.comments.create(body:Faker::Hacker.say_something_smart, article_id:article.id)
     end
   end
 
   User.all.each do |user|
-    3.times do
+    7.times do
       user.like!(Article.all.sample)
       user.follow!(User.all.sample)
       user.follow!(Tag.all.sample)
       Article.all.sample.mention! user
     end
+    (5 + rand(40)).times do
+      user.article_views.create(article_id: Article.all.sample.id)
+    end
   end
+
 
 end

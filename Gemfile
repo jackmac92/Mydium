@@ -31,6 +31,7 @@ gem 'devise'
 gem 'uuidtools'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem "omniauth-google-oauth2"
 gem 'kaminari'
 
 
@@ -46,7 +47,6 @@ gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
   gem 'quiet_assets'
 end
 
@@ -55,6 +55,7 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'pry-rails'
   gem 'better_errors'
+  gem 'pry-byebug'
   gem 'binding_of_caller'
   gem 'did-you-mean'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring

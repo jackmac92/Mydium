@@ -44,7 +44,7 @@ ApiUtil =
         article_type: "popular"
         page: page
       success: (response) ->
-        ApiActions.receiveTopArticles articles
+        ApiActions.receiveTopArticles response
       error: ->
         console.log "ApiUtil#fetchTopArticles error"
       complete: ->
@@ -162,13 +162,20 @@ ApiUtil =
       error: () ->
       complete: () ->
 
-  toggleFollow: (user) ->
+  toggleFollow: (user_id) ->
     $.ajax
       type: "POST"
       dataType: "json"
-      url: "api/"
-      success: () ->
-      error: () ->
+      url: "api/user"
+      data:
+        receiver: "user"
+        id: user_id
+        user_action: "toggle_follow"
+      success: (article) ->
+        ApiActions.receiveUpdatedArticle article
+      error: (e) ->
+        console.log "Gone wrong following user"
+        console.log e
       complete: () ->
 
   fetchCurrentUser: (completion) ->

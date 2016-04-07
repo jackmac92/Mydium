@@ -16,25 +16,31 @@ var Header = React.createClass({
 	},
 
 	render: function() {
+		var fileInputButton = <div>File Input</div>
+		var router = this.context.router
 		return (
-	    <div className="header group">
 	    	<AppBar
 	    		style={{background:"transparent"}}
-	    		title={<div id="logo" />}
-	    		iconElementRight={<IconButton><FontIcon className="material-icons">{"account_circle"}</FontIcon></IconButton>}
-
+	    		title={<div onClick={() => router.push("/")} id="logo" />}
+	    		iconElementRight={
+	    			<IconMenu 
+	    				iconButtonElement={
+	    					<IconButton>
+			    				<FontIcon className="material-icons">{"account_circle"}</FontIcon>
+	    					</IconButton>
+	    				}
+			        targetOrigin={{horizontal: 'right', vertical: 'top'}}
+			        anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+	    				>
+		    			<MenuItem onClick={() => router.push("/editor")} caption="New Story" />
+		    			<MenuItem onClick={() => router.push("#")} caption="Import Story" />
+		    			<MenuItem onClick={() => router.push("/me/drafts")} caption="Drafts and Stories" />
+		    			<MenuItem onClick={() => router.push("/me/published")} caption="Publications" />
+		    			<MenuItem onClick={() => router.push("/me")} caption="Profile" />
+		    			<MenuItem onClick={ApiUtil.logOutUser} caption="Sign Out" />
+		    		</IconMenu>
+	    		}
 	    	/>
-	      <Navigation className="header-nav group">        
-	        <Navigation type="horizontal" className="header-nav-left">
-	          <Link href="#" active label="Home" />
-	          <Link href="#/popular" label="Top Articles" />
-	          <Link href="#/me/bookmarks" label="Bookmarks" />
-	        </Navigation>
-	        <Navigation type="horizontal" className="header-nav-right">
-	          <Link href="/#/editor" label="Write Something"/>
-	        </Navigation>
-	      </Navigation>
-	    </div>
 		);
 	}
 

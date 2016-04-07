@@ -6,7 +6,7 @@ unless @is_mini
 
 	json.authors_recent_articles do
 		json.array! @article.user.recent_articles_excluding @article.id do |article|
-			json.extract! article, :id, :title
+			json.extract! article, :id, :title, :subtitle
 		end
 	end
 end

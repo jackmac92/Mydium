@@ -14,8 +14,16 @@ class Article < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
 
-  has_many :article_views
+  has_many :article_views, dependent: :destroy
   has_many :users_who_viewed, through: :article_views, source: :user
+
+  scope :popular, -> { 
+    select("articles.*, count(article_views.id) AS views_count").
+    joins(:article_views).
+    group("articles.id").
+    order("views_count DESC").
+    limit(7)
+  }
 
   acts_as_likeable
   acts_as_mentioner
@@ -23,10 +31,6 @@ class Article < ActiveRecord::Base
   def add_tag tag_name
     tag = Tag.where(name: tag_name)[0] || Tag.create(name: tag_name)
     taggings.create(tag_id: tag.id)
-  end
-
-  def self.popular
-    Article.all.order(view_count: :desc).limit 5
   end
 
   def view_count

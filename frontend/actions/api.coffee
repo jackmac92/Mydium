@@ -10,11 +10,11 @@ ApiActions =
       meta: response.meta
 
   receiveTopArticles: (response) ->
-    for article in articles
+    for article in response.articles
       article.topArticle = true
     AppDispatcher.dispatch
       meta: response.meta
-      articles: respone.articles
+      articles: response.articles
       actionType: ArticleConstants.TOP_ARTICLES_RECEIVED
 
   receiveSingleArticle: (article) ->
