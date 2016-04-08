@@ -69,7 +69,7 @@ section.content-sidebar {
   float: right;
   width: 400px;
   /*background: blue;*/
-  margin-top: 40px;
+  /*margin-top: 40px;*/
   margin-left: 20px;
   height: 100%;
 }
@@ -111,6 +111,7 @@ section.content-sidebar {
   border: 1px solid #ccc;
   line-height: 1.77777;
 }
+
 
 .article-card button > span{
   width: 30px;
@@ -163,7 +164,7 @@ img.article-detail-image {
 
 .user-action-button-header {
   float: right;
-  margin: 20px 20px 0 0;
+  margin: 17px 15px 0 0;
 }
 .user-action-button-header > * {
   float: left;

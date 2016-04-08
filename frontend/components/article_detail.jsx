@@ -1,10 +1,9 @@
-var React = require('react');
+import React from 'react';
 import ArticleStore from '../stores/articles'
 import SessionStore from '../stores/session'
 import ApiUtil from '../util/api_util'
 import Tag from './tag'
 import Comments from './comment_section'
-import Navigation from 'react-toolbox/lib/navigation'
 import Checkbox from 'material-ui/lib/checkbox'
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
@@ -43,7 +42,7 @@ var ArticleDetail = React.createClass({
   },
 
   handleUnpublish: function () {
-    ApiUtil.ArticleUnpublish(this.state.article.id,alert("Unpublished fasho"))
+    ApiUtil.ArticleUnpublish(this.state.article.id, () => this.context.router.push('/me/drafts'))
   },
 
   rawBody: function () {
@@ -63,7 +62,6 @@ var ArticleDetail = React.createClass({
         delete_button = <RaisedButton label="Unpublish" onClick={this.handleUnpublish}/>
       } else {
         console.log(this.state.followsAuthor)
-        // debugger
         follow_button = <Checkbox value={this.state.followsAuthor} onCheck={this.handleFollowAuthor} label={"Follow " + this.state.article.author.name} />
       }
     }
@@ -81,9 +79,8 @@ var ArticleDetail = React.createClass({
           <img className="author-thumb" src={this.state.article.author.avatar} />
           <p className="author-email">{this.state.article.author.name}</p>
           {delete_button}
-          <Navigation>
             {tags}
-          </Navigation>
+
           <h1>{this.state.article.title}</h1>
           <img className="article-detail-image" src={this.state.article.picture} />
           <div

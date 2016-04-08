@@ -31,6 +31,9 @@ class Article < ActiveRecord::Base
   multisearchable against: [:title, :subtitle, :body_plain_text],
                     :if => :published
 
+  # include PublicActivity::Model
+  # tracked
+
   def add_tag tag_name
     tag = Tag.where(name: tag_name)[0] || Tag.create(name: tag_name)
     taggings.create(tag_id: tag.id)

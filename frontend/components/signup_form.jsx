@@ -43,14 +43,14 @@ var LoginForm = React.createClass({
 		if (this.state.password.length > 6 && this.state.password === this.state.password_confirm) {
 			return "";
 		} else {
-			return "Passwords Don't Match"
+			return "Invalid Password"
 		}
 	},
 	emailErrors: function () {
 		if (this.state.email.length > 6 || this.state.email.length == 0) {
 			return "";
 		} else {
-			return "Email err"
+			return "Invalid Email"
 		}
 	},
 

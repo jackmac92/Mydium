@@ -4,14 +4,8 @@ import ArticleStore from '../stores/articles'
 import SessionStore from '../stores/session'
 import ArticleIndexItem from './article_index_item'
 import Sidebar from './sidebar'
-import Input from 'react-toolbox/lib/input'
-import Navigation from 'react-toolbox/lib/navigation'
-
 import LinearProgress from 'material-ui/lib/linear-progress'
-// import ProgressBar from 'react-toolbox/lib/progress_bar'
 import Infinite from 'react-infinite'
-var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
-var dolla = require('react-query');
 
 var ArticleIndex = React.createClass ({
 
@@ -112,7 +106,6 @@ var ArticleIndex = React.createClass ({
       <main>
         {progress}
         <section className="content-main">
-          <Input onFocus={this.sendToFullEditor} type="text" label="Write here..." />
           <Infinite useWindowAsScrollContainer
                     elementHeight={800}
                     infiniteLoadBeginEdgeOffset={10}

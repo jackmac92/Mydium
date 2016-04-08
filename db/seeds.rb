@@ -7,6 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 ActiveRecord::Base.transaction do
+  PublicActivity.enabled = false
   Tag.destroy_all
   User.destroy_all
   me = User.create(email:"jackmac79@gmail.com", password:"password", name:"Jack McCown", username:"jackmac", avatar:Faker::Avatar.image)

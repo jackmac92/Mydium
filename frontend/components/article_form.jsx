@@ -2,15 +2,15 @@ import React from 'react'
 import ReactQuill from 'react-quill'
 import ReactDOM from 'react-dom'
 
-import Paper from 'material-ui/lib/paper'
 import Input from 'react-toolbox/lib/input'
 import ApiUtil from '../util/api_util'
-import Button from 'react-toolbox/lib/button'
-
-var MediumEditor = require('react-medium-editor');
+import Checkbox from 'material-ui/lib/checkbox'
+import RaisedButton from 'material-ui/lib/raised-button'
 
 var ArticleForm = React.createClass({
+	
 	contextTypes: {router: React.PropTypes.object.isRequired},
+
 	getInitialState: function () {
 		return {
 				title: "",
@@ -20,7 +20,6 @@ var ArticleForm = React.createClass({
 				published: true
 			};
 	},
-
 	handleSubmit: function (e) {
 		e.preventDefault();
 		var router = this.context.router;
@@ -28,7 +27,6 @@ var ArticleForm = React.createClass({
 		ApiUtil.createNewArticle(newArticle, function (articleId) {router.push('/article/'+articleId);})
 	},
 	updateTitle: function (e) {
-		console.log(e)
 		this.setState({title:e})
 	},
 	updateSubTitle: function (e) {
@@ -40,6 +38,11 @@ var ArticleForm = React.createClass({
 			body_plain_text: $(".ql-editor")[0].innerText
 		});
 	},
+	updatePublished: function () {
+		this.setState({
+			published: !this.state.published
+		})
+	},
 	formReady: function () {
 
 		if (this.state.title && this.state.title.length != 0 && this.state.body_plain_text.length != 0) {
@@ -48,12 +51,6 @@ var ArticleForm = React.createClass({
 		return false;
 	},	
   render: function () {
-  	var button;
-		if (this.formReady()) {
-			button = <Button raised accent ripple onClick={this.handleSubmit} label="Submit" />
-		} else {
-			button = <Button disabled onClick={this.handleSubmit} label="Submit" />
-		}
   	return (
   		<div>
 	  		<Input label="Title" value={this.state.title} onChange={this.updateTitle} />
@@ -63,7 +60,8 @@ var ArticleForm = React.createClass({
 	  								value={this.state.body_stylized}
 	  								onChange={this.updateBody}
 	  								/>
-				{button}
+	  		<Checkbox checked={this.state.published} onCheck={this.updatePublished} label="Publish?" />
+				<RaisedButton disabled={!this.formReady()} onClick={this.handleSubmit}  label={ this.state.published ? "Submit" : "Save"}/>
   		</div>
   	)
   }

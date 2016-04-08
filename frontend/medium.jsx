@@ -38,9 +38,7 @@ $(document).ready(function () {
           <Route path="popular" component={ArticleIndex} />
           <Route path="me/bookmarks" component={ArticleIndex}/>
           <Route path="tags/:tag_name" component={ArticleIndex} />
-
-          <Route path="article/:id" component={ArticleDetail} />
-          
+          <Route path="article/:id" component={ArticleDetail} />       
           <Route path="user/:id" component={UserShow} />
           <Route path="me" component={UserShow} />
           <Route path="editor" component={ArticleForm} />

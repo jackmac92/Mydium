@@ -4,6 +4,11 @@ class Api::UsersController < ApplicationController
 		@user = User.find params[:id]
 	end
 
+	def drafts
+		@articles = current_user.articles.where published: false
+		render 'api/articles/index'
+	end
+
 	def update
 		case params[:receiver]
 		when "article"
