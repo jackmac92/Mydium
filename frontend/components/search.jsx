@@ -1,9 +1,10 @@
 var React = require('react');
 var SearchStore = require('../stores/search')
 var ApiUtil = require('../util/api_util');
-
+import Paper from 'material-ui/lib/paper'
 var Search = React.createClass({
-  
+  contextTypes: {router: React.PropTypes.object.isRequired},
+
   getInitialState: function () {
     return { query: "" };
   },
@@ -45,15 +46,19 @@ var Search = React.createClass({
     return SearchStore.all().map(function (result) {
       if (result._type === "User") {
         return (
-          <li key={ result.id }>
-            User #{ result.id }: { result.name || result.email }
-          </li>
+          <Paper>
+            <li key={ result.id }>
+              User #{ result.id }: { result.name || result.email }
+            </li>
+          </Paper>
         );          
       } else if (result._type == "Article"){
         return (
-          <li key={ result.id }>
-            Article #{ result.id }: { result.title }
-          </li>
+          <Paper onClick={() => this.context.router.push("/article/"+result.id)}>
+            <li key={ result.id }>
+              Article #{ result.id }: { result.title }
+            </li>
+          </Paper>
         );  
 
       }
@@ -65,11 +70,9 @@ var Search = React.createClass({
     return (
       <article>
         <input type="text" onChange={ this.handleInputChange } />
-        <button onClick={ this.search }>GO</button>
         
         <nav>
-          Displaying page { meta.page } of { meta.total_pages }
-          <button onClick={ this.nextPage }>NEXT PAGE</button>
+          Results
         </nav>
       
         <ul>

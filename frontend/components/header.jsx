@@ -27,6 +27,8 @@ var Header = React.createClass({
   handleRequestClose: function () {
   	this.setState({open:false})
   },
+	            // <FlatButton onClick={() => router.push("/me/drafts")} label="Drafts"/>
+	            // <FlatButton onClick={() => router.push("/me/published")} label="Publications"/>
 
 	render: function() {
 		var userActionButton;
@@ -51,8 +53,7 @@ var Header = React.createClass({
 	        >
 	            <FlatButton onClick={() => router.push("/editor")} label="New Article"/>
 	            <FlatButton onClick={() => router.push("me/bookmarks")} label="Bookmarks"/>
-	            <FlatButton onClick={() => router.push("/me/drafts")} label="Drafts"/>
-	            <FlatButton onClick={() => router.push("/me/published")} label="Publications"/>
+	            <FlatButton onClick={() => router.push("/search")} label="Search"/>
 	            <FlatButton onClick={ApiUtil.logOutUser} label="Sign Out"/>
 	        </Popover>				
 				</div>
