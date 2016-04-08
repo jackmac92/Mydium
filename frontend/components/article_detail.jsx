@@ -5,10 +5,16 @@ import ApiUtil from '../util/api_util'
 import Tag from './tag'
 import Comments from './comment_section'
 import Navigation from 'react-toolbox/lib/navigation'
-import { List,ListItem,ListSubHeader,ListDivider,ListCheckbox } from 'react-toolbox/lib/list'
+import Checkbox from 'material-ui/lib/checkbox'
+import List from 'material-ui/lib/lists/list';
+import ListItem from 'material-ui/lib/lists/list-item';
+
 import RaisedButton from 'material-ui/lib/raised-button'
 
 var ArticleDetail = React.createClass({
+
+  contextTypes: {router: React.PropTypes.object.isRequired},
+
   stateFromStore: function () {
     return {article: ArticleStore.getDetail()};
   },
@@ -33,7 +39,7 @@ var ArticleDetail = React.createClass({
   },
 
   handleFollowAuthor: function () {
-    ApiUtil.toggleFollow(this.state.article.author.id)
+    ApiUtil.toggleFollow(this.state.article.author.id, () => this.setState({followsAuthor: !this.state.followsAuthor}) )
   },
 
   handleUnpublish: function () {
@@ -41,7 +47,6 @@ var ArticleDetail = React.createClass({
   },
 
   rawBody: function () {
-    debugger
     return { __html: this.state.article.body}
   },
 
@@ -57,14 +62,15 @@ var ArticleDetail = React.createClass({
       if (this.state.article.author.id == SessionStore.currentUser().id) {
         delete_button = <RaisedButton label="Unpublish" onClick={this.handleUnpublish}/>
       } else {
-        follow_button = <ListCheckbox onClick={this.handleFollowAuthor} value={this.state.followsAuthor} caption={"Follow " + this.state.article.author.name} />
+        console.log(this.state.followsAuthor)
+        // debugger
+        follow_button = <Checkbox value={this.state.followsAuthor} onCheck={this.handleFollowAuthor} label={"Follow " + this.state.article.author.name} />
       }
     }
     if (this.state.article.authors_recent_articles) {
-      var article_items = this.state.article.authors_recent_articles.map( recent_article => (<ListItem key={recent_article.id} caption={recent_article.title} />) );
+      var article_items = this.state.article.authors_recent_articles.map( recent_article => (<ListItem onClick={() => this.context.router.push("/article/"+recent_article.id)} key={recent_article.id} primaryText={recent_article.title} />) );
       recent_posts_view = (
-        <List selectable ripple>
-          <ListSubHeader caption="Author's Recent Articles" />
+        <List>
           {article_items}
         </List>
       )
@@ -86,6 +92,7 @@ var ArticleDetail = React.createClass({
         </article>
         <hr />
         {recent_posts_view}
+        {follow_button}
         <hr />
         <Comments article_id={this.state.article.id} comments={this.state.article.comments} />
       </main>

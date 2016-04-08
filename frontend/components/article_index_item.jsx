@@ -23,9 +23,6 @@ const ArticleCard = React.createClass({
  		ApiUtil.toggleBookmark(article_id)
  	},
 
- 	rawBody: function () {
- 		return this.props.article.body
- 	},
  	render: function() {
  		var tags, bookmark_style, fav_style;
  		if (this.props.article.user) {
@@ -56,7 +53,7 @@ const ArticleCard = React.createClass({
 						title={this.props.article.title}
 					/>
 			    <CardText>
-			    	dangerouslySetInnerHTML={this.rawBody}
+			    	{this.props.article.body}
 			    </CardText>
 			    <Link className="card-read-more" label="Read More" href={"#/article/"+this.props.article.id} />
 			    <CardActions>

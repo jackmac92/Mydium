@@ -7,6 +7,10 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     oauthorize "Facebook"
   end
 
+  def google_oauth2
+    
+  end
+
   private
 
   def oauthorize(kind)

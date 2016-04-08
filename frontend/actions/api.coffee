@@ -1,5 +1,6 @@
 AppDispatcher = require '../dispatchers/dispatcher'
 ArticleConstants = require '../constants/article'
+SearchConstants = require '../constants/search'
 TagConstants = require '../constants/tag'
 
 ApiActions =
@@ -40,5 +41,11 @@ ApiActions =
   	AppDispatcher.dispatch
   		actionType: ArticleConstants.NEW_COMMENT_RECEIVED
   		comment: comment
+
+  receiveSearchResults: (response) ->
+    AppDispatcher.dispatch
+      actionType: SearchConstants.SEARCH_RESULTS_RECEIVED
+      searchResults: response.search_results
+      meta: response.meta
 
 module.exports = ApiActions

@@ -3,4 +3,7 @@ class Tag < ActiveRecord::Base
 	has_many :taggings, dependent: :destroy
 	
 	acts_as_followable
+
+  include PgSearch
+  multisearchable against: [:name]
 end

@@ -6,6 +6,21 @@ SessionActions = require '../actions/session'
 #   xhr
 
 ApiUtil =
+
+  search: (query, page) ->
+    $.ajax
+      type: "GET"
+      url:"api/searches"
+      dataType: "json"
+      data:
+        query: query 
+        page: page
+      success: (response) ->
+        ApiActions.receiveSearchResults response
+      error: (e) ->
+        console.log ("Search Error")
+        console.log e
+
   fetchArticles: (page, completionCallback) ->
     $.ajax
       type: "GET"
@@ -175,17 +190,17 @@ ApiUtil =
       error: () ->
       complete: () ->
 
-  toggleFollow: (user_id) ->
+  toggleFollow: (user_id, successCallback) ->
     $.ajax
-      type: "POST"
+      type: "PATCH"
       dataType: "json"
       url: "api/user"
       data:
         receiver: "user"
         id: user_id
         user_action: "toggle_follow"
-      success: (article) ->
-        ApiActions.receiveUpdatedArticle article
+      success: ->
+        successCallback && successCallback()
       error: (e) ->
         console.log "Gone wrong following user"
         console.log e

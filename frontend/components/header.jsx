@@ -34,7 +34,6 @@ var Header = React.createClass({
 		if (SessionStore.isLoggedIn()) {
 			userActionButton = (
 				<div className="user-action-button-header">
-					<Link className="header-right-nav" label="Write Something" href="/#/editor" />
 	        <FlatButton className="header-right-nav"
 	          onClick={this.handleTouchTap}
 	          label={
@@ -51,6 +50,7 @@ var Header = React.createClass({
 	          onRequestClose={this.handleRequestClose}
 	        >
 	            <FlatButton onClick={() => router.push("/editor")} label="New Article"/>
+	            <FlatButton onClick={() => router.push("me/bookmarks")} label="Bookmarks"/>
 	            <FlatButton onClick={() => router.push("/me/drafts")} label="Drafts"/>
 	            <FlatButton onClick={() => router.push("/me/published")} label="Publications"/>
 	            <FlatButton onClick={ApiUtil.logOutUser} label="Sign Out"/>

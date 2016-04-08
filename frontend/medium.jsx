@@ -13,6 +13,7 @@ import UserShow from './components/user_show'
 import ArticleIndex from './components/article_index'
 import ArticleDetail from './components/article_detail'
 import ArticleForm from './components/article_form'
+import Search from './components/search'
 
 function _requireLoggedIn(nextState, replace, asyncCompletionCallback) {
   if (!SessionStore.currentUserHasBeenFetched()) {
@@ -45,6 +46,7 @@ $(document).ready(function () {
           <Route path="editor" component={ArticleForm} />
           <Route path="login" component={LoginForm}/>
           <Route path="signup" component={SignUpForm}/>
+          <Route path="search" component={Search}/>
         </Route>
       </Router>,
     $('#root')[0]

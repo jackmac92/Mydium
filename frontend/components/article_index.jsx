@@ -6,8 +6,9 @@ import ArticleIndexItem from './article_index_item'
 import Sidebar from './sidebar'
 import Input from 'react-toolbox/lib/input'
 import Navigation from 'react-toolbox/lib/navigation'
-import Ripple from 'react-toolbox/lib/ripple'
-import ProgressBar from 'react-toolbox/lib/progress_bar'
+
+import LinearProgress from 'material-ui/lib/linear-progress'
+// import ProgressBar from 'react-toolbox/lib/progress_bar'
 import Infinite from 'react-infinite'
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 var dolla = require('react-query');
@@ -105,7 +106,7 @@ var ArticleIndex = React.createClass ({
         );
     }
     if (this.state.fetching) {
-      progress = <ProgressBar mode="indeterminate" /> 
+      progress = <LinearProgress mode="indeterminate" /> 
     }
     return (
       <main>

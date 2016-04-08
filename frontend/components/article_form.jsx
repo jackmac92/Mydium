@@ -13,33 +13,36 @@ var ArticleForm = React.createClass({
 	contextTypes: {router: React.PropTypes.object.isRequired},
 	getInitialState: function () {
 		return {
-			title: "",
-			subTitle: "",
-			body_stylized: ""
-		}
-	},
-
-	componentDidMount: function() {
+				title: "",
+				subtitle: "",
+				body_plain_text: "",
+				body_stylized: "",
+				published: true
+			};
 	},
 
 	handleSubmit: function (e) {
 		e.preventDefault();
 		var router = this.context.router;
 		var newArticle = this.state
-		newArticle.body_plain_text = $(".ql-editor")[0].innerText
 		ApiUtil.createNewArticle(newArticle, function (articleId) {router.push('/article/'+articleId);})
 	},
 	updateTitle: function (e) {
+		console.log(e)
 		this.setState({title:e})
 	},
 	updateSubTitle: function (e) {
 		this.setState({subTitle:e})
 	},
 	updateBody: function (e) {
-		this.setState({body:e})
+		this.setState({
+			body_stylized:e,
+			body_plain_text: $(".ql-editor")[0].innerText
+		});
 	},
 	formReady: function () {
-		if (this.state.title.length != 0 && this.state.body.length != 0) {
+
+		if (this.state.title && this.state.title.length != 0 && this.state.body_plain_text.length != 0) {
 			return true
 		} 
 		return false;
@@ -56,7 +59,8 @@ var ArticleForm = React.createClass({
 	  		<Input label="Title" value={this.state.title} onChange={this.updateTitle} />
 	  		<Input label="Subtitle" value={this.state.subTitle} onChange={this.updateSubTitle} />
 	  		<ReactQuill	theme="snow"
-	  								value={this.state.body}
+	  								id="main-editor"
+	  								value={this.state.body_stylized}
 	  								onChange={this.updateBody}
 	  								/>
 				{button}
@@ -66,4 +70,3 @@ var ArticleForm = React.createClass({
 
 })
 module.exports = ArticleForm
-			// <MediumEditor value={this.state.body} onChange={this.updateBody}/>

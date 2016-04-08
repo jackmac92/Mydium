@@ -1,5 +1,5 @@
 class Article < ActiveRecord::Base
-  validates :body, :user_id, :title, presence: :true
+  validates :body_plain_text, :user_id, :title, presence: :true
   validates :published, inclusion:{in:[true, false]}
 
   has_attached_file :picture, styles: { large: "800x800>", thumb: "100x100>" }, default_url: "missing.jpg"
@@ -21,22 +21,33 @@ class Article < ActiveRecord::Base
     select("articles.*, count(article_views.id) AS views_count").
     joins(:article_views).
     group("articles.id").
-    order("views_count DESC").
-    limit(7)
+    order("views_count DESC")
   }
 
   acts_as_likeable
   acts_as_mentioner
+
+  include PgSearch
+  multisearchable against: [:title, :subtitle, :body_plain_text],
+                    :if => :published
 
   def add_tag tag_name
     tag = Tag.where(name: tag_name)[0] || Tag.create(name: tag_name)
     taggings.create(tag_id: tag.id)
   end
 
+  def scan_for_mentions!
+    body_plain_text
+      .split
+      .select { |word| word[0] == "@" && User.any?(username: word[1..-1])}
+      .each { |user| mention! user }
+  end
+
   def publish!
-    published = true
-    published_at = Time.now
-    save!
+    self.published = true
+    self.published_at = Time.now
+    scan_for_mentions!
+    self.save!
   end
   def unpublish!
     published = false

@@ -169,11 +169,11 @@ img.article-detail-image {
   float: left;
 }
 
-#full-editor {
-  background: red;
+#main-editor {
+  background: white;
 }
 
-.medium-editor-anchor-preview {
+/*.medium-editor-anchor-preview {
   background: orange;
   height: 300px;
 }
@@ -186,5 +186,4 @@ img.article-detail-image {
 }
 .medium-editor-toolbar > ul > li {
   /*float: right;*/
-}
-
+/*}*/

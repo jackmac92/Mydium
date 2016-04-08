@@ -9,11 +9,13 @@ Rails.application.routes.draw do
     resources :users, only:[:show]
     resources :comments, only:[:create, :destroy]
     resources :tags, only:[:index]
+    resources :searches, only:[:index]
 
     get '/articles/:id/publish', to: 'articles#publish'
     get '/articles/:id/unpublish', to: 'articles#unpublish'
 
     get '/user/drafts', to: 'users#drafts' 
+    
   end
 end
 

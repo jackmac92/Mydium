@@ -30,6 +30,7 @@ class Api::ArticlesController < ApplicationController
 
   def update
     @article = Article.find(params[:id])
+
     if @article.update(article_params)
       render :show
     else
@@ -42,6 +43,7 @@ class Api::ArticlesController < ApplicationController
     @article.publish!
     render json: {}
   end
+
   def unpublish
     @article = Article.find(params[:id])
     @article.unpublish!
@@ -56,6 +58,6 @@ class Api::ArticlesController < ApplicationController
 
   private
   def article_params
-    params.require(:article).permit(:title,:body,:published)
+    params.require(:article).permit(:title, :subtitle, :body_plain_text,:body_stylized, :published)
   end
 end

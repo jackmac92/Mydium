@@ -6,7 +6,6 @@ import ArticleIndexItem from './article_index_item'
 import Sidebar from './sidebar'
 import Input from 'react-toolbox/lib/input'
 import Navigation from 'react-toolbox/lib/navigation'
-import Ripple from 'react-toolbox/lib/ripple'
 
 var TopArticles = React.createClass({
 

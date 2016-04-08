@@ -1,11 +1,11 @@
 import React from 'react'
 import Sidebar from './sidebar'
-import Input from 'react-toolbox/lib/input'
-import Navigation from 'react-toolbox/lib/navigation'
 import ArticleIndexItem from './article_index_item'
 import ApiUtil from '../util/api_util'
 import SessionStore from '../stores/session'
 import ArticleStore from '../stores/articles'
+
+import Navigation from 'react-toolbox/lib/navigation'
 
 var UserBookmarks = React.createClass({
   contextTypes: {router: React.PropTypes.object.isRequired},
@@ -42,9 +42,7 @@ var UserBookmarks = React.createClass({
     }
     return (
       <main>
-      	<h2>Your Bookmarks...</h2>
         <section className="content-main">
-          <Input onFocus={this.sendToFullEditor} type="text" label="Write here..." />
           <Navigation type="vertical" className="article-index">
             {articles}
           </Navigation>

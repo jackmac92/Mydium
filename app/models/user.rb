@@ -24,6 +24,9 @@ class User < ActiveRecord::Base
   acts_as_follower
   acts_as_followable
 
+  include PgSearch
+  multisearchable against: [:username, :name, :email]
+
   def favorite_articles
     Article.where(id: likees(Article).map(&:id))
   end

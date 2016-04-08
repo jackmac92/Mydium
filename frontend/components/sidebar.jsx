@@ -5,11 +5,13 @@ import SessionStore from '../stores/session'
 import Tag from './tag'
 import ApiUtil from '../util/api_util'
 import Navigation from 'react-toolbox/lib/navigation'
+
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 
 
 var Sidebar = React.createClass({
+  contextTypes: {router: React.PropTypes.object.isRequired},
 
 	stateFromStore: function () {
 		return {
@@ -53,7 +55,7 @@ var Sidebar = React.createClass({
 			}
 		}
 		top_stories = this.state.top.map( a => 
-			<ListItem key={a.id} primaryText={a.title+" ("+a.num_views+")"} secondaryText={"By "+a.author.name+" in "+a.tags[0].name} /> 
+			<ListItem onClick={() => this.context.router.push("/article/"+a.id)} key={a.id} primaryText={a.title} secondaryText={"By "+a.author.name+" in "+a.tags[0].name} /> 
 		)
 		return (
 			<section className="content-sidebar">

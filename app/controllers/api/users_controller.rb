@@ -21,7 +21,12 @@ class Api::UsersController < ApplicationController
 			@tag = Tag.find params[:id]
 		when "user"
 			@user = User.find params[:id]
-			
+			case params[:user_action]
+			when "toggle_follow"
+				current_user.toggle_follow! @user
+				render json: {}
+				return
+			end
 		end
 	end
 end

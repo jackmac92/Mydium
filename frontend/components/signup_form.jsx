@@ -68,14 +68,17 @@ var LoginForm = React.createClass({
 		} else {
 			button = <Button raised disabled onClick={this.handleSubmit} label="Submit" />
 		}
-		return (		
-			<form className="auth-form">				
-				<Input error={this.emailErrors()} type="email" onChange={this.updateEmail} label="Email" value={this.state.email}/>
-				<Input type="text" onChange={this.updateUsername} label="Username" value={this.state.username}/>
-				<Input label="Password" type="password" onChange={this.updatePassword} value={this.state.password}/>
-				<Input label="Password" error={this.passwordErrors()} type="password" onChange={this.updatePasswordConfirm} value={this.state.password_confirm}/>
-				{button}
-			</form>
+		return (
+			<div>
+				<form className="auth-form">				
+					<Input error={this.emailErrors()} type="email" onChange={this.updateEmail} label="Email" value={this.state.email}/>
+					<Input type="text" onChange={this.updateUsername} label="Username" value={this.state.username}/>
+					<Input label="Password" type="password" onChange={this.updatePassword} value={this.state.password}/>
+					<Input label="Password" error={this.passwordErrors()} type="password" onChange={this.updatePasswordConfirm} value={this.state.password_confirm}/>
+					{button}
+				</form>
+				<Button raised label="Login with Facebook" href="/users/auth/facebook" />
+			</div>
 		)	
 	}
 });
