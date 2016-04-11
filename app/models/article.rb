@@ -11,7 +11,6 @@ class Article < ActiveRecord::Base
   has_many :tags, through: :taggings
 
   has_many :bookmarks, dependent: :destroy
-  has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
 
   has_many :article_views, dependent: :destroy

@@ -14,7 +14,6 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_articles, through: :bookmarks, source: :article
-  has_many :favorites, dependent: :destroy
   
   has_many :article_views, dependent: :destroy
   has_many :viewed_articles, through: :article_views, source: :article

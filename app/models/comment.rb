@@ -6,5 +6,5 @@ class Comment < ActiveRecord::Base
   acts_as_mentionable
 
   include PublicActivity::Model
-
+  tracked
 end
