@@ -1,5 +1,4 @@
 class Follow < Socialization::ActiveRecordStores::Follow
-  # include PublicActivity::Model
-  # tracked
+  include PublicActivity::Common
 
 end

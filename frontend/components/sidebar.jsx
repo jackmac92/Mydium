@@ -8,6 +8,7 @@ import Navigation from 'react-toolbox/lib/navigation'
 
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
+// import {Sticky, StickyContainer} from 'react-sticky'
 
 
 var Sidebar = React.createClass({
@@ -65,7 +66,7 @@ var Sidebar = React.createClass({
 						<hr />
 							{featured_tags}
 					</li>
-					<div id="sidebar-sticky">
+					<div>
 						{user_tags_section}
 						<li>Top Stories</li>
 						<hr />

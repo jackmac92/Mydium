@@ -151,12 +151,14 @@ ApiUtil =
         ApiActions.commentDeleted commentId
 
 
-  createNewArticle: (article, callback) ->
+  createNewArticle: (articleFormData, callback) ->
     $.ajax
       type: "POST"
       dataType: "json"
+      processData: false
+      contentType: false
       url: "api/articles"
-      data: article: article
+      data: article: articleFormData
       success: (article) ->
         ApiActions.receiveSingleArticle article
         callback && callback(article.id)

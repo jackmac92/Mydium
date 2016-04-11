@@ -1,5 +1,5 @@
 class Mention < Socialization::ActiveRecordStores::Mention
-  # include PublicActivity::Model
-  # tracked
+  include PublicActivity::Common
+  tracked
 
 end

@@ -1,12 +1,20 @@
 var React = require('react');
 var SearchStore = require('../stores/search')
 var ApiUtil = require('../util/api_util');
-import Paper from 'material-ui/lib/paper'
+import AutoComplete from 'material-ui/lib/auto-complete';
+import List from 'material-ui/lib/lists/list';
+import ListItem from 'material-ui/lib/lists/list-item';
+import TextField from 'material-ui/lib/text-field';
+
 var Search = React.createClass({
   contextTypes: {router: React.PropTypes.object.isRequired},
 
   getInitialState: function () {
-    return { query: "" };
+    return { 
+      query: "",
+      results: [],
+      meta: {}
+    };
   },
   
   componentDidMount: function () {
@@ -20,11 +28,14 @@ var Search = React.createClass({
   },
   
   _onChange: function () {
-    this.setState({results: SearchStore.all()});
+    this.setState({
+      results: SearchStore.all(),
+      meta: SearchStore.meta()
+    });
   },
   
-  handleInputChange: function (e) {
-    var query = e.currentTarget.value;
+  handleInputChange: function (t) {
+    var query = t
     this.setState({ query: query }, function () {      
       if (query.length > 2) {
         this.search();
@@ -40,45 +51,40 @@ var Search = React.createClass({
     var meta = SearchStore.meta();
     ApiUtil.search(meta.query, meta.page + 1);
   },
-  
-  resultLis: function () {
 
-    return SearchStore.all().map(function (result) {
+  resultItems: function () {
+
+    return this.state.results.map(function (result) {
       if (result._type === "User") {
         return (
-          <Paper>
-            <li key={ result.id }>
-              User #{ result.id }: { result.name || result.email }
-            </li>
-          </Paper>
+          <ListItem 
+              key={ result.id }
+              primaryText={ result.name || result.email }
+              secondaryText="User"
+          />
         );          
       } else if (result._type == "Article"){
         return (
-          <Paper onClick={() => this.context.router.push("/article/"+result.id)}>
-            <li key={ result.id }>
-              Article #{ result.id }: { result.title }
-            </li>
-          </Paper>
+          <ListItem
+              onClick={() => this.context.router.push("/article/"+result.id)} 
+              key={ result.id }
+              primaryText={ result.title }
+              secondaryText="Article"
+          />
         );  
 
       }
-    });
+    }.bind(this));
   },
   
   render: function () { 
-    var meta = SearchStore.meta();
     return (
-      <article>
-        <input type="text" onChange={ this.handleInputChange } />
-        
-        <nav>
-          Results
-        </nav>
-      
-        <ul>
-          { this.resultLis() }
-        </ul>
-      </article>
+      <div>
+        <TextField onChange={this.handleInputChange} floatingLabelText="Search" />
+        <List>
+          {this.resultItems()}
+        </List>
+      </div>
     );
   }
   

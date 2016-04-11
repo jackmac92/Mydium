@@ -1,5 +1,4 @@
 class Like < Socialization::ActiveRecordStores::Like
-  # include PublicActivity::Model
-  # tracked
+  include PublicActivity::Common
 
 end

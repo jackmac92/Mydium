@@ -2,7 +2,7 @@ var ApiUtil = require('../util/api_util');
 var SessionStore = require('../stores/session');
 var Header = require('../components/header');
 import injectTapEventPlugin from 'react-tap-event-plugin';
-
+// import StickyContainer from 'react-sticky'
 
 var App = React.createClass({
   contextTypes: {

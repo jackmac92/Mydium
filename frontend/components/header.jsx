@@ -6,7 +6,9 @@ import Popover from 'material-ui/lib/popover/popover';
 import FlatButton from 'material-ui/lib/flat-button';
 import FontIcon from 'material-ui/lib/font-icon';
 import Paper from 'material-ui/lib/paper';
+import Headroom from 'react-headroom'
 import Link from 'react-toolbox/lib/link'
+import AutoComplete from 'material-ui/lib/auto-complete';
 
 var Header = React.createClass({
 	contextTypes: {
@@ -62,12 +64,14 @@ var Header = React.createClass({
 			userActionButton = <Link className="user-action-button-header" href="/#/login" label="Log In" />
 		}
 		return (
+			<Headroom>
     		<Paper className="header-wrap" zDepth={1}>
 		    	<header className="header">
 		    		<div onClick={() => router.push("/")} id="logo" />
 		    		{userActionButton}
 		    	</header>
     		</Paper>
+			</Headroom>
 		);
 	}
 

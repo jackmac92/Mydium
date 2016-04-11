@@ -6,6 +6,7 @@ import ArticleIndexItem from './article_index_item'
 import Sidebar from './sidebar'
 import LinearProgress from 'material-ui/lib/linear-progress'
 import Infinite from 'react-infinite'
+// import StickyContainer from 'react-sticky'
 
 var ArticleIndex = React.createClass ({
 
@@ -108,7 +109,7 @@ var ArticleIndex = React.createClass ({
         <section className="content-main">
           <Infinite useWindowAsScrollContainer
                     elementHeight={800}
-                    infiniteLoadBeginEdgeOffset={10}
+                    infiniteLoadBeginEdgeOffset={200}
                     onInfiniteLoad={this.moreArticles}
                     isInfiniteLoading={this.state.isInfiniteLoading}
                     >

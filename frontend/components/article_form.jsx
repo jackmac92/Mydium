@@ -2,10 +2,15 @@ import React from 'react'
 import ReactQuill from 'react-quill'
 import ReactDOM from 'react-dom'
 
-import Input from 'react-toolbox/lib/input'
 import ApiUtil from '../util/api_util'
 import Checkbox from 'material-ui/lib/checkbox'
 import RaisedButton from 'material-ui/lib/raised-button'
+import Dropzone from 'react-dropzone'
+import Tabs from 'material-ui/lib/tabs/tabs';
+import Tab from 'material-ui/lib/tabs/tab';
+
+import TextField from 'material-ui/lib/text-field';
+
 
 var ArticleForm = React.createClass({
 	
@@ -17,21 +22,44 @@ var ArticleForm = React.createClass({
 				subtitle: "",
 				body_plain_text: "",
 				body_stylized: "",
+				pictures: [],
 				published: true
 			};
 	},
+	handleFiles: function (pictures) {
+		this.setState({
+			pictures: pictures
+		});
+	},
+
+	openDropZone: function () {
+		this.refs.dropzone.open()
+	},
+	
 	handleSubmit: function (e) {
 		e.preventDefault();
+		var formData = new FormData();
+
+		formData.append("article[title]", this.state.title);
+		formData.append("article[subtitle]", this.state.subtitle);
+		formData.append("article[picture]", this.state.picture);
+		formData.append("article[published]", this.state.published);
+		formData.append("article[body_plain_text]", this.state.body_plain_text);
+		formData.append("article[body_stylized]", this.state.body_stylized);
+
 		var router = this.context.router;
-		var newArticle = this.state
-		ApiUtil.createNewArticle(newArticle, function (articleId) {router.push('/article/'+articleId);})
+
+		ApiUtil.createNewArticle(formData, function (articleId) {router.push('/article/'+articleId);})
 	},
+	
 	updateTitle: function (e) {
 		this.setState({title:e})
 	},
+	
 	updateSubTitle: function (e) {
 		this.setState({subTitle:e})
 	},
+	
 	updateBody: function (e) {
 		this.setState({
 			body_stylized:e,
@@ -51,10 +79,23 @@ var ArticleForm = React.createClass({
 		return false;
 	},	
   render: function () {
+  	var uploadPreview;
+  	if (this.state.pictures.length > 0) {
+  		uploadPreview = (
+				<div className="picture-upload-preview">
+		  		<h2>Uploading {this.state.pictures.length} pictures...</h2>
+			    <div>{this.state.pictures.map((file) => <img src={file.preview} /> )}</div>
+		    </div>
+  		)
+  	}
   	return (
   		<div>
-	  		<Input label="Title" value={this.state.title} onChange={this.updateTitle} />
-	  		<Input label="Subtitle" value={this.state.subTitle} onChange={this.updateSubTitle} />
+	  			<TextField floatingLabelText="Title" value={this.state.title} onChange={this.updateTitle} />
+		  		<TextField floatingLabelText="Subtitle" value={this.state.subTitle} onChange={this.updateSubTitle} />
+		  		<Dropzone onDrop={this.handleFiles}>
+		  			<div>Drop your image here</div>
+		  		</Dropzone>
+		  		{uploadPreview}
 	  		<ReactQuill	theme="snow"
 	  								id="main-editor"
 	  								value={this.state.body_stylized}
