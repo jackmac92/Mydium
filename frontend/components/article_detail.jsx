@@ -10,7 +10,7 @@ import ListItem from 'material-ui/lib/lists/list-item';
 
 import RaisedButton from 'material-ui/lib/raised-button'
 import LinearProgress from 'material-ui/lib/linear-progress';
-import Sticky from 'react-sticky'
+
 
 var ArticleDetail = React.createClass({
 
@@ -33,13 +33,14 @@ var ArticleDetail = React.createClass({
   componentDidMount: function () {
     this.articleStoreToken = ArticleStore.addListener(this.__onChange);
     ApiUtil.fetchArticle(parseInt(this.props.params.id));
-    window.addEventListener('scroll', (e)=>this.handleScroll(e.target));
+    window.addEventListener('scroll', this.handleScroll);
     if (SessionStore.isLoggedIn()) {
       this.setState({followsAuthor: this.state.article.user.follows_author})
     }
   },
   componentWillUnmount: function () {
     this.articleStoreToken.remove();
+    window.removeEventListener('scroll', this.handleScroll)
   },
 
   handleFollowAuthor: function () {
@@ -55,7 +56,7 @@ var ArticleDetail = React.createClass({
   },
 
   handleScroll: function (e) {
-    this.setState({position: (e.body.scrollTop/e.body.scrollHeight)*100})
+    this.setState({position: (e.target.body.scrollTop/e.target.body.scrollHeight)*100})
   },
 
   render: function() {
@@ -84,9 +85,7 @@ var ArticleDetail = React.createClass({
     }
     return (
       <main>
-        <Sticky>
-          <LinearProgress className="article-progress" mode="determinate" value={this.state.position}/>
-        </Sticky>
+        <LinearProgress className="article-progress" mode="determinate" value={this.state.position}/>
         <article className="article-detail">
           <img className="author-thumb" src={this.state.article.author.avatar} />
           <p className="author-email">{this.state.article.author.name}</p>

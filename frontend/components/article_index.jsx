@@ -6,7 +6,6 @@ import ArticleIndexItem from './article_index_item'
 import Sidebar from './sidebar'
 import LinearProgress from 'material-ui/lib/linear-progress'
 import Infinite from 'react-infinite'
-// import StickyContainer from 'react-sticky'
 
 var ArticleIndex = React.createClass ({
 
