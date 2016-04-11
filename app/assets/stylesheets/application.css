@@ -188,9 +188,9 @@ img.article-detail-image {
 .medium-editor-toolbar > ul > li {
   /*float: right;*/
 /*}*/
-.article-progress {
+/*.article-progress {
   position: absolute;
-  top 50px;
+  top: 50px;
   width: 90%;
 
-}
+}*/
