@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, and :timeoutable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook]
+         :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
   has_many :authorizations, dependent: :destroy
 
   #Paperclip

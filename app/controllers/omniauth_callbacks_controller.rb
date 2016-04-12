@@ -8,7 +8,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def google_oauth2
-    
+    oauthorize "Google"
   end
 
   private
@@ -33,6 +33,14 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
                     :token => access_token['credentials']['token'], 
                     :secret => nil, 
                     :name => access_token[:info][:name], 
+                  }
+    when "Google"
+      uid = access_token['uid']
+      email = access_token[:info][:email]
+      auth_attr = { uid: uid,
+                    token: access_token[:credentials][:token],
+                    secret: nil,
+                    name: access_token[:info][:name]
                   }
     else
       raise 'Provider #{provider} not handled'
