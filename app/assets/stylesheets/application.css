@@ -172,6 +172,7 @@ img.article-detail-image {
 
 #main-editor {
   background: white;
+  height: 444px;
 }
 
 /*.medium-editor-anchor-preview {
@@ -188,9 +189,27 @@ img.article-detail-image {
 .medium-editor-toolbar > ul > li {
   /*float: right;*/
 /*}*/
-/*.article-progress {
-  position: absolute;
-  top: 50px;
-  width: 90%;
 
-}*/
+.article-progress {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 10;
+}
+.article-picture-preview {
+  position: absolute;
+  max-height: 205px;
+  width: auto;
+  top: 0;
+  left: -2px;
+}
+
+.dropzone {
+  position: relative;
+  float: right;
+}
+.article-attrs {
+  overflow: auto;
+  margin: 10px 50px;
+}

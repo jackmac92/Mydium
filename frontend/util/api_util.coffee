@@ -93,21 +93,6 @@ ApiUtil =
         console.log "ApiUtil#fetch bookmarked"
       complete: ->
         callback && callback()
-  ArticleUnpublish: (article_id, callback) ->
-    $.ajax
-      type: "PATCH"
-      dataType: "json"
-      url: "api/articles/" + "unpublish"
-      success: ->
-        callback && callback()
-      error: ->
-        console.log "ApiUtil#fetchTags error"
-  ArticlePublish: (article_id, callback) ->
-    $.ajax
-      type: "PATCH"
-      dataType: "json"
-      url: "api/articles/publish"
-      data:
         id: article_id
       success: ->
         callback && callback()
@@ -134,6 +119,31 @@ ApiUtil =
       error: ->
         console.log "Error fetching article"
 
+  fetchDraft: (id, callback) ->
+    $.ajax
+      type: "GET"
+      dataType: "json"
+      url: "api/articles/"+id
+
+      success: (draft) ->
+        ApiActions.receiveSingleDraft draft
+        callback && callback(draft)
+      error: ->
+        console.log "Error fetching draft"
+
+  updateArticle: (articleFormData, callback) ->
+    $.ajax
+      type: "PATCH"
+      dataType: "json"
+      processData: false
+      contentType: false
+      url: "api/articles"
+      data: articleFormData
+      success: (article) ->
+        ApiActions.receiveSingleArticle article
+        callback && callback(article.id)
+      error: ->
+        console.log "ApiUtil#createNewArticle error"
   createArticleComment: (commentData) ->
     $.ajax
       type: "POST"
@@ -158,13 +168,13 @@ ApiUtil =
       processData: false
       contentType: false
       url: "api/articles"
-      data: article: articleFormData
+      data: articleFormData
       success: (article) ->
         ApiActions.receiveSingleArticle article
         callback && callback(article.id)
       error: ->
         console.log "ApiUtil#createNewArticle error"
-      complete: ->
+
 
   toggleFavorite: (article_id) ->
     $.ajax
@@ -219,6 +229,17 @@ ApiUtil =
         completion && completion()
       error: ->
         console.log "Done gone wrong tryna fetch current user"
+  markArticleRead: (article_id) ->
+    $.ajax
+      type: "PATCH"
+      url: "api/user"
+      dataType: "json"
+      data:
+        receiver: "article"
+        id: article_id
+        user_action: "mark_read"
+      success: ->
+        console.log "Successfully marked article read"
 
   logOutUser: (callback) ->
     $.ajax

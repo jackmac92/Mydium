@@ -52,11 +52,15 @@ var ArticleDetail = React.createClass({
   },
 
   rawBody: function () {
-    return { __html: this.state.article.body}
+    return { __html: this.state.article.body }
   },
 
   handleScroll: function (e) {
-    this.setState({position: (e.target.body.scrollTop/e.target.body.scrollHeight)*100})
+    var scrollPercent = 100 * $(window).scrollTop() / ($("article").height() - $(window).height());
+    if (scrollPercent >= 98) {
+      // ApiUtil.markArticleRead(this.state.article.id)
+    }
+    this.setState({position: scrollPercent})
   },
 
   render: function() {
@@ -71,7 +75,6 @@ var ArticleDetail = React.createClass({
       if (this.state.article.author.id == SessionStore.currentUser().id) {
         delete_button = <RaisedButton label="Unpublish" onClick={this.handleUnpublish}/>
       } else {
-        console.log(this.state.followsAuthor)
         follow_button = <Checkbox value={this.state.followsAuthor} onCheck={this.handleFollowAuthor} label={"Follow " + this.state.article.author.name} />
       }
     }
@@ -85,7 +88,9 @@ var ArticleDetail = React.createClass({
     }
     return (
       <main>
-        <LinearProgress className="article-progress" mode="determinate" value={this.state.position}/>
+        <div className="article-progress">
+          <LinearProgress mode="determinate" value={this.state.position}/>
+        </div>
         <article className="article-detail">
           <img className="author-thumb" src={this.state.article.author.avatar} />
           <p className="author-email">{this.state.article.author.name}</p>

@@ -6,11 +6,8 @@ import ApiUtil from '../util/api_util'
 import Checkbox from 'material-ui/lib/checkbox'
 import RaisedButton from 'material-ui/lib/raised-button'
 import Dropzone from 'react-dropzone'
-import Tabs from 'material-ui/lib/tabs/tabs';
-import Tab from 'material-ui/lib/tabs/tab';
-
 import TextField from 'material-ui/lib/text-field';
-
+import WritingStore from '../stores/writing'
 
 var ArticleForm = React.createClass({
 	
@@ -22,20 +19,33 @@ var ArticleForm = React.createClass({
 				subtitle: "",
 				body_plain_text: "",
 				body_stylized: "",
-				pictures: [],
+				picture: null,
 				published: true
 			};
 	},
-	handleFiles: function (pictures) {
-		this.setState({
-			pictures: pictures
-		});
-	},
-
-	openDropZone: function () {
-		this.refs.dropzone.open()
-	},
 	
+	handleFiles: function (picture) {
+		this.setState({ picture: picture[0] });
+	},
+	componentDidMount: function() {
+		this.writingStoreToken = WritingStore.addListener(this.__onChange)
+		if (this.props.params.id) {
+			ApiUtil.fetchDraft(this.props.params.id)
+		}
+	},
+	componentWillUnmount: function() {
+		this.writingStoreToken.remove()
+	},
+	__onChange: function () {
+		var draft = WritingStore.getDetail();
+		this.setState({
+			title: draft.title,
+			subtitle: draft.subtitle,
+			body_plain_text: draft.body_plain_text,
+			body_stylized: draft.body_stylized,
+			picture: draft.picture
+		})
+	},
 	handleSubmit: function (e) {
 		e.preventDefault();
 		var formData = new FormData();
@@ -48,16 +58,15 @@ var ArticleForm = React.createClass({
 		formData.append("article[body_stylized]", this.state.body_stylized);
 
 		var router = this.context.router;
-
 		ApiUtil.createNewArticle(formData, function (articleId) {router.push('/article/'+articleId);})
 	},
 	
 	updateTitle: function (e) {
-		this.setState({title:e})
+		this.setState({title:e.currentTarget.value})
 	},
 	
 	updateSubTitle: function (e) {
-		this.setState({subTitle:e})
+		this.setState({subTitle:e.currentTarget.value})
 	},
 	
 	updateBody: function (e) {
@@ -65,6 +74,12 @@ var ArticleForm = React.createClass({
 			body_stylized:e,
 			body_plain_text: $(".ql-editor")[0].innerText
 		});
+		clearTimeout(this.autoSaveTimeout)
+		this.autoSaveTimeout = setTimeout(this.autoSave, 3000)
+	},
+	autoSave: function () {
+		console.log("autosave")
+		// ajax post body_stylized and plain_text
 	},
 	updatePublished: function () {
 		this.setState({
@@ -72,30 +87,28 @@ var ArticleForm = React.createClass({
 		})
 	},
 	formReady: function () {
-
-		if (this.state.title && this.state.title.length != 0 && this.state.body_plain_text.length != 0) {
+		if (this.state.title && this.state.title.length != 0 && this.state.body_plain_text.length != 0 && this.state.picture) {
 			return true
 		} 
 		return false;
 	},	
   render: function () {
   	var uploadPreview;
-  	if (this.state.pictures.length > 0) {
-  		uploadPreview = (
-				<div className="picture-upload-preview">
-		  		<h2>Uploading {this.state.pictures.length} pictures...</h2>
-			    <div>{this.state.pictures.map((file) => <img src={file.preview} /> )}</div>
-		    </div>
-  		)
+  	if (this.state.picture) {
+  		uploadPreview = <img className="article-picture-preview" src={this.state.picture.preview} />
   	}
   	return (
   		<div>
+  			<div className="article-attrs">
 	  			<TextField floatingLabelText="Title" value={this.state.title} onChange={this.updateTitle} />
 		  		<TextField floatingLabelText="Subtitle" value={this.state.subTitle} onChange={this.updateSubTitle} />
-		  		<Dropzone onDrop={this.handleFiles}>
-		  			<div>Drop your image here</div>
-		  		</Dropzone>
-		  		{uploadPreview}
+		  		<div className="dropzone">
+			  		<Dropzone onDrop={this.handleFiles}>
+			  			<div>Drop your image here</div>
+				  		{uploadPreview}
+			  		</Dropzone>
+		  		</div>
+  			</div>
 	  		<ReactQuill	theme="snow"
 	  								id="main-editor"
 	  								value={this.state.body_stylized}

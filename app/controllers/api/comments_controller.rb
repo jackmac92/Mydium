@@ -1,4 +1,6 @@
 class Api::CommentsController < ApplicationController
+	include PublicActivity::StoreController
+	
 	def show
 	end
 	

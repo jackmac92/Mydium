@@ -10,6 +10,9 @@ var UserShow = React.createClass({
 	handleChange: function (value) {
 		this.setState({value: value})
 	},
+  componentDidMount: function() {
+    
+  },
 	render: function() {
 		return (
       <Tabs
@@ -22,9 +25,9 @@ var UserShow = React.createClass({
         </Tab>
         <Tab onClick={this.handleChange.bind(this,"c")} label="Drafts" value="c">
         </Tab>
-        <Tab onClick={this.handleChange.bind(this,"c")} label="Published" value="c">
+        <Tab onClick={this.handleChange.bind(this,"d")} label="Published" value="d">
         </Tab>
-        <Tab onClick={this.handleChange.bind(this,"c")} label="Activity" value="c">
+        <Tab onClick={this.handleChange.bind(this,"e")} label="Activity" value="e">
         </Tab>
       </Tabs>
 		);

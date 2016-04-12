@@ -18,6 +18,11 @@ ApiActions =
       articles: response.articles
       actionType: ArticleConstants.TOP_ARTICLES_RECEIVED
 
+  receiveSingleDraft: (draft) ->
+    AppDispatcher.dispatch
+      actionType: ArticleConstants.DRAFT_RECEIVED
+      draft: draft
+      
   receiveSingleArticle: (article) ->
     AppDispatcher.dispatch
       actionType: ArticleConstants.ARTICLE_DETAIL_RECEIVED

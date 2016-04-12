@@ -9,9 +9,9 @@ ArticleStore = new Store AppDispatcher
 `_articleDetail = null`
 
 ArticleStore.all = ->
-  for id, article of _mainStore
+  articles = for id, article of _mainStore
     article
-
+    
 ArticleStore.topArticles = ->
   articles = []
   for id, article of _mainStore

@@ -1,17 +1,16 @@
 class Api::ArticlesController < ApplicationController
-
+  include PublicActivity::StoreController
   def index
     case params[:article_type]
     when "popular"
-      articles = Article.popular
+      @articles = Article.popular.page(params[:page]).per(5)
     when "user_bookmarks"
-      articles = current_user.bookmarked_articles
+      @articles = current_user.bookmarked_articles.page(params[:page]).per(5)
     when "tag"
-      articles = Article.all_with_tag params[:tag]
+      @articles = Article.all_with_tag params[:tag].page(params[:page]).per(5)
     else
-      articles = Article.all.order(created_at: :asc)
+      @articles = Article.order(published_at: :desc).page(params[:page]).per(5)
     end
-    @articles = articles.page(params[:page]).per(5)
   end
   
   def show
@@ -58,6 +57,6 @@ class Api::ArticlesController < ApplicationController
 
   private
   def article_params
-    params.require(:article).permit(:title, :subtitle, :body_plain_text,:body_stylized, :published)
+    params.require(:article).permit(:title, :subtitle, :picture, :body_plain_text,:body_stylized, :published)
   end
 end

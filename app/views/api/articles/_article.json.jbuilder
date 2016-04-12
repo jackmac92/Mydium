@@ -1,5 +1,14 @@
-json.extract! article, :id, :title
+json.extract! article, :id, :title, :subtitle
+
+unless minified
+	json.extract! article, :body_stylized, :body_plain_text
+end
+
 json.created_at time_ago_in_words(article.created_at)
+if article.published
+	json.published_at time_ago_in_words(article.published_at)
+	json.pubTime article.published_at.to_i
+end
 json.body minified ? truncate(article.body_plain_text, length: 250) : article.body_stylized || article.body_plain_text
 
 json.tags do

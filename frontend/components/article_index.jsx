@@ -52,16 +52,15 @@ var ArticleIndex = React.createClass ({
   },
 
   moreArticles: function () {
-    var that = this;
     this.setState({isInfiniteLoading: true});
-    var meta = ArticleStore.meta()
-    this.articleFetcher(this.props, meta.page + 1)
+    var that = this;
+    var meta = ArticleStore.meta();
+    this.articleFetcher(this.props, meta.page + 1);
   },
 
   stateFromStore: function () {
     return {
-      articles: this.articleGrabber(),
-      isInfiniteLoading: false 
+      articles: this.articleGrabber().sort((x,y) => y.pubTime - x.pubTime)
     };
   },
 
@@ -78,6 +77,8 @@ var ArticleIndex = React.createClass ({
   componentDidMount: function () {
     this.articleStoreToken = ArticleStore.addListener(this.__onChange);
     this.articleFetcher(this.props)
+    // window.addEventListener('scroll', this.handleScroll);
+
   },
 
   componentWillReceiveProps: function(nextProps) {
@@ -85,11 +86,20 @@ var ArticleIndex = React.createClass ({
   },
 
   componentWillUnmount: function () {
+    // window.addRemoveListener('scroll', this.handleScroll);
     this.articleStoreToken.remove();
   },
 
   sendToFullEditor: function (text) {
     this.context.router.push('/editor')
+  },
+
+  handleScroll: function (e) {
+    var remainingLength = ($(document).height() - $(window).height()) - $(window).scrollTop()
+    if (remainingLength < 200) {
+      this.moreArticles()
+    }
+
   },
 
   render: function () {
@@ -108,7 +118,7 @@ var ArticleIndex = React.createClass ({
         <section className="content-main">
           <Infinite useWindowAsScrollContainer
                     elementHeight={800}
-                    infiniteLoadBeginEdgeOffset={200}
+                    infiniteLoadBeginEdgeOffset={1600}
                     onInfiniteLoad={this.moreArticles}
                     isInfiniteLoading={this.state.isInfiniteLoading}
                     >
