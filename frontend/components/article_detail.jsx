@@ -78,6 +78,7 @@ var ArticleDetail = React.createClass({
         follow_button = <Checkbox value={this.state.followsAuthor} onCheck={this.handleFollowAuthor} label={"Follow " + this.state.article.author.name} />
       }
     }
+
     if (this.state.article.authors_recent_articles) {
       var article_items = this.state.article.authors_recent_articles.map( recent_article => (<ListItem onClick={() => this.context.router.push("/article/"+recent_article.id)} key={recent_article.id} primaryText={recent_article.title} />) );
       recent_posts_view = (
@@ -86,6 +87,7 @@ var ArticleDetail = React.createClass({
         </List>
       )
     }
+
     return (
       <main>
         <div className="article-progress">

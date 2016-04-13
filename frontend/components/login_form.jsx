@@ -2,9 +2,8 @@ var React = require('react');
 var ApiUtil = require('../util/api_util');
 
 import Input from 'react-toolbox/lib/input'
-import Button from 'react-toolbox/lib/button'
-import Link from 'react-toolbox/lib/link'
-import Checkbox from 'react-toolbox/lib/checkbox'
+import Checkbox from 'material-ui/lib/checkbox'
+import RaisedButton from 'material-ui/lib/raised-button'
 
 var LoginForm = React.createClass({
 
@@ -36,6 +35,8 @@ var LoginForm = React.createClass({
 	updatePassword: function (e) {
 		this.setState({password:e});
 	},
+
+
 
 	passwordNoErrors: function () {
 		if (this.state.password.length == 0) return true;
@@ -70,22 +71,23 @@ var LoginForm = React.createClass({
 	},
 	
 	render: function () {
-		var button;
-		if (this.formReady()) {
-			button = <Button raised accent ripple onClick={this.handleSubmit} label="Submit" />
-		} else {
-			button = <Button raised disabled onClick={this.handleSubmit} label="Submit" />
+		var buttonStyle = {
+			width:'100%',
+			margin:'5px',
+			textTransform:"none"
 		}
 		return (
-			<div>
+			<div className="auth-form-container">
 				<form className="auth-form" >
 					<Input type="email" onChange={this.updateEmail} label="Email" value={this.state.email}/>
-					<Input label="Password" type="password" onChange={this.updatePassword} value={this.state.password}/>
-					<Checkbox label="Remember Me" onChange={this.updateRememberStatus} checked={this.state.remember_me} />
-					{button}
+					<Input label="Password" type="password" onChange={this.updatePassword} value={this.state.password}/> 
+					<Checkbox label="Remember Me" onCheck={this.updateRememberStatus} checked={this.state.remember_me} />
 				</form>
-				<Link label="Don't have an account? Create a new one!" href="#/signup" />
-				<Button label="Try With Demo Account" onClick={this.demoStart}/>
+				<RaisedButton style={buttonStyle} className="auth-form-button" disabled={!this.formReady()} onClick={this.handleSubmit}  label="Submit"/>
+				<RaisedButton style={buttonStyle} className="auth-form-button" label="Don't have an account? Create a new one!" onClick={this.props.toggleAuth} />
+				<RaisedButton style={buttonStyle} className="auth-form-button" label="Sign in with Facebook" href="/users/auth/facebook" linkButton={true} />
+				<RaisedButton style={buttonStyle} className="auth-form-button" label="Sign in with Google" href="/users/auth/google_oauth2" linkButton={true} />
+				<RaisedButton style={buttonStyle} className="auth-form-button" label="Try With Demo Account" onClick={this.demoStart}/>
 			</div>
 		)	
 	}

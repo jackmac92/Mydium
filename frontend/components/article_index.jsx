@@ -6,6 +6,7 @@ import ArticleIndexItem from './article_index_item'
 import Sidebar from './sidebar'
 import LinearProgress from 'material-ui/lib/linear-progress'
 import Infinite from 'react-infinite'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 var ArticleIndex = React.createClass ({
 
@@ -52,6 +53,7 @@ var ArticleIndex = React.createClass ({
   },
 
   moreArticles: function () {
+    console.log("moooar")
     this.setState({isInfiniteLoading: true});
     var that = this;
     var meta = ArticleStore.meta();
@@ -77,7 +79,7 @@ var ArticleIndex = React.createClass ({
   componentDidMount: function () {
     this.articleStoreToken = ArticleStore.addListener(this.__onChange);
     this.articleFetcher(this.props)
-    // window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll);
 
   },
 
@@ -86,7 +88,7 @@ var ArticleIndex = React.createClass ({
   },
 
   componentWillUnmount: function () {
-    // window.addRemoveListener('scroll', this.handleScroll);
+    window.removeEventListener('scroll', this.handleScroll);
     this.articleStoreToken.remove();
   },
 
@@ -96,7 +98,7 @@ var ArticleIndex = React.createClass ({
 
   handleScroll: function (e) {
     var remainingLength = ($(document).height() - $(window).height()) - $(window).scrollTop()
-    if (remainingLength < 200) {
+    if (remainingLength < 100 && !this.state.isInfiniteLoading) {
       this.moreArticles()
     }
 
@@ -110,20 +112,19 @@ var ArticleIndex = React.createClass ({
         );
     }
     if (this.state.fetching) {
-      progress = <LinearProgress mode="indeterminate" /> 
+      progress = <LinearProgress className="fetch-progress" mode="indeterminate" /> 
     }
     return (
       <main>
         {progress}
         <section className="content-main">
-          <Infinite useWindowAsScrollContainer
-                    elementHeight={800}
-                    infiniteLoadBeginEdgeOffset={1600}
-                    onInfiniteLoad={this.moreArticles}
-                    isInfiniteLoading={this.state.isInfiniteLoading}
-                    >
-              {articles}
-          </Infinite>
+        <ReactCSSTransitionGroup
+          transitionName="auto"
+          transitionEnterTimeout={5000}
+          transitionLeaveTimeout={5000}
+        >
+          {articles}
+        </ReactCSSTransitionGroup>
         </section>
         <Sidebar />
       </main>
@@ -132,5 +133,3 @@ var ArticleIndex = React.createClass ({
 
 });
 module.exports = ArticleIndex
-
-

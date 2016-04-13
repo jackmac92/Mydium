@@ -64,7 +64,7 @@ main {
   margin: 0 auto;
 }
 
-section.content-sidebar {
+#content-sidebar {
   display: block;
   float: right;
   width: 400px;
@@ -95,6 +95,7 @@ section.content-sidebar {
 
 .article-card {
   margin: 10px;
+  height: 800px;
 }
 
 .auth-form {
@@ -129,30 +130,35 @@ button.article-index-bookmark {
 
 .auto-enter {
   opacity: 0.01;
-  transform: translateY(500%);
+  transform: translateX(500%);
 }
 
 .auto-enter.auto-enter-active {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(0);
   transition: opacity 500ms, transform 500ms;
 }
 
 .auto-leave {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(0);
 }
 
 .auto-leave.auto-leave-active {
   opacity: 0.01;
-  transform: translateY(500%);
+  transform: translateX(500%);
   transition: opacity 500ms, transform 500ms;
 }
 
 #user-icon {
   color:black;
 }
-
+.article-card-image:hover {
+  cursor: pointer;
+}
+.article-card-title:hover {
+  cursor: pointer;
+}
 img.article-detail-image {
   position: relative;
   width: 100%;
@@ -164,7 +170,11 @@ img.article-detail-image {
 
 .user-action-button-header {
   float: right;
-  margin: 17px 15px 0 0;
+  border: 1px solid green !important;
+  border-radius: 15px  !important;
+  padding: 6px !important;
+  margin: 10px 15px 0 0 !important;
+  text-transform: none !important;
 }
 .user-action-button-header > * {
   float: left;
@@ -174,23 +184,14 @@ img.article-detail-image {
   background: white;
   height: 444px;
 }
-
-/*.medium-editor-anchor-preview {
-  background: orange;
-  height: 300px;
-}
-
-.medium-editor-toolbar {
-  background: blue;
-}
-.medium-editor-toolboar > ul {
-  margin: 0 auto;
-}
-.medium-editor-toolbar > ul > li {
-  /*float: right;*/
-/*}*/
-
 .article-progress {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 10;
+}
+.fetch-progress {
   position: fixed;
   top: 0px;
   left: 0px;
@@ -212,4 +213,13 @@ img.article-detail-image {
 .article-attrs {
   overflow: auto;
   margin: 10px 50px;
+}
+
+.auth-form-container {
+  width: 53%;
+  margin: 5px auto;
+}
+
+.auth-form-button > button span {
+  text-transform: none !important;
 }

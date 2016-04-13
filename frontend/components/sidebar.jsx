@@ -59,7 +59,7 @@ var Sidebar = React.createClass({
 			<ListItem onClick={() => this.context.router.push("/article/"+a.id)} key={a.id} primaryText={a.title} secondaryText={"By "+a.author.name+" in "+a.tags[0].name} /> 
 		)
 		return (
-			<section className="content-sidebar">
+			<section id="content-sidebar">
 				<ul>
 					<li>
 						<h3>Featured Tags</h3>

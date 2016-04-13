@@ -18,7 +18,9 @@ header.header {
   float: right;
 }
 
-
+.header-user-icon {
+  font-size: 36px;
+}
 div.header-searchbar {
   width: 200px;
   height: 10px;
@@ -31,4 +33,7 @@ div.header-searchbar {
   height: 50px;
   margin: 5px 20px;
   float: left;
+}
+#logo:hover {
+  cursor: pointer;
 }

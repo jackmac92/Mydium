@@ -2,7 +2,8 @@ var React = require('react');
 var ApiUtil = require('../util/api_util');
 
 import Input from 'react-toolbox/lib/input'
-import Button from 'react-toolbox/lib/button'
+import RaisedButton from 'material-ui/lib/raised-button'
+
 
 var LoginForm = React.createClass({
 
@@ -62,22 +63,23 @@ var LoginForm = React.createClass({
 	},
 	
 	render: function () {
-		var button;
-		if (this.formReady()) {
-			button = <Button raised accent ripple onClick={this.handleSubmit} label="Submit" />
-		} else {
-			button = <Button raised disabled onClick={this.handleSubmit} label="Submit" />
+		var buttonStyle = {
+			width:'100%',
+			margin:'5px',
+			textTransform:"none"
 		}
 		return (
-			<div>
+			<div className="auth-form-container">
 				<form className="auth-form">				
 					<Input error={this.emailErrors()} type="email" onChange={this.updateEmail} label="Email" value={this.state.email}/>
 					<Input type="text" onChange={this.updateUsername} label="Username" value={this.state.username}/>
 					<Input label="Password" type="password" onChange={this.updatePassword} value={this.state.password}/>
 					<Input label="Password" error={this.passwordErrors()} type="password" onChange={this.updatePasswordConfirm} value={this.state.password_confirm}/>
-					{button}
+					<RaisedButton style={buttonStyle} className="auth-form-button" disabled={!this.formReady()} onClick={this.handleSubmit}  label="Submit"/>
 				</form>
-				<Button raised label="Login with Facebook" href="/users/auth/facebook" />
+				<RaisedButton style={buttonStyle} className="auth-form-button" label="Sign in with Facebook" href="/users/auth/facebook" linkButton={true} />
+				<RaisedButton style={buttonStyle} className="auth-form-button" label="Sign in with Google" href="/users/auth/google_oauth2" linkButton={true} />
+				<RaisedButton style={buttonStyle} className="auth-form-button" label="Already have an Account?" onClick={this.props.toggleAuth} />
 			</div>
 		)	
 	}

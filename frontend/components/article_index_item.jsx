@@ -35,7 +35,7 @@ const ArticleCard = React.createClass({
  			tags = <div />
  		}
  		return (
-			  <Card style={{height:"800px"}} className="article-card" >
+			  <Card className="article-card" >
 			  	<CardTitle
 			  		subtitle={this.props.article.tags.map(t => t.name).join(" - ")}
 			  	/>
@@ -45,10 +45,11 @@ const ArticleCard = React.createClass({
 						subtitle={"Published " + this.props.article.published_at + " ago • " + this.props.article.read_time + " minute read"}
 					/>
 					<CardMedia onClick={this.viewArticle}>
-					  <img style={{height:"400"}} src={this.props.article.picture} />
+					  <img className="article-card-image" src={this.props.article.picture} />
 					</CardMedia>
 					/>
-					<CardTitle 
+					<CardTitle
+						className="article-card-title"
 						onClick={this.viewArticle}
 						title={this.props.article.title}
 					/>
