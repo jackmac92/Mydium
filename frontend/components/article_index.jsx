@@ -53,16 +53,17 @@ var ArticleIndex = React.createClass ({
   },
 
   moreArticles: function () {
-    console.log("moooar")
     this.setState({isInfiniteLoading: true});
     var that = this;
     var meta = ArticleStore.meta();
-    this.articleFetcher(this.props, meta.page + 1);
+    if (!(meta.page == meta.total_pages)) {
+      this.articleFetcher(this.props, meta.page + 1);
+    }
   },
 
   stateFromStore: function () {
     return {
-      articles: this.articleGrabber().sort((x,y) => y.pubTime - x.pubTime)
+      articles: this.articleGrabber()
     };
   },
 
@@ -73,6 +74,7 @@ var ArticleIndex = React.createClass ({
   getInitialState: function () {
     var init = this.stateFromStore();
     init.fetching = true;
+    init.isInfiniteLoading = false;
     return init
   },
 
@@ -98,7 +100,7 @@ var ArticleIndex = React.createClass ({
 
   handleScroll: function (e) {
     var remainingLength = ($(document).height() - $(window).height()) - $(window).scrollTop()
-    if (remainingLength < 100 && !this.state.isInfiniteLoading) {
+    if (remainingLength < 900 && !this.state.isInfiniteLoading) {
       this.moreArticles()
     }
 
@@ -118,13 +120,13 @@ var ArticleIndex = React.createClass ({
       <main>
         {progress}
         <section className="content-main">
-        <ReactCSSTransitionGroup
-          transitionName="auto"
-          transitionEnterTimeout={5000}
-          transitionLeaveTimeout={5000}
-        >
-          {articles}
-        </ReactCSSTransitionGroup>
+          <ReactCSSTransitionGroup
+            transitionName="auto"
+            transitionEnterTimeout={5000}
+            transitionLeaveTimeout={5000}
+          >
+            {articles}
+          </ReactCSSTransitionGroup>
         </section>
         <Sidebar />
       </main>
@@ -133,3 +135,11 @@ var ArticleIndex = React.createClass ({
 
 });
 module.exports = ArticleIndex
+        // <Infinite
+        //   useWindowAsScrollContainer
+        //   elementHeight={900}
+        //   isInfiniteLoading={this.state.isInfiniteLoading}
+        //   infiniteLoadBeginEdgeOffset={1200}
+        //   onInfiniteLoad={this.moreArticles}
+        // >
+        // </Infinite>

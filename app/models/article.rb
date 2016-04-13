@@ -21,6 +21,13 @@ class Article < ActiveRecord::Base
     joins(:article_views).
     group("articles.id").
     order("views_count DESC")
+    where("published = TRUE")
+  }
+
+  scope :viewable, -> {
+    select("articles.*")
+    order("published_at DESC")
+    where("published = TRUE")
   }
 
   acts_as_likeable
@@ -67,7 +74,7 @@ class Article < ActiveRecord::Base
 
   def self.all_with_tag tag_name
     tag = Tag.where(name: tag_name)[0]
-    where(id: Tagging.where(tag_id: tag.id).map(&:article_id))
+    viewable.where(id: Tagging.where(tag_id: tag.id).map(&:article_id))
   end
 
 end

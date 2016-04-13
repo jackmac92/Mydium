@@ -9,7 +9,7 @@ class Api::ArticlesController < ApplicationController
     when "tag"
       @articles = Article.all_with_tag(params[:tag]).page(params[:page]).per(5)
     else
-      @articles = Article.order(published_at: :desc).page(params[:page]).per(5)
+      @articles = Article.viewable.page(params[:page]).per(5)
     end
   end
   

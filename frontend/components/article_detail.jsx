@@ -48,7 +48,7 @@ var ArticleDetail = React.createClass({
   },
 
   handleUnpublish: function () {
-    ApiUtil.ArticleUnpublish(this.state.article.id, () => this.context.router.push('/me/drafts'))
+    ApiUtil.ArticleUnpublish(this.state.article.id, () => this.context.router.push('/editor/'+this.state.article.id))
   },
 
   rawBody: function () {
@@ -82,9 +82,12 @@ var ArticleDetail = React.createClass({
     if (this.state.article.authors_recent_articles) {
       var article_items = this.state.article.authors_recent_articles.map( recent_article => (<ListItem onClick={() => this.context.router.push("/article/"+recent_article.id)} key={recent_article.id} primaryText={recent_article.title} />) );
       recent_posts_view = (
-        <List>
-          {article_items}
-        </List>
+        <div>
+          <hr />
+          <List>
+            {article_items}
+          </List>
+        </div>
       )
     }
 
@@ -105,7 +108,6 @@ var ArticleDetail = React.createClass({
             dangerouslySetInnerHTML={this.rawBody()}
           />
         </article>
-        <hr />
         {recent_posts_view}
         {follow_button}
         <hr />

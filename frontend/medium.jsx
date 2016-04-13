@@ -43,8 +43,6 @@ $(document).ready(function () {
           <Route path="me" component={UserShow} />
           <Route path="editor" component={ArticleForm} />
           <Route path="editor/:id" component={ArticleForm} />
-          <Route path="login" component={LoginForm}/>
-          <Route path="signup" component={SignUpForm}/>
           <Route path="search" component={Search}/>
         </Route>
       </Router>,

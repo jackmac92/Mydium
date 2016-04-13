@@ -11,6 +11,7 @@ ArticleStore = new Store AppDispatcher
 ArticleStore.all = ->
   articles = for id, article of _mainStore
     article
+  articles.sort (x,y) -> y.pubTime - x.pubTime
     
 ArticleStore.topArticles = ->
   articles = []
