@@ -29,9 +29,11 @@ ActiveRecord::Base.transaction do
   20.times do
     article = User.all.sample.articles.create!(title:Faker::StarWars.quote, subtitle:Faker::Hipster.sentence , body_plain_text:Faker::Hipster.paragraphs(20+rand(35)).join("\n\n"), picture:File.open(article_pics.pop))
     time = Time.now - rand(4).hours - rand(2).days - rand(60).minutes
-    article.publish! if rand(4) > 1
-    article.update! published_at: time 
-    article.update! created_at: time - 1.hour
+    article.update! created_at: (time - 1.hour)
+    if rand(4) > 1
+      article.publish! 
+      article.update! published_at: time 
+    end
     tags.sample(5).each do |tag|
       article.add_tag(tag)
     end
