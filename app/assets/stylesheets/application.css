@@ -229,3 +229,22 @@ img.article-detail-image {
 .comment-form {
   margin-bottom: 100px;
 }
+@media only screen and (min-width: 1320px) {
+  #content-sidebar {
+    display: block;
+  }
+}
+@media only screen and (min-width: 0px) and (max-width: 1320px) {
+  #content-sidebar {
+    display: none;
+  }
+  main {
+    width: 100%;
+  }
+  .content-main {
+    width: 80%;
+    float: none;
+    margin: 0 auto;
+  }
+
+}

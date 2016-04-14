@@ -123,8 +123,8 @@ var ArticleIndex = React.createClass ({
         <section className="content-main">
           <ReactCSSTransitionGroup
             transitionName="auto"
-            transitionEnterTimeout={5000}
-            transitionLeaveTimeout={5000}
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}
           >
             {articles}
           </ReactCSSTransitionGroup>
