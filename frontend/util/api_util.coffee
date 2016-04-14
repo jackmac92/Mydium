@@ -30,6 +30,9 @@ ApiUtil =
       data:
         page: page
       success: (articles) ->
+        console.log "util received"
+        console.log articles
+        console.log "util end"
         ApiActions.receiveArticles articles
       error: (e) ->
         console.log "ApiUtil#fetchArticles error"

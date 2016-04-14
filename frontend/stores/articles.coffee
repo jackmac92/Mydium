@@ -9,9 +9,10 @@ ArticleStore = new Store AppDispatcher
 `_articleDetail = null`
 
 ArticleStore.all = ->
-  articles = for id, article of _mainStore
-    article
-  articles.sort (x,y) -> y.pubTime - x.pubTime
+  result = []
+  for id, article of _mainStore
+    result.push article unless article.topArticle
+  result.sort (a,b) -> b.pubTime - a.pubTime
     
 ArticleStore.topArticles = ->
   articles = []

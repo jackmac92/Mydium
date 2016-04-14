@@ -28,9 +28,9 @@ ActiveRecord::Base.transaction do
 
   20.times do
     article = User.all.sample.articles.create!(title:Faker::StarWars.quote, subtitle:Faker::Hipster.sentence , body_plain_text:Faker::Hipster.paragraphs(20+rand(35)).join("\n\n"), picture:File.open(article_pics.pop))
-    time = Time.now - rand(4).hours - rand(2).days - rand(60).minutes
+    time = Time.now - rand(12).hours - rand(8).days - rand(60).minutes
     article.update! created_at: (time - 1.hour)
-    if rand(4) > 1
+    if rand(5) > 1
       article.publish! 
       article.update! published_at: time 
     end

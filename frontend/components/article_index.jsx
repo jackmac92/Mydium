@@ -30,6 +30,7 @@ var ArticleIndex = React.createClass ({
         currArticles = ArticleStore.taggedArticles(this.props.params.tag_name)
         break;
     }
+    console.log(currArticles.map(a=> a.id))
     return currArticles;
   },
   articleFetcher: function (currProps, pageNum) {
@@ -100,7 +101,7 @@ var ArticleIndex = React.createClass ({
 
   handleScroll: function (e) {
     var remainingLength = ($(document).height() - $(window).height()) - $(window).scrollTop()
-    if (remainingLength < 900 && !this.state.isInfiniteLoading) {
+    if (remainingLength < 1400 && !this.state.isInfiniteLoading) {
       this.moreArticles()
     }
 

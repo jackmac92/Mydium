@@ -35,7 +35,7 @@ const ArticleCard = React.createClass({
  			tags = <div />
  		}
  		return (
-			  <Card style={{height:'900px'}} className="article-card" >
+			  <Card className="article-card" >
 			  	<CardTitle
 			  		subtitle={this.props.article.tags.map(t => t.name).join(" - ")}
 			  	/>

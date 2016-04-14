@@ -17,17 +17,17 @@ class Article < ActiveRecord::Base
   has_many :users_who_viewed, through: :article_views, source: :user
 
   scope :popular, -> { 
-    select("articles.*, count(article_views.id) AS views_count").
-    joins(:article_views).
-    group("articles.id").
-    order("views_count DESC")
-    where("published = TRUE")
+    select("articles.*, count(article_views.id) AS views_count")
+    .where(published: true)
+    .joins(:article_views)
+    .group("articles.id")
+    .order("views_count DESC")
   }
 
   scope :viewable, -> {
     select("articles.*")
-    order("published_at DESC")
-    where("published = TRUE")
+    .where(published: true)
+    .order(published_at: :desc)
   }
 
   acts_as_likeable
