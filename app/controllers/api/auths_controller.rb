@@ -4,7 +4,7 @@ class Api::AuthsController < ApplicationController
     if user_signed_in?
       render json: current_user
     else
-      render json: {message: "Not logged in"}, status: 401
+      render json: {message: "Not logged in"}, status: 204
     end
   end
 

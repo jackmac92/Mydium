@@ -23,15 +23,13 @@ var App = React.createClass({
   handleChange: function () {
     if (SessionStore.isLoggedIn()) {
       this.setState({currentUser: SessionStore.currentUser()});
-    } else {
-      this.context.router.push("/login");
     }
   },
 
   render: function () {
     return (
       <div>
-        <Header currentUser={this.state.currentUser}/>
+        <Header ref="appHeader" currentUser={this.state.currentUser}/>
         <content className="curr-page-content">
           {this.props.children}
         </content>

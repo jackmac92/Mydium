@@ -222,3 +222,10 @@ img.article-detail-image {
 .auth-form-button > button span {
   text-transform: none !important;
 }
+
+.auth-form > div {
+  width: 100% !important;
+}
+.comment-form {
+  margin-bottom: 100px;
+}

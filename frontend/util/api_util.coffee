@@ -16,6 +16,7 @@ ApiUtil =
         query: query 
         page: page
       success: (response) ->
+        console.log response
         ApiActions.receiveSearchResults response
       error: (e) ->
         console.log ("Search Error")
@@ -223,12 +224,14 @@ ApiUtil =
       type: "GET"
       url: "api/auth"
       dataType: "json"
-      success: (currentUser) ->
-        SessionActions.currentUserReceived currentUser
+      success: (currentUser, textStatus, xhr) ->
+        unless xhr.status == 204
+          SessionActions.currentUserReceived currentUser 
       complete: ->
         completion && completion()
       error: ->
         console.log "Done gone wrong tryna fetch current user"
+
   markArticleRead: (article_id) ->
     $.ajax
       type: "PATCH"
@@ -248,7 +251,8 @@ ApiUtil =
       dataType: "json"
       success: ->
         SessionActions.logout()
-        callback && callback()
+        if callback
+          callback()
 
   logInUser: (userCredentials, callback) ->
     $.ajax

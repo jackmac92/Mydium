@@ -1,7 +1,7 @@
 var React = require('react');
 var ApiUtil = require('../util/api_util');
 
-import Input from 'react-toolbox/lib/input'
+import TextField from 'material-ui/lib/text-field'
 import Checkbox from 'material-ui/lib/checkbox'
 import RaisedButton from 'material-ui/lib/raised-button'
 
@@ -27,13 +27,13 @@ var LoginForm = React.createClass({
 	},
 
 	updateEmail: function (e) {
-		this.setState({email:e});
+		this.setState({email:e.currentTarget.value});
 	},
 	updateRememberStatus: function (e) {
 		this.setState({remember_me: (!this.state.remember_me)});
 	},
 	updatePassword: function (e) {
-		this.setState({password:e});
+		this.setState({password:e.currentTarget.value});
 	},
 
 
@@ -74,19 +74,32 @@ var LoginForm = React.createClass({
 		var buttonStyle = {
 			width:'100%',
 			margin:'5px',
-			textTransform:"none"
+			textTransform:"none",
 		}
+		var fbStyle = {
+			width:'100%',
+			margin:'5px',
+			textTransform:"none",
+			backgroundColor:"blue"
+		}
+		var googStyle = {
+			width:'100%',
+			margin:'5px',
+			textTransform:"none",
+			backgroundColor:"red"
+		}
+
 		return (
 			<div className="auth-form-container">
 				<form className="auth-form" >
-					<Input type="email" onChange={this.updateEmail} label="Email" value={this.state.email}/>
-					<Input label="Password" type="password" onChange={this.updatePassword} value={this.state.password}/> 
+					<TextField type="email" onChange={this.updateEmail} floatingLabelText="Email" value={this.state.email}/>
+					<TextField floatingLabelText="Password" type="password" onChange={this.updatePassword} value={this.state.password}/> 
 					<Checkbox label="Remember Me" onCheck={this.updateRememberStatus} checked={this.state.remember_me} />
+					<RaisedButton style={buttonStyle} className="auth-form-button" disabled={!this.formReady()} onClick={this.handleSubmit}  label="Submit"/>
 				</form>
-				<RaisedButton style={buttonStyle} className="auth-form-button" disabled={!this.formReady()} onClick={this.handleSubmit}  label="Submit"/>
 				<RaisedButton style={buttonStyle} className="auth-form-button" label="Don't have an account? Create a new one!" onClick={this.props.toggleAuth} />
-				<RaisedButton style={buttonStyle} className="auth-form-button" label="Sign in with Facebook" href="/users/auth/facebook" linkButton={true} />
-				<RaisedButton style={buttonStyle} className="auth-form-button" label="Sign in with Google" href="/users/auth/google_oauth2" linkButton={true} />
+				<RaisedButton style={fbStyle} className="auth-form-button" label="Sign in with Facebook" href="/users/auth/facebook" linkButton={true} />
+				<RaisedButton style={googStyle} className="auth-form-button" label="Sign in with Google" href="/users/auth/google_oauth2" linkButton={true} />
 				<RaisedButton style={buttonStyle} className="auth-form-button" label="Try With Demo Account" onClick={this.demoStart}/>
 			</div>
 		)	

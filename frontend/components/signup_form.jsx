@@ -1,7 +1,7 @@
 var React = require('react');
 var ApiUtil = require('../util/api_util');
 
-import Input from 'react-toolbox/lib/input'
+import TextField from 'material-ui/lib/text-field'
 import RaisedButton from 'material-ui/lib/raised-button'
 
 
@@ -26,17 +26,17 @@ var LoginForm = React.createClass({
 	},
 
 	updateEmail: function (e) {
-		this.setState({email:e})
+		this.setState({email:e.currentTarget.value})
 	},
 	updateUsername: function (e) {
-		this.setState({username:e})
+		this.setState({username:e.currentTarget.value})
 	},
 
 	updatePassword: function (e) {
-		this.setState({password:e})
+		this.setState({password:e.currentTarget.value})
 	},
 	updatePasswordConfirm: function (e) {
-		this.setState({password_confirm:e})
+		this.setState({password_confirm:e.currentTarget.value})
 	},
 	
 	passwordErrors: function () {
@@ -71,10 +71,10 @@ var LoginForm = React.createClass({
 		return (
 			<div className="auth-form-container">
 				<form className="auth-form">				
-					<Input error={this.emailErrors()} type="email" onChange={this.updateEmail} label="Email" value={this.state.email}/>
-					<Input type="text" onChange={this.updateUsername} label="Username" value={this.state.username}/>
-					<Input label="Password" type="password" onChange={this.updatePassword} value={this.state.password}/>
-					<Input label="Password" error={this.passwordErrors()} type="password" onChange={this.updatePasswordConfirm} value={this.state.password_confirm}/>
+					<TextField error={this.emailErrors()} type="email" onChange={this.updateEmail} floatingLabelText="Email" value={this.state.email}/>
+					<TextField type="text" onChange={this.updateUsername} floatingLabelText="Username" value={this.state.username}/>
+					<TextField floatingLabelText="Password" type="password" onChange={this.updatePassword} value={this.state.password}/>
+					<TextField floatingLabelText="Password" error={this.passwordErrors()} type="password" onChange={this.updatePasswordConfirm} value={this.state.password_confirm}/>
 					<RaisedButton style={buttonStyle} className="auth-form-button" disabled={!this.formReady()} onClick={this.handleSubmit}  label="Submit"/>
 				</form>
 				<RaisedButton style={buttonStyle} className="auth-form-button" label="Sign in with Facebook" href="/users/auth/facebook" linkButton={true} />

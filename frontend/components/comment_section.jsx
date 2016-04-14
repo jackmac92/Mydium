@@ -1,6 +1,7 @@
 var React = require('react');
 import Comment from './comment';
 import CommentForm from './comment_form';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 var Comments = React.createClass({
 
@@ -10,9 +11,16 @@ var Comments = React.createClass({
 			<section>
 				<h3>Responses</h3>
 				<ul>
-					{comments}
+          <ReactCSSTransitionGroup
+            transitionName="auto"
+            transitionEnterTimeout={5000}
+            transitionLeaveTimeout={5000}
+          >
+						{comments}
+					</ReactCSSTransitionGroup>
 				</ul>
-				<CommentForm article_id={this.props.article_id} />
+				<CommentForm className="comment-form" article_id={this.props.article_id} />
+				<div style={{height:"200px"}} />
 			</section>
 		);
 	}

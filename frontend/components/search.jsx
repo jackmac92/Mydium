@@ -35,7 +35,7 @@ var Search = React.createClass({
   },
   
   handleInputChange: function (t) {
-    var query = t
+    var query = t.currentTarget.value
     this.setState({ query: query }, function () {      
       if (query.length > 2) {
         this.search();
@@ -60,8 +60,7 @@ var Search = React.createClass({
           <ListItem 
               key={ result.id }
               primaryText={ result.name || result.email }
-              secondaryText="User"
-          />
+              secondaryText="User"/>
         );          
       } else if (result._type == "Article"){
         return (
@@ -69,8 +68,7 @@ var Search = React.createClass({
               onClick={() => this.context.router.push("/article/"+result.id)} 
               key={ result.id }
               primaryText={ result.title }
-              secondaryText="Article"
-          />
+              secondaryText="Article"/>
         );  
 
       }

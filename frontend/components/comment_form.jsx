@@ -1,7 +1,7 @@
 var React = require('react');
 import ApiUtil from '../util/api_util'
-import Button from 'react-toolbox/lib/button'
-import Input from 'react-toolbox/lib/input'
+import RaisedButton from 'material-ui/lib/raised-button'
+import TextField from 'material-ui/lib/text-field'
 
 var CommentForm = React.createClass({
 	getInitialState: function() {
@@ -11,7 +11,7 @@ var CommentForm = React.createClass({
 		};
 	},
 	handleInput: function (e) {
-		this.setState({body:e});
+		this.setState({body:e.currentTarget.value});
 	},
 	handleSubmit: function (e) {
 		e.preventDefault();
@@ -21,8 +21,8 @@ var CommentForm = React.createClass({
 	render: function() {
 		return (
 			<section>
-				<Input onChange={this.handleInput} value={this.state.body} label="Add Response" type="text" />
-				<Button onClick={this.handleSubmit} raised accent label="Publish" />
+				<TextField onChange={this.handleInput} value={this.state.body} floatingLabelText="Add Response" />
+				<RaisedButton onClick={this.handleSubmit} label="Publish" />
 			</section>
 		);
 	}
