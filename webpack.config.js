@@ -31,7 +31,7 @@ module.exports = {
       }  
     ],
   },
-  devtool: 'eval-cheap-source-map',
+  devtool: 'cheap-source-map',
   plugins: [
     new webpack.ProvidePlugin({'React':'react'})
   ]

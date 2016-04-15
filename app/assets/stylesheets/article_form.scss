@@ -1,0 +1,20 @@
+#article-picture-preview {
+  position: absolute;
+  max-height: 195px;
+  max-width: 195px;
+}
+
+#dropzone {
+  position: relative;
+  float: right;
+  margin-top: -70px;
+  width: initial !important;
+}
+.article-attrs {
+  overflow: auto;
+  margin: 10px 50px;
+}
+
+.article-attrs > div {
+	width: 70% !important;
+}

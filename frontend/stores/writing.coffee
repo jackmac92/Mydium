@@ -16,7 +16,7 @@ setDetail = (draft) ->
 WritingStore.__onDispatch = (payload) ->
   switch payload.actionType
     when ArticleConstants.DRAFT_RECEIVED
-      setDetail payload.draft
-      WritingStore.__emitChange()
+    	setDetail payload.draft
+    	WritingStore.__emitChange()
 
 module.exports = WritingStore

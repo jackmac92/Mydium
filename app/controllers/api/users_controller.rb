@@ -6,7 +6,7 @@ class Api::UsersController < ApplicationController
 
 	def drafts
 		@articles = current_user.articles.where published: false
-		render 'api/articles/index'
+		render 'api/articles/drafts'
 	end
 
 	def update

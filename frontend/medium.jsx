@@ -39,8 +39,8 @@ $(document).ready(function () {
           <Route path="me/bookmarks" component={ArticleIndex}/>
           <Route path="tags/:tag_name" component={ArticleIndex} />
           <Route path="article/:id" component={ArticleDetail} />       
-          <Route path="user/:id" component={UserShow} />
-          <Route path="me" component={UserShow} />
+          <Route path="users/:username" component={UserShow} />
+          <Route path="me" onEnter={_requireLoggedIn} component={UserShow} />
           <Route path="editor" component={ArticleForm} />
           <Route path="editor/:id" component={ArticleForm} />
           <Route path="search" component={Search}/>

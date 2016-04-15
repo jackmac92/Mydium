@@ -2,14 +2,13 @@ AppDispatcher = require '../dispatchers/dispatcher'
 ArticleConstants = require '../constants/article'
 SearchConstants = require '../constants/search'
 TagConstants = require '../constants/tag'
-
+SessionConstants = require '../constants/session'
 ApiActions =
   receiveArticles: (response) ->
     AppDispatcher.dispatch
       actionType: ArticleConstants.ARTICLES_RECEIVED
       articles: response.articles
       meta: response.meta
-
   receiveTopArticles: (response) ->
     for article in response.articles
       article.topArticle = true
@@ -18,7 +17,17 @@ ApiActions =
       articles: response.articles
       actionType: ArticleConstants.TOP_ARTICLES_RECEIVED
 
+  receiveUserDrafts: (drafts) ->
+    AppDispatcher.dispatch
+      actionType: SessionConstants.RECEIVED_DRAFTS
+      drafts: drafts
+
   receiveSingleDraft: (draft) ->
+    pic = draft.picture
+    draft.picture = {}
+    draft.picture.preview = pic
+    unless draft.body_stylized
+      draft.body_stylized = "<div>"+draft.body_plain_text+"</div>"
     AppDispatcher.dispatch
       actionType: ArticleConstants.DRAFT_RECEIVED
       draft: draft

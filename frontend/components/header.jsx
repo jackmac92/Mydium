@@ -45,13 +45,18 @@ var Header = React.createClass({
   },
   toggleFormState: function () {
   	this.setState({formForSignIn:!this.state.formForSignIn})
-  	console.log("toggle")
   },
   handleRequestClose: function () {
   	this.setState({open:false})
   },
-	            // <FlatButton onClick={() => router.push("/me/drafts")} label="Drafts"/>
-	            // <FlatButton onClick={() => router.push("/me/published")} label="Publications"/>
+  goTo: function (loc) {
+  	this.context.router.push(loc)
+  	this.handleRequestClose()
+  },
+  logOut: function () {
+  	ApiUtil.logOutUser()
+  	this.handleRequestClose()
+  },
 
 	render: function() {
 		var userActionButton, authForm;
@@ -70,10 +75,10 @@ var Header = React.createClass({
 	          targetOrigin={{horizontal: 'left', vertical: 'top'}}
 	          onRequestClose={this.handleRequestClose}
 	        >
-	            <FlatButton onClick={() => router.push("/editor")} label="New Article"/>
-	            <FlatButton onClick={() => router.push("me/bookmarks")} label="Bookmarks"/>
-	            <FlatButton onClick={() => router.push("/search")} label="Search"/>
-	            <FlatButton onClick={ApiUtil.logOutUser} label="Sign Out"/>
+	            <FlatButton onClick={this.goTo.bind(this,"/editor")} label="New Article"/>
+	            <FlatButton onClick={this.goTo.bind(this,"me/bookmarks")} label="Bookmarks"/>
+	            <FlatButton onClick={this.goTo.bind(this,"/search")} label="Search"/>
+	            <FlatButton onClick={this.logOut} label="Sign Out"/>
 	        </Popover>
 				</div>
 			)
@@ -111,3 +116,5 @@ var Header = React.createClass({
 });
 
 module.exports = Header;
+	            // <FlatButton onClick={() => router.push("/me/drafts")} label="Drafts"/>
+	            // <FlatButton onClick={() => router.push("/me/published")} label="Publications"/>

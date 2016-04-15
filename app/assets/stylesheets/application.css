@@ -193,22 +193,6 @@ img.article-detail-image {
   width: 100%;
   z-index: 10;
 }
-.article-picture-preview {
-  position: absolute;
-  max-height: 205px;
-  width: auto;
-  top: 0;
-  left: -2px;
-}
-
-.dropzone {
-  position: relative;
-  float: right;
-}
-.article-attrs {
-  overflow: auto;
-  margin: 10px 50px;
-}
 
 .auth-form-container {
   width: 53%;

@@ -25,7 +25,9 @@ var ArticleForm = React.createClass({
 	},
 	
 	handleFiles: function (picture) {
-		this.setState({ picture: picture[0] });
+		this.setState({ 
+			picture: picture[0]
+		});
 	},
 	componentDidMount: function() {
 		this.writingStoreToken = WritingStore.addListener(this.__onChange)
@@ -41,7 +43,7 @@ var ArticleForm = React.createClass({
 		var draft = WritingStore.getDetail();
 		this.setState({
 			title: draft.title,
-			subtitle: draft.subtitle,
+			subTitle: draft.subtitle,
 			body_plain_text: draft.body_plain_text,
 			body_stylized: draft.body_stylized,
 			picture: draft.picture
@@ -52,7 +54,7 @@ var ArticleForm = React.createClass({
 		var formData = new FormData();
 
 		formData.append("article[title]", this.state.title);
-		formData.append("article[subtitle]", this.state.subtitle);
+		formData.append("article[subtitle]", this.state.subTitle);
 		formData.append("article[picture]", this.state.picture);
 		formData.append("article[published]", this.state.published);
 		formData.append("article[body_plain_text]", this.state.body_plain_text);
@@ -81,7 +83,7 @@ var ArticleForm = React.createClass({
 		this.autoSaveTimeout = setTimeout(this.autoSave, 3000)
 	},
 	autoSave: function () {
-		console.log("autosave")
+		// console.log("autosave")
 		// ajax post body_stylized and plain_text
 	},
 	updatePublished: function () {
@@ -98,14 +100,15 @@ var ArticleForm = React.createClass({
   render: function () {
   	var uploadPreview;
   	if (this.state.picture) {
-  		uploadPreview = <img className="article-picture-preview" src={this.state.picture.preview} />
+  		uploadPreview = <img id="article-picture-preview" src={this.state.picture.preview} />
   	}
   	return (
   		<div>
   			<div className="article-attrs">
-	  			<TextField floatingLabelText="Title" value={this.state.title} onChange={this.updateTitle} />
-		  		<TextField floatingLabelText="Subtitle" value={this.state.subTitle} onChange={this.updateSubTitle} />
-		  		<div className="dropzone">
+	  			<TextField id="title-field" floatingLabelText="Title" value={this.state.title} onChange={this.updateTitle} />
+	  			<div />
+		  		<TextField id="subtitle-field" floatingLabelText="Subtitle" value={this.state.subTitle} onChange={this.updateSubTitle} />
+		  		<div id="dropzone">
 			  		<Dropzone onDrop={this.handleFiles}>
 			  			<div>Drop your image here</div>
 				  		{uploadPreview}

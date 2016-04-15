@@ -122,7 +122,16 @@ ApiUtil =
         ApiActions.receiveSingleArticle article
       error: ->
         console.log "Error fetching article"
-
+  fetchDrafts: ->
+    $.ajax
+      type: "GET"
+      dataType: "json"
+      url: "api/user/drafts/"
+      success: (drafts) ->
+        ApiActions.receiveUserDrafts drafts
+      error: ->
+        console.log "Error fetching all drafts"
+    
   fetchDraft: (id, callback) ->
     $.ajax
       type: "GET"
