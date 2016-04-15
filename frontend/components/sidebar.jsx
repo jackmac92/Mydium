@@ -59,24 +59,26 @@ var Sidebar = React.createClass({
 			<ListItem onClick={() => this.context.router.push("/article/"+a.id)} key={a.id} primaryText={a.title} secondaryText={"By "+a.author.name+" in "+a.tags[0].name} /> 
 		)
 		return (
-			<section id="content-sidebar">
-				<ul>
-					<li>
-						<h3>Featured Tags</h3>
-						<hr />
-							{featured_tags}
-					</li>
-					<div>
-						{user_tags_section}
-						<li>Top Stories</li>
-						<hr />
-						<List>
-							{top_stories}
-						</List>
-					</div>
-				</ul>
+			<div id="sidebar-wrap">
+				<section id="content-sidebar">
+					<ul>
+						<li>
+							<h3>Featured Tags</h3>
+							<hr />
+								{featured_tags}
+						</li>
+						<div>
+							{user_tags_section}
+							<li>Top Stories</li>
+							<hr />
+							<List>
+								{top_stories}
+							</List>
+						</div>
+					</ul>
 
-			</section>
+				</section>
+			</div>
 		)
 	}
 });

@@ -31,9 +31,22 @@ div.header-searchbar {
   background-size: 100%;
   width: 110px;
   height: 50px;
-  margin: 5px 20px;
+  margin: 5px 5px 0 30px;
   float: left;
 }
 #logo:hover {
   cursor: pointer;
+}
+
+.user-action-button-header {
+  float: right;
+  padding: 6px !important;
+  margin: 5px 15px 0 0 !important;
+  text-transform: none !important;
+}
+.user-action-button-header > * {
+  float: left;
+}
+#header-user-icon {
+  font-size: 50px !important;
 }
