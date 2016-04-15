@@ -25,9 +25,6 @@ class User < ActiveRecord::Base
 
   include PgSearch
   multisearchable against: [:username, :name, :email]
-  
-  include PublicActivity::Model
-  tracked
 
   def favorite_articles
     Article.where(id: likees(Article).map(&:id))

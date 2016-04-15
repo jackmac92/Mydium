@@ -33,6 +33,7 @@ var ArticleForm = React.createClass({
 			ApiUtil.fetchDraft(this.props.params.id)
 		}
 	},
+
 	componentWillUnmount: function() {
 		this.writingStoreToken.remove()
 	},
@@ -70,8 +71,10 @@ var ArticleForm = React.createClass({
 	},
 	
 	updateBody: function (e) {
+		var regex = /(^|[^@\w])@(\w{1,15})\b\s/
+		var replace = '$1<a href="/#/users/$2">@$2</a> ';
 		this.setState({
-			body_stylized:e,
+			body_stylized:e.replace( regex, replace ),
 			body_plain_text: $(".ql-editor")[0].innerText
 		});
 		clearTimeout(this.autoSaveTimeout)

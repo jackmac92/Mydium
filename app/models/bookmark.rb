@@ -1,6 +1,6 @@
 class Bookmark < ActiveRecord::Base
   belongs_to :user
   belongs_to :article
-  include PublicActivity::Common
-
+  include PublicActivity::Model
+  tracked owner: :user, recipient: :article
 end

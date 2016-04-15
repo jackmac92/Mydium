@@ -68,6 +68,8 @@ main {
   display: block;
   float: right;
   width: 400px;
+  /*left: 900px;*/
+  /*position: fixed;*/
   /*background: blue;*/
   /*margin-top: 40px;*/
   margin-left: 20px;
@@ -237,6 +239,9 @@ img.article-detail-image {
 @media only screen and (min-width: 0px) and (max-width: 1320px) {
   #content-sidebar {
     display: none;
+  }
+  .card-read-more {
+    left: 100px;
   }
   main {
     width: 100%;

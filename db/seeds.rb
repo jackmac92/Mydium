@@ -26,11 +26,11 @@ ActiveRecord::Base.transaction do
   Article.destroy_all
   tags = %w(tech fashion startups culture art stocks foreign finance celebrity politics DIY offbeat funny satire design business economcis UX life)
 
-  20.times do
+  25.times do
     article = User.all.sample.articles.create!(title:Faker::StarWars.quote, subtitle:Faker::Hipster.sentence , body_plain_text:Faker::Hipster.paragraphs(20+rand(35)).join("\n\n"), picture:File.open(article_pics.pop))
     time = Time.now - rand(12).hours - rand(8).days - rand(60).minutes
     article.update! created_at: (time - 1.hour)
-    if rand(5) > 1
+    if rand(8) >= 2
       article.publish! 
       article.update! published_at: time 
     end
