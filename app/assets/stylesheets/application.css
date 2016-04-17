@@ -104,6 +104,9 @@ main {
 .article-card {
   margin: 10px;
 }
+.article-card-header:hover {
+  cursor: pointer;
+}
 
 .auth-form {
   width: 90%;

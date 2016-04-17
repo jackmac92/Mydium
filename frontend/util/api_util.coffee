@@ -281,15 +281,14 @@ ApiUtil =
       error: (e) ->
         console.log "Done gone wrong when making new user"
         console.log e
-  # fetchUser: (id) ->
-  #   $.ajax
-  #   type: "GET"
-  #   dataType: "json"
-  #   url: "api/users/" + id
-  #   success: (user) ->
-  #     ApiActions.receiveUserInfo user
-  #   error: ->
-  #     console.log "ApiUtil#fetchSingleArticle error"
+  fetchUserInfo: (id) ->
+    $.ajax
+      type: "GET"
+      dataType: "json"
+      url: "api/users/" + id
+      success: (user) ->
+        ApiActions.receiveUserInfo user
+      error: ->
+        console.log "ApiUtil#fetchUser error"
 
-window.ApiUtil = ApiUtil
 module.exports = ApiUtil

@@ -9,7 +9,8 @@ import SessionStore from './stores/session'
 import App from './components/app'
 import LoginForm from './components/login_form'
 import SignUpForm from './components/signup_form'
-import UserShow from './components/user_show'
+import SelfShow from './components/self_show'
+import OtherShow from './components/other_show'
 import ArticleIndex from './components/article_index'
 import ArticleDetail from './components/article_detail'
 import ArticleForm from './components/article_form'
@@ -39,8 +40,8 @@ $(document).ready(function () {
           <Route path="me/bookmarks" component={ArticleIndex}/>
           <Route path="tags/:tag_name" component={ArticleIndex} />
           <Route path="article/:id" component={ArticleDetail} />       
-          <Route path="users/:username" component={UserShow} />
-          <Route path="me" onEnter={_requireLoggedIn} component={UserShow} />
+          <Route path="users/:id" component={OtherShow} />
+          <Route path="me" onEnter={_requireLoggedIn} component={SelfShow} />
           <Route path="editor" component={ArticleForm} />
           <Route path="editor/:id" component={ArticleForm} />
           <Route path="search" component={Search}/>

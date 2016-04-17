@@ -39,7 +39,9 @@ const ArticleCard = React.createClass({
 			  	<CardTitle
 			  		subtitle={this.props.article.tags.map(t => t.name).join(" - ")}
 			  	/>
-					<CardHeader 
+					<CardHeader
+						className="article-card-header"
+						onClick={() => this.context.router.push("/users/"+this.props.article.author.id)}
 						avatar={this.props.article.author.avatar}
 						title={this.props.article.author.name}
 						subtitle={"Published " + this.props.article.published_at + " ago • " + this.props.article.read_time + " minute read"}

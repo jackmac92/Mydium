@@ -3,6 +3,8 @@ ArticleConstants = require '../constants/article'
 SearchConstants = require '../constants/search'
 TagConstants = require '../constants/tag'
 SessionConstants = require '../constants/session'
+UserConstants = require '../constants/user'
+
 ApiActions =
   receiveArticles: (response) ->
     AppDispatcher.dispatch
@@ -34,6 +36,11 @@ ApiActions =
     AppDispatcher.dispatch
       actionType: SessionConstants.RECEIVED_DRAFTS
       drafts: drafts
+
+  receiveUserInfo: (user) ->
+    AppDispatcher.dispatch
+      actionType: UserConstants.RECEIVED_USER_DETAIL
+      user: user
 
   receiveSingleDraft: (draft) ->
     pic = draft.picture

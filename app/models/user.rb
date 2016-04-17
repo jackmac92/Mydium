@@ -42,6 +42,10 @@ class User < ActiveRecord::Base
     Tag.where(id: followees(Tag).map(&:id))
   end
 
+  def activity_list
+    PublicActivity::Activity.where owner_type: "User", owner_id: self.id
+  end
+
   def toggle_bookmark article_id
     bookmark = bookmarks.find_by(article_id: article_id)
     bookmark ? bookmark.destroy : bookmarks.create(article_id: article_id)

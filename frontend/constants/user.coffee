@@ -1,0 +1,2 @@
+module.exports = 
+	RECEIVED_USER_DETAIL:"RECEIVED_USER_DETAIL"

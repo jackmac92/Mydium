@@ -46,12 +46,10 @@ SessionStore.__onDispatch = (payload) ->
 			`_userDrafts = payload.drafts`
 			SessionStore.__emitChange()
 		when SessionConstants.RECEIVED_FAVORITES
-			console.log "faaavs"
 			`_userFavorites = payload.articles`
 			`_metaStore["favorites"] = payload.meta`
 			SessionStore.__emitChange()
 		when SessionConstants.RECEIVED_BOOKMARKS
-			console.log "bmsss"
 			`_metaStore["bookmarks"] = payload.meta`
 			`_userBookmarks = payload.articles`
 			SessionStore.__emitChange()
