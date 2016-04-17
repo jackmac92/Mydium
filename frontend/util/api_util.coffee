@@ -254,8 +254,7 @@ ApiUtil =
       dataType: "json"
       success: ->
         SessionActions.logout()
-        if callback
-          callback()
+        callback && callback()
 
   logInUser: (userCredentials, callback) ->
     $.ajax

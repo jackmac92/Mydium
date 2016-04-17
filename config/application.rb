@@ -23,6 +23,10 @@ module Podium
     # Do not swallow errors in after_commit/after_rollback callbacks.
 
     config.paperclip_defaults = {
+      compression: {
+        png: false,
+        jpeg: '-optimize'
+      },
       :storage => :s3,
       :s3_credentials => {
         :bucket => ENV["s3_bucket"],

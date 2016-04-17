@@ -33,6 +33,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem "omniauth-google-oauth2"
 gem 'kaminari'
+gem 'paperclip-compression'
 
 gem 'public_activity'
 gem 'pg_search'

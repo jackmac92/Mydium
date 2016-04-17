@@ -29,7 +29,6 @@ var ArticleIndex = React.createClass ({
         currArticles = ArticleStore.taggedArticles(this.props.params.tag_name)
         break;
     }
-    console.log(currArticles.map(a=> a.id))
     return currArticles;
   },
   articleFetcher: function (currProps, pageNum) {
