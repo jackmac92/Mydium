@@ -20,6 +20,7 @@ class Api::ArticlesController < ApplicationController
   def create
     @article = current_user.articles.new(article_params)
     if @article.valid?
+      @article.publish! if @article.published
       @article.save!
       render :show
     else
@@ -29,8 +30,8 @@ class Api::ArticlesController < ApplicationController
 
   def update
     @article = Article.find(params[:id])
-
     if @article.update(article_params)
+      @article.publish! if @article.published
       render :show
     else
       render json: @article.errors.full_messages, status: 422

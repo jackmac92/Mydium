@@ -33,6 +33,9 @@ ActiveRecord::Base.transaction do
     if rand(8) >= 2
       article.publish! 
       article.update! published_at: time 
+      8.times do
+        User.all.sample.comments.create(body:Faker::Hacker.say_something_smart, article_id:article.id)
+      end
     end
     tags.sample(5).each do |tag|
       article.add_tag(tag)
@@ -41,16 +44,13 @@ ActiveRecord::Base.transaction do
       User.all.sample.bookmarks.create(article_id: article.id)
     end
 
-    8.times do
-      User.all.sample.comments.create(body:Faker::Hacker.say_something_smart, article_id:article.id)
-    end
   end
 
   
   
   User.all.each do |user|
     7.times do
-      user.like!(Article.all.sample)
+      user.like!(Article.viewable.sample)
       user.follow!(User.all.sample)
       user.follow!(Tag.all.sample)
       Article.all.sample.mention! user

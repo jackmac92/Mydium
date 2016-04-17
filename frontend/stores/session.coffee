@@ -11,6 +11,7 @@ SessionStore = new Store AppDispatcher
 `_userFavorites = []`
 `_userBookmarks = []`
 `_userActivity = []`
+`_metaStore = {}`
 SessionStore.currentUser = ->
 	_currentUser
 
@@ -44,6 +45,17 @@ SessionStore.__onDispatch = (payload) ->
 		when SessionConstants.RECEIVED_DRAFTS
 			`_userDrafts = payload.drafts`
 			SessionStore.__emitChange()
+		when SessionConstants.RECEIVED_FAVORITES
+			console.log "faaavs"
+			`_userFavorites = payload.articles`
+			`_metaStore["favorites"] = payload.meta`
+			SessionStore.__emitChange()
+		when SessionConstants.RECEIVED_BOOKMARKS
+			console.log "bmsss"
+			`_metaStore["bookmarks"] = payload.meta`
+			`_userBookmarks = payload.articles`
+			SessionStore.__emitChange()
+
 
 
 module.exports = SessionStore

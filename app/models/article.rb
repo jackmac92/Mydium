@@ -53,10 +53,8 @@ class Article < ActiveRecord::Base
   end
 
   def publish!
-    self.published = true
-    self.published_at = Time.now
+    update!(published: true, published_at: Time.now)
     scan_for_mentions!
-    self.save!
   end
   def unpublish!
     published = false

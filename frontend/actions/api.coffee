@@ -17,6 +17,19 @@ ApiActions =
       articles: response.articles
       actionType: ArticleConstants.TOP_ARTICLES_RECEIVED
 
+  receiveBookmarkedArticles: (payload) ->
+    AppDispatcher.dispatch
+      actionType: SessionConstants.RECEIVED_BOOKMARKS
+      articles: payload.articles
+      meta: payload.meta
+
+  receiveFavoritedArticles: (payload) ->
+    AppDispatcher.dispatch
+      actionType: SessionConstants.RECEIVED_FAVORITES
+      articles: payload.articles
+      meta: payload.meta
+    
+
   receiveUserDrafts: (drafts) ->
     AppDispatcher.dispatch
       actionType: SessionConstants.RECEIVED_DRAFTS

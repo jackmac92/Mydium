@@ -5,6 +5,7 @@ unless minified
 end
 
 json.created_at time_ago_in_words(article.created_at)
+
 if article.published
 	json.published_at time_ago_in_words(article.published_at)
 	json.pubTime article.published_at.to_i

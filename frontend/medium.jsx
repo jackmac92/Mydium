@@ -44,6 +44,7 @@ $(document).ready(function () {
           <Route path="editor" component={ArticleForm} />
           <Route path="editor/:id" component={ArticleForm} />
           <Route path="search" component={Search}/>
+          <Route path="login" component={LoginForm}/>
         </Route>
       </Router>,
     $('#root')[0]

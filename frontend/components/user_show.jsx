@@ -15,11 +15,11 @@ var UserShow = React.createClass({
 	},
   stateFromStore: function () {
     return {
+      bookmarks: SessionStore.userBookmarks(),
+      favorites: SessionStore.userFavorites(),
       drafts: SessionStore.userDrafts()
     }
       // published: SessionStore.userPublished(),
-      // favorites: SessionStore.userFavorites(),
-      // bookmarks: SessionStore.userBookmarks(),
       // activity: SessionStore.userActivity()
   },
 	handleChange: function (value) {
@@ -28,6 +28,8 @@ var UserShow = React.createClass({
   componentDidMount: function() {
     this.sessionStoreToken = SessionStore.addListener(this.__onChange)
     ApiUtil.fetchDrafts()
+    ApiUtil.fetchBookmarkedArticles()
+    ApiUtil.fetchFavoritedArticles()
   },
 
   __onChange: function () {
@@ -35,8 +37,8 @@ var UserShow = React.createClass({
   },
 
 	render: function() {
-    var drafts, draftsection;
-    if (this.state.drafts) {
+    var drafts, draftsection, bookmarksection, bookmarks, favoritesection, favorites;
+    if (this.state.drafts.length > 0) {
         drafts = this.state.drafts.map( d =>
           <ListItem onClick={() => this.context.router.push("/editor/"+d.id)} key={d.id} primaryText={d.title}/>
         );
@@ -47,14 +49,42 @@ var UserShow = React.createClass({
           )
 
     }
+    if (this.state.favorites.length > 0) {
+        favorites = this.state.favorites.map( a =>
+          <ListItem onClick={() => this.context.router.push("/article/"+a.id)} key={a.id} primaryText={a.title}/>
+        );
+        favoritesection = (
+            <List>
+              {favorites}
+            </List>            
+          )
+
+    }
+    if (this.state.bookmarks.length > 0) {
+        bookmarks = this.state.bookmarks.map( a =>
+          <ListItem onClick={() => this.context.router.push("/article/"+a.id)} key={a.id} primaryText={a.title}/>
+        );
+        bookmarksection = (
+            <List>
+              {bookmarks}
+            </List>            
+          )
+
+    }
+
     return (
       <Tabs
         value={this.state.value}
         onChange={this.handleChange}
       >
         <Tab onClick={this.handleChange.bind(this,"a")} label="Favorites" value="a" >
+          {favoritesection}
+        </Tab>
+        <Tab onClick={this.handleChange.bind(this,"a")} label="Profile" value="f" >
+          {favoritesection}
         </Tab>
         <Tab onClick={this.handleChange.bind(this,"b")} label="Bookmarks" value="b">
+          {bookmarksection}
         </Tab>
         <Tab onClick={this.handleChange.bind(this,"c")} label="Drafts" value="c">
           {draftsection}

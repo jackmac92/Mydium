@@ -16,7 +16,6 @@ ApiUtil =
         query: query 
         page: page
       success: (response) ->
-        console.log response
         ApiActions.receiveSearchResults response
       error: (e) ->
         console.log ("Search Error")
@@ -30,9 +29,6 @@ ApiUtil =
       data:
         page: page
       success: (articles) ->
-        console.log "util received"
-        console.log articles
-        console.log "util end"
         ApiActions.receiveArticles articles
       error: (e) ->
         console.log "ApiUtil#fetchArticles error"
@@ -78,11 +74,12 @@ ApiUtil =
         article_type: "user_bookmarks"
         page: page
       success: (articles) ->
-        ApiActions.receiveArticles articles
+        ApiActions.receiveBookmarkedArticles articles
       error: ->
         console.log "ApiUtil#fetch bookmarked"
       complete: ->
         callback && callback()
+
   fetchFavoritedArticles: (page, callback) ->
     $.ajax
       type: "GET"
@@ -92,16 +89,11 @@ ApiUtil =
         article_type: "user_favorites"
         page: page
       success: (articles) ->
-        ApiActions.receiveArticles articles
+        ApiActions.receiveFavoritedArticles articles
       error: ->
-        console.log "ApiUtil#fetch bookmarked"
+        console.log "ApiUtil#fetch favorited"
       complete: ->
         callback && callback()
-        id: article_id
-      success: ->
-        callback && callback()
-      error: ->
-        console.log "ApiUtil#fetchTags error"
 
   fetchTagsIndex: ->
     $.ajax
@@ -122,6 +114,7 @@ ApiUtil =
         ApiActions.receiveSingleArticle article
       error: ->
         console.log "Error fetching article"
+
   fetchDrafts: ->
     $.ajax
       type: "GET"
@@ -137,7 +130,6 @@ ApiUtil =
       type: "GET"
       dataType: "json"
       url: "api/articles/"+id
-
       success: (draft) ->
         ApiActions.receiveSingleDraft draft
         callback && callback(draft)
@@ -187,7 +179,6 @@ ApiUtil =
         callback && callback(article.id)
       error: ->
         console.log "ApiUtil#createNewArticle error"
-
 
   toggleFavorite: (article_id) ->
     $.ajax

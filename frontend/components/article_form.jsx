@@ -20,12 +20,14 @@ var ArticleForm = React.createClass({
 				body_plain_text: "",
 				body_stylized: "",
 				picture: null,
+				newPicture: false,
 				published: true
 			};
 	},
 	
 	handleFiles: function (picture) {
-		this.setState({ 
+		this.setState({
+			newPicture: true,
 			picture: picture[0]
 		});
 	},
@@ -52,10 +54,11 @@ var ArticleForm = React.createClass({
 	handleSubmit: function (e) {
 		e.preventDefault();
 		var formData = new FormData();
-
+		if (this.state.newPicture) {
+			formData.append("article[picture]", this.state.picture);
+		};
 		formData.append("article[title]", this.state.title);
 		formData.append("article[subtitle]", this.state.subTitle);
-		formData.append("article[picture]", this.state.picture);
 		formData.append("article[published]", this.state.published);
 		formData.append("article[body_plain_text]", this.state.body_plain_text);
 		formData.append("article[body_stylized]", this.state.body_stylized);
@@ -114,13 +117,13 @@ var ArticleForm = React.createClass({
 				  		{uploadPreview}
 			  		</Dropzone>
 		  		</div>
+		  		<Checkbox checked={this.state.published} onCheck={this.updatePublished} label="Publish?" />
   			</div>
 	  		<ReactQuill	theme="snow"
 	  								id="main-editor"
 	  								value={this.state.body_stylized}
 	  								onChange={this.updateBody}
 	  								/>
-	  		<Checkbox checked={this.state.published} onCheck={this.updatePublished} label="Publish?" />
 				<RaisedButton disabled={!this.formReady()} onClick={this.handleSubmit}  label={ this.state.published ? "Submit" : "Save"}/>
   		</div>
   	)
