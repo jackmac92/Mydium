@@ -6,6 +6,7 @@ import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import TextField from 'material-ui/lib/text-field';
 import Popover from 'material-ui/lib/popover/popover';
+import MenuItem from 'material-ui/lib/menus/menu-item';
 
 var Search = React.createClass({
   contextTypes: {router: React.PropTypes.object.isRequired},
@@ -86,26 +87,26 @@ var Search = React.createClass({
     this.setState({open: false})
   },
   render: function () { 
+    var resultStore = this.state.results.map(function (result) {
+      if (result._type === "User") {
+        return {
+          text: result.name,
+          value: <MenuItem key={result.id} primaryText={result.name} secondaryText="User"/>
+        }
+      } else if (result._type === "Article") {
+        return {
+          text: result.title,
+          value: <MenuItem key={result.id} primaryText={result.title} secondaryText="Article" />
+        }
+      }
+     })
     return (
       <div>
-        
-        <TextField onFocus={this.startSearch} onBlur={this.handleRequestClose} onChange={this.handleInputChange} floatingLabelText="Search" />
-        <Popover
-          style={
-            {
-              maxWidth:"444px"
-            }
-          }
-          open={this.state.open}
-          anchorEl={this.state.anchorEl}
-          anchorOrigin={{"horizontal":"middle","vertical":"bottom"}}
-          targetOrigin={{"horizontal":"middle","vertical":"top"}}
-          onRequestClose={this.handleRequestClose}
-        >
-          <List>
-            {this.resultItems()}
-          </List>
-        </Popover>
+        <AutoComplete 
+          dataSource={resultStore}
+          filter={AutoComplete.noFilter}
+          floatingLabelText="Search"
+          onUpdateInput={this.handleInputChange}/>
       </div>
     );
   }
