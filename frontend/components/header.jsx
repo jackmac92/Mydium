@@ -2,16 +2,22 @@ import React from 'react'
 import Search from './search'
 import ApiUtil from '../util/api_util'
 import SessionStore from '../stores/session'
-import Popover from 'material-ui/lib/popover/popover';
-import FlatButton from 'material-ui/lib/flat-button';
-import FontIcon from 'material-ui/lib/font-icon';
-import Paper from 'material-ui/lib/paper';
 import Headroom from 'react-headroom'
-import AutoComplete from 'material-ui/lib/auto-complete';
-import Modal from 'react-modal'
-import TextField from 'material-ui/lib/TextField'
 import LoginForm from './login_form'
 import SignupForm from './signup_form'
+import Modal from 'react-modal'
+
+import Popover from 'material-ui/lib/popover/popover';
+import FlatButton from 'material-ui/lib/flat-button';
+import IconButton from 'material-ui/lib/icon-button';
+import FontIcon from 'material-ui/lib/font-icon';
+import Paper from 'material-ui/lib/paper';
+import AutoComplete from 'material-ui/lib/auto-complete';
+import TextField from 'material-ui/lib/TextField'
+import ActionAccountCircle from 'material-ui/lib/svg-icons/action/account-circle'
+import IconMenu from 'material-ui/lib/menus/icon-menu';
+import MenuItem from 'material-ui/lib/menus/menu-item';
+
 
 var Header = React.createClass({
 	contextTypes: {
@@ -64,22 +70,24 @@ var Header = React.createClass({
 		authForm = (this.state.formForSignIn) ? <LoginForm toggleAuth={this.toggleFormState} /> : <SignupForm toggleAuth={this.toggleFormState} /> 
 		if (SessionStore.isLoggedIn()) {
 			userActionButton = (
-				<div className="user-action-button-header">
-	        <FlatButton className="header-right-nav"
-	          onClick={this.handleTouchTap}
-	          label={<FontIcon id="header-user-icon" className="material-icons">{"account_circle"}</FontIcon>} / >
-	        <Popover
-	          open={this.state.open}
-	          anchorEl={this.state.anchorEl}
-	          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-	          targetOrigin={{horizontal: 'left', vertical: 'top'}}
-	          onRequestClose={this.handleRequestClose}
-	        >
-	            <FlatButton onClick={this.goTo.bind(this,"/editor")} label="New Article"/>
-	            <FlatButton onClick={this.goTo.bind(this,"me/bookmarks")} label="Bookmarks"/>
-	            <FlatButton onClick={this.goTo.bind(this,"/search")} label="Search"/>
-	            <FlatButton onClick={this.logOut} label="Sign Out"/>
-	        </Popover>
+				<div>
+					<div className="user-action-button-header">
+		        <IconButton onClick={this.handleTouchTap} className="header-right-nav">
+		          <ActionAccountCircle id="header-user-icon" />}
+		         </IconButton>
+		        <Popover
+		          open={this.state.open}
+		          anchorEl={this.state.anchorEl}
+		          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+		          targetOrigin={{horizontal: 'left', vertical: 'top'}}
+		          onRequestClose={this.handleRequestClose}
+		        >
+		            <FlatButton onClick={this.goTo.bind(this,"/editor")} label="New Article"/>
+		            <FlatButton onClick={this.goTo.bind(this,"me/bookmarks")} label="Bookmarks"/>
+		            <FlatButton onClick={this.goTo.bind(this,"/search")} label="Search"/>
+		            <FlatButton onClick={this.logOut} label="Sign Out"/>
+		        </Popover>
+					</div>
 				</div>
 			)
 		} else {

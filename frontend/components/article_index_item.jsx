@@ -5,7 +5,10 @@ import Tag from './tag'
 import ApiUtil from '../util/api_util'
 import IconButton from 'material-ui/lib/icon-button'
 import FontIcon from 'material-ui/lib/font-icon'
-
+import ActionFavorite from 'material-ui/lib/svg-icons/action/favorite';
+import ActionFavoriteBorder from 'material-ui/lib/svg-icons/action/favorite-border';
+import ActionBookmark from 'material-ui/lib/svg-icons/action/bookmark';
+import ActionBookmarkBorder from 'material-ui/lib/svg-icons/action/bookmark-border';
 
 const ArticleCard = React.createClass({
  	contextTypes: {router: React.PropTypes.object.isRequired},
@@ -26,8 +29,8 @@ const ArticleCard = React.createClass({
  	render: function() {
  		var tags, bookmark_style, fav_style;
  		if (this.props.article.user) {
- 			bookmark_style = (this.props.article.user.bookmarked_article) ? "":"_border";
- 			fav_style = (this.props.article.user.faved_article) ? "":"_border";
+ 			bookmark_style = (this.props.article.user.bookmarked_article) ? <ActionBookmark />: <ActionBookmarkBorder />;;
+ 			fav_style = (this.props.article.user.faved_article) ? <ActionFavorite />: <ActionFavoriteBorder />;
  		}
  		if (this.props.article.tags) {
  			tags = this.props.article.tags.map( t => <Tag key={t.id} tag={t} />);
@@ -48,8 +51,7 @@ const ArticleCard = React.createClass({
 					/>
 					<CardMedia onClick={this.viewArticle}>
 					  <img className="article-card-image" src={this.props.article.picture} />
-					</CardMedia>
-					/>
+					</CardMedia>/>
 					<CardTitle
 						className="article-card-title"
 						onClick={this.viewArticle}
@@ -61,10 +63,10 @@ const ArticleCard = React.createClass({
 			    <Link className="card-read-more" label="Read More" href={"#/article/"+this.props.article.id} />
 			    <CardActions>
 			      <IconButton disabled={this.props.noUser} tooltipPosition="top-right" tooltip="favorite" onClick={this.toggleFavorite.bind(this, this.props.article.id)} className="article-index-favorite">
-			      	<FontIcon className="material-icons">{"favorite"+fav_style}</FontIcon>
+			      	{fav_style}
 			      </IconButton>
 			      <IconButton disabled={this.props.noUser} tooltipPosition="top-left" tooltip="bookmark" onClick={this.toggleBookmark.bind(this, this.props.article.id)} className="article-index-bookmark">
-			      	<FontIcon className="material-icons">{"bookmark"+bookmark_style}</FontIcon>
+			      	{bookmark_style}
 			      </IconButton>
 			    </CardActions>
 			  </Card>
