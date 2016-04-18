@@ -18,7 +18,10 @@ ApiActions =
       meta: response.meta
       articles: response.articles
       actionType: ArticleConstants.TOP_ARTICLES_RECEIVED
-
+  receiveUserTags: (tags) ->
+    AppDispatcher.dispatch
+      actionType: TagConstants.USER_TAGS_RECEIVED
+      tags: tags
   receiveBookmarkedArticles: (payload) ->
     AppDispatcher.dispatch
       actionType: SessionConstants.RECEIVED_BOOKMARKS

@@ -5,6 +5,7 @@ import AutoComplete from 'material-ui/lib/auto-complete';
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import TextField from 'material-ui/lib/text-field';
+import Popover from 'material-ui/lib/popover/popover';
 
 var Search = React.createClass({
   contextTypes: {router: React.PropTypes.object.isRequired},
@@ -13,6 +14,7 @@ var Search = React.createClass({
     return { 
       query: "",
       results: [],
+      open:false,
       meta: {}
     };
   },
@@ -35,7 +37,7 @@ var Search = React.createClass({
   },
   
   handleInputChange: function (t) {
-    var query = t.currentTarget.value
+    var query = t.currentTarget ? t.currentTarget.value : t
     this.setState({ query: query }, function () {      
       if (query.length > 2) {
         this.search();
@@ -74,14 +76,36 @@ var Search = React.createClass({
       }
     }.bind(this));
   },
-  
+  startSearch: function (e) {
+    this.setState({
+      open: true,
+      anchorEl:e.currentTarget
+    })
+  },
+  handleRequestClose: function () {
+    this.setState({open: false})
+  },
   render: function () { 
     return (
-      <div>
-        <TextField onChange={this.handleInputChange} floatingLabelText="Search" />
-        <List>
-          {this.resultItems()}
-        </List>
+      <div style={{float:"left"}}>
+        <TextField onFocus={this.startSearch} onBlur={this.handleRequestClose} onChange={this.handleInputChange} floatingLabelText="Search" />
+        <Popover
+          style={
+            {
+              maxHeight:"200px",
+              maxWidth:"200px"
+            }
+          }
+          open={this.state.open}
+          anchorEl={this.state.anchorEl}
+          anchorOrigin={{"horizontal":"middle","vertical":"bottom"}}
+          targetOrigin={{"horizontal":"middle","vertical":"top"}}
+          onRequestClose={this.handleRequestClose}
+        >
+          <List>
+            {this.resultItems()}
+          </List>
+        </Popover>
       </div>
     );
   }

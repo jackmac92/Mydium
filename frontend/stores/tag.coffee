@@ -6,7 +6,8 @@ TagStore = new Store AppDispatcher
 
 `_tags = {
 	featured_tags: [],
-	user_tags: []
+	user_tags: [],
+	all_tags: []
 	}`
 
 TagStore.featured = ->
@@ -18,10 +19,13 @@ TagStore.user = ->
 resetTags = (tags) ->
   `_tags = tags`
 
+TagStore.all = ->
+	`_tags.all_tags.slice()`
+
 TagStore.__onDispatch = (payload) ->
   switch payload.actionType
     when TagConstants.TAGS_RECEIVED
-      resetTags payload.tags
-      TagStore.__emitChange()
+    	resetTags payload.tags
+    	TagStore.__emitChange()
 
 module.exports = TagStore

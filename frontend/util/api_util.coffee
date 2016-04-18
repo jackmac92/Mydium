@@ -149,6 +149,49 @@ ApiUtil =
         callback && callback(article.id)
       error: ->
         console.log "ApiUtil#createNewArticle error"
+
+  fetchUserTags: ->
+    $.ajax
+      type: "PATCH"
+      dataType: "json"
+      url: "api/user"
+      data:
+        receiver: "tag"
+      success: (tags) ->
+        ApiActions.receiveUserTags tags
+      error: (e) ->
+        console.log e
+    
+
+  tagFollowCreate: (tagId, callback) ->
+    $.ajax
+      type: "PATCH"
+      dataType: "json"
+      url: "api/user"
+      data:
+        receiver: "tag"
+        tag_action: "follow"
+        id: tagId
+      success: (tags) ->
+        ApiActions.receiveUserTags tags
+        callback && callback()
+      error: (e) ->
+        console.log e
+
+  tagFollowDestroy: (tagId, callback) ->
+    $.ajax
+      type: "PATCH"
+      dataType: "json"
+      url: "api/user"
+      data:
+        receiver: "tag"
+        id: tagId
+        tag_action: "unfollow"
+      success: (tags) ->
+        ApiActions.receiveUserTags tags
+      error: (e) ->
+        console.log e
+
   createArticleComment: (commentData) ->
     $.ajax
       type: "POST"

@@ -9,6 +9,11 @@ class Api::UsersController < ApplicationController
 		render 'api/articles/drafts'
 	end
 
+	def tags
+		@tags = current_user.followed_tags
+		render 'api/tags/user_tags'
+	end
+
 	def update
 		case params[:receiver]
 		when "article"
@@ -23,7 +28,17 @@ class Api::UsersController < ApplicationController
 			render 'api/articles/show'
 			return
 		when "tag"
-			@tag = Tag.find params[:id]
+			case params[:tag_action]
+			when "follow"
+				@tag = Tag.find params[:id]
+				current_user.follow! @tag
+			when "unfollow"
+				@tag = Tag.find params[:id]
+				current_user.unfollow! @tag
+			end
+			@tags = current_user.followed_tags
+			render 'api/tags/user_tags'
+			return
 		when "user"
 			@user = User.find params[:id]
 			case params[:user_action]

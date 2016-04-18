@@ -18,9 +18,6 @@ header.header {
   float: right;
 }
 
-.header-user-icon {
-  font-size: 36px;
-}
 div.header-searchbar {
   width: 200px;
   height: 10px;
@@ -41,12 +38,17 @@ div.header-searchbar {
 .user-action-button-header {
   float: right;
   padding: 6px !important;
-  margin: 5px 15px 0 0 !important;
+  margin: 5px 25px 0 0 !important;
   text-transform: none !important;
 }
 .user-action-button-header > * {
   float: left;
 }
-#header-user-icon {
-  font-size: 50px !important;
-}
+// #header-user-icon {
+//   height: 100% !important;
+//   width: 100% !important;
+// }
+// .user-action-button-header > .header-right-nav > button {
+//   height: 50px !important;
+//   width: 50px !important;
+// }

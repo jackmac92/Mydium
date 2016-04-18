@@ -18,7 +18,6 @@ import ActionAccountCircle from 'material-ui/lib/svg-icons/action/account-circle
 import IconMenu from 'material-ui/lib/menus/icon-menu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
 
-
 var Header = React.createClass({
 	contextTypes: {
 		router: React.PropTypes.object.isRequired
@@ -70,25 +69,19 @@ var Header = React.createClass({
 		authForm = (this.state.formForSignIn) ? <LoginForm toggleAuth={this.toggleFormState} /> : <SignupForm toggleAuth={this.toggleFormState} /> 
 		if (SessionStore.isLoggedIn()) {
 			userActionButton = (
-				<div>
 					<div className="user-action-button-header">
-		        <IconButton onClick={this.handleTouchTap} className="header-right-nav">
-		          <ActionAccountCircle id="header-user-icon" />}
-		         </IconButton>
-		        <Popover
-		          open={this.state.open}
-		          anchorEl={this.state.anchorEl}
+		        <IconMenu
+		        	className="header-right-nav"
+		        	iconButtonElement={<IconButton><ActionAccountCircle />}</IconButton>}
 		          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
 		          targetOrigin={{horizontal: 'left', vertical: 'top'}}
-		          onRequestClose={this.handleRequestClose}
 		        >
-		            <FlatButton onClick={this.goTo.bind(this,"/editor")} label="New Article"/>
-		            <FlatButton onClick={this.goTo.bind(this,"me/bookmarks")} label="Bookmarks"/>
-		            <FlatButton onClick={this.goTo.bind(this,"/search")} label="Search"/>
-		            <FlatButton onClick={this.logOut} label="Sign Out"/>
-		        </Popover>
+		        	<MenuItem onTouchTap={this.goTo.bind(this,"/editor")} primaryText="New Article"/>
+		        	<MenuItem onTouchTap={this.goTo.bind(this,"/me")} primaryText="Account"/>
+	            <MenuItem onTouchTap={this.goTo.bind(this,"/search")} primaryText="Search"/>
+	            <MenuItem onTouchTap={this.logOut} primaryText="Sign Out"/>
+		        </IconMenu>
 					</div>
-				</div>
 			)
 		} else {
 			userActionButton = (
@@ -114,6 +107,7 @@ var Header = React.createClass({
     		<Paper className="header-wrap" zDepth={1}>
 		    	<header className="header">
 		    		<div onClick={() => router.push("/")} id="logo" />
+		    		<Search />
 		    		{userActionButton}
 		    	</header>
     		</Paper>

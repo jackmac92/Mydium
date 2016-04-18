@@ -1,6 +1,7 @@
 Store = require('flux/utils').Store
 AppDispatcher = require '../dispatchers/dispatcher'
 SessionConstants = require '../constants/session'
+TagConstants = require '../constants/tag'
 
 SessionStore = new Store AppDispatcher
 
@@ -12,6 +13,8 @@ SessionStore = new Store AppDispatcher
 `_userBookmarks = []`
 `_userActivity = []`
 `_metaStore = {}`
+`_userTags = []`
+
 SessionStore.currentUser = ->
 	_currentUser
 
@@ -28,6 +31,8 @@ SessionStore.userBookmarks = ->
 	_userBookmarks
 SessionStore.userActivity = ->
 	_userActivity
+SessionStore.userTags = ->
+	`_userTags.slice()`
 
 SessionStore.currentUserHasBeenFetched = ->
 	_currentUserHasBeenFetched
@@ -53,6 +58,10 @@ SessionStore.__onDispatch = (payload) ->
 			`_metaStore["bookmarks"] = payload.meta`
 			`_userBookmarks = payload.articles`
 			SessionStore.__emitChange()
+		when TagConstants.USER_TAGS_RECEIVED
+			`_userTags = payload.tags`
+			SessionStore.__emitChange()
+			
 
 
 

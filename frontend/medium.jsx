@@ -15,6 +15,7 @@ import ArticleIndex from './components/article_index'
 import ArticleDetail from './components/article_detail'
 import ArticleForm from './components/article_form'
 import Search from './components/search'
+import TagSelector from './components/tag_selector.jsx'
 
 function _requireLoggedIn(nextState, replace, asyncCompletionCallback) {
   if (!SessionStore.currentUserHasBeenFetched()) {
@@ -41,6 +42,7 @@ $(document).ready(function () {
           <Route path="tags/:tag_name" component={ArticleIndex} />
           <Route path="article/:id" component={ArticleDetail} />       
           <Route path="users/:id" component={OtherShow} />
+          <Route path="tagselect" component={TagSelector} />
           <Route path="me" onEnter={_requireLoggedIn} component={SelfShow} />
           <Route path="editor" component={ArticleForm} />
           <Route path="editor/:id" component={ArticleForm} />
