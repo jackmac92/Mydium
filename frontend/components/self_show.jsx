@@ -6,6 +6,7 @@ import UserStore from '../stores/user'
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 import ApiUtil from '../util/api_util'
+import TagSelector from './tag_selector'
 
 var SelfShow = React.createClass({
   contextTypes: {router: React.PropTypes.object.isRequired},

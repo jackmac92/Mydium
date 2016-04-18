@@ -17,10 +17,12 @@ class User < ActiveRecord::Base
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
-  has_many :bookmarked_articles, through: :bookmarks, source: :article
-  
   has_many :article_views, dependent: :destroy
+  has_many :article_reads, dependent: :destroy
+  
   has_many :viewed_articles, through: :article_views, source: :article
+  has_many :read_articles, through: :article_reads, source: :article
+  has_many :bookmarked_articles, through: :bookmarks, source: :article
 
   acts_as_liker
   acts_as_mentionable
@@ -52,6 +54,6 @@ class User < ActiveRecord::Base
   end
 
   def recent_articles_excluding article_id
-  	articles.order(:created_at).limit(5).where.not(id: article_id)
+  	articles.where(published: true).order(:created_at).limit(5).where.not(id: article_id)
   end
 end

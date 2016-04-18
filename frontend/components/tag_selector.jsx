@@ -63,6 +63,8 @@ var TagSelector = React.createClass({
 		      filter={AutoComplete.fuzzyFilter}
 		      onNewRequest={this.handleRequest}
 		      dataSource={dataStore} />
+		    <h3>Here are the tags you currently follow</h3>
+		    <h6>Click a tag below to remove it from your list</h6>
 				<List>
 				{userTagList}
 				</List>

@@ -20,31 +20,43 @@ var ArticleDetail = React.createClass({
     return {article: ArticleStore.getDetail()};
   },
   __onChange: function () {
-    this.setState(this.stateFromStore());
+    var currState = this.stateFromStore()
+    currState.readTimeElapsed = false
+    currState.scrolledToEnd = false
+    currState.markedRead = false
+    this.setState(currState);
+    clearTimeout(this.readTimer)
+    var that = this;
+    this.readTimer = setTimeout(() => that.setState({readTimeElapsed: true}), 60000 * parseInt(currState.article.read_time))
   },
   getInitialState: function () {
     var currState = this.stateFromStore();
     currState.position = 0
     return currState
   },
+  tryMarkArticleRead: function () {
+    if (this.state.readTimeElapsed && this.state.scrolledToEnd) {
+      ApiUtil.markArticleRead(this.state.article.id)
+      this.setState({markedRead: true})
+    };
+  },
   componentWillReceiveProps: function (nextProps) {
+    this.tryMarkArticleRead()
     ApiUtil.fetchArticle(parseInt(nextProps.params.id));
   },
   componentDidMount: function () {
     this.articleStoreToken = ArticleStore.addListener(this.__onChange);
     ApiUtil.fetchArticle(parseInt(this.props.params.id));
     window.addEventListener('scroll', this.handleScroll);
-    if (SessionStore.isLoggedIn()) {
-      this.setState({followsAuthor: this.state.article.user.follows_author})
-    }
   },
   componentWillUnmount: function () {
+    this.tryMarkArticleRead()
     this.articleStoreToken.remove();
     window.removeEventListener('scroll', this.handleScroll)
   },
 
   handleFollowAuthor: function () {
-    ApiUtil.toggleFollow(this.state.article.author.id, () => this.setState({followsAuthor: !this.state.followsAuthor}) )
+    ApiUtil.toggleFollow(this.state.article.author.id)
   },
 
   handleUnpublish: function () {
@@ -57,8 +69,9 @@ var ArticleDetail = React.createClass({
 
   handleScroll: function (e) {
     var scrollPercent = 100 * $(window).scrollTop() / ($("article").height() - $(window).height());
-    if (scrollPercent >= 98) {
-      // ApiUtil.markArticleRead(this.state.article.id)
+    if (scrollPercent >= 98 && !this.state.markedRead) {
+      this.setState({scrolledToEnd: true})
+      this.tryMarkArticleRead()
     }
     this.setState({position: scrollPercent})
   },
@@ -75,7 +88,7 @@ var ArticleDetail = React.createClass({
       if (this.state.article.author.id == SessionStore.currentUser().id) {
         delete_button = <RaisedButton label="Unpublish" onClick={this.handleUnpublish}/>
       } else {
-        follow_button = <Checkbox value={this.state.followsAuthor} onCheck={this.handleFollowAuthor} label={"Follow " + this.state.article.author.name} />
+        follow_button = <Checkbox checked={this.state.article.user.follows_author} onCheck={this.handleFollowAuthor} label={"Follow " + this.state.article.author.name} />
       }
     }
 
@@ -85,6 +98,7 @@ var ArticleDetail = React.createClass({
         <div>
           <hr />
           <List>
+            <h4>{"Other Articles authored by " + this.state.article.author.name}</h4>
             {article_items}
           </List>
         </div>

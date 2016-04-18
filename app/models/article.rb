@@ -18,6 +18,8 @@ class Article < ActiveRecord::Base
 
   has_many :article_views, dependent: :destroy
   has_many :users_who_viewed, through: :article_views, source: :user
+  has_many :article_reads, dependent: :destroy
+  has_many :users_who_read, through: :article_reads, source: :user
 
   scope :popular, -> { 
     select("articles.*, count(article_views.id) AS views_count")

@@ -4,11 +4,9 @@ import ArticleStore from '../stores/articles'
 import SessionStore from '../stores/session'
 import Tag from './tag'
 import ApiUtil from '../util/api_util'
-import Navigation from 'react-toolbox/lib/navigation'
 
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
-// import {Sticky, StickyContainer} from 'react-sticky'
 
 
 var Sidebar = React.createClass({
@@ -48,7 +46,7 @@ var Sidebar = React.createClass({
 				var user_tags = this.state.user_tags.map( ut => <Tag className="sidebar-tag" key={ut.id} tag={ut}/> )
 				user_tags_section = (
 					<li>
-						<h3>Your Tags</h3>
+						<h3>Your Tags</h3> <a href="/#/tagselect">(Edit)</a>
 						<hr />
 						{user_tags}
 					</li>

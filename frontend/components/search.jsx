@@ -15,7 +15,6 @@ var Search = React.createClass({
     return { 
       query: "",
       results: [],
-      open:false,
       meta: {}
     };
   },
@@ -77,32 +76,26 @@ var Search = React.createClass({
       }
     }.bind(this));
   },
-  startSearch: function (e) {
-    this.setState({
-      open: true,
-      anchorEl:e.currentTarget
-    })
-  },
-  handleRequestClose: function () {
-    this.setState({open: false})
-  },
   render: function () { 
     var resultStore = this.state.results.map(function (result) {
       if (result._type === "User") {
         return {
           text: result.name,
-          value: <MenuItem key={result.id} primaryText={result.name} secondaryText="User"/>
+          value: <MenuItem key={result.id} primaryText={result.name} secondaryText="User" onClick={() => this.context.router.push("/users/"+result.id)}/>
         }
       } else if (result._type === "Article") {
         return {
           text: result.title,
-          value: <MenuItem key={result.id} primaryText={result.title} secondaryText="Article" />
+          value: <MenuItem key={result.id} primaryText={result.title} secondaryText="Article" onClick={() => this.context.router.push("/article/"+result.id)} /> 
         }
       }
-     })
+     }.bind(this))
     return (
       <div>
-        <AutoComplete 
+        <AutoComplete
+          anchorOrigin={{"horizontal":"right","vertical":"bottom"}}
+          targetOrigin={{"horizontal":"right","vertical":"top"}}
+          listStyle={{width:"100%"}}
           dataSource={resultStore}
           filter={AutoComplete.noFilter}
           floatingLabelText="Search"

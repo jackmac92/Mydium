@@ -18,13 +18,15 @@ class Api::UsersController < ApplicationController
 		case params[:receiver]
 		when "article"
 			@article = Article.find params[:id]
-			@is_mini = true # To reduce json render
 			case params[:user_action]
 			when "toggle_favorite"
 				current_user.toggle_like! @article
 			when "toggle_bookmark"
 				current_user.toggle_bookmark params[:id]
+			when "mark_read"
+				current_user.article_reads.create(article_id:@article.id)
 			end
+			@is_mini = true # To reduce json render
 			render 'api/articles/show'
 			return
 		when "tag"

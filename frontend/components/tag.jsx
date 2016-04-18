@@ -1,14 +1,16 @@
 var React = require('react');
-import Link from 'react-toolbox/lib/link'
 import Paper from 'material-ui/lib/paper';
+import FlatButton from 'material-ui/lib/flat-button';
 
 var Tag = React.createClass({
 
 	render: function() {
 		return (
-			<Paper className="tag">
-				<Link label={this.props.tag.name} href={"#/tags/"+this.props.tag.name} />
-			</Paper>
+			<a href={"#/tags/"+this.props.tag.name} >
+				<Paper className="tag">
+					{this.props.tag.name}
+				</Paper>
+			</a>
 		);
 	}
 

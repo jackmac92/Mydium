@@ -43,7 +43,7 @@ $(document).ready(function () {
           <Route path="article/:id" component={ArticleDetail} />       
           <Route path="users/:id" component={OtherShow} />
           <Route path="tagselect" component={TagSelector} />
-          <Route path="me" onEnter={_requireLoggedIn} component={SelfShow} />
+          <Route path="me" component={SelfShow} />
           <Route path="editor" component={ArticleForm} />
           <Route path="editor/:id" component={ArticleForm} />
           <Route path="search" component={Search}/>

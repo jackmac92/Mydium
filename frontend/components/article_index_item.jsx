@@ -1,10 +1,10 @@
 import React from 'react'
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/lib/card'
-import Link from 'react-toolbox/lib/link'
 import Tag from './tag'
 import ApiUtil from '../util/api_util'
 import IconButton from 'material-ui/lib/icon-button'
 import FontIcon from 'material-ui/lib/font-icon'
+import FlatButton from 'material-ui/lib/flat-button'
 import ActionFavorite from 'material-ui/lib/svg-icons/action/favorite';
 import ActionFavoriteBorder from 'material-ui/lib/svg-icons/action/favorite-border';
 import ActionBookmark from 'material-ui/lib/svg-icons/action/bookmark';
@@ -60,7 +60,6 @@ const ArticleCard = React.createClass({
 			    <CardText>
 			    	{this.props.article.body}
 			    </CardText>
-			    <Link className="card-read-more" label="Read More" href={"#/article/"+this.props.article.id} />
 			    <CardActions>
 			      <IconButton disabled={this.props.noUser} tooltipPosition="top-right" tooltip="favorite" onClick={this.toggleFavorite.bind(this, this.props.article.id)} className="article-index-favorite">
 			      	{fav_style}

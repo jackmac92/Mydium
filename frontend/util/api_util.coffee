@@ -259,7 +259,7 @@ ApiUtil =
         id: user_id
         user_action: "toggle_follow"
       success: ->
-        successCallback && successCallback()
+        ApiActions.toggleDetailFollow()
       error: (e) ->
         console.log "Gone wrong following user"
         console.log e

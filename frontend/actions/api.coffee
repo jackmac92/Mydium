@@ -6,6 +6,10 @@ SessionConstants = require '../constants/session'
 UserConstants = require '../constants/user'
 
 ApiActions =
+  toggleDetailFollow: ->
+    AppDispatcher.dispatch
+      actionType: ArticleConstants.DETAIL_UPDATE
+      attr: "toggle_follow"
   receiveArticles: (response) ->
     AppDispatcher.dispatch
       actionType: ArticleConstants.ARTICLES_RECEIVED

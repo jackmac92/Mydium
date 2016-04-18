@@ -22,15 +22,15 @@ SessionStore.isLoggedIn = ->
 	!!_currentUser
 
 SessionStore.userDrafts = ->
-	_userDrafts
+	`_userDrafts.slice()`
 SessionStore.userPublished = ->
-	_userPublished
+	`_userPublished.slice()`
 SessionStore.userFavorites = ->
-	_userFavorites
+	`_userFavorites.slice()`
 SessionStore.userBookmarks = ->
-	_userBookmarks
+	`_userBookmarks.slice()`
 SessionStore.userActivity = ->
-	_userActivity
+	`_userActivity.slice()`
 SessionStore.userTags = ->
 	`_userTags.slice()`
 

@@ -77,6 +77,7 @@ var Header = React.createClass({
 		          targetOrigin={{horizontal: 'left', vertical: 'top'}}
 		        >
 		        	<MenuItem onTouchTap={this.goTo.bind(this,"/editor")} primaryText="New Article"/>
+		        	<MenuItem onTouchTap={this.goTo.bind(this,"/tagselect")} primaryText="Select Followed Tags"/>
 		        	<MenuItem onTouchTap={this.goTo.bind(this,"/me")} primaryText="Account"/>
 	            <MenuItem onTouchTap={this.goTo.bind(this,"/search")} primaryText="Search"/>
 	            <MenuItem onTouchTap={this.logOut} primaryText="Sign Out"/>
@@ -97,7 +98,7 @@ var Header = React.createClass({
 						<FlatButton style={{float:"right"}} onClick={this.modalClose} label="close" />
 						{authForm}
 					</Modal>
-					<FlatButton onClick={this.modalOpen} className="user-action-button-header" label="Log In/ Sign Up" />
+					<FlatButton onClick={this.modalOpen} className="user-login-button-header" label="Log In/ Sign Up" />
 				</div>
 
 			)

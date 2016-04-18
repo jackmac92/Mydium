@@ -71,6 +71,10 @@ var ArticleIndex = React.createClass ({
     return this.setState(this.stateFromStore());
   },
 
+  sessionChange: function () {
+    this.setState({currentUser:SessionStore.currentUser()})
+  },
+
   getInitialState: function () {
     var init = this.stateFromStore();
     init.fetching = true;
@@ -80,7 +84,9 @@ var ArticleIndex = React.createClass ({
 
   componentDidMount: function () {
     this.articleStoreToken = ArticleStore.addListener(this.__onChange);
+    this.SessionStoreToken = SessionStore.addListener(this.sessionChange)
     this.articleFetcher(this.props)
+    ApiUtil.fetchCurrentUser()
     window.addEventListener('scroll', this.handleScroll);
 
   },
@@ -92,10 +98,7 @@ var ArticleIndex = React.createClass ({
   componentWillUnmount: function () {
     window.removeEventListener('scroll', this.handleScroll);
     this.articleStoreToken.remove();
-  },
-
-  sendToFullEditor: function (text) {
-    this.context.router.push('/editor')
+    this.SessionStoreToken.remove()
   },
 
   handleScroll: function (e) {
@@ -110,7 +113,7 @@ var ArticleIndex = React.createClass ({
     var articles, progress;
     if (this.state.articles) {
         articles = this.state.articles.map( article => 
-          <ArticleIndexItem key={article.id} noUser={!SessionStore.currentUser()} article={article} />
+          <ArticleIndexItem key={article.id} noUser={!this.state.currentUser} article={article} />
         );
     }
     if (this.state.fetching) {

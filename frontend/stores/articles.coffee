@@ -3,7 +3,7 @@ AppDispatcher = require '../dispatchers/dispatcher'
 ArticleConstants = require '../constants/article'
 
 ArticleStore = new Store AppDispatcher
-
+`_popularArticles = []`
 `_mainStore = {}`
 `_meta = {}`
 `_articleDetail = null`
@@ -15,10 +15,7 @@ ArticleStore.all = ->
   result.sort (a,b) -> b.pubTime - a.pubTime
     
 ArticleStore.topArticles = ->
-  articles = []
-  for id, article of _mainStore
-    articles.push article if article.topArticle
-  articles
+  _popularArticles
 
 ArticleStore.bookmarkedArticles = ->
   articles = []
@@ -60,6 +57,8 @@ addArticles = (articles) ->
   for article in articles
     _mainStore[article.id] = article
   null
+toggleFollowOfDetail = ->
+  `_articleDetail.user.follows_author = !_articleDetail.user.follows_author`
 
 addComment = (comment) ->
   _articleDetail.comments.push comment
@@ -77,7 +76,7 @@ ArticleStore.__onDispatch = (payload) ->
       resetMeta payload.meta
       ArticleStore.__emitChange()
     when ArticleConstants.TOP_ARTICLES_RECEIVED
-      addArticles payload.articles
+      `_popularArticles = payload.articles`
       ArticleStore.__emitChange()
     when ArticleConstants.TAG_ARTICLES_RECEIVED
       addArticles payload.articles
@@ -97,6 +96,11 @@ ArticleStore.__onDispatch = (payload) ->
     when ArticleConstants.COMMENT_DELETED
       removeComment payload.commentId
       ArticleStore.__emitChange()
+    when ArticleConstants.DETAIL_UPDATE
+      switch payload.attr
+        when "toggle_follow"
+          toggleFollowOfDetail()
+          ArticleStore.__emitChange()
 
 
 module.exports = ArticleStore

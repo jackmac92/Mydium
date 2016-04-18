@@ -67,7 +67,7 @@ main {
   float:right;
   width: 35%;
   left: 60%;
-  position: fixed;
+
 }
 #content-sidebar {
   display: block;
@@ -132,10 +132,6 @@ main {
 button.article-index-bookmark {
   float: right;
   height: 50px;
-}
-
-.card-read-more {
-  left: 200px;  
 }
 
 .auto-enter {
