@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408175957) do
+ActiveRecord::Schema.define(version: 20160418135407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,16 @@ ActiveRecord::Schema.define(version: 20160408175957) do
   add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
+
+  create_table "article_reads", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "article_reads", ["article_id"], name: "index_article_reads_on_article_id", using: :btree
+  add_index "article_reads", ["user_id"], name: "index_article_reads_on_user_id", using: :btree
 
   create_table "article_views", force: :cascade do |t|
     t.integer  "user_id"
@@ -191,6 +201,8 @@ ActiveRecord::Schema.define(version: 20160408175957) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "article_reads", "articles"
+  add_foreign_key "article_reads", "users"
   add_foreign_key "article_views", "articles"
   add_foreign_key "article_views", "users"
   add_foreign_key "articles", "users"
