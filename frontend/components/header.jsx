@@ -107,8 +107,10 @@ var Header = React.createClass({
     		<Paper className="header-wrap" zDepth={1}>
 		    	<header className="header">
 		    		<div onClick={() => router.push("/")} id="logo" />
-		    		<Search />
-		    		{userActionButton}
+		    		<div className="header-right">
+			    		<Search id="searchbar" />
+			    		{userActionButton}
+		    		</div>
 		    	</header>
     		</Paper>
 			</Headroom>

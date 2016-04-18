@@ -87,13 +87,12 @@ var Search = React.createClass({
   },
   render: function () { 
     return (
-      <div style={{float:"left"}}>
+      <div>
         <TextField onFocus={this.startSearch} onBlur={this.handleRequestClose} onChange={this.handleInputChange} floatingLabelText="Search" />
         <Popover
           style={
             {
-              maxHeight:"200px",
-              maxWidth:"200px"
+              maxWidth:"444px"
             }
           }
           open={this.state.open}

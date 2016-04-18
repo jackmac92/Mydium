@@ -1,26 +1,35 @@
 header.header {
   background: white;
   height: 70px;
-  margin-bottom: 30px;
+  // margin-bottom: 30px;
 }
 .header-nav {
-  height: 60px;
+  // height: 60px;
   width: 90%;
-  display: block;
+  // display: block;
   font-size: 24px;
 }
 
-.header-nav-left {
+// .header-nav-left {
+//   float: left;
+// }
+
+// .header-nav-right {
+//   float: right;
+// }
+
+// div.header-searchbar {
+//   width: 200px;
+//   height: 10px;
+// }
+
+#searchbar {
   float: left;
+  width: 30px;
 }
-
-.header-nav-right {
+.header-right {
   float: right;
-}
-
-div.header-searchbar {
-  width: 200px;
-  height: 10px;
+  width: 500px;
 }
 
 #logo {
@@ -36,14 +45,18 @@ div.header-searchbar {
 }
 
 .user-action-button-header {
-  float: right;
-  padding: 6px !important;
-  margin: 5px 25px 0 0 !important;
-  text-transform: none !important;
+  // float: right;
+  // padding: 6px !important;
+  width: 50px !important;
+  position: absolute;
+  top: 13px;
+  right: 20px;
+  // margin: 5px 25px 0 0 !important;
+  // text-transform: none !important;
 }
-.user-action-button-header > * {
-  float: left;
-}
+// .user-action-button-header > * {
+//   float: left;
+// }
 // #header-user-icon {
 //   height: 100% !important;
 //   width: 100% !important;
