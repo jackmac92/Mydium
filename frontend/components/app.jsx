@@ -29,7 +29,7 @@ var App = React.createClass({
   render: function () {
     return (
       <div>
-        <Header ref="appHeader" currentUser={this.state.currentUser}/>
+        <Header currentUser={this.state.currentUser}/>
         <content className="curr-page-content">
           {this.props.children}
         </content>

@@ -40,7 +40,10 @@ class Article < ActiveRecord::Base
 
   include PgSearch
   multisearchable against: [:title, :subtitle, :body_plain_text],
-                    :if => :published
+                  using: {
+                    tsearch: {prefix: true}
+                  },
+                  :if => :published
 
   include PublicActivity::Model
   tracked 

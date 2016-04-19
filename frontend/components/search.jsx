@@ -81,7 +81,7 @@ var Search = React.createClass({
       if (result._type === "User") {
         return {
           text: result.name,
-          value: <MenuItem key={result.id} primaryText={result.name} secondaryText="User" onClick={() => this.context.router.push("/users/"+result.id)}/>
+          value: <MenuItem key={result.id*result._type.length} primaryText={result.name} secondaryText="User" onClick={() => this.context.router.push("/users/"+result.id)}/>
         }
       } else if (result._type === "Article") {
         return {
