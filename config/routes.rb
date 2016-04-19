@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :searches, only:[:index]
 
     get '/articles/:id/publish', to: 'articles#publish'
-    get '/articles/:id/unpublish', to: 'articles#unpublish'
+    patch '/articles/:id/unpublish', to: 'articles#unpublish'
 
     get '/user/drafts', to: 'users#drafts' 
     

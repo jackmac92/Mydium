@@ -25,7 +25,18 @@ const ArticleCard = React.createClass({
  		e.preventDefault()
  		ApiUtil.toggleBookmark(article_id)
  	},
+ 	componentDidMount: function() {
+	  var placeholder = document.querySelector('#placeholder-'+this.props.article.id);
+	  var small = placeholder.querySelector('.img-small')
+	  var img = new Image();
+	  img.src = small.src;
+	  img.onload = () => small.classList.add('loaded')
 
+	  var imgLarge = new Image()
+	  imgLarge.src = placeholder.dataset.large
+	  imgLarge.onload = () => imgLarge.classList.add('loaded')
+	  placeholder.appendChild(imgLarge)
+ 	},
  	render: function() {
  		var tags, bookmark_style, fav_style;
  		if (this.props.article.user) {
@@ -50,7 +61,10 @@ const ArticleCard = React.createClass({
 						subtitle={"Published " + this.props.article.published_at + " ago • " + this.props.article.read_time + " minute read"}
 					/>
 					<CardMedia onClick={this.viewArticle}>
-					  <img className="article-card-image" src={this.props.article.picture} />
+						<div className="article-card-image placeholder" id={"placeholder-"+this.props.article.id} data-large={this.props.article.picture}>
+					  	<img className="img-small" src={this.props.article.loading_pic} />
+					  	<div style={{paddingBottom: "50%"}}></div>
+						</div>
 					</CardMedia>/>
 					<CardTitle
 						className="article-card-title"

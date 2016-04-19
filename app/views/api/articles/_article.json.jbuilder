@@ -28,6 +28,8 @@ end
 
 json.picture asset_url(article.picture.url)
 
+json.loading_pic asset_url(article.picture.url(:thumb))
+
 json.num_responses article.comments.count
 
 json.read_time article.body_plain_text.split.length / 275

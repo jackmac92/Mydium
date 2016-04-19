@@ -50,6 +50,15 @@ ApiUtil =
         console.log "ApiUtil#fetchTopArticles error"
       complete: ->
         callback && callback()
+  ArticleUnpublish: (id, callback) ->
+    $.ajax
+      type: "PATCH"
+      dataType: "json"
+      url: "api/articles/"+id+"/unpublish"
+      success: (article) ->
+        callback && callback()
+      error: ->
+        console.log "ApiUtil#createNewArticle error"
 
   fetchArticlesByTag: (tag, page, callback) ->
     $.ajax
