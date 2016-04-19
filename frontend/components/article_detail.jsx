@@ -26,7 +26,6 @@ var ArticleDetail = React.createClass({
     currState.markedRead = false
     this.setState(currState);
     clearTimeout(this.readTimer)
-    $('html, body').animate({ scrollTop: 0 }, 'fast');
     var that = this;
     this.readTimer = setTimeout(() => that.setState({readTimeElapsed: true}), 60000 * parseInt(currState.article.read_time))
   },
@@ -43,11 +42,13 @@ var ArticleDetail = React.createClass({
   },
   componentWillReceiveProps: function (nextProps) {
     this.tryMarkArticleRead()
+    $('html, body').animate({ scrollTop: 0 }, 'fast');
     ApiUtil.fetchArticle(parseInt(nextProps.params.id));
   },
   componentDidMount: function () {
     this.articleStoreToken = ArticleStore.addListener(this.__onChange);
     ApiUtil.fetchArticle(parseInt(this.props.params.id));
+    $('html, body').animate({ scrollTop: 0 }, 'fast');
     window.addEventListener('scroll', this.handleScroll);
   },
   componentWillUnmount: function () {

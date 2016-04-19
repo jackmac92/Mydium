@@ -39,6 +39,7 @@ var TagSelector = React.createClass({
 	handleRequest: function (input, dataStoreId) {
 		if (dataStoreId) {
 			this.setState({query:""})
+			debugger
 			ApiUtil.tagFollowCreate(input.value.props.tag.id)
 		};
 	},
@@ -58,11 +59,11 @@ var TagSelector = React.createClass({
 		return (
 			<div>
 				<AutoComplete
-					searchText={this.state.query}
-		      floatingLabelText="Pick Your Tags"
-		      filter={AutoComplete.fuzzyFilter}
-		      onNewRequest={this.handleRequest}
-		      dataSource={dataStore} />
+						searchText={this.state.query}
+		     		floatingLabelText="Pick Your Tags"
+			    	filter={AutoComplete.fuzzyFilter}
+			      onNewRequest={this.handleRequest}
+			      dataSource={dataStore} />
 		    <h3>Here are the tags you currently follow</h3>
 		    <h6>Click a tag below to remove it from your list</h6>
 				<List>
