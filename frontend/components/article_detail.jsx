@@ -58,7 +58,12 @@ var ArticleDetail = React.createClass({
   },
 
   handleFollowAuthor: function () {
-    ApiUtil.toggleFollow(this.state.article.author.id)
+    if (this.state.article.user.follows_author) {
+      ApiUtil.unMarkFollow("User",this.state.article.author.id)
+    } else {
+      ApiUtil.markFollow("User",this.state.article.author.id)
+    }
+    // ApiUtil.toggleFollow(this.state.article.author.id)
   },
 
   handleUnpublish: function () {

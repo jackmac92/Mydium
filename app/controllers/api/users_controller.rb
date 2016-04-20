@@ -24,8 +24,6 @@ class Api::UsersController < ApplicationController
 		when "article"
 			@article = Article.find params[:id]
 			case params[:user_action]
-			when "toggle_favorite"
-				current_user.toggle_like! @article
 			when "toggle_bookmark"
 				current_user.toggle_bookmark params[:id]
 			when "mark_read"

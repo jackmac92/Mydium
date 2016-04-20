@@ -20,12 +20,22 @@ const ArticleCard = React.createClass({
 
  	toggleFavorite: function (article_id, e) {
  		e.preventDefault()
- 		ApiUtil.toggleFavorite(article_id)
+ 		if (this.props.article.user.faved_article) {
+ 			ApiUtil.unMarkFavorite("Article",this.props.article.id)
+ 		} else {
+ 			ApiUtil.markFavorite("Article",this.props.article.id)
+ 		}
  	},
+
  	toggleBookmark: function (article_id, e) {
  		e.preventDefault()
- 		ApiUtil.toggleBookmark(article_id)
+ 		if (this.props.article.user.bookmarked_article) {
+ 			ApiUtil.removeBookmark(this.props.article.id)
+ 		} else {
+ 			ApiUtil.createBookmark(this.props.article.id)
+ 		}
  	},
+
  	fetchImage: function() {
 	  var placeholder = document.querySelector('#placeholder-'+this.props.article.id);
 	  var small = placeholder.querySelector('.img-small')

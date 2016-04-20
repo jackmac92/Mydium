@@ -10,6 +10,11 @@ ApiActions =
     AppDispatcher.dispatch
       actionType: ArticleConstants.DETAIL_UPDATE
       attr: "toggle_follow"
+  updateDetailFollow: (followStatus) ->
+    AppDispatcher.dispatch
+      actionType: ArticleConstants.DETAIL_UPDATE
+      followStatus: followStatus
+    
   receiveArticles: (response) ->
     AppDispatcher.dispatch
       actionType: ArticleConstants.ARTICLES_RECEIVED

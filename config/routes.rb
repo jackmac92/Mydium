@@ -10,10 +10,20 @@ Rails.application.routes.draw do
     resources :comments, only:[:create, :destroy]
     resources :tags, only:[:index]
     resources :searches, only:[:index]
+    resources :follows, only:[:create,:destroy]
 
     get '/articles/:id/publish', to: 'articles#publish'
     patch '/articles/:id/unpublish', to: 'articles#unpublish'
     patch '/articles/:id/autosave', to: 'articles#autosave'
+
+    post '/likes', to: 'likes#create'
+    delete '/likes', to: 'likes#destroy'
+
+    post '/bookmarks', to: 'bookmarks#create'
+    delete '/bookmarks', to: 'bookmarks#destroy'
+    
+    post '/follows', to: 'follows#create'
+    delete '/follows', to: 'follows#destroy'
 
     get '/user/drafts', to: 'users#drafts' 
     get '/user/published', to: 'users#published' 

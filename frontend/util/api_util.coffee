@@ -267,31 +267,80 @@ ApiUtil =
       error: ->
         console.log "ApiUtil#createNewArticle error"
 
-  toggleFavorite: (article_id) ->
+  markFavorite: (type, id) ->
     $.ajax
-      type: "PATCH"
+      type: "POST"
       dataType: "json"
-      url: "api/user"
+      url: "api/likes"
       data:
-        receiver: "article"
-        id: article_id
-        user_action: "toggle_favorite"
-      success: (article) ->
+        r_type: type
+        id: id
+      success: (article) -> 
         ApiActions.receiveUpdatedArticle article
+    
+  unMarkFavorite: (type, id) ->
+    $.ajax
+      type: "DELETE"
+      dataType: "json"
+      url: "api/likes"
+      data:
+        r_type: type
+        id: id
+      success: (article) -> 
+        ApiActions.receiveUpdatedArticle article
+  
 
-  toggleBookmark: (article_id) ->
+  createBookmark: (id) ->
     $.ajax
-      type: "PATCH"
+      type: "POST"
       dataType: "json"
-      url: "api/user"
+      url: "api/bookmarks"
       data:
-        receiver: "article"
-        id: article_id
-        user_action: "toggle_bookmark"
-      success: (article) ->
+        article_id: id
+      success: (article) -> 
         ApiActions.receiveUpdatedArticle article
-      error: () ->
-      complete: () ->
+      error: (e) ->
+        console.log e
+        console.log "Error creating bookmark"
+        
+  removeBookmark: (id) ->
+    $.ajax
+      type: "DELETE"
+      dataType: "json"
+      url: "api/bookmarks"
+      data:
+        article_id: id
+      success: (article) -> 
+        ApiActions.receiveUpdatedArticle article
+      error: (e) ->
+        console.log e
+        console.log "Error destroying bookmark"
+
+  markFollow: (type, id) ->
+    $.ajax
+      type: "POST"
+      dataType: "json"
+      url: "api/follows"
+      data:
+        r_type: type
+        id: id
+      success: (followStatus) -> 
+        ApiActions.updateDetailFollow(followStatus)
+      error: (e) ->
+        console.log e
+
+  unMarkFollow: (type, id) ->
+    $.ajax
+      type: "DELETE"
+      dataType: "json"
+      url: "api/follows"
+      data:
+        r_type: type
+        id: id
+      success: (followStatus) -> 
+        ApiActions.updateDetailFollow(followStatus)
+      error: (e) ->
+        console.log e
 
   toggleFollow: (user_id, successCallback) ->
     $.ajax

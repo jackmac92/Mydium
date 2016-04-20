@@ -60,6 +60,9 @@ addArticles = (articles) ->
 toggleFollowOfDetail = ->
   `_articleDetail.user.follows_author = !_articleDetail.user.follows_author`
 
+setFollowOfDetail = (status) ->
+  `_articleDetail.user.follows_author = status`
+
 addComment = (comment) ->
   _articleDetail.comments.push comment
 
@@ -97,10 +100,12 @@ ArticleStore.__onDispatch = (payload) ->
       removeComment payload.commentId
       ArticleStore.__emitChange()
     when ArticleConstants.DETAIL_UPDATE
-      switch payload.attr
-        when "toggle_follow"
-          toggleFollowOfDetail()
-          ArticleStore.__emitChange()
+      setFollowOfDetail payload.followStatus
+      ArticleStore.__emitChange()
 
+      # switch payload.attr
+      #   when "toggle_follow"
+      #     toggleFollowOfDetail()
+      #     ArticleStore.__emitChange()
 
 module.exports = ArticleStore
