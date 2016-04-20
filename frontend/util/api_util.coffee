@@ -74,6 +74,8 @@ ApiUtil =
       complete: ->
         callback && callback()
 
+          
+
   fetchBookmarkedArticles: (page, callback) ->
     $.ajax
       type: "GET"
@@ -128,11 +130,20 @@ ApiUtil =
     $.ajax
       type: "GET"
       dataType: "json"
-      url: "api/user/drafts/"
+      url: "api/user/drafts"
       success: (drafts) ->
         ApiActions.receiveUserDrafts drafts
       error: ->
         console.log "Error fetching all drafts"
+  fetchPublished: ->
+    $.ajax
+      type: "GET"
+      dataType: "json"
+      url: "api/user/published"
+      success: (articles) ->
+        ApiActions.receiveUserPublished articles
+      error: ->
+        console.log "Error fetching published articles"
     
   fetchDraft: (id, callback) ->
     $.ajax
@@ -144,6 +155,21 @@ ApiUtil =
         callback && callback(draft)
       error: ->
         console.log "Error fetching draft"
+
+  autoSave: (id, bodyStylized, bodyPlainText, callback) ->
+    $.ajax
+      type: "PATCH"
+      dataType: "json"
+      url: "api/articles/"+id+"/autosave"
+      data:
+        article:
+          body_stylized: bodyStylized
+          body_plain_text: bodyPlainText
+      success: ->
+        callback && callback()
+      error: (e) ->
+        console.log e
+        console.log "Autosave error"
 
   updateArticle: (articleFormData, callback) ->
     $.ajax
@@ -217,6 +243,15 @@ ApiUtil =
       success: ->
         ApiActions.commentDeleted commentId
 
+  setNewArticleId: () ->
+    $.ajax
+      type: "POST"
+      dataType: "json"
+      url: "api/articles"
+      success: (article) ->
+        callback(article.id)
+      error: ->
+        console.log "ApiUtil#createNewArticle error"
 
   createNewArticle: (articleFormData, callback) ->
     $.ajax

@@ -102,7 +102,7 @@ var ArticleIndex = React.createClass ({
 
   handleScroll: function (e) {
     var remainingLength = ($(document).height() - $(window).height()) - $(window).scrollTop()
-    if (remainingLength < 1400 && !this.state.isInfiniteLoading) {
+    if (remainingLength < 200 && !this.state.isInfiniteLoading) {
       this.moreArticles()
     }
 

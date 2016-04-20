@@ -127,7 +127,7 @@ var ArticleDetail = React.createClass({
         {recent_posts_view}
         {follow_button}
         <hr />
-        <Comments article_id={this.state.article.id} comments={this.state.article.comments} />
+        <Comments disabled={!this.state.markedRead} article_id={this.state.article.id} comments={this.state.article.comments} />
       </main>
     );
   }

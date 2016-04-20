@@ -9,7 +9,7 @@ class Api::ArticlesController < ApplicationController
     when "tag"
       @articles = Article.includes(:tags,:user).all_with_tag(params[:tag]).page(params[:page]).per(5)
     else
-      @articles = Article.includes(:tags, :user).viewable.page(params[:page]).per(5)
+      @articles = Article.includes(:tags, :user).viewable.page(params[:page]).per(2)
     end
   end
   
@@ -33,6 +33,15 @@ class Api::ArticlesController < ApplicationController
     if @article.update(article_params)
       @article.publish! if @article.published
       render :show
+    else
+      render json: @article.errors.full_messages, status: 422
+    end
+  end
+
+  def autosave
+    @article = Article.find(params[:id])
+    if @article.update(article_params)
+      render json: {}
     else
       render json: @article.errors.full_messages, status: 422
     end

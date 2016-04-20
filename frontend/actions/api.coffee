@@ -43,6 +43,10 @@ ApiActions =
     AppDispatcher.dispatch
       actionType: SessionConstants.RECEIVED_DRAFTS
       drafts: drafts
+  receiveUserPublished: (articles) ->
+    AppDispatcher.dispatch
+      actionType: SessionConstants.RECEIVED_PUBLISHED
+      articles: articles
 
   receiveUserInfo: (user) ->
     AppDispatcher.dispatch

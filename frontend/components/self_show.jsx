@@ -21,10 +21,9 @@ var SelfShow = React.createClass({
       bookmarks: SessionStore.userBookmarks(),
       favorites: SessionStore.userFavorites(),
       drafts: SessionStore.userDrafts(),
+      published: SessionStore.userPublished(),
       profile: UserStore.detail()
     }
-      // published: SessionStore.userPublished(),
-      // activity: SessionStore.userActivity()
   },
 	handleChange: function (value) {
 		this.setState({value: value})
@@ -33,6 +32,7 @@ var SelfShow = React.createClass({
     this.sessionStoreToken = SessionStore.addListener(this.__onChange)
     this.userStoreToken = UserStore.addListener(this.__onChange)
     ApiUtil.fetchDrafts()
+    ApiUtil.fetchPublished()
     ApiUtil.fetchBookmarkedArticles()
     ApiUtil.fetchFavoritedArticles()
     ApiUtil.fetchUserInfo(SessionStore.currentUser().id)
@@ -47,7 +47,7 @@ var SelfShow = React.createClass({
   },
 
 	render: function() {
-    var drafts, draftsection, bookmarksection, bookmarks, favoritesection, favorites, profile, profilesection;
+    var drafts, draftsection, bookmarksection, bookmarks, favoritesection, favorites, profile, profilesection, published, publishedection;
     if (this.state.drafts.length > 0) {
         drafts = this.state.drafts.map( d =>
           <ListItem onClick={() => this.context.router.push("/editor/"+d.id)} key={d.id} primaryText={d.title}/>
@@ -55,6 +55,17 @@ var SelfShow = React.createClass({
         draftsection = (
             <List>
               {drafts}
+            </List>            
+          )
+
+    }
+    if (this.state.published.length > 0) {
+        published = this.state.published.map( a =>
+          <ListItem onClick={() => this.context.router.push("/article/"+a.id)} key={a.id} primaryText={a.title}/>
+        );
+        publishedection = (
+            <List>
+              {published}
             </List>            
           )
 
@@ -143,6 +154,7 @@ var SelfShow = React.createClass({
           {draftsection}
         </Tab>
         <Tab onClick={this.handleChange.bind(this,"d")} label="Published" value="d">
+          {published}
         </Tab>
         <Tab onClick={this.handleChange.bind(this,"e")} label="Activity" value="e">
           {activitiessection}

@@ -9,6 +9,7 @@ import ActionFavorite from 'material-ui/lib/svg-icons/action/favorite';
 import ActionFavoriteBorder from 'material-ui/lib/svg-icons/action/favorite-border';
 import ActionBookmark from 'material-ui/lib/svg-icons/action/bookmark';
 import ActionBookmarkBorder from 'material-ui/lib/svg-icons/action/bookmark-border';
+import Waypoint from 'react-waypoint'
 
 const ArticleCard = React.createClass({
  	contextTypes: {router: React.PropTypes.object.isRequired},
@@ -25,7 +26,7 @@ const ArticleCard = React.createClass({
  		e.preventDefault()
  		ApiUtil.toggleBookmark(article_id)
  	},
- 	componentDidMount: function() {
+ 	fetchImage: function() {
 	  var placeholder = document.querySelector('#placeholder-'+this.props.article.id);
 	  var small = placeholder.querySelector('.img-small')
 	  var img = new Image();
@@ -36,6 +37,12 @@ const ArticleCard = React.createClass({
 	  imgLarge.src = placeholder.dataset.large
 	  imgLarge.onload = () => imgLarge.classList.add('loaded')
 	  placeholder.appendChild(imgLarge)
+ 	},
+ 	componentDidMount: function() {
+ 		this.fetchImage()
+ 	},
+ 	handlePositionChange: (pos) => {
+ 		// console.log(pos)
  	},
  	render: function() {
  		var tags, bookmark_style, fav_style;

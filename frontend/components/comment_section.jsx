@@ -13,13 +13,13 @@ var Comments = React.createClass({
 				<ul>
           <ReactCSSTransitionGroup
             transitionName="auto"
-            transitionEnterTimeout={5000}
-            transitionLeaveTimeout={5000}
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={500}
           >
 						{comments}
 					</ReactCSSTransitionGroup>
 				</ul>
-				<CommentForm className="comment-form" article_id={this.props.article_id} />
+				<CommentForm disabled={this.props.disabled} className="comment-form" article_id={this.props.article_id} />
 				<div style={{height:"200px"}} />
 			</section>
 		);

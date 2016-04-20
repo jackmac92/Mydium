@@ -8,6 +8,8 @@ import RaisedButton from 'material-ui/lib/raised-button'
 import Dropzone from 'react-dropzone'
 import TextField from 'material-ui/lib/text-field';
 import WritingStore from '../stores/writing'
+import RefreshIndicator from 'material-ui/lib/refresh-indicator';
+
 
 var ArticleForm = React.createClass({
 	
@@ -21,7 +23,8 @@ var ArticleForm = React.createClass({
 				body_stylized: "",
 				picture: null,
 				newPicture: false,
-				published: true
+				published: true,
+				autoSaving: "hide"
 			};
 	},
 	
@@ -35,6 +38,8 @@ var ArticleForm = React.createClass({
 		this.writingStoreToken = WritingStore.addListener(this.__onChange)
 		if (this.props.params.id) {
 			ApiUtil.fetchDraft(this.props.params.id)
+		} else {
+			ApiUtil.setNewArticleId( function(id) {this.setState({id: id})}.bind(this))
 		}
 	},
 
@@ -48,11 +53,13 @@ var ArticleForm = React.createClass({
 			subTitle: draft.subtitle,
 			body_plain_text: draft.body_plain_text,
 			body_stylized: draft.body_stylized,
-			picture: draft.picture
+			picture: draft.picture,
+			id: draft.id
 		})
 	},
 	handleSubmit: function (e) {
 		e.preventDefault();
+		debugger
 		var formData = new FormData();
 		if (this.state.newPicture) {
 			formData.append("article[picture]", this.state.picture);
@@ -77,17 +84,18 @@ var ArticleForm = React.createClass({
 	
 	updateBody: function (e) {
 		var regex = /(^|[^@\w])@(\w{1,15})\b\s/
-		var replace = '$1<a href="/#/users/$2">@$2</a> ';
+		var replace = '$1<a class="user-mention" href="/#/users/$2">@$2</a> ';
 		this.setState({
 			body_stylized:e.replace( regex, replace ),
-			body_plain_text: $(".ql-editor")[0].innerText
+			body_plain_text: $(".ql-editor")[0].innerText,
+			autoSaving: "ready"
 		});
 		clearTimeout(this.autoSaveTimeout)
 		this.autoSaveTimeout = setTimeout(this.autoSave, 3000)
 	},
 	autoSave: function () {
-		// console.log("autosave")
-		// ajax post body_stylized and plain_text
+		this.setState({autoSaving: "loading"})
+		ApiUtil.autoSave(this.state.id ,this.state.body_stylized, this.state.body_plain_text, function () {this.setState({autoSaving: "hide"})}.bind(this))
 	},
 	updatePublished: function () {
 		this.setState({
@@ -119,6 +127,12 @@ var ArticleForm = React.createClass({
 		  		</div>
 		  		<Checkbox checked={this.state.published} onCheck={this.updatePublished} label="Publish?" />
   			</div>
+		    <RefreshIndicator
+		      size={40}
+		      left={20}
+		      top={250}
+		      status={this.state.autoSaving}
+		    />
 	  		<ReactQuill	theme="snow"
 	  								id="main-editor"
 	  								value={this.state.body_stylized}

@@ -47,6 +47,9 @@ SessionStore.__onDispatch = (payload) ->
 			`_currentUser = null`
 			`_currentUserHasBeenFetched = false`
 			SessionStore.__emitChange()
+		when SessionConstants.RECEIVED_PUBLISHED
+			`_userPublished = payload.articles`
+			SessionStore.__emitChange()			
 		when SessionConstants.RECEIVED_DRAFTS
 			`_userDrafts = payload.drafts`
 			SessionStore.__emitChange()

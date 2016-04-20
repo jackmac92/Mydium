@@ -13,8 +13,10 @@ Rails.application.routes.draw do
 
     get '/articles/:id/publish', to: 'articles#publish'
     patch '/articles/:id/unpublish', to: 'articles#unpublish'
+    patch '/articles/:id/autosave', to: 'articles#autosave'
 
     get '/user/drafts', to: 'users#drafts' 
+    get '/user/published', to: 'users#published' 
     
   end
 end

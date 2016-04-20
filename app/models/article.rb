@@ -1,5 +1,5 @@
 class Article < ActiveRecord::Base
-  validates :body_plain_text, :user_id, :title, presence: :true
+  validates :user_id, presence: :true
   validates :published, inclusion:{in:[true, false]}
 
   has_attached_file :picture, 

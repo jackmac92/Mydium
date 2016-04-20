@@ -4,6 +4,11 @@ class Api::UsersController < ApplicationController
 		@user = User.find params[:id]
 	end
 
+	def published
+		@articles = current_user.articles.where published: true
+		render 'api/articles/drafts'
+	end
+
 	def drafts
 		@articles = current_user.articles.where published: false
 		render 'api/articles/drafts'

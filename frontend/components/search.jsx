@@ -76,17 +76,19 @@ var Search = React.createClass({
       }
     }.bind(this));
   },
-  render: function () { 
+  render: function () {
+    var articleIdCounter = 0
+    var userIdCounter = 0
     var resultStore = this.state.results.map(function (result) {
       if (result._type === "User") {
         return {
           text: result.name,
-          value: <MenuItem key={result.id*result._type.length} primaryText={result.name} secondaryText="User" onClick={() => this.context.router.push("/users/"+result.id)}/>
+          value: <MenuItem key={articleIdCounter++} primaryText={result.name} secondaryText="User" onClick={() => this.context.router.push("/users/"+result.id)}/>
         }
       } else if (result._type === "Article") {
         return {
           text: result.title,
-          value: <MenuItem key={result.id} primaryText={result.title} secondaryText="Article" onClick={() => this.context.router.push("/article/"+result.id)} /> 
+          value: <MenuItem key={userIdCounter++} primaryText={result.title} secondaryText="Article" onClick={() => this.context.router.push("/article/"+result.id)} /> 
         }
       }
      }.bind(this))
