@@ -5,7 +5,6 @@ import SessionStore from '../stores/session'
 import Headroom from 'react-headroom'
 import LoginForm from './login_form'
 import SignupForm from './signup_form'
-import Modal from 'react-modal'
 
 import Popover from 'material-ui/lib/popover/popover';
 import FlatButton from 'material-ui/lib/flat-button';
@@ -17,6 +16,9 @@ import TextField from 'material-ui/lib/TextField'
 import ActionAccountCircle from 'material-ui/lib/svg-icons/action/account-circle'
 import IconMenu from 'material-ui/lib/menus/icon-menu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
+
+import Dialog from 'material-ui/lib/dialog';
+
 
 var Header = React.createClass({
 	contextTypes: {
@@ -87,17 +89,19 @@ var Header = React.createClass({
 		} else {
 			userActionButton = (
 				<div>
-					<Modal isOpen={this.state.modalIsOpen}
+					<Dialog open={this.state.modalIsOpen}
+								 modal={true}
 								 onRequestClose={this.modalClose}
-								 style={{
-								 		content:{
-								 			top:'90px'
-								 		}
-								 	}}
+								 actions={[<FlatButton onClick={this.modalClose} label="close" />]}
+								 contentStyle={{
+								 	width: "70%",
+								 	height: "60%",
+								 	maxHeight:"none",
+								 	maxWidth:"none"
+								 }}
 								 >
-						<FlatButton style={{float:"right"}} onClick={this.modalClose} label="close" />
 						{authForm}
-					</Modal>
+					</Dialog>
 					<FlatButton onClick={this.modalOpen} className="user-login-button-header" label="Log In/ Sign Up" />
 				</div>
 

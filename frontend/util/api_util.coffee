@@ -243,11 +243,15 @@ ApiUtil =
       success: ->
         ApiActions.commentDeleted commentId
 
-  setNewArticleId: () ->
+  setNewArticleId: (callback) ->
     $.ajax
       type: "POST"
       dataType: "json"
       url: "api/articles"
+      data:
+        article:
+          body_plain_text:""
+          title:""
       success: (article) ->
         callback(article.id)
       error: ->
@@ -341,36 +345,6 @@ ApiUtil =
         ApiActions.updateDetailFollow(followStatus)
       error: (e) ->
         console.log e
-
-  toggleFollow: (user_id, successCallback) ->
-    $.ajax
-      type: "PATCH"
-      dataType: "json"
-      url: "api/user"
-      data:
-        receiver: "user"
-        id: user_id
-        user_action: "toggle_follow"
-      success: ->
-        ApiActions.toggleDetailFollow()
-      error: (e) ->
-        console.log "Gone wrong following user"
-        console.log e
-      complete: () ->
-
-  fetchCurrentUser: (completion) ->
-    $.ajax
-      type: "GET"
-      url: "api/auth"
-      dataType: "json"
-      success: (currentUser, textStatus, xhr) ->
-        unless xhr.status == 204
-          SessionActions.currentUserReceived currentUser 
-      complete: ->
-        completion && completion()
-      error: ->
-        console.log "Done gone wrong tryna fetch current user"
-
   markArticleRead: (article_id) ->
     $.ajax
       type: "PATCH"
@@ -382,6 +356,29 @@ ApiUtil =
         user_action: "mark_read"
       success: ->
         console.log "Successfully marked article read"
+
+  fetchUserInfo: (id) ->
+    $.ajax
+      type: "GET"
+      dataType: "json"
+      url: "api/users/" + id
+      success: (user) ->
+        ApiActions.receiveUserInfo user
+      error: ->
+        console.log "ApiUtil#fetchUser error"
+
+  createNewUser: (userForm, callback) ->
+    $.ajax
+      type: "POST"
+      url: "users/"
+      dataType: "json"
+      data: {user: userForm}
+      success: (currentUser) ->
+        SessionActions.currentUserReceived currentUser
+        callback && callback()
+      error: (e) ->
+        console.log "Done gone wrong when making new user"
+        console.log e
 
   logOutUser: (callback) ->
     $.ajax
@@ -405,26 +402,17 @@ ApiUtil =
         console.log "Done gone wrong when loggin in"
         console.log e
     
-  createNewUser: (userForm, callback) ->
-    $.ajax
-      type: "POST"
-      url: "users/"
-      dataType: "json"
-      data: {user: userForm}
-      success: (currentUser) ->
-        SessionActions.currentUserReceived currentUser
-        callback && callback()
-      error: (e) ->
-        console.log "Done gone wrong when making new user"
-        console.log e
-  fetchUserInfo: (id) ->
+
+  fetchCurrentUser: (completion) ->
     $.ajax
       type: "GET"
+      url: "api/auth"
       dataType: "json"
-      url: "api/users/" + id
-      success: (user) ->
-        ApiActions.receiveUserInfo user
+      success: (currentUser, textStatus, xhr) ->
+        unless xhr.status == 204
+          SessionActions.currentUserReceived currentUser 
+      complete: ->
+        completion && completion()
       error: ->
-        console.log "ApiUtil#fetchUser error"
-
+        console.log "Done gone wrong tryna fetch current user"
 module.exports = ApiUtil
