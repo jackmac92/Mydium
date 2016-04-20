@@ -16,6 +16,7 @@ import TextField from 'material-ui/lib/TextField'
 import ActionAccountCircle from 'material-ui/lib/svg-icons/action/account-circle'
 import IconMenu from 'material-ui/lib/menus/icon-menu';
 import MenuItem from 'material-ui/lib/menus/menu-item';
+import ActionSearch from 'material-ui/lib/svg-icons/action/search'
 
 import Dialog from 'material-ui/lib/dialog';
 
@@ -113,7 +114,9 @@ var Header = React.createClass({
 		    	<header className="header">
 		    		<div onClick={() => router.push("/")} id="logo" />
 		    		<div className="header-right">
-			    		<Search id="searchbar" />
+		    			<IconButton id="searchbutton" onClick={() => this.context.router.push("/search") }>
+		    				<ActionSearch />
+		    			</IconButton>
 			    		{userActionButton}
 		    		</div>
 		    	</header>

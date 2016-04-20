@@ -50,9 +50,7 @@ const ArticleCard = React.createClass({
  	componentDidMount: function() {
  		this.fetchImage()
  	},
- 	handlePositionChange: (pos) => {
- 		// console.log(pos)
- 	},
+
  	render: function() {
  		var tags, bookmark_style, fav_style;
  		if (this.props.article.user) {

@@ -53,6 +53,7 @@ var OtherShow = React.createClass({
           case "Tag":
             link = "/tags/" + a.recipient_name
         }
+        console.log(a)
         switch (a.trackable_type) {
           case "ArticleView":
             label = that.state.profile.name + " viewed " + a.recipient_name
@@ -72,7 +73,11 @@ var OtherShow = React.createClass({
           case "Socialization::ActiveRecordStores::Mention":
             label = that.state.profile.name + " mentioned " +  a.recipient_name
             break;
+          default:
+            label = "Unhandled "+ a
+            break;
         }
+
         return <ListItem onClick={() => that.context.router.push(link)} primaryText={label} key={a.id} />
       })
     };
