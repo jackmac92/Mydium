@@ -9,7 +9,6 @@ import ActionFavorite from 'material-ui/lib/svg-icons/action/favorite';
 import ActionFavoriteBorder from 'material-ui/lib/svg-icons/action/favorite-border';
 import ActionBookmark from 'material-ui/lib/svg-icons/action/bookmark';
 import ActionBookmarkBorder from 'material-ui/lib/svg-icons/action/bookmark-border';
-import Waypoint from 'react-waypoint'
 
 const ArticleCard = React.createClass({
  	contextTypes: {router: React.PropTypes.object.isRequired},
