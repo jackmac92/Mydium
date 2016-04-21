@@ -113,11 +113,11 @@ var Header = React.createClass({
     		<Paper className="header-wrap" zDepth={1}>
 		    	<header className="header">
 		    		<div onClick={() => router.push("/")} id="logo" />
-		    		<div className="header-right">
+		    		<div className="header-right group">
+			    		{userActionButton}
 		    			<IconButton id="searchbutton" onClick={() => this.context.router.push("/search") }>
 		    				<ActionSearch />
 		    			</IconButton>
-			    		{userActionButton}
 		    		</div>
 		    	</header>
     		</Paper>

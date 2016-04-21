@@ -1,7 +1,6 @@
 header.header {
   background: white;
   height: 70px;
-  // margin-bottom: 30px;
 }
 .header-nav {
   // height: 60px;
@@ -10,23 +9,13 @@ header.header {
   font-size: 24px;
 }
 
-// .header-nav-left {
-//   float: left;
-// }
-
-// .header-nav-right {
-//   float: right;
-// }
-
-// div.header-searchbar {
-//   width: 200px;
-//   height: 10px;
-// }
 
 #searchbutton {
-  left: 390px;
+  float: right;
   top: 13px;
+  margin-right: 10px;
 }
+
 .header-right {
   float: right;
   width: 500px;
@@ -47,17 +36,15 @@ header.header {
 }
 .user-login-button-header {
   text-transform: none !important;
-  position: absolute;
-  top: -50px;
-  right: -350px;
+  top: 20px;
+  float: right;
 }
 .user-action-button-header {
-  // float: right;
+  float: right;
   // padding: 6px !important;
-  position: absolute;
+  position: relative;
   width: 50px !important;
   top: 13px;
-  right: 20px;
   // margin: 5px 25px 0 0 !important;
 }
 // .user-action-button-header > * {
