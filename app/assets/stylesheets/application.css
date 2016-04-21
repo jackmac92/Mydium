@@ -85,6 +85,8 @@ main {
   width: 60%;
   margin: 0 auto;
 }
+
+
 #sidebar-wrap {
   float:right;
   width: 35%;
@@ -112,11 +114,9 @@ main {
 }
 .tag {
   /*font-size: 18px;*/
-  padding: 4px 15px;
-  background: white;
+  /*margin: 5px 15px;*/
+  /*background: white;*/
   text-align: center;
-  margin: 5px 10px;
-  display: inline-block;
 }
 
 /*nav > a.tag {
@@ -130,9 +130,40 @@ main {
   cursor: pointer;
 }
 
+.unpublish-button > div > div {
+  background: red;
+}
+
 .auth-form {
   width: 90%;
   margin: 20px auto;
+}
+
+.auth-form-container {
+  width: 53%;
+  margin: 5px auto;
+}
+
+.auth-form-button {
+  width: 100%;
+}
+
+.auth-form-button.facebook > div > div {
+  background: royalblue;
+}
+.auth-form-button.google > div > div {
+  background: red;
+}
+.auth-form-button.facebook > div > div > span {
+  color: white;
+}
+.auth-form-button > div > div > span {
+  text-transform: none !important;
+}
+
+
+.auth-form > div {
+  width: 100% !important;
 }
 
 .article-detail {
@@ -219,18 +250,6 @@ img.article-detail-image {
   z-index: 10;
 }
 
-.auth-form-container {
-  width: 53%;
-  margin: 5px auto;
-}
-
-.auth-form-button > button span {
-  text-transform: none !important;
-}
-
-.auth-form > div {
-  width: 100% !important;
-}
 .comment-form {
   margin-bottom: 100px;
 }
@@ -239,6 +258,7 @@ img.article-detail-image {
     display: block;
   }
 }
+
 @media only screen and (min-width: 0px) and (max-width: 1320px) {
   #content-sidebar {
     display: none;
@@ -255,4 +275,9 @@ img.article-detail-image {
     margin: 0 auto;
   }
 
+}
+@media only screen and (min-width: 0px) and (max-width: 500px) {
+  .article-card-header {
+    display: inline;
+  }
 }

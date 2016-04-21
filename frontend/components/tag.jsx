@@ -1,16 +1,12 @@
 var React = require('react');
-import Paper from 'material-ui/lib/paper';
-import FlatButton from 'material-ui/lib/flat-button';
+import RaisedButton from 'material-ui/lib/raised-button';
 
 var Tag = React.createClass({
 
+  contextTypes: {router: React.PropTypes.object.isRequired},
 	render: function() {
 		return (
-			<a href={"#/tags/"+this.props.tag.name} >
-				<Paper className="tag">
-					{this.props.tag.name}
-				</Paper>
-			</a>
+			<RaisedButton labelStyle={{textTransform:"none"}} style={{margin:"4px 7px"}} onClick={() => this.context.router.push("#/tags/"+this.props.tag.name)} className="tag" label={this.props.tag.name} />
 		);
 	}
 

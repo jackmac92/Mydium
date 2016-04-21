@@ -93,7 +93,11 @@ var ArticleDetail = React.createClass({
     }
     if (SessionStore.isLoggedIn()) {
       if (this.state.article.author.id == SessionStore.currentUser().id) {
-        delete_button = <RaisedButton label="Unpublish" onClick={this.handleUnpublish}/>
+        var delStyle = {
+          float:"right",
+          margin:"-10px 20px 10px 0px"
+        }
+        delete_button = <RaisedButton className="unpublish-button" style={delStyle} label="Unpublish" onClick={this.handleUnpublish}/>
       } else {
         follow_button = <Checkbox checked={this.state.article.user.follows_author} onCheck={this.handleFollowAuthor} label={"Follow " + this.state.article.author.name} />
       }
@@ -120,10 +124,12 @@ var ArticleDetail = React.createClass({
         <article className="article-detail">
           <img className="author-thumb" src={this.state.article.author.avatar} />
           <p className="author-email">{this.state.article.author.name}</p>
-          {delete_button}
             {tags}
 
-          <h1>{this.state.article.title}</h1>
+          <div>
+            {delete_button}
+            <h1>{this.state.article.title}</h1>
+          </div>
           <img className="article-detail-image" src={this.state.article.picture} />
           <div
             dangerouslySetInnerHTML={this.rawBody()}

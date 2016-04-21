@@ -5,6 +5,7 @@ import TextField from 'material-ui/lib/text-field'
 import Checkbox from 'material-ui/lib/checkbox'
 import RaisedButton from 'material-ui/lib/raised-button'
 
+
 var LoginForm = React.createClass({
 
 	contextTypes: {router: React.PropTypes.object.isRequired},
@@ -56,6 +57,10 @@ var LoginForm = React.createClass({
 		}
 	},
 
+	jsLink: function (target) {
+		window.location = target
+	},
+
 	formReady: function () {
 		if (this.state.password.length < 4 || this.state.email.length < 4) return false;
 		if (this.passwordNoErrors() && this.emailNoErrors()) {
@@ -74,19 +79,14 @@ var LoginForm = React.createClass({
 		var buttonStyle = {
 			width:'100%',
 			margin:'5px',
-			textTransform:"none",
 		}
 		var fbStyle = {
 			width:'100%',
 			margin:'5px',
-			textTransform:"none",
-			backgroundColor:"blue"
 		}
 		var googStyle = {
 			width:'100%',
 			margin:'5px',
-			textTransform:"none",
-			backgroundColor:"red"
 		}
 
 		return (
@@ -98,8 +98,8 @@ var LoginForm = React.createClass({
 					<RaisedButton style={buttonStyle} className="auth-form-button" disabled={!this.formReady()} onClick={this.handleSubmit}  label="Submit"/>
 				</form>
 				<RaisedButton style={buttonStyle} className="auth-form-button" label="Don't have an account? Create a new one!" onClick={this.props.toggleAuth} />
-				<RaisedButton style={fbStyle} className="auth-form-button" label="Sign in with Facebook" href="/users/auth/facebook" linkButton={true} />
-				<RaisedButton style={googStyle} className="auth-form-button" label="Sign in with Google" href="/users/auth/google_oauth2" linkButton={true} />
+				<RaisedButton style={fbStyle} className="auth-form-button facebook" label="Sign in with Facebook" onClick={() => this.jsLink("/users/auth/facebook")} />
+				<RaisedButton style={googStyle} className="auth-form-button google" label="Sign in with Google" onClick={() => this.jsLink("/users/auth/google_oauth2")} />
 				<RaisedButton style={buttonStyle} className="auth-form-button" label="Try With Demo Account" onClick={this.demoStart}/>
 			</div>
 		)	

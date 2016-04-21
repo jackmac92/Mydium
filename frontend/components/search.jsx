@@ -94,7 +94,7 @@ var Search = React.createClass({
      }.bind(this))
     return (
       <div>
-        <AutoComplete
+        <AutoComplete style={{width:"80%"}}
           anchorOrigin={{"horizontal":"right","vertical":"bottom"}}
           targetOrigin={{"horizontal":"right","vertical":"top"}}
           listStyle={{width:"100%"}}
