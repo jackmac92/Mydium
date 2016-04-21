@@ -101,7 +101,7 @@ main {
   /*position: fixed;*/
   /*background: blue;*/
   /*margin-top: 40px;*/
-  margin-left: 7%;
+  /*margin-left: 7%;*/
   margin-right: 10%;
   height: 100%;
 }
@@ -113,15 +113,9 @@ main {
   border-radius: 50%;
 }
 .tag {
-  /*font-size: 18px;*/
-  /*margin: 5px 15px;*/
-  /*background: white;*/
   text-align: center;
 }
 
-/*nav > a.tag {
-  margin: 5px 7px;
-}*/
 
 .article-card {
   margin: 10px;

@@ -36,6 +36,21 @@ var Sidebar = React.createClass({
 			this.articleStoreToken = ArticleStore.addListener(this.__onChange)
 			ApiUtil.fetchTagsIndex()
 			ApiUtil.fetchTopArticles()
+			var sidebarSticky = document.querySelector('#sidebar-fixed');
+			var sidebarStickyPos = document.querySelector('#featured-tags').getBoundingClientRect().bottom;
+			window.addEventListener('scroll', () => {
+				if (window.pageYOffset >= sidebarStickyPos + 60) {
+					sidebarSticky.style.position = 'fixed';
+					sidebarSticky.style.marginRight = "70px"
+					sidebarSticky.style.top = '40px';
+
+				} else {
+					sidebarSticky.style.position = 'static';
+					sidebarSticky.style.marginRight = ""
+					sidebarSticky.style.top = '';					
+				}
+			})
+
 		},
 
 	render: function () {
@@ -60,12 +75,12 @@ var Sidebar = React.createClass({
 			<div id="sidebar-wrap">
 				<section id="content-sidebar">
 					<ul>
-						<li>
+						<li id="featured-tags">
 							<h3>Featured Tags</h3>
 							<hr />
 								{featured_tags}
 						</li>
-						<div>
+						<div id="sidebar-fixed" >
 							{user_tags_section}
 							<li>Top Stories</li>
 							<hr />
