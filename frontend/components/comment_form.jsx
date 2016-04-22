@@ -19,11 +19,11 @@ var CommentForm = React.createClass({
 		this.setState({body:""})
 	},
 	render: function() {
-		var label = (this.props.disabled) ? "Read the article first silly" : "Add Response";
+		var label = (this.props.disabled) ? "Ya gotta read the article before you comment" : "Add Response";
 		return (
-			<section>
-				<TextField disabled={this.props.disabled} onChange={this.handleInput} value={this.state.body} floatingLabelText={label} />
-				<RaisedButton onClick={this.handleSubmit} label="Publish" />
+			<section style={{width:"60%",margin:"0 auto"}} >
+				<TextField style={{width:"500px"}} disabled={this.props.disabled} onChange={this.handleInput} value={this.state.body} floatingLabelText={label} />
+				<RaisedButton style={{marginLeft:"40px"}} onClick={this.handleSubmit} label="Publish" />
 			</section>
 		);
 	}

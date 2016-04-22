@@ -15,6 +15,7 @@ json.search_results do
       json.partial! "api/tags/tag", tag: search_result
     end
     json._type search_result.class.to_s
+    json.resultId search_result.id + 10000
     
     # # Metaprogramming for general case
     # tableized = search_result.class.to_s.tableize

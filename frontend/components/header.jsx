@@ -30,7 +30,8 @@ var Header = React.createClass({
 		return {
 			open: false,
 			modalIsOpen: false,
-			formForSignIn: true
+			formForSignIn: true,
+			currentUser: null
 		};
 	},
 
@@ -41,26 +42,45 @@ var Header = React.createClass({
     });
   },
 
+  updateUser: function () {
+  	this.setState({
+  		currentUser: SessionStore.currentUser()
+  	})
+  },
+
+  componentDidMount: function() {
+  	this.SessionStoreToken = SessionStore.addListener(this.updateUser)
+  },
+
+  componentWillUnmount: function() {
+  	this.SessionStoreToken.remove()
+  },
+
   modalOpen: function () {
   	this.setState({
   		modalIsOpen:true
   	})
   },
+
   modalClose: function () {
   	this.setState({
   		modalIsOpen:false
   	})
   },
+
   toggleFormState: function () {
   	this.setState({formForSignIn:!this.state.formForSignIn})
   },
+
   handleRequestClose: function () {
   	this.setState({open:false})
   },
+
   goTo: function (loc) {
   	this.context.router.push(loc)
   	this.handleRequestClose()
   },
+
   logOut: function () {
   	ApiUtil.logOutUser()
   	this.handleRequestClose()
@@ -70,7 +90,7 @@ var Header = React.createClass({
 		var userActionButton, authForm;
 		var router = this.context.router
 		authForm = (this.state.formForSignIn) ? <LoginForm toggleAuth={this.toggleFormState} /> : <SignupForm toggleAuth={this.toggleFormState} /> 
-		if (SessionStore.isLoggedIn()) {
+		if (this.state.currentUser) {
 			userActionButton = (
 					<div className="user-action-button-header">
 		        <IconMenu
@@ -80,9 +100,7 @@ var Header = React.createClass({
 		          targetOrigin={{horizontal: 'left', vertical: 'top'}}
 		        >
 		        	<MenuItem onTouchTap={this.goTo.bind(this,"/editor")} primaryText="New Article"/>
-		        	<MenuItem onTouchTap={this.goTo.bind(this,"/tagselect")} primaryText="Select Followed Tags"/>
 		        	<MenuItem onTouchTap={this.goTo.bind(this,"/me")} primaryText="Account"/>
-	            <MenuItem onTouchTap={this.goTo.bind(this,"/search")} primaryText="Search"/>
 	            <MenuItem onTouchTap={this.logOut} primaryText="Sign Out"/>
 		        </IconMenu>
 					</div>

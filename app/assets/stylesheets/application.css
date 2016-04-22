@@ -86,6 +86,12 @@ main {
   margin: 0 auto;
 }
 
+#featured-tags > div {
+  min-width: initial !important;
+}
+#sidebar-fixed > li > div {
+  min-width: initial !important;
+}
 
 #sidebar-wrap {
   float:right;

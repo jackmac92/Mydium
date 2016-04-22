@@ -81,27 +81,17 @@ var Search = React.createClass({
     var userIdCounter = 0
     var resultStore = this.state.results.map(function (result) {
       if (result._type === "User") {
-        return {
-          text: result.name,
-          value: <MenuItem key={articleIdCounter++} primaryText={result.name} secondaryText="User" onClick={() => this.context.router.push("/users/"+result.id)}/>
-        }
+        return  <ListItem key={result.resultId} primaryText={result.name} secondaryText="User" onClick={() => this.context.router.push("/users/"+result.id)}/>
       } else if (result._type === "Article") {
-        return {
-          text: result.title,
-          value: <MenuItem key={userIdCounter++} primaryText={result.title} secondaryText="Article" onClick={() => this.context.router.push("/article/"+result.id)} /> 
-        }
+        return <ListItem key={result.resultId} primaryText={result.title} secondaryText="Article" onClick={() => this.context.router.push("/article/"+result.id)} /> 
       }
      }.bind(this))
     return (
       <div>
-        <AutoComplete style={{width:"80%"}}
-          anchorOrigin={{"horizontal":"right","vertical":"bottom"}}
-          targetOrigin={{"horizontal":"right","vertical":"top"}}
-          listStyle={{width:"100%"}}
-          dataSource={resultStore}
-          filter={AutoComplete.noFilter}
-          floatingLabelText="Search"
-          onUpdateInput={this.handleInputChange}/>
+        <TextField value={this.state.query} onChange={this.handleInputChange} floatingLabelText="Search" />
+        <List style={{background:"transparent"}}>
+          {resultStore}
+        </List>
       </div>
     );
   }

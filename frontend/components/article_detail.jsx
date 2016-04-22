@@ -103,7 +103,7 @@ var ArticleDetail = React.createClass({
       }
     }
 
-    if (this.state.article.authors_recent_articles) {
+    if (this.state.article.authors_recent_articles.length > 0) {
       var article_items = this.state.article.authors_recent_articles.map( recent_article => (<ListItem onClick={() => this.context.router.push("/article/"+recent_article.id)} key={recent_article.id} primaryText={recent_article.title} />) );
       recent_posts_view = (
         <div>

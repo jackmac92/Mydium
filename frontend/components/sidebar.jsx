@@ -5,6 +5,7 @@ import SessionStore from '../stores/session'
 import Tag from './tag'
 import ApiUtil from '../util/api_util'
 
+import FlatButton from 'material-ui/lib/flat-button'
 import List from 'material-ui/lib/lists/list';
 import ListItem from 'material-ui/lib/lists/list-item';
 
@@ -39,10 +40,10 @@ var Sidebar = React.createClass({
 			var sidebarSticky = document.querySelector('#sidebar-fixed');
 			var sidebarStickyPos = document.querySelector('#featured-tags').getBoundingClientRect().bottom;
 			window.addEventListener('scroll', () => {
-				if (window.pageYOffset >= sidebarStickyPos + 60) {
+				if (window.pageYOffset >= sidebarStickyPos + 77) {
 					sidebarSticky.style.position = 'fixed';
 					sidebarSticky.style.marginRight = "70px"
-					sidebarSticky.style.top = '40px';
+					sidebarSticky.style.top = '67px'
 
 				} else {
 					sidebarSticky.style.position = 'static';
@@ -61,7 +62,10 @@ var Sidebar = React.createClass({
 				var user_tags = this.state.user_tags.map( ut => <Tag className="sidebar-tag" key={ut.id} tag={ut}/> )
 				user_tags_section = (
 					<li>
-						<h3>Your Tags</h3> <a href="/#/tagselect">(Edit)</a>
+						<div className="user-tags">
+							<h3 style={{display:"inline"}}>Your Tags</h3> 
+							<FlatButton onClick={() => this.context.router.push("/tagselect")} label="edit" />
+						</div>
 						<hr />
 						{user_tags}
 					</li>
@@ -84,7 +88,7 @@ var Sidebar = React.createClass({
 							{user_tags_section}
 							<li>Top Stories</li>
 							<hr />
-							<List>
+							<List style={{background:"transparent"}}>
 								{top_stories}
 							</List>
 						</div>
