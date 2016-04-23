@@ -4,8 +4,8 @@ var ApiUtil = require('../util/api_util');
 import TextField from 'material-ui/TextField'
 import Checkbox from 'material-ui/Checkbox'
 import RaisedButton from 'material-ui/RaisedButton'
-
-
+import FontIcon from 'material-ui/FontIcon'
+import * as Colors from 'material-ui/styles/colors'
 var LoginForm = React.createClass({
 
 	contextTypes: {router: React.PropTypes.object.isRequired},
@@ -88,6 +88,7 @@ var LoginForm = React.createClass({
 		var googStyle = {
 			width:'100%',
 			margin:'5px',
+			color: Colors.redA500
 		}
 
 		return (
@@ -98,10 +99,10 @@ var LoginForm = React.createClass({
 					<Checkbox label="Remember Me" onCheck={this.updateRememberStatus} checked={this.state.remember_me} />
 					<RaisedButton style={buttonStyle} className="auth-form-button" disabled={!this.formReady()} onClick={this.handleSubmit}  label="Submit"/>
 				</form>
-				<RaisedButton style={buttonStyle} className="auth-form-button" label="Don't have an account? Create a new one!" onClick={this.props.toggleAuth} />
-				<RaisedButton style={fbStyle} className="auth-form-button facebook" label="Sign in with Facebook" onClick={() => this.jsLink("/users/auth/facebook")} />
-				<RaisedButton style={googStyle} className="auth-form-button google" label="Sign in with Google" onClick={() => this.jsLink("/users/auth/google_oauth2")} />
+				<RaisedButton icon={<FontIcon className="fa fa-facebook-official"/>} style={fbStyle} className="auth-form-button facebook" label="Sign in with Facebook" href="/users/auth/facebook" linkButton={true} />
+				<RaisedButton icon={<FontIcon className="fa fa-google"/>} style={googStyle} className="auth-form-button google" label="Sign in with Google" href="/users/auth/google_oauth2" linkButton={true} />
 				<RaisedButton style={buttonStyle} className="auth-form-button" label="Try With Demo Account" onClick={this.demoStart}/>
+				<RaisedButton style={buttonStyle} className="auth-form-button" label="Create a new account" onClick={this.props.toggleAuth} />
 			</div>
 		)	
 	}

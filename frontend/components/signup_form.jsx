@@ -3,6 +3,7 @@ var ApiUtil = require('../util/api_util');
 
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import FontIcon from 'material-ui/FontIcon'
 
 
 var LoginForm = React.createClass({
@@ -77,8 +78,9 @@ var LoginForm = React.createClass({
 					<TextField floatingLabelText="Password" error={this.passwordErrors()} type="password" onChange={this.updatePasswordConfirm} value={this.state.password_confirm}/>
 					<RaisedButton style={buttonStyle} className="auth-form-button" disabled={!this.formReady()} onClick={this.handleSubmit}  label="Submit"/>
 				</form>
-				<RaisedButton style={buttonStyle} className="auth-form-button" label="Sign in with Facebook" href="/users/auth/facebook" linkButton={true} />
-				<RaisedButton style={buttonStyle} className="auth-form-button" label="Sign in with Google" href="/users/auth/google_oauth2" linkButton={true} />
+
+				<RaisedButton icon={<FontIcon className="fa fa-facebook-official"/>} style={buttonStyle} className="auth-form-button" label="Sign in with Facebook" href="/users/auth/facebook" linkButton={true} />
+				<RaisedButton icon={<FontIcon className="fa fa-google"/>} style={buttonStyle} className="auth-form-button" label="Sign in with Google" href="/users/auth/google_oauth2" linkButton={true} />
 				<RaisedButton style={buttonStyle} className="auth-form-button" label="Already have an Account?" onClick={this.props.toggleAuth} />
 			</div>
 		)	
