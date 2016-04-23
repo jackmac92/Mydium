@@ -7,6 +7,7 @@ class Article < ActiveRecord::Base
     default_url: "missing.jpg",
     processors: [:compression]
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\Z/
+  validates_uniqueness_of :title, scope: [:user_id]
 
   belongs_to :user
 

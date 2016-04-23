@@ -13,12 +13,12 @@ export default {
   },
   
   palette: {
-    primary1Color: Colors.cyan500,
-    primary2Color: Colors.cyan700,
+    primary1Color: Colors.blue500,
+    primary2Color: Colors.blue700,
     primary3Color: Colors.lightBlack,
-    accent1Color: Colors.pinkA200,
-    accent2Color: Colors.grey100,
-    accent3Color: Colors.grey500,
+    accent1Color: Colors.yellowA500,
+    accent2Color: Colors.yellowA100,
+    accent3Color: Colors.yellowA900,
     textColor: Colors.darkBlack,
     alternateTextColor: Colors.white,
     canvasColor: Colors.white,
