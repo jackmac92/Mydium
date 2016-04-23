@@ -120,10 +120,11 @@ var SelfShow = React.createClass({
             break;
           case "follow":
             var faction = (action == "destroy") ? " unfollowed " : " started following "
-            label = that.state.profile.name +  +  a.recipient_name
+            label = that.state.profile.name + faction +  a.recipient_name
             break;
           case "like":
-            label = that.state.profile.name + " liked " +  a.recipient_name
+            var laction = (action == "destroy") ? " unliked " : " liked "
+            label = that.state.profile.name + laction +  a.recipient_name
             break;
           case "mention":
             label = that.state.profile.name + " mentioned " +  a.recipient_name

@@ -8,9 +8,9 @@
 
 ActiveRecord::Base.transaction do
   PublicActivity.enabled = false
-    Tag.destroy_all
-    User.destroy_all
     Article.destroy_all
+    User.destroy_all
+    Tag.destroy_all
     PublicActivity::Activity.destroy_all
   PublicActivity.enabled = true
   

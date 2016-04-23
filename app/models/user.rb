@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
 
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
+  before_destroy :remove_social_activity
+
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
@@ -56,4 +58,14 @@ class User < ActiveRecord::Base
   def recent_articles_excluding article_id
   	articles.where(published: true).order(:created_at).limit(5).where.not(id: article_id)
   end
+
+  private
+
+  def remove_social_activity
+    Follow.where(follower_type: "User").where(follower_id: self.id).destroy_all
+    Follow.where(followable_type: "User").where(followable_id: self.id).destroy_all
+    Like.where(liker_type: "User").where(liker_id: self.id).destroy_all
+    Mention.where(mentionable_type: "User").where(mentionable_id: self.id).destroy_all
+  end
+
 end

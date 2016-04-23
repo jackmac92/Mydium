@@ -10,6 +10,8 @@ class Article < ActiveRecord::Base
 
   belongs_to :user
 
+  before_destroy :remove_social_activity
+
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
 
@@ -81,6 +83,11 @@ class Article < ActiveRecord::Base
   def self.all_with_tag tag_name
     tag = Tag.where(name: tag_name)[0]
     viewable.where(id: Tagging.where(tag_id: tag.id).map(&:article_id))
+  end
+
+  def remove_social_activity
+    Mention.where(mentioner_type: "Article").where(mentioner_id: self.id).destroy_all
+    Like.where(likeable_type: "Article").where(likeable_id: self.id).destroy_all
   end
 
 end
