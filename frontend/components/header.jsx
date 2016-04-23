@@ -98,7 +98,7 @@ var Header = React.createClass({
 		          targetOrigin={{horizontal: 'left', vertical: 'top'}}
 		        >
 		        	<MenuItem onTouchTap={this.goTo.bind(this,"/editor")} primaryText="New Article"/>
-		        	<MenuItem onTouchTap={this.goTo.bind(this,"/me")} primaryText="Account"/>
+		        	<MenuItem onTouchTap={() => this.context.router.push("/me")} primaryText="Account"/>
 	            <MenuItem onTouchTap={this.logOut} primaryText="Sign Out"/>
 		        </IconMenu>
 					</div>

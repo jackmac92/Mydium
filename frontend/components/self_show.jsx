@@ -89,48 +89,35 @@ var SelfShow = React.createClass({
       var that = this
       var activities = this.state.profile.activities.map( function (a) {
 
-        var label;
         var link = "#";
         switch (a.recipient_type) {
           case "Article":
-            link = "/article/" + a.recipient_id
-            break;
+            link = "/article/" + a.recipient_id; break;
           case "User":
-            link = "/users/" + a.recipient_id
-            break;
+            link = "/users/" + a.recipient_id; break;
           case "Tag":
-            link = "/tags/" + a.recipient_name
+            link = "/tags/" + a.recipient_name; break;
         }
         var model = a.key.split(".")[0]
         var action = a.key.split(".")[1]
-        console.log(a.key)
+        var label = that.state.profile.name;
         switch (model) {
           case "article_view":
-            label = that.state.profile.name + " viewed " + a.recipient_name
-            break;
+            label += " viewed "; break;
           case "article_read":
-            label = that.state.profile.name + " read " + a.recipient_name
-            break;
+            label += " read "; break;
           case "comment":
-            label = that.state.profile.name + " " + action + "ed" + " a comment on " +  a.recipient_name
-            break;
+            label += " " + action + "ed a comment on "; break;
           case "bookmark":
-            var bmaction = (action == "destroy") ? " unbookmarked " : " bookmarked "
-            label = that.state.profile.name + " " + bmaction +  a.recipient_name
-            break;
+            label += (action == "destroy") ? " unbookmarked " : " bookmarked "; break;
           case "follow":
-            var faction = (action == "destroy") ? " unfollowed " : " started following "
-            label = that.state.profile.name + faction +  a.recipient_name
-            break;
+            label +=  (action == "follow") ? " unfollowed " : " started following "; break;
           case "like":
-            var laction = (action == "destroy") ? " unliked " : " liked "
-            label = that.state.profile.name + laction +  a.recipient_name
-            break;
+            label += (action == "like") ? " unfavorited " : " favorited "; break;
           case "mention":
-            label = that.state.profile.name + " mentioned " +  a.recipient_name
-            console.log(label)
-            break;
+            label += " mentioned "; break;
         }
+        label += a.recipient_name
         return <ListItem onClick={() => that.context.router.push(link)} primaryText={label} key={a.id} />
       })
       var activitiessection = (

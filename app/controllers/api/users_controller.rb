@@ -2,6 +2,7 @@ class Api::UsersController < ApplicationController
 	include PublicActivity::StoreController
 	def show
 		@user = User.find params[:id]
+		@activities = @user.activity_list.order(created_at: :desc)
 	end
 
 	def published

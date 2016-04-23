@@ -9,6 +9,7 @@ import {List,ListItem} from 'material-ui/List';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import LinearProgress from 'material-ui/LinearProgress';
+import * as Colors from 'material-ui/styles/colors';
 
 
 var ArticleDetail = React.createClass({
@@ -118,7 +119,7 @@ var ArticleDetail = React.createClass({
     return (
       <main>
         <div className="article-progress">
-          <LinearProgress mode="determinate" value={this.state.position}/>
+          <LinearProgress color={Colors.green600} mode="determinate" value={this.state.position}/>
         </div>
         <article className="article-detail">
           <img className="author-thumb" src={this.state.article.author.avatar} />

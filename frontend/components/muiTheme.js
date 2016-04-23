@@ -11,6 +11,7 @@ export default {
   baseTheme: {
     fontFamily: 'Roboto, sans-serif'
   },
+  
   palette: {
     primary1Color: Colors.cyan500,
     primary2Color: Colors.cyan700,

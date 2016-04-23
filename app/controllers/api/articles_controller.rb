@@ -15,6 +15,11 @@ class Api::ArticlesController < ApplicationController
   
   def show
     @article = Article.includes(:tags, :user, comments: :user).find(params[:id])
+    unless @article.published
+      unless current_user.id == @article.user.id
+        render json: "Cannot view others unpublished articles", status: 401
+      end
+    end
   end
 
   def create
