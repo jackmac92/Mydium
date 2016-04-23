@@ -6,25 +6,23 @@ import Headroom from 'react-headroom'
 import LoginForm from './login_form'
 import SignupForm from './signup_form'
 
-import Popover from 'material-ui/lib/popover/popover';
-import FlatButton from 'material-ui/lib/flat-button';
-import IconButton from 'material-ui/lib/icon-button';
-import FontIcon from 'material-ui/lib/font-icon';
-import Paper from 'material-ui/lib/paper';
-import AutoComplete from 'material-ui/lib/auto-complete';
-import TextField from 'material-ui/lib/TextField'
-import ActionAccountCircle from 'material-ui/lib/svg-icons/action/account-circle'
-import IconMenu from 'material-ui/lib/menus/icon-menu';
-import MenuItem from 'material-ui/lib/menus/menu-item';
-import ActionSearch from 'material-ui/lib/svg-icons/action/search'
+import Popover from 'material-ui/Popover';
+import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
+import Paper from 'material-ui/Paper';
+import AutoComplete from 'material-ui/AutoComplete';
+import TextField from 'material-ui/TextField';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import ActionAccountCircle from 'material-ui/svg-icons/action/account-circle';
+import ActionSearch from 'material-ui/svg-icons/action/search';
 
-import Dialog from 'material-ui/lib/dialog';
+import Dialog from 'material-ui/Dialog';
 
 
 var Header = React.createClass({
-	contextTypes: {
-		router: React.PropTypes.object.isRequired
-	},
+	contextTypes: {router: React.PropTypes.object.isRequired},
 
 	getInitialState: function() {
 		return {
@@ -128,7 +126,7 @@ var Header = React.createClass({
 		}
 		return (
 			<Headroom>
-    		<Paper className="header-wrap" zDepth={1}>
+    		<Paper muiTheme={this.context.muiTheme} className="header-wrap" zDepth={1}>
 		    	<header className="header">
 		    		<div onClick={() => router.push("/")} id="logo" />
 		    		<div className="header-right group">

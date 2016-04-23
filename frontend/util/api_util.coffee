@@ -270,6 +270,16 @@ ApiUtil =
         callback && callback(article.id)
       error: ->
         console.log "ApiUtil#createNewArticle error"
+  destroyArticle: (id, callback) ->
+    $.ajax
+      type: "DELETE"
+      dataType: "json"
+      url: "api/articles/"+id
+      success: (drafts) ->
+        ApiActions.receiveUserDrafts drafts
+        callback && callback()
+      error: ->
+        console.log "ApiUtil#destroyArticle error"
 
   markFavorite: (type, id) ->
     $.ajax

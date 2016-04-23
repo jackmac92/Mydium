@@ -62,7 +62,8 @@ class Api::ArticlesController < ApplicationController
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
-    render :show
+    @articles = current_user.articles.where published: false
+    render 'api/articles/drafts'
   end
 
   private

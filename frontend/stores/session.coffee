@@ -16,7 +16,7 @@ SessionStore = new Store AppDispatcher
 `_userTags = []`
 
 SessionStore.currentUser = ->
-	_currentUser
+	$.extend(_currentUser, {}, true)
 
 SessionStore.isLoggedIn = ->
 	!!_currentUser

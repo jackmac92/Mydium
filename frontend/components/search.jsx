@@ -1,12 +1,12 @@
 var React = require('react');
 var SearchStore = require('../stores/search')
 var ApiUtil = require('../util/api_util');
-import AutoComplete from 'material-ui/lib/auto-complete';
-import List from 'material-ui/lib/lists/list';
-import ListItem from 'material-ui/lib/lists/list-item';
-import TextField from 'material-ui/lib/text-field';
-import Popover from 'material-ui/lib/popover/popover';
-import MenuItem from 'material-ui/lib/menus/menu-item';
+
+import AutoComplete from 'material-ui/AutoComplete';
+import { List, ListItem } from 'material-ui/List';
+import TextField from 'material-ui/TextField';
+import Popover from 'material-ui/Popover';
+import { MenuItem } from 'material-ui/Menu';
 
 var Search = React.createClass({
   contextTypes: {router: React.PropTypes.object.isRequired},

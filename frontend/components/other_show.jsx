@@ -1,10 +1,8 @@
 var React = require('react');
-import Tabs from 'material-ui/lib/tabs/tabs';
-import Tab from 'material-ui/lib/tabs/tab';
+import {Tab, Tabs} from 'material-ui/Tabs';
 import SessionStore from '../stores/session'
 import UserStore from '../stores/user'
-import List from 'material-ui/lib/lists/list';
-import ListItem from 'material-ui/lib/lists/list-item';
+import { List, ListItem } from 'material-ui/List';
 import ApiUtil from '../util/api_util'
 
 var OtherShow = React.createClass({

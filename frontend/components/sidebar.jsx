@@ -5,9 +5,8 @@ import SessionStore from '../stores/session'
 import Tag from './tag'
 import ApiUtil from '../util/api_util'
 
-import FlatButton from 'material-ui/lib/flat-button'
-import List from 'material-ui/lib/lists/list';
-import ListItem from 'material-ui/lib/lists/list-item';
+import FlatButton from 'material-ui/FlatButton';
+import { List, ListItem } from 'material-ui/List';
 
 
 var Sidebar = React.createClass({

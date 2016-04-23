@@ -6,7 +6,7 @@ import { createHashHistory } from 'history'
 import ApiUtil from './util/api_util'
 import SessionStore from './stores/session'
 
-import App from './components/app'
+import MaterialApp from './components/material_app'
 import LoginForm from './components/login_form'
 import SignUpForm from './components/signup_form'
 import SelfShow from './components/self_show'
@@ -35,7 +35,7 @@ $(document).ready(function () {
   const appHistory = useRouterHistory(createHashHistory)({queryKey:false})
   ReactDOM.render(
       <Router history={appHistory}>
-        <Route path="/" component={App}>
+        <Route path="/" component={MaterialApp}>
           <IndexRoute component={ArticleIndex} />
           <Route path="popular" component={ArticleIndex} />
           <Route path="me/bookmarks" component={ArticleIndex}/>
@@ -43,7 +43,7 @@ $(document).ready(function () {
           <Route path="article/:id" component={ArticleDetail} />       
           <Route path="users/:id" component={OtherShow} />
           <Route path="tagselect" component={TagSelector} />
-          <Route path="me" component={SelfShow} />
+          <Route path="me" onEnter={_requireLoggedIn} component={SelfShow} />
           <Route path="editor" component={ArticleForm} />
           <Route path="editor/:id" component={ArticleForm} />
           <Route path="search" component={Search}/>

@@ -1,7 +1,7 @@
 var React = require('react');
 import ApiUtil from '../util/api_util'
-import RaisedButton from 'material-ui/lib/raised-button'
-import TextField from 'material-ui/lib/text-field'
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 
 var CommentForm = React.createClass({
 	getInitialState: function() {

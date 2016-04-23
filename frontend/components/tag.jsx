@@ -1,5 +1,5 @@
 var React = require('react');
-import RaisedButton from 'material-ui/lib/raised-button';
+import RaisedButton from 'material-ui/RaisedButton';
 
 var Tag = React.createClass({
 

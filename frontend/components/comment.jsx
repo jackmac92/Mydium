@@ -1,6 +1,6 @@
 var React = require('react');
 import ApiUtil from '../util/api_util'
-import FlatButton from 'material-ui/lib/flat-button'
+import FlatButton from 'material-ui/FlatButton'
 var Comment = React.createClass({
 
 	handleDelete: function (id) {

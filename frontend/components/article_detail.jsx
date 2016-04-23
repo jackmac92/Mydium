@@ -4,12 +4,11 @@ import SessionStore from '../stores/session'
 import ApiUtil from '../util/api_util'
 import Tag from './tag'
 import Comments from './comment_section'
-import Checkbox from 'material-ui/lib/checkbox'
-import List from 'material-ui/lib/lists/list';
-import ListItem from 'material-ui/lib/lists/list-item';
+import Checkbox from 'material-ui/Checkbox';
+import {List,ListItem} from 'material-ui/List';
 
-import RaisedButton from 'material-ui/lib/raised-button'
-import LinearProgress from 'material-ui/lib/linear-progress';
+import RaisedButton from 'material-ui/RaisedButton';
+import LinearProgress from 'material-ui/LinearProgress';
 
 
 var ArticleDetail = React.createClass({

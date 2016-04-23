@@ -1,12 +1,11 @@
 var React = require('react');
-import Tabs from 'material-ui/lib/tabs/tabs';
-import Tab from 'material-ui/lib/tabs/tab';
+import {Tab, Tabs} from 'material-ui/Tabs';
 import SessionStore from '../stores/session'
 import UserStore from '../stores/user'
-import List from 'material-ui/lib/lists/list';
-import ListItem from 'material-ui/lib/lists/list-item';
+import {List,ListItem} from 'material-ui/List';
 import ApiUtil from '../util/api_util'
 import TagSelector from './tag_selector'
+import FlatButton from 'material-ui/FlatButton'
 
 var SelfShow = React.createClass({
   contextTypes: {router: React.PropTypes.object.isRequired},
@@ -50,7 +49,11 @@ var SelfShow = React.createClass({
     var drafts, draftsection, bookmarksection, bookmarks, favoritesection, favorites, profile, profilesection, published, publishedection;
     if (this.state.drafts.length > 0) {
         drafts = this.state.drafts.map( d =>
-          <ListItem onClick={() => this.context.router.push("/editor/"+d.id)} key={d.id} primaryText={d.title}/>
+          <ListItem 
+            onClick={() => this.context.router.push("/editor/"+d.id)} 
+            primaryText={d.title}
+            rightIconButton={<FlatButton onClick={() => ApiUtil.destroyArticle(d.id)} label="delete" />}
+            key={d.id} />
         );
         draftsection = (
             <List>
@@ -81,6 +84,7 @@ var SelfShow = React.createClass({
           )
 
     }
+
     if (this.state.profile) {
       var that = this
       var activities = this.state.profile.activities.map( function (a) {
@@ -97,24 +101,33 @@ var SelfShow = React.createClass({
           case "Tag":
             link = "/tags/" + a.recipient_name
         }
-        switch (a.trackable_type) {
-          case "ArticleView":
+        var model = a.key.split(".")[0]
+        var action = a.key.split(".")[1]
+        console.log(a.key)
+        switch (model) {
+          case "article_view":
             label = that.state.profile.name + " viewed " + a.recipient_name
             break;
-          case "Comment":
-            label = that.state.profile.name + " made a comment on " +  a.recipient_name
+          case "article_read":
+            label = that.state.profile.name + " read " + a.recipient_name
             break;
-          case "Bookmark":
-            label = that.state.profile.name + " bookmarked " +  a.recipient_name
+          case "comment":
+            label = that.state.profile.name + " " + action + "ed" + " a comment on " +  a.recipient_name
             break;
-          case "Socialization::ActiveRecordStores::Follow":
-            label = that.state.profile.name + " started following " +  a.recipient_name
+          case "bookmark":
+            var bmaction = (action == "destroy") ? " unbookmarked " : " bookmarked "
+            label = that.state.profile.name + " " + bmaction +  a.recipient_name
             break;
-          case "Socialization::ActiveRecordStores::Like":
+          case "follow":
+            var faction = (action == "destroy") ? " unfollowed " : " started following "
+            label = that.state.profile.name +  +  a.recipient_name
+            break;
+          case "like":
             label = that.state.profile.name + " liked " +  a.recipient_name
             break;
-          case "Socialization::ActiveRecordStores::Mention":
+          case "mention":
             label = that.state.profile.name + " mentioned " +  a.recipient_name
+            console.log(label)
             break;
         }
         return <ListItem onClick={() => that.context.router.push(link)} primaryText={label} key={a.id} />

@@ -1,9 +1,9 @@
 var React = require('react');
 var ApiUtil = require('../util/api_util');
 
-import TextField from 'material-ui/lib/text-field'
-import Checkbox from 'material-ui/lib/checkbox'
-import RaisedButton from 'material-ui/lib/raised-button'
+import TextField from 'material-ui/TextField'
+import Checkbox from 'material-ui/Checkbox'
+import RaisedButton from 'material-ui/RaisedButton'
 
 
 var LoginForm = React.createClass({
@@ -83,6 +83,7 @@ var LoginForm = React.createClass({
 		var fbStyle = {
 			width:'100%',
 			margin:'5px',
+			
 		}
 		var googStyle = {
 			width:'100%',

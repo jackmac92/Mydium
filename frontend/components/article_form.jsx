@@ -3,12 +3,12 @@ import ReactQuill from 'react-quill'
 import ReactDOM from 'react-dom'
 
 import ApiUtil from '../util/api_util'
-import Checkbox from 'material-ui/lib/checkbox'
-import RaisedButton from 'material-ui/lib/raised-button'
+import Checkbox from 'material-ui/Checkbox';
+import RaisedButton from 'material-ui/RaisedButton';
 import Dropzone from 'react-dropzone'
-import TextField from 'material-ui/lib/text-field';
+import TextField from 'material-ui/TextField';
 import WritingStore from '../stores/writing'
-import RefreshIndicator from 'material-ui/lib/refresh-indicator';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 
 var ArticleForm = React.createClass({
@@ -84,30 +84,39 @@ var ArticleForm = React.createClass({
 	
 	updateBody: function (e) {
 		var regex = /(^|[^@\w])@(\w{1,15})\b\s/
-		var replace = '$1<a class="user-mention" href="/#/users/$2">@$2</a> ';
+		var replace = '$1<a class="user-mention" href="/#/users/$2">@$2</a>';
 		this.setState({
 			body_stylized:e.replace( regex, replace ),
 			body_plain_text: $(".ql-editor")[0].innerText,
 			autoSaving: "ready"
 		});
 		clearTimeout(this.autoSaveTimeout)
-		this.autoSaveTimeout = setTimeout(this.autoSave, 3000)
+		this.autoSaveTimeout = setTimeout(this.autoSave, 500)
+		clearTimeout(this.writersBlockTimeout)
+		this.writersBlockTimeout = setTimeout(this.writersBlock, 500)
+
 	},
+	writersBlock: function () {
+	},
+	
 	autoSave: function () {
 		this.setState({autoSaving: "loading"})
 		ApiUtil.autoSave(this.state.id ,this.state.body_stylized, this.state.body_plain_text, function () {this.setState({autoSaving: "hide"})}.bind(this))
 	},
+	
 	updatePublished: function () {
 		this.setState({
 			published: !this.state.published
 		})
 	},
+	
 	formReady: function () {
 		if (this.state.title && this.state.title.length != 0 && this.state.body_plain_text.length != 0 && this.state.picture) {
 			return true
 		} 
 		return false;
-	},	
+	},
+
   render: function () {
   	var uploadPreview;
   	if (this.state.picture) {

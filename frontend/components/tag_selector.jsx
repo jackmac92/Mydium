@@ -1,10 +1,10 @@
 var React = require('react');
-import {List, ListItem} from 'material-ui/lib/lists'
-import AutoComplete from 'material-ui/lib/auto-complete';
+import {List, ListItem} from 'material-ui/List'
+import AutoComplete from 'material-ui/AutoComplete';
 import TagStore from '../stores/tag'
 import SessionStore from '../stores/session'
 import ApiUtil from '../util/api_util'
-import MenuItem from 'material-ui/lib/menus/menu-item';
+import { MenuItem } from 'material-ui/Menu';
 
 var TagSelector = React.createClass({
 

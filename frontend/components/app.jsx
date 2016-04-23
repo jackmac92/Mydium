@@ -2,11 +2,11 @@ var ApiUtil = require('../util/api_util');
 var SessionStore = require('../stores/session');
 var Header = require('../components/header');
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+
 
 var App = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.object.isRequired
-  },
+  contextTypes: { router: React.PropTypes.object.isRequired },
   getInitialState: function() {
     return {
       currentUser: null
@@ -31,7 +31,13 @@ var App = React.createClass({
       <div>
         <Header currentUser={this.state.currentUser}/>
         <content className="curr-page-content">
-          {this.props.children}
+          <ReactCSSTransitionGroup
+                transitionName="router"
+                transitionEnterTimeout={1500}
+                transitionLeaveTimeout={1500}
+          >
+            {this.props.children}
+          </ReactCSSTransitionGroup>
         </content>
       </div>
     );

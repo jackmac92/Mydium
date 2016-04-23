@@ -4,7 +4,7 @@ import ArticleStore from '../stores/articles'
 import SessionStore from '../stores/session'
 import ArticleIndexItem from './article_index_item'
 import Sidebar from './sidebar'
-import LinearProgress from 'material-ui/lib/linear-progress'
+import LinearProgress from 'material-ui/LinearProgress'
 import Infinite from 'react-infinite'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 

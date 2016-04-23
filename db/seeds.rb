@@ -7,8 +7,13 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 ActiveRecord::Base.transaction do
-  Tag.destroy_all
-  User.destroy_all
+  PublicActivity.enabled = false
+    Tag.destroy_all
+    User.destroy_all
+    Article.destroy_all
+    PublicActivity::Activity.destroy_all
+  PublicActivity.enabled = true
+  
   me = User.create(email:"jackmac79@gmail.com", password:"password", name:"Jack McCown", username:"jackmac", avatar:Faker::Avatar.image)
 
   40.times do
@@ -23,7 +28,6 @@ ActiveRecord::Base.transaction do
     end
   end
 
-  Article.destroy_all
   tags = %w(tech fashion startups culture art stocks foreign finance celebrity politics DIY offbeat funny satire design business economcis UX life)
 
   25.times do

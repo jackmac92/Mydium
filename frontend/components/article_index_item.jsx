@@ -1,14 +1,15 @@
 import React from 'react'
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/lib/card'
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
 import Tag from './tag'
 import ApiUtil from '../util/api_util'
-import IconButton from 'material-ui/lib/icon-button'
-import FontIcon from 'material-ui/lib/font-icon'
-import FlatButton from 'material-ui/lib/flat-button'
-import ActionFavorite from 'material-ui/lib/svg-icons/action/favorite';
-import ActionFavoriteBorder from 'material-ui/lib/svg-icons/action/favorite-border';
-import ActionBookmark from 'material-ui/lib/svg-icons/action/bookmark';
-import ActionBookmarkBorder from 'material-ui/lib/svg-icons/action/bookmark-border';
+import IconButton from 'material-ui/IconButton'
+import FontIcon from 'material-ui/FontIcon'
+import FlatButton from 'material-ui/FlatButton'
+
+import ActionFavorite from 'material-ui/svg-icons/action/favorite';
+import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
+import ActionBookmark from 'material-ui/svg-icons/action/bookmark';
+import ActionBookmarkBorder from 'material-ui/svg-icons/action/bookmark-border';
 
 const ArticleCard = React.createClass({
  	contextTypes: {router: React.PropTypes.object.isRequired},
