@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     get '/user/drafts', to: 'users#drafts' 
     get '/user/published', to: 'users#published' 
     
+    get "*unmatched_route", to: 'static_pages#root'
   end
 end
 

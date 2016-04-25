@@ -143,22 +143,22 @@ var SelfShow = React.createClass({
         value={this.state.value}
         onChange={this.handleChange}
       >
-        <Tab onClick={this.handleChange.bind(this,"a")} label="Favorites" value="a" >
-          {favoritesection}
+        <Tab onClick={this.handleChange.bind(this,"e")} label="Activity" value="e">
+          {activitiessection}
         </Tab>
         <Tab onClick={this.handleChange.bind(this,"f")} label="Profile" value="f" >
-        </Tab>
-        <Tab onClick={this.handleChange.bind(this,"b")} label="Bookmarks" value="b">
-          {bookmarksection}
-        </Tab>
-        <Tab onClick={this.handleChange.bind(this,"c")} label="Drafts" value="c">
-          {draftsection}
         </Tab>
         <Tab onClick={this.handleChange.bind(this,"d")} label="Published" value="d">
           {published}
         </Tab>
-        <Tab onClick={this.handleChange.bind(this,"e")} label="Activity" value="e">
-          {activitiessection}
+        <Tab onClick={this.handleChange.bind(this,"c")} label="Drafts" value="c">
+          {draftsection}
+        </Tab>
+        <Tab onClick={this.handleChange.bind(this,"a")} label="Favorites" value="a" >
+          {favoritesection}
+        </Tab>
+        <Tab onClick={this.handleChange.bind(this,"b")} label="Bookmarks" value="b">
+          {bookmarksection}
         </Tab>
       </Tabs>
     );

@@ -97,9 +97,9 @@ var Header = React.createClass({
 		          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
 		          targetOrigin={{horizontal: 'left', vertical: 'top'}}
 		        >
-		        	<MenuItem onTouchTap={this.goTo.bind(this,"/editor")} primaryText="New Article"/>
-		        	<MenuItem onTouchTap={() => this.context.router.push("/me")} primaryText="Account"/>
-	            <MenuItem onTouchTap={this.logOut} primaryText="Sign Out"/>
+		        	<MenuItem rightIcon={<FontIcon className="fa fa-plus"/>} onTouchTap={this.goTo.bind(this,"/editor")} primaryText="New Article"/>
+		        	<MenuItem rightIcon={<FontIcon className="fa fa-user"/>} onTouchTap={() => this.context.router.push("/me")} primaryText="Account"/>
+	            <MenuItem rightIcon={<FontIcon className="fa fa-sign-out"/>} onTouchTap={this.logOut} primaryText="Sign Out"/>
 		        </IconMenu>
 					</div>
 			)
@@ -144,5 +144,3 @@ var Header = React.createClass({
 });
 
 module.exports = Header;
-	            // <FlatButton onClick={() => router.push("/me/drafts")} label="Drafts"/>
-	            // <FlatButton onClick={() => router.push("/me/published")} label="Publications"/>

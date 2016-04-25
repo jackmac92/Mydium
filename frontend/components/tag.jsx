@@ -9,7 +9,12 @@ var Tag = React.createClass({
 			margin:"4px 7px",
 		}
 		return (
-			<RaisedButton labelStyle={{textTransform:"none"}} style={tagStyle} onClick={() => this.context.router.push("/tags/"+this.props.tag.name)} className="tag" label={this.props.tag.name} />
+			<RaisedButton 
+				labelStyle={{textTransform:"none"}} 
+				style={tagStyle} 
+				onClick={() => this.context.router.push("/tags/"+this.props.tag.name)} 
+				className="tag" 
+				label={this.props.tag.name} />
 		);
 	}
 

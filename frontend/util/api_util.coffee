@@ -7,7 +7,7 @@ SessionActions = require '../actions/session'
 
 ApiUtil =
 
-  search: (query, page) ->
+  search: (query, page, callback) ->
     $.ajax
       type: "GET"
       url:"api/searches"
@@ -17,6 +17,7 @@ ApiUtil =
         page: page
       success: (response) ->
         ApiActions.receiveSearchResults response
+        callback && callback()
       error: (e) ->
         console.log ("Search Error")
         console.log e

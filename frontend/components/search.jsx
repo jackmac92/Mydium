@@ -7,6 +7,8 @@ import { List, ListItem } from 'material-ui/List';
 import TextField from 'material-ui/TextField';
 import Popover from 'material-ui/Popover';
 import { MenuItem } from 'material-ui/Menu';
+import CircularProgress from 'material-ui/CircularProgress';
+
 
 var Search = React.createClass({
   contextTypes: {router: React.PropTypes.object.isRequired},
@@ -15,7 +17,8 @@ var Search = React.createClass({
     return { 
       query: "",
       results: [],
-      meta: {}
+      meta: {},
+      loading: false
     };
   },
   
@@ -46,7 +49,9 @@ var Search = React.createClass({
   },
   
   search: function (e) {
-    ApiUtil.search(this.state.query, 1);
+    this.setState({loading: true})
+    var that = this;
+    ApiUtil.search(this.state.query, 1, () => that.setState({loading: false}));
   },
   
   nextPage: function () {
@@ -60,6 +65,7 @@ var Search = React.createClass({
       if (result._type === "User") {
         return (
           <ListItem 
+              onClick={() => this.context.router.push("/article/"+result.id)} 
               key={ result.id }
               primaryText={ result.name || result.email }
               secondaryText="User"/>
@@ -73,12 +79,22 @@ var Search = React.createClass({
               secondaryText="Article"/>
         );  
 
+      } else if (result._type == "Tag") {
+        console.log(result)
+        return (
+          <ListItem 
+            onClick={() => this.context.router.push("/tags/"+result.name)} 
+            key={result.id}
+            primaryText={result.name}
+            secondaryText="Tag" />
+        );
       }
     }.bind(this));
   },
   render: function () {
     var articleIdCounter = 0
     var userIdCounter = 0
+    var progress;
     var resultStore = this.state.results.map(function (result) {
       if (result._type === "User") {
         return  <ListItem key={result.resultId} primaryText={result.name} secondaryText="User" onClick={() => this.context.router.push("/users/"+result.id)}/>
@@ -86,9 +102,12 @@ var Search = React.createClass({
         return <ListItem key={result.resultId} primaryText={result.title} secondaryText="Article" onClick={() => this.context.router.push("/article/"+result.id)} /> 
       }
      }.bind(this))
+
+    progress = (this.state.loading) ?  <CircularProgress /> : null
     return (
       <div>
-        <TextField value={this.state.query} onChange={this.handleInputChange} floatingLabelText="Search" />
+        <TextField style={{width:"100%"}} value={this.state.query} onChange={this.handleInputChange} floatingLabelText="Search" />
+        {progress}
         <List style={{background:"transparent"}}>
           {resultStore}
         </List>

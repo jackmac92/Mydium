@@ -21,7 +21,7 @@ function _requireLoggedIn(nextState, replace, asyncCompletionCallback) {
   if (!SessionStore.currentUserHasBeenFetched()) {
     ApiUtil.fetchCurrentUser(_redirectIfNotLoggedIn);
   } else {
-    _redirectIfNotLoggedIn
+    _redirectIfNotLoggedIn()
   }
   function _redirectIfNotLoggedIn () {
     if (!SessionStore.isLoggedIn()) {

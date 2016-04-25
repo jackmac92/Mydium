@@ -14,4 +14,3 @@
 //= require jquery_ujs
 //= require ./bundle
 //= require_tree .
-
