@@ -18,5 +18,8 @@ WritingStore.__onDispatch = (payload) ->
     when ArticleConstants.DRAFT_RECEIVED
     	setDetail payload.draft
     	WritingStore.__emitChange()
+    when ArticleConstants.DRAFT_PICTURE_RECEIVED
+    	`_article.picture = payload.picture`
+    	WritingStore.__emitChange()
 
 module.exports = WritingStore

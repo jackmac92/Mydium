@@ -40,12 +40,13 @@ ActiveRecord::Base.transaction do
       8.times do
         User.all.sample.comments.create(body:Faker::Hacker.say_something_smart, article_id:article.id)
       end
+      6.times do
+        User.all.sample.bookmarks.create(article_id: article.id)
+      end
     end
+  
     tags.sample(5).each do |tag|
       article.add_tag(tag)
-    end
-    6.times do
-      User.all.sample.bookmarks.create(article_id: article.id)
     end
 
   end

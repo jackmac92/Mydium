@@ -25,9 +25,12 @@ class Api::ArticlesController < ApplicationController
   def create
     @article = current_user.articles.new(article_params)
     if @article.valid?
-      @article.publish! if @article.published
       @article.save!
-      render :show
+      unless params[:idSet] == "true"
+        render :show
+      else
+        render json: {id:@article.id}
+      end
     else
       render json: @article.errors.full_messages, status: 422
     end
@@ -40,6 +43,15 @@ class Api::ArticlesController < ApplicationController
       render :show
     else
       render json: @article.errors.full_messages, status: 422
+    end
+  end
+
+  def set_picture
+    @article = Article.find(params[:id])
+    if @article.update(picture: params[:picture])
+      render json: asset_url(@article.picture.url)
+    else
+      render json: "Error setting picture"
     end
   end
 

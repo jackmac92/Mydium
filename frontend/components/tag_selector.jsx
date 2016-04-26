@@ -36,11 +36,10 @@ var TagSelector = React.createClass({
 		ApiUtil.fetchTagsIndex()
 		ApiUtil.fetchUserTags()
 	},
-	handleRequest: function (input, dataStoreId, list) {
+	handleRequest: function (input, dataStoreId) {
 		if (dataStoreId) {
 			this.setState({query:""})
-			var tagId = list[dataStoreId].value.props.tag.id
-			ApiUtil.tagFollowCreate(tagId)
+			ApiUtil.tagFollowCreate(input.value.props.tag.id)
 		};
 	},
 	render: function() {

@@ -10,7 +10,6 @@ if article.published
 	json.published_at time_ago_in_words(article.published_at)
 	json.pubTime article.published_at.to_i
 end
-json.body minified ? truncate(article.body_plain_text, length: 250) : article.body_stylized || article.body_plain_text
 
 json.tags do
 	json.array! article.tags do |tag|
@@ -26,13 +25,18 @@ json.author do
 	json.partial! '/api/users/user', user: article.user
 end
 
-json.picture asset_url(article.picture.url)
+json.picture asset_url(article.picture.url) if article.picture
 
 json.loading_pic asset_url(article.picture.url(:thumb))
 
 json.num_responses article.comments.count
 
-json.read_time article.body_plain_text.split.length / 275
+unless article.body_plain_text.nil?
+	json.read_time article.body_plain_text.split.length / 275
+	json.body minified ? truncate(article.body_plain_text, length: 250) : article.body_stylized || article.body_plain_text
+end
+
+
 if user_signed_in?
 	json.user do
 		json.faved_article current_user.likes? article

@@ -244,19 +244,34 @@ ApiUtil =
       success: ->
         ApiActions.commentDeleted commentId
 
-  setNewArticleId: (callback) ->
+  setArticlePicture: (article_id, picture, callback) ->
+    console.log article_id
+    $.ajax
+      type: "PATCH"
+      dataType: "json"
+      processData: false
+      contentType: false
+      url: "api/articles/" + article_id + "/picture"
+      data: picture
+      success: (picture) ->
+        callback && callback(picture)
+      error: ->
+        console.log "ApiUtil#setPicture error"
+    
+  setNewArticleId: (title, callback) ->
     $.ajax
       type: "POST"
       dataType: "json"
       url: "api/articles"
       data:
+        idSet: true
         article:
-          body_plain_text:""
-          title:""
+          title:title
       success: (article) ->
         callback(article.id)
-      error: ->
-        console.log "ApiUtil#createNewArticle error"
+      error: (e) ->
+        console.log e
+        console.log "ApiUtil#setIdErr error"
 
   createNewArticle: (articleFormData, callback) ->
     $.ajax

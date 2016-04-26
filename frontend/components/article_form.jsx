@@ -19,27 +19,18 @@ var ArticleForm = React.createClass({
 		return {
 				title: "",
 				subtitle: "",
-				body_plain_text: "",
+				body_plain_text: null,
 				body_stylized: "",
 				picture: null,
-				newPicture: false,
-				published: true,
-				autoSaving: "hide"
+				autoSaving: "hide",
+				idSet: false
 			};
 	},
 	
-	handleFiles: function (picture) {
-		this.setState({
-			newPicture: true,
-			picture: picture[0]
-		});
-	},
 	componentDidMount: function() {
 		this.writingStoreToken = WritingStore.addListener(this.__onChange)
 		if (this.props.params.id) {
 			ApiUtil.fetchDraft(this.props.params.id)
-		} else {
-			ApiUtil.setNewArticleId( function(id) {this.setState({id: id})}.bind(this))
 		}
 	},
 
@@ -54,16 +45,19 @@ var ArticleForm = React.createClass({
 			body_plain_text: draft.body_plain_text,
 			body_stylized: draft.body_stylized,
 			picture: draft.picture,
-			id: draft.id
+			id: draft.id,
+			idSet: true
 		})
+	},
+	handleFiles: function (picture) {
+		var picData = new FormData();
+		picData.append("picture", this.state.picture)
+		ApiUtil.setArticlePicture(this.state.id, picData, function (picture) {this.setState({picture: picture})}.bind(this))
 	},
 	handleSubmit: function (e) {
 		e.preventDefault();
-		debugger
 		var formData = new FormData();
-		if (this.state.newPicture) {
-			formData.append("article[picture]", this.state.picture);
-		};
+		formData.append("article[picture]", this.state.picture);
 		formData.append("article[title]", this.state.title);
 		formData.append("article[subtitle]", this.state.subTitle);
 		formData.append("article[published]", this.state.published);
@@ -73,8 +67,16 @@ var ArticleForm = React.createClass({
 		var router = this.context.router;
 		ApiUtil.createNewArticle(formData, function (articleId) {router.push('/article/'+articleId);})
 	},
+
+	setId: function () {
+		ApiUtil.setNewArticleId(this.state.title, function(id) {this.setState({id: id, idSet:true})}.bind(this))	
+	},
 	
 	updateTitle: function (e) {
+		if (!this.state.idSet) {
+			clearTimeout(this.setIdTimeout)
+			this.setIdTimeout = setTimeout(this.setId, 1000)
+		}
 		this.setState({title:e.currentTarget.value})
 	},
 	
@@ -111,7 +113,7 @@ var ArticleForm = React.createClass({
 	},
 	
 	formReady: function () {
-		if (this.state.title && this.state.title.length != 0 && this.state.body_plain_text.length != 0 && this.state.picture) {
+		if (this.state.title && this.state.title.length != 0 && this.state.body_plain_text && this.state.picture) {
 			return true
 		} 
 		return false;
@@ -120,6 +122,7 @@ var ArticleForm = React.createClass({
   render: function () {
   	var uploadPreview;
   	if (this.state.picture) {
+  		console.log(this.state.picture)
   		uploadPreview = <img id="article-picture-preview" src={this.state.picture.preview} />
   	}
   	return (

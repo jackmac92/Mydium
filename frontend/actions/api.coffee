@@ -6,6 +6,12 @@ SessionConstants = require '../constants/session'
 UserConstants = require '../constants/user'
 
 ApiActions =
+  
+  receiveArticlePicture: (picture) ->
+    AppDispatcher.dispatch
+      actionType: ArticleConstants.DRAFT_PICTURE_RECEIVED
+      picture: picture
+
   toggleDetailFollow: ->
     AppDispatcher.dispatch
       actionType: ArticleConstants.DETAIL_UPDATE

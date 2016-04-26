@@ -49,8 +49,8 @@ var SelfShow = React.createClass({
     var drafts, draftsection, bookmarksection, bookmarks, favoritesection, favorites, profile, profilesection, published, publishedection;
     if (this.state.drafts.length > 0) {
         drafts = this.state.drafts.map( d =>
-          <ListItem 
-            onClick={() => this.context.router.push("/editor/"+d.id)} 
+          <ListItem
+            onClick={() => this.context.router.push("/editor/"+d.id)}
             primaryText={d.title}
             rightIconButton={<FlatButton onClick={() => ApiUtil.destroyArticle(d.id)} label="delete" />}
             key={d.id} />
@@ -128,7 +128,7 @@ var SelfShow = React.createClass({
     };
     if (this.state.bookmarks.length > 0) {
         bookmarks = this.state.bookmarks.map( a =>
-          <ListItem onClick={() => this.context.router.push("/article/"+a.id)} key={a.id} primaryText={a.title}/>
+           <ListItem onClick={() => this.context.router.push("/article/"+a.id)} key={a.id} primaryText={a.title}/>
         );
         bookmarksection = (
             <List>
