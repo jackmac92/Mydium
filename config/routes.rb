@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     patch '/articles/:id/unpublish', to: 'articles#unpublish'
     patch '/articles/:id/autosave', to: 'articles#autosave'
     patch '/articles/:id/picture', to: 'articles#set_picture'
+    post '/articles/new_id', to: 'articles#autosave_id'
 
     post '/likes', to: 'likes#create'
     delete '/likes', to: 'likes#destroy'
@@ -32,5 +33,3 @@ Rails.application.routes.draw do
     get "*unmatched_route", to: 'static_pages#root'
   end
 end
-
-# custom routes for drafts, mentions 

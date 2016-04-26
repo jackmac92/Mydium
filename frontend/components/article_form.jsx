@@ -3,7 +3,6 @@ import ReactQuill from 'react-quill'
 import ReactDOM from 'react-dom'
 
 import ApiUtil from '../util/api_util'
-import Checkbox from 'material-ui/Checkbox';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dropzone from 'react-dropzone'
 import TextField from 'material-ui/TextField';
@@ -51,7 +50,8 @@ var ArticleForm = React.createClass({
 	},
 	handleFiles: function (picture) {
 		var picData = new FormData();
-		picData.append("picture", this.state.picture)
+		debugger
+		picData.append("picture", picture[0])
 		ApiUtil.setArticlePicture(this.state.id, picData, function (picture) {this.setState({picture: picture})}.bind(this))
 	},
 	handleSubmit: function (e) {
@@ -60,12 +60,28 @@ var ArticleForm = React.createClass({
 		formData.append("article[picture]", this.state.picture);
 		formData.append("article[title]", this.state.title);
 		formData.append("article[subtitle]", this.state.subTitle);
-		formData.append("article[published]", this.state.published);
 		formData.append("article[body_plain_text]", this.state.body_plain_text);
 		formData.append("article[body_stylized]", this.state.body_stylized);
 
 		var router = this.context.router;
 		ApiUtil.createNewArticle(formData, function (articleId) {router.push('/article/'+articleId);})
+	},
+	handlePublish: function (e) {
+		e.preventDefault()
+		if (!this.state.autoSaving == "loading") {
+
+		}
+	},
+	autoSave: function () {
+		this.setState({autoSaving: "loading"})
+		var articleData = {
+			id:this.state.id,
+			body_stylized: this.state.body_stylized,
+			body_plain_text: this.state.body_plain_text,
+			title: this.state.title,
+			subtitle: this.state.subTitle
+		}
+		ApiUtil.autoSave(articleData, function () {this.setState({autoSaving: "hide"})}.bind(this))
 	},
 
 	setId: function () {
@@ -73,11 +89,11 @@ var ArticleForm = React.createClass({
 	},
 	
 	updateTitle: function (e) {
+		this.setState({title:e.currentTarget.value})
 		if (!this.state.idSet) {
 			clearTimeout(this.setIdTimeout)
 			this.setIdTimeout = setTimeout(this.setId, 1000)
 		}
-		this.setState({title:e.currentTarget.value})
 	},
 	
 	updateSubTitle: function (e) {
@@ -101,10 +117,6 @@ var ArticleForm = React.createClass({
 	writersBlock: function () {
 	},
 	
-	autoSave: function () {
-		this.setState({autoSaving: "loading"})
-		ApiUtil.autoSave(this.state.id ,this.state.body_stylized, this.state.body_plain_text, function () {this.setState({autoSaving: "hide"})}.bind(this))
-	},
 	
 	updatePublished: function () {
 		this.setState({
@@ -122,7 +134,6 @@ var ArticleForm = React.createClass({
   render: function () {
   	var uploadPreview;
   	if (this.state.picture) {
-  		console.log(this.state.picture)
   		uploadPreview = <img id="article-picture-preview" src={this.state.picture.preview} />
   	}
   	return (
@@ -137,7 +148,7 @@ var ArticleForm = React.createClass({
 				  		{uploadPreview}
 			  		</Dropzone>
 		  		</div>
-		  		<Checkbox checked={this.state.published} onCheck={this.updatePublished} label="Publish?" />
+					<RaisedButton disabled={!this.formReady()} onClick={this.handleSubmit}  label="Publish"/>
   			</div>
 		    <RefreshIndicator
 		      size={40}
@@ -150,7 +161,6 @@ var ArticleForm = React.createClass({
 	  								value={this.state.body_stylized}
 	  								onChange={this.updateBody}
 	  								/>
-				<RaisedButton disabled={!this.formReady()} onClick={this.handleSubmit}  label={ this.state.published ? "Submit" : "Save"}/>
   		</div>
   	)
   }

@@ -65,9 +65,6 @@ ApiActions =
       user: user
 
   receiveSingleDraft: (draft) ->
-    pic = draft.picture
-    draft.picture = {}
-    draft.picture.preview = pic
     unless draft.body_stylized
       draft.body_stylized = "<div>"+draft.body_plain_text+"</div>"
     AppDispatcher.dispatch

@@ -49,7 +49,7 @@ class Api::ArticlesController < ApplicationController
   def set_picture
     @article = Article.find(params[:id])
     if @article.update(picture: params[:picture])
-      render json: asset_url(@article.picture.url)
+      render "api/articles/picture"
     else
       render json: "Error setting picture"
     end
@@ -62,6 +62,11 @@ class Api::ArticlesController < ApplicationController
     else
       render json: @article.errors.full_messages, status: 422
     end
+  end
+
+  def autosave_id
+    @article = current_user.articles.create(article_params)
+    render json: @article.id
   end
 
   def publish

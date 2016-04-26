@@ -5,7 +5,7 @@ import UserStore from '../stores/user'
 import {List,ListItem} from 'material-ui/List';
 import ApiUtil from '../util/api_util'
 import TagSelector from './tag_selector'
-import FlatButton from 'material-ui/FlatButton'
+import IconButton from 'material-ui/IconButton'
 
 var SelfShow = React.createClass({
   contextTypes: {router: React.PropTypes.object.isRequired},
@@ -50,9 +50,9 @@ var SelfShow = React.createClass({
     if (this.state.drafts.length > 0) {
         drafts = this.state.drafts.map( d =>
           <ListItem
-            onClick={() => this.context.router.push("/editor/"+d.id)}
+            onTouchTap={() => this.context.router.push("/editor/"+d.id)}
             primaryText={d.title}
-            rightIconButton={<FlatButton onClick={() => ApiUtil.destroyArticle(d.id)} label="delete" />}
+            rightIconButton={<IconButton onClick={() => ApiUtil.destroyArticle(d.id)} iconClassName="fa fa-trash-o" />}
             key={d.id} />
         );
         draftsection = (

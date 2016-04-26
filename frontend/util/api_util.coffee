@@ -157,15 +157,13 @@ ApiUtil =
       error: ->
         console.log "Error fetching draft"
 
-  autoSave: (id, bodyStylized, bodyPlainText, callback) ->
+  autoSave: (article,callback) ->
     $.ajax
       type: "PATCH"
       dataType: "json"
-      url: "api/articles/"+id+"/autosave"
+      url: "api/articles/"+article.id+"/autosave"
       data:
-        article:
-          body_stylized: bodyStylized
-          body_plain_text: bodyPlainText
+        article: article
       success: ->
         callback && callback()
       error: (e) ->
@@ -245,7 +243,6 @@ ApiUtil =
         ApiActions.commentDeleted commentId
 
   setArticlePicture: (article_id, picture, callback) ->
-    console.log article_id
     $.ajax
       type: "PATCH"
       dataType: "json"
@@ -254,7 +251,7 @@ ApiUtil =
       url: "api/articles/" + article_id + "/picture"
       data: picture
       success: (picture) ->
-        callback && callback(picture)
+        callback && callback(picture.picture)
       error: ->
         console.log "ApiUtil#setPicture error"
     
@@ -262,13 +259,12 @@ ApiUtil =
     $.ajax
       type: "POST"
       dataType: "json"
-      url: "api/articles"
+      url: "api/articles/new_id"
       data:
-        idSet: true
         article:
           title:title
-      success: (article) ->
-        callback(article.id)
+      success: (id) ->
+        callback(id)
       error: (e) ->
         console.log e
         console.log "ApiUtil#setIdErr error"

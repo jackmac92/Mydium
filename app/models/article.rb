@@ -4,11 +4,10 @@ class Article < ActiveRecord::Base
 
   has_attached_file :picture, 
     styles: { large: "800x800>", thumb: "100x100>" },
-    default_url: 'missing.jpg',
     processors: [:compression]
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\Z/
-  validates_uniqueness_of :title, scope: [:user_id]
 
+  validates_uniqueness_of :title, scope: [:user_id]
   belongs_to :user
 
   before_destroy :remove_social_activity

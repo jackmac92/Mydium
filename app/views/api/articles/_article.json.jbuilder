@@ -25,7 +25,11 @@ json.author do
 	json.partial! '/api/users/user', user: article.user
 end
 
-json.picture asset_url(article.picture.url) if article.picture
+unless article.picture.url == "/pictures/original/missing.png"
+	json.picture asset_path(article.picture.url)
+else
+	json.picture nil
+end
 
 json.loading_pic asset_url(article.picture.url(:thumb))
 
