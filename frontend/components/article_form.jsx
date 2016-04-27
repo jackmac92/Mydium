@@ -8,6 +8,7 @@ import Dropzone from 'react-dropzone'
 import TextField from 'material-ui/TextField';
 import WritingStore from '../stores/writing'
 import RefreshIndicator from 'material-ui/RefreshIndicator';
+import CircularProgress from 'material-ui/CircularProgress';
 
 
 var ArticleForm = React.createClass({
@@ -22,6 +23,7 @@ var ArticleForm = React.createClass({
 				body_stylized: "",
 				picture: null,
 				autoSaving: "hide",
+				loadingPic: false,
 				idSet: false
 			};
 	},
@@ -51,8 +53,14 @@ var ArticleForm = React.createClass({
 	handleFiles: function (picture) {
 		var picData = new FormData();
 		debugger
+		this.setState({loadingPic: true})
 		picData.append("picture", picture[0])
-		ApiUtil.setArticlePicture(this.state.id, picData, function (picture) {this.setState({picture: picture})}.bind(this))
+		ApiUtil.setArticlePicture(this.state.id, picData, function (picture) {
+			this.setState({
+				picture: picture,
+				loadingPic: false
+			})
+		}.bind(this))
 	},
 	handleSubmit: function (e) {
 		e.preventDefault();
@@ -68,9 +76,8 @@ var ArticleForm = React.createClass({
 	},
 	handlePublish: function (e) {
 		e.preventDefault()
-		if (!this.state.autoSaving == "loading") {
-
-		}
+		var that = this;
+		ApiUtil.ArticlePublish(this.state.id, () => that.context.router.push("/article/"+that.state.id))
 	},
 	autoSave: function () {
 		this.setState({autoSaving: "loading"})
@@ -134,7 +141,10 @@ var ArticleForm = React.createClass({
   render: function () {
   	var uploadPreview;
   	if (this.state.picture) {
-  		uploadPreview = <img id="article-picture-preview" src={this.state.picture.preview} />
+  		uploadPreview = <img id="article-picture-preview" src={this.state.picture} />
+  	}
+  	if (this.state.loadingPic) {
+  		uploadPreview = <CircularProgress />
   	}
   	return (
   		<div>
@@ -148,7 +158,7 @@ var ArticleForm = React.createClass({
 				  		{uploadPreview}
 			  		</Dropzone>
 		  		</div>
-					<RaisedButton disabled={!this.formReady()} onClick={this.handleSubmit}  label="Publish"/>
+					<RaisedButton disabled={!this.formReady()} onClick={this.handlePublish}  label="Publish"/>
   			</div>
 		    <RefreshIndicator
 		      size={40}

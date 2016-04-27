@@ -51,6 +51,16 @@ ApiUtil =
         console.log "ApiUtil#fetchTopArticles error"
       complete: ->
         callback && callback()
+  ArticlePublish: (id, callback) ->
+    $.ajax
+      type: "PATCH"
+      dataType: "json"
+      url: "api/articles/"+id+"/publish"
+      success: (article) ->
+        callback && callback()
+      error: ->
+        console.log "ApiUtil#publish error"
+    
   ArticleUnpublish: (id, callback) ->
     $.ajax
       type: "PATCH"
@@ -251,7 +261,7 @@ ApiUtil =
       url: "api/articles/" + article_id + "/picture"
       data: picture
       success: (picture) ->
-        callback && callback(picture.picture)
+        callback && callback(picture)
       error: ->
         console.log "ApiUtil#setPicture error"
     

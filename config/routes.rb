@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :searches, only:[:index]
     resources :follows, only:[:create,:destroy]
 
-    get '/articles/:id/publish', to: 'articles#publish'
+    patch '/articles/:id/publish', to: 'articles#publish'
     patch '/articles/:id/unpublish', to: 'articles#unpublish'
     patch '/articles/:id/autosave', to: 'articles#autosave'
     patch '/articles/:id/picture', to: 'articles#set_picture'
