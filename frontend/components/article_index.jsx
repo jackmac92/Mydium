@@ -55,10 +55,10 @@ var ArticleIndex = React.createClass ({
   },
 
   moreArticles: function () {
-    this.setState({isInfiniteLoading: true});
     var that = this;
     var meta = ArticleStore.meta();
     if (!(meta.page == meta.total_pages)) {
+      this.setState({isInfiniteLoading: true});
       this.articleFetcher(this.props, meta.page + 1);
     }
   },

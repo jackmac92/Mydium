@@ -94,15 +94,52 @@ var LoginForm = React.createClass({
 		return (
 			<div className="auth-form-container">
 				<form className="auth-form" >
-					<TextField type="email" onChange={this.updateEmail} floatingLabelText="Email" value={this.state.email}/>
-					<TextField floatingLabelText="Password" type="password" onChange={this.updatePassword} value={this.state.password}/> 
-					<Checkbox label="Remember Me" onCheck={this.updateRememberStatus} checked={this.state.remember_me} />
-					<RaisedButton style={buttonStyle} className="auth-form-button" disabled={!this.formReady()} onClick={this.handleSubmit}  label="Submit"/>
+					<TextField 
+						type="email" 
+						onChange={this.updateEmail} 
+						floatingLabelText="Email" 
+						value={this.state.email}/>
+					<TextField 
+						floatingLabelText="Password" 
+						type="password" 
+						onChange={this.updatePassword} 
+						value={this.state.password}/> 
+					<Checkbox 
+						label="Remember Me" 
+						onCheck={this.updateRememberStatus} 
+						checked={this.state.remember_me} />
+					<RaisedButton style={buttonStyle} 
+						className="auth-form-button" 
+						disabled={!this.formReady()} 
+						onClick={this.handleSubmit} 
+						label="Submit"/>
 				</form>
-				<RaisedButton icon={<FontIcon className="fa fa-facebook-official"/>} style={fbStyle} className="auth-form-button facebook" label="Sign in with Facebook" href="/users/auth/facebook" linkButton={true} />
-				<RaisedButton icon={<FontIcon className="fa fa-google"/>} style={googStyle} className="auth-form-button google" label="Sign in with Google" href="/users/auth/google_oauth2" linkButton={true} />
-				<RaisedButton style={buttonStyle} className="auth-form-button" label="Try With Demo Account" onClick={this.demoStart}/>
-				<RaisedButton style={buttonStyle} className="auth-form-button" label="Create a new account" onClick={this.props.toggleAuth} />
+				<RaisedButton 
+					backgroundColor={Colors.blue600} 
+					icon={<FontIcon className="fa fa-facebook-official"/>} 
+					style={fbStyle} 
+					className="auth-form-button facebook" 
+					label="Sign in with Facebook" 
+					href="/users/auth/facebook" 
+					linkButton={true} />
+				<RaisedButton 
+					backgroundColor={Colors.red600} 
+					icon={<FontIcon className="fa fa-google"/>} 
+					style={googStyle} 
+					className="auth-form-button google" 
+					label="Sign in with Google" 
+					href="/users/auth/google_oauth2" 
+					linkButton={true} />
+				<RaisedButton 
+					style={buttonStyle} 
+					className="auth-form-button" 
+					label="Try With Demo Account" 
+					onClick={this.demoStart}/>
+				<RaisedButton 
+					style={buttonStyle} 
+					className="auth-form-button" 
+					label="Create a new account" 
+					onClick={this.props.toggleAuth} />
 			</div>
 		)	
 	}

@@ -33,6 +33,11 @@ module.exports = {
   },
   devtool: 'cheap-source-map',
   plugins: [
-    new webpack.ProvidePlugin({'React':'react'})
+    new webpack.ProvidePlugin({'React':'react'}),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    })
   ]
 }

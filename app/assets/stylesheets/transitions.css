@@ -24,7 +24,7 @@
 .auto-enter.auto-enter-active {
   opacity: 1;
   transform: translateX(0);
-  transition: opacity 500ms, transform 500ms;
+  transition: opacity 1500ms, transform 1500ms;
 }
 
 .auto-leave {
@@ -35,5 +35,5 @@
 .auto-leave.auto-leave-active {
   opacity: 0.01;
   transform: translateX(500%);
-  transition: opacity 500ms, transform 500ms;
+  transition: opacity 1500ms, transform 1500ms;
 }

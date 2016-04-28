@@ -67,21 +67,66 @@ var LoginForm = React.createClass({
 		var buttonStyle = {
 			width:'100%',
 			margin:'5px',
-			textTransform:"none"
+		}
+		var buttonStyleLabel = {
+			textTransform:"none !important"
 		}
 		return (
 			<div className="auth-form-container">
 				<form className="auth-form">				
-					<TextField error={this.emailErrors()} type="email" onChange={this.updateEmail} floatingLabelText="Email" value={this.state.email}/>
-					<TextField type="text" onChange={this.updateUsername} floatingLabelText="Username" value={this.state.username}/>
-					<TextField floatingLabelText="Password" type="password" onChange={this.updatePassword} value={this.state.password}/>
-					<TextField floatingLabelText="Password" error={this.passwordErrors()} type="password" onChange={this.updatePasswordConfirm} value={this.state.password_confirm}/>
-					<RaisedButton style={buttonStyle} className="auth-form-button" disabled={!this.formReady()} onClick={this.handleSubmit}  label="Submit"/>
+					<TextField 
+						error={this.emailErrors()} 
+						type="email" onChange={this.updateEmail} 
+						floatingLabelText="Email" value={this.state.email}/>
+					<TextField 
+						type="text" 
+						onChange={this.updateUsername} 
+						floatingLabelText="Username" 
+						value={this.state.username}/>
+					<TextField 
+						floatingLabelText="Password" 
+						type="password" 
+						onChange={this.updatePassword} 
+						value={this.state.password}/>
+					<TextField 
+						floatingLabelText="Password" 
+						error={this.passwordErrors()} 
+						type="password" 
+						onChange={this.updatePasswordConfirm} 
+						value={this.state.password_confirm}/>
+					<RaisedButton 
+						style={buttonStyle} 
+						labelStyle={buttonStyleLabel}
+						className="auth-form-button" 
+						disabled={!this.formReady()} 
+						onClick={this.handleSubmit}  
+						label="Submit"/>
 				</form>
 
-				<RaisedButton icon={<FontIcon className="fa fa-facebook-official"/>} style={buttonStyle} className="auth-form-button" label="Sign in with Facebook" href="/users/auth/facebook" linkButton={true} />
-				<RaisedButton icon={<FontIcon className="fa fa-google"/>} style={buttonStyle} className="auth-form-button" label="Sign in with Google" href="/users/auth/google_oauth2" linkButton={true} />
-				<RaisedButton style={buttonStyle} className="auth-form-button" label="Already have an Account?" onClick={this.props.toggleAuth} />
+				<RaisedButton 
+					backgroundColor={Colors.blue600} 
+					icon={<FontIcon className="fa fa-facebook-official"/>} 
+					style={buttonStyle} 
+					labelStyle={buttonStyleLabel}
+					className="auth-form-button" 
+					label="Sign in with Facebook" 
+					href="/users/auth/facebook" 
+					linkButton={true} />
+				<RaisedButton 
+					backgroundColor={Colors.red600} 
+					icon={<FontIcon className="fa fa-google"/>} 
+					style={buttonStyle} 
+					labelStyle={buttonStyleLabel}
+					className="auth-form-button" 
+					label="Sign in with Google" 
+					href="/users/auth/google_oauth2" 
+					linkButton={true} />
+				<RaisedButton 
+					style={buttonStyle} 
+					labelStyle={buttonStyleLabel}
+					className="auth-form-button" 
+					label="Already have an Account?" 
+					onClick={this.props.toggleAuth} />
 			</div>
 		)	
 	}

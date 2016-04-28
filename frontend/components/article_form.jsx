@@ -52,12 +52,11 @@ var ArticleForm = React.createClass({
 	},
 	handleFiles: function (picture) {
 		var picData = new FormData();
-		debugger
 		this.setState({loadingPic: true})
 		picData.append("picture", picture[0])
-		ApiUtil.setArticlePicture(this.state.id, picData, function (picture) {
+		ApiUtil.setArticlePicture(this.state.id, picData, function (response) {
 			this.setState({
-				picture: picture,
+				picture: response.picture,
 				loadingPic: false
 			})
 		}.bind(this))
