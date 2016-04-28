@@ -13,14 +13,14 @@ class Article < ActiveRecord::Base
   before_destroy :remove_social_activity
 
   has_many :taggings, dependent: :destroy
-  has_many :tags, through: :taggings
 
+  has_many :tags, through: :taggings
   has_many :bookmarks, dependent: :destroy
   has_many :comments, dependent: :destroy
-
   has_many :article_views, dependent: :destroy
-  has_many :users_who_viewed, through: :article_views, source: :user
   has_many :article_reads, dependent: :destroy
+
+  has_many :users_who_viewed, through: :article_views, source: :user
   has_many :users_who_read, through: :article_reads, source: :user
 
   scope :popular, -> { 

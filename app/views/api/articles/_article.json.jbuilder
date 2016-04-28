@@ -27,11 +27,11 @@ end
 
 unless article.picture.url == "/pictures/original/missing.png"
 	json.picture asset_path(article.picture.url)
+	json.loading_pic asset_url(article.picture.url(:thumb))
 else
 	json.picture nil
 end
 
-json.loading_pic asset_url(article.picture.url(:thumb))
 
 json.num_responses article.comments.count
 
