@@ -207,34 +207,6 @@ ApiUtil =
         console.log e
     
 
-  tagFollowCreate: (tagId, callback) ->
-    $.ajax
-      type: "PATCH"
-      dataType: "json"
-      url: "api/user"
-      data:
-        receiver: "tag"
-        tag_action: "follow"
-        id: tagId
-      success: (tags) ->
-        ApiActions.receiveUserTags tags
-        callback && callback()
-      error: (e) ->
-        console.log e
-
-  tagFollowDestroy: (tagId, callback) ->
-    $.ajax
-      type: "PATCH"
-      dataType: "json"
-      url: "api/user"
-      data:
-        receiver: "tag"
-        id: tagId
-        tag_action: "unfollow"
-      success: (tags) ->
-        ApiActions.receiveUserTags tags
-      error: (e) ->
-        console.log e
 
   createArticleComment: (commentData) ->
     $.ajax
@@ -377,15 +349,42 @@ ApiUtil =
         ApiActions.updateDetailFollow(followStatus)
       error: (e) ->
         console.log e
-  markArticleRead: (article_id) ->
+
+  tagFollowCreate: (tagId, callback) ->
     $.ajax
       type: "PATCH"
+      dataType: "json"
       url: "api/user"
+      data:
+        receiver: "tag"
+        tag_action: "follow"
+        id: tagId
+      success: (tags) ->
+        ApiActions.receiveUserTags tags
+        callback && callback()
+      error: (e) ->
+        console.log e
+
+  tagFollowDestroy: (tagId, callback) ->
+    $.ajax
+      type: "PATCH"
+      dataType: "json"
+      url: "api/user"
+      data:
+        receiver: "tag"
+        id: tagId
+        tag_action: "unfollow"
+      success: (tags) ->
+        ApiActions.receiveUserTags tags
+      error: (e) ->
+        console.log e
+  markArticleRead: (article_id) ->
+    $.ajax
+      type: "POST"
+      url: "api/article_reads"
       dataType: "json"
       data:
-        receiver: "article"
         id: article_id
-        user_action: "mark_read"
       success: ->
         console.log "Successfully marked article read"
 

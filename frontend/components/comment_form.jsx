@@ -9,7 +9,7 @@ var CommentForm = React.createClass({
 		return {
 			body: "",
 			article_id:this.props.article_id,
-			userSignedIn: false
+			userSignedIn: SessionStore.isLoggedIn()
 		};
 	},
 	componentDidMount: function() {

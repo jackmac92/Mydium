@@ -41,12 +41,12 @@ class Article < ActiveRecord::Base
   acts_as_mentioner
 
   include PgSearch
-  multisearchable against: [:title, :subtitle, :body_plain_text],
+  multisearchable against: [:title, :subtitle, :body_plain_text], 
+                  if: :published,
                   using: {
-                    tsearch: {prefix: true}
-                  },
-                  :if => :published
-
+                    tsearch: {prefix: false, any_word: true},
+                    trigram: {}
+                  }
   include PublicActivity::Model
   tracked 
 

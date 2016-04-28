@@ -11,7 +11,8 @@ Rails.application.routes.draw do
     resources :comments, only:[:create, :destroy]
     resources :tags, only:[:index]
     resources :searches, only:[:index]
-    resources :follows, only:[:create,:destroy]
+
+    resources :article_reads, only:[:create]
 
     patch '/articles/:id/publish', to: 'articles#publish'
     patch '/articles/:id/unpublish', to: 'articles#unpublish'
@@ -24,7 +25,7 @@ Rails.application.routes.draw do
 
     post '/bookmarks', to: 'bookmarks#create'
     delete '/bookmarks', to: 'bookmarks#destroy'
-    
+
     post '/follows', to: 'follows#create'
     delete '/follows', to: 'follows#destroy'
 

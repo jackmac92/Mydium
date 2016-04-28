@@ -23,9 +23,7 @@ var Search = React.createClass({
   },
   
   componentDidMount: function () {
-    this.storeListener = SearchStore.addListener(
-      this._onChange
-    );
+    this.storeListener = SearchStore.addListener(this._onChange);
   },
   
   componentWillUnmount: function () {
@@ -62,11 +60,12 @@ var Search = React.createClass({
   resultItems: function () {
 
     return this.state.results.map(function (result) {
+      console.log(result._type)
       if (result._type === "User") {
         return (
           <ListItem 
-              onClick={() => this.context.router.push("/article/"+result.id)} 
-              key={ result.id }
+              key={ result.resultId }
+              onClick={() => this.context.router.push("/users/"+result.id)} 
               primaryText={ result.name || result.email }
               secondaryText="User"/>
         );          
@@ -74,42 +73,38 @@ var Search = React.createClass({
         return (
           <ListItem
               onClick={() => this.context.router.push("/article/"+result.id)} 
-              key={ result.id }
+              key={ result.resultId }
               primaryText={ result.title }
               secondaryText="Article"/>
         );  
 
       } else if (result._type == "Tag") {
-        console.log(result)
         return (
           <ListItem 
             onClick={() => this.context.router.push("/tags/"+result.name)} 
-            key={result.id}
+            key={result.resultId}
             primaryText={result.name}
             secondaryText="Tag" />
         );
-      }
+      } 
     }.bind(this));
   },
   render: function () {
-    var articleIdCounter = 0
-    var userIdCounter = 0
-    var progress;
-    var resultStore = this.state.results.map(function (result) {
-      if (result._type === "User") {
-        return  <ListItem key={result.resultId} primaryText={result.name} secondaryText="User" onClick={() => this.context.router.push("/users/"+result.id)}/>
-      } else if (result._type === "Article") {
-        return <ListItem key={result.resultId} primaryText={result.title} secondaryText="Article" onClick={() => this.context.router.push("/article/"+result.id)} /> 
-      }
-     }.bind(this))
+    // var resultStore = this.state.results.map(function (result) {
+    //   if (result._type === "User") {
+    //     return  <ListItem key={result.resultId} primaryText={result.name} secondaryText="User" onClick={() => this.context.router.push("/users/"+result.id)}/>
+    //   } else if (result._type === "Article") {
+    //     return <ListItem key={result.resultId} primaryText={result.title} secondaryText="Article" onClick={() => this.context.router.push("/article/"+result.id)} /> 
+    //   }
+    //  }.bind(this))
 
-    progress = (this.state.loading) ?  <CircularProgress /> : null
+    var progress = (this.state.loading) ?  <CircularProgress /> : null
     return (
       <div>
         <TextField style={{width:"100%"}} value={this.state.query} onChange={this.handleInputChange} floatingLabelText="Search" />
         {progress}
         <List style={{background:"transparent"}}>
-          {resultStore}
+          {this.resultItems()}
         </List>
       </div>
     );

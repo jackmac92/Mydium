@@ -27,8 +27,6 @@ class Api::UsersController < ApplicationController
 			case params[:user_action]
 			when "toggle_bookmark"
 				current_user.toggle_bookmark params[:id]
-			when "mark_read"
-				current_user.article_reads.create(article_id:@article.id)
 			end
 			@is_mini = true # To reduce json render
 			render 'api/articles/show'

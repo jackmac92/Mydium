@@ -8,6 +8,7 @@
 
 ActiveRecord::Base.transaction do
   PublicActivity.enabled = false
+    PgSearch::Document.destroy_all
     Article.destroy_all
     User.destroy_all
     Tag.destroy_all

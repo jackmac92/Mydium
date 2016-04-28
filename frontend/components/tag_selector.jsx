@@ -39,7 +39,9 @@ var TagSelector = React.createClass({
 	handleRequest: function (input, dataStoreId) {
 		if (dataStoreId) {
 			this.setState({query:""})
+			var that = this;
 			ApiUtil.tagFollowCreate(input.value.props.tag.id)
+			// ApiUtil.markFollow("Tag", input.value.props.tag.id)
 		};
 	},
 	render: function() {

@@ -5,5 +5,10 @@ class Tag < ActiveRecord::Base
 	acts_as_followable
 
   include PgSearch
-  multisearchable against: [:name]
+  multisearchable against: :name,
+  								using: {
+  									tsearch: {prefix: true, any_word: true},
+  									trigram: {}
+  								}
+
 end
