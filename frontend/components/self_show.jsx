@@ -6,6 +6,8 @@ import {List,ListItem} from 'material-ui/List';
 import ApiUtil from '../util/api_util'
 import TagSelector from './tag_selector'
 import IconButton from 'material-ui/IconButton'
+import TextField from 'material-ui/TextField'
+
 
 var SelfShow = React.createClass({
   contextTypes: {router: React.PropTypes.object.isRequired},
@@ -125,6 +127,17 @@ var SelfShow = React.createClass({
           {activities}
         </List>
       )
+      var userProfile = (
+        <form>
+          <TextField floatingLabelText="Email" value={this.state.profile.email}/>
+          <div/>
+          <TextField floatingLabelText="Username" value={this.state.profile.username} />
+          <div/>
+          <TextField floatingLabelText="Name" value={this.state.profile.name} />
+          <div />
+          <img src={this.state.profile.avatar} />
+        </form>
+      )
     };
     if (this.state.bookmarks.length > 0) {
         bookmarks = this.state.bookmarks.map( a =>
@@ -147,6 +160,7 @@ var SelfShow = React.createClass({
           {activitiessection}
         </Tab>
         <Tab onClick={this.handleChange.bind(this,"f")} label="Profile" value="f" >
+          {userProfile}
         </Tab>
         <Tab onClick={this.handleChange.bind(this,"d")} label="Published" value="d">
           {published}

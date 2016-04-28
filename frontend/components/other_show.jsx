@@ -33,49 +33,41 @@ var OtherShow = React.createClass({
     this.setState(this.stateFromStore())
   },
 
-	render: function() {
+  render: function() {
     var activities;
     if (this.state.profile) {
       var that = this
       var activities = this.state.profile.activities.map( function (a) {
 
-        var label;
         var link = "#";
         switch (a.recipient_type) {
           case "Article":
-            link = "/article/" + a.recipient_id
-            break;
+            link = "/article/" + a.recipient_id; break;
           case "User":
-            link = "/users/" + a.recipient_id
-            break;
+            link = "/users/" + a.recipient_id; break;
           case "Tag":
-            link = "/tags/" + a.recipient_name
+            link = "/tags/" + a.recipient_name; break;
         }
-        console.log(a)
-        switch (a.trackable_type) {
-          case "ArticleView":
-            label = that.state.profile.name + " viewed " + a.recipient_name
-            break;
-          case "Comment":
-            label = that.state.profile.name + " made a comment on " +  a.recipient_name
-            break;
-          case "Bookmark":
-            label = that.state.profile.name + " bookmarked " +  a.recipient_name
-            break;
-          case "Socialization::ActiveRecordStores::Follow":
-            label = that.state.profile.name + " started following " +  a.recipient_name
-            break;
-          case "Socialization::ActiveRecordStores::Like":
-            label = that.state.profile.name + " liked " +  a.recipient_name
-            break;
-          case "Socialization::ActiveRecordStores::Mention":
-            label = that.state.profile.name + " mentioned " +  a.recipient_name
-            break;
-          default:
-            label = "Unhandled "+ a
-            break;
+        var model = a.key.split(".")[0]
+        var action = a.key.split(".")[1]
+        var label = that.state.profile.name;
+        switch (model) {
+          case "article_view":
+            label += " viewed "; break;
+          case "article_read":
+            label += " read "; break;
+          case "comment":
+            label += " " + action + "ed a comment on "; break;
+          case "bookmark":
+            label += (action == "destroy") ? " unbookmarked " : " bookmarked "; break;
+          case "follow":
+            label +=  (action == "follow") ? " unfollowed " : " started following "; break;
+          case "like":
+            label += (action == "like") ? " unfavorited " : " favorited "; break;
+          case "mention":
+            label += " mentioned "; break;
         }
-
+        label += a.recipient_name
         return <ListItem onClick={() => that.context.router.push(link)} primaryText={label} key={a.id} />
       })
     };
@@ -90,3 +82,4 @@ var OtherShow = React.createClass({
 });
 
 module.exports = OtherShow;
+

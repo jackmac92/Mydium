@@ -3,8 +3,8 @@ class Article < ActiveRecord::Base
   validates :published, inclusion:{in:[true, false]}
 
   has_attached_file :picture, 
-    styles: { large: "800x800>", thumb: "100x100>" },
-    processors: [:compression]
+    styles: { large: "800x800>", thumb: "100x100>" }
+    
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\Z/
 
   validates_uniqueness_of :title, scope: [:user_id]

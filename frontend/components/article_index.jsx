@@ -104,7 +104,7 @@ var ArticleIndex = React.createClass ({
 
   handleScroll: function (e) {
     var remainingLength = ($(document).height() - $(window).height()) - $(window).scrollTop()
-    if (remainingLength < 200 && !this.state.isInfiniteLoading) {
+    if (remainingLength < 600 && !this.state.isInfiniteLoading) {
       this.moreArticles()
     }
 
@@ -132,7 +132,7 @@ var ArticleIndex = React.createClass ({
           >
             {articles}
           </ReactCSSTransitionGroup>
-          <div style={{height:"200px"}}>
+          <div style={{height:"400px"}}>
             {fetchingIndicator}
           </div>
         </section>
