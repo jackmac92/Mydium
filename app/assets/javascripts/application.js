@@ -12,5 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require loadCSS
+//= require cssrelpreload
+//= require onloadCSS
 //= require ./bundle
 //= require_tree .

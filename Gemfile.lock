@@ -101,6 +101,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     levenshtein (0.2.2)
+    loadcss-rails (1.2.1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -258,6 +259,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
+  loadcss-rails
   nokogiri
   omniauth
   omniauth-facebook

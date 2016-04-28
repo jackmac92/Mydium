@@ -141,6 +141,8 @@ var ArticleForm = React.createClass({
   	var uploadPreview;
   	if (this.state.picture) {
   		uploadPreview = <img id="article-picture-preview" src={this.state.picture} />
+  	} else {
+  		uploadPreview = <div className="dropzone-text">Drop your image here</div>
   	}
   	if (this.state.loadingPic) {
   		uploadPreview = <CircularProgress />
@@ -153,7 +155,6 @@ var ArticleForm = React.createClass({
 		  		<TextField id="subtitle-field" floatingLabelText="Subtitle" value={this.state.subTitle} onChange={this.updateSubTitle} />
 		  		<div id="dropzone">
 			  		<Dropzone onDrop={this.handleFiles}>
-			  			<div>Drop your image here</div>
 				  		{uploadPreview}
 			  		</Dropzone>
 		  		</div>

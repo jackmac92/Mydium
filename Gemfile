@@ -35,6 +35,7 @@ gem "omniauth-google-oauth2"
 gem 'kaminari'
 gem 'paperclip-compression'
 gem 'nokogiri'
+gem 'loadcss-rails'
 gem 'public_activity'
 gem 'pg_search'
 

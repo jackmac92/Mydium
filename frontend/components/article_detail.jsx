@@ -32,6 +32,7 @@ var ArticleDetail = React.createClass({
   getInitialState: function () {
     var currState = this.stateFromStore();
     currState.position = 0
+    currState.userSignedIn = SessionStore.isLoggedIn()
     return currState
   },
   tryMarkArticleRead: function () {
@@ -45,8 +46,12 @@ var ArticleDetail = React.createClass({
     $('html, body').animate({ scrollTop: 0 }, 'fast');
     ApiUtil.fetchArticle(parseInt(nextProps.params.id));
   },
+  __updateUser: function () {
+    this.setState({userSignedIn: SessionStore.isLoggedIn()})
+  },
   componentDidMount: function () {
     this.articleStoreToken = ArticleStore.addListener(this.__onChange);
+    this.SessionStoreToken = SessionStore.addListener(this.__updateUser);
     ApiUtil.fetchArticle(parseInt(this.props.params.id));
     $('html, body').animate({ scrollTop: 0 }, 'fast');
     window.addEventListener('scroll', this.handleScroll);
@@ -76,11 +81,11 @@ var ArticleDetail = React.createClass({
 
   handleScroll: function (e) {
     var scrollPercent = 100 * $(window).scrollTop() / ($("article").height() - $(window).height());
-    if (scrollPercent >= 98 && !this.state.markedRead) {
+    this.setState({position: scrollPercent})
+    if (scrollPercent >= 98 && !this.state.markedRead && this.state.userSignedIn) {
       this.setState({scrolledToEnd: true})
       this.tryMarkArticleRead()
     }
-    this.setState({position: scrollPercent})
   },
 
   render: function() {
