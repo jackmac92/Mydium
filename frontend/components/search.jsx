@@ -24,10 +24,12 @@ var Search = React.createClass({
   
   componentDidMount: function () {
     this.storeListener = SearchStore.addListener(this._onChange);
+    window.addEventListener('scroll', this.handleScroll);
   },
   
   componentWillUnmount: function () {
     this.storeListener.remove();
+    window.removeEventListener('scroll', this.handleScroll);
   },
   
   _onChange: function () {
@@ -36,6 +38,15 @@ var Search = React.createClass({
       meta: SearchStore.meta()
     });
   },
+
+  handleScroll: function (e) {
+    var remainingLength = ($(document).height() - $(window).height()) - $(window).scrollTop()
+    if (remainingLength < 200 && !this.state.loading) {
+      this.nextPage()
+    }
+
+  },
+
   
   handleInputChange: function (t) {
     var query = t.currentTarget ? t.currentTarget.value : t
@@ -54,13 +65,16 @@ var Search = React.createClass({
   
   nextPage: function () {
     var meta = SearchStore.meta();
-    ApiUtil.search(meta.query, meta.page + 1);
+    if (meta.page + 1 <= meta.total_pages) {
+      var that = this;
+      this.setState({loading: true})
+      ApiUtil.search(meta.query, meta.page + 1, () => that.setState({loading: false}) );
+    }
   },
 
   resultItems: function () {
 
     return this.state.results.map(function (result) {
-      console.log(result._type)
       if (result._type === "User") {
         return (
           <ListItem 
@@ -102,10 +116,10 @@ var Search = React.createClass({
     return (
       <div>
         <TextField style={{width:"100%"}} value={this.state.query} onChange={this.handleInputChange} floatingLabelText="Search" />
-        {progress}
         <List style={{background:"transparent"}}>
           {this.resultItems()}
         </List>
+        {progress}
       </div>
     );
   }

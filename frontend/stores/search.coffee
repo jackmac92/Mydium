@@ -14,7 +14,9 @@ SearchStore.meta = ->
 	$.extend(true, {}, _meta)
 
 setSearchResults = (results) ->
-	`_searchResults = results || []`
+	oldResults = `_searchResults`
+	newResults = results || []
+	`_searchResults = oldResults.concat(newResults)`
 	null
 
 resetMeta = (meta) ->
