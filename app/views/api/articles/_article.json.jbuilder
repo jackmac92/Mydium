@@ -26,7 +26,7 @@ json.author do
 end
 
 unless article.picture.url == "/pictures/original/missing.png"
-	json.picture asset_path(article.picture.url)
+	json.picture asset_path(article.picture.url(:large))
 	json.loading_pic asset_url(article.picture.url(:thumb))
 else
 	json.picture nil
