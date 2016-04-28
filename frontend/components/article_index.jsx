@@ -5,6 +5,7 @@ import SessionStore from '../stores/session'
 import ArticleIndexItem from './article_index_item'
 import Sidebar from './sidebar'
 import LinearProgress from 'material-ui/LinearProgress'
+import CircularProgress from 'material-ui/CircularProgress'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 var ArticleIndex = React.createClass ({
@@ -33,7 +34,9 @@ var ArticleIndex = React.createClass ({
   },
   articleFetcher: function (currProps, pageNum) {
     pageNum = pageNum || 1
-    var completionCallback = () => this.setState({fetching: false, isInfiniteLoading: false})
+    this.setState({isInfiniteLoading: false})
+    var that = this;
+    var completionCallback = () => that.setState({isInfiniteLoading: false})
     var currPath = currProps.location.pathname.split("/")[1]; 
     switch (currPath) {
       case "":
@@ -76,8 +79,7 @@ var ArticleIndex = React.createClass ({
 
   getInitialState: function () {
     var init = this.stateFromStore();
-    init.fetching = true;
-    init.isInfiniteLoading = false;
+    init.isInfiniteLoading = true;
     return init
   },
 
@@ -115,9 +117,10 @@ var ArticleIndex = React.createClass ({
           <ArticleIndexItem key={article.id} noUser={!this.state.currentUser} article={article} />
         );
     }
-    if (this.state.fetching) {
+    if (this.state.isInfiniteLoading) {
       progress = <LinearProgress className="fetch-progress" mode="indeterminate" /> 
     }
+    var fetchingIndicator = (this.state.isInfiniteLoading) ? <CircularProgress /> : null
     return (
       <main>
         {progress}
@@ -129,6 +132,9 @@ var ArticleIndex = React.createClass ({
           >
             {articles}
           </ReactCSSTransitionGroup>
+          <div style={{height:"200px"}}>
+            {fetchingIndicator}
+          </div>
         </section>
         <Sidebar />
       </main>
@@ -137,11 +143,4 @@ var ArticleIndex = React.createClass ({
 
 });
 module.exports = ArticleIndex
-        // <Infinite
-        //   useWindowAsScrollContainer
-        //   elementHeight={900}
-        //   isInfiniteLoading={this.state.isInfiniteLoading}
-        //   infiniteLoadBeginEdgeOffset={1200}
-        //   onInfiniteLoad={this.moreArticles}
-        // >
-        // </Infinite>
+

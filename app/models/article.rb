@@ -56,10 +56,14 @@ class Article < ActiveRecord::Base
   end
 
   def scan_for_mentions!
-    body_plain_text
-      .split
-      .select { |word| word[0] == "@" && User.any?(username: word[1..-1])}
-      .each { |user| mention! user }
+    doc = Nokogiri::HTML(body_stylized)
+
+    mentions = doc.css("a.user-mention")
+    mentions.each do |user_link|
+      un = user_link.text[1..-1]
+      user = User.find_by(username: un)
+      mention! user
+    end
   end
 
   def publish!
@@ -67,9 +71,7 @@ class Article < ActiveRecord::Base
     scan_for_mentions!
   end
   def unpublish!
-    published = false
-    published_at = nil
-    save!
+    update!(published: false, published_at: nil)
   end
 
   def view_count
