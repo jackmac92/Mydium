@@ -6,10 +6,13 @@ import ApiUtil from '../util/api_util'
 import RaisedButton from 'material-ui/RaisedButton';
 import Dropzone from 'react-dropzone'
 import TextField from 'material-ui/TextField';
+import TagStore from '../stores/tag'
 import WritingStore from '../stores/writing'
 import RefreshIndicator from 'material-ui/RefreshIndicator';
+import MenuItem from 'material-ui/MenuItem';
 import CircularProgress from 'material-ui/CircularProgress';
-
+import AutoComplete from 'material-ui/AutoComplete';
+import {ListItem, List} from 'material-ui/List'
 
 var ArticleForm = React.createClass({
 	
@@ -24,12 +27,17 @@ var ArticleForm = React.createClass({
 				picture: null,
 				autoSaving: "hide",
 				loadingPic: false,
-				idSet: false
+				idSet: false,
+				tagQuery: "",
+				articleTags: [],
+				availableTags: TagStore.all()
 			};
 	},
-	
+
 	componentDidMount: function() {
 		this.writingStoreToken = WritingStore.addListener(this.__onChange)
+		this.tagStoreToken = TagStore.addListener(this.__tagChange)
+		ApiUtil.fetchTagsIndex()
 		if (this.props.params.id) {
 			ApiUtil.fetchDraft(this.props.params.id)
 		}
@@ -37,6 +45,13 @@ var ArticleForm = React.createClass({
 
 	componentWillUnmount: function() {
 		this.writingStoreToken.remove()
+		this.tagStoreToken.remove()
+	},
+
+	__tagChange: function () {
+		this.setState({
+			availableTags: TagStore.all()
+		})
 	},
 	__onChange: function () {
 		var draft = WritingStore.getDetail();
@@ -47,8 +62,25 @@ var ArticleForm = React.createClass({
 			body_stylized: draft.body_stylized,
 			picture: draft.picture,
 			id: draft.id,
-			idSet: true
+			idSet: true,
+			articleTags: draft.tags
 		})
+	},
+
+	handleTagChange: function (input, dataStoreId) {
+		if (dataStoreId) {
+			console.log("dataStoreId found")
+			var currTags = this.state.articleTags
+			currTags.push(input.value.props.tag)
+			this.setState({
+				tagQuery:"",
+				articleTags: currTags
+			})
+			// var that = this;
+			// ApiUtil.tagFollowCreate(input.value.props.tag.id)
+			// ApiUtil.markFollow("Tag", input.value.props.tag.id)
+		};
+		console.log(this.state.articleTags)
 	},
 	handleFiles: function (picture) {
 		var picData = new FormData();
@@ -137,8 +169,31 @@ var ArticleForm = React.createClass({
 		return false;
 	},
 
+	removeTag: function (id) {
+		var currTags = this.state.articleTags
+		var newTags = []
+		for (var i = currTags.length - 1; i >= 0; i--) {
+			var tag = currTags[i]
+			if (!id === tag.id) {
+				newTags.push(tag)
+			}
+		}
+		this.setState({articleTags: newTags})
+	},
+
   render: function () {
-  	var uploadPreview;
+  	var uploadPreview, tagStore, articleTags;
+  	if (this.state.availableTags) {
+  		tagStore = this.state.availableTags.map( function(tag) {
+  			return {
+  				text: tag.name,
+  				value: (<MenuItem key={tag.id} tag={tag} primaryText={tag.name} />)
+  			}
+  		})
+  	}
+  	articleTags = this.state.articleTags.map ( t => 
+  		<ListItem key={t.id} primaryText={t.name} onClick={() => this.removeTag(t.id)} />
+  	)
   	if (this.state.picture) {
   		uploadPreview = <img id="article-picture-preview" src={this.state.picture} />
   	} else {
@@ -153,6 +208,17 @@ var ArticleForm = React.createClass({
 	  			<TextField id="title-field" floatingLabelText="Title" value={this.state.title} onChange={this.updateTitle} />
 	  			<div />
 		  		<TextField id="subtitle-field" floatingLabelText="Subtitle" value={this.state.subTitle} onChange={this.updateSubTitle} />
+		  		<div>
+			  		<AutoComplete
+							searchText={this.state.query}
+			     		floatingLabelText="Tag this article"
+				    	filter={AutoComplete.fuzzyFilter}
+				      onNewRequest={this.handleTagChange}
+				      dataSource={tagStore} />
+				    <List>
+				  		{articleTags}
+				    </List>
+		  		</div>
 		  		<div id="dropzone">
 			  		<Dropzone onDrop={this.handleFiles}>
 				  		{uploadPreview}
