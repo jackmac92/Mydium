@@ -24,14 +24,23 @@ var ArticleDetail = React.createClass({
     currState.readTimeElapsed = false
     currState.scrolledToEnd = false
     currState.markedRead = false
+    currState.remainingTime = 0
     this.setState(currState);
     clearTimeout(this.readTimer)
+    clearInterval(this.readTimerProgress)
     var that = this;
-    this.readTimer = setTimeout(() => that.setState({readTimeElapsed: true}), 60000 * parseInt(currState.article.read_time))
+    this.readTimer = setTimeout(() => that.setState({readTimeElapsed: true}), 20000 * parseInt(currState.article.read_time))
+    this.readTimerProgress = setInterval(
+      () => {
+        that.setState({remainingTime: that.state.remainingTime + 1});
+      },
+      600 * parseInt(currState.article.read_time)
+    )
   },
   getInitialState: function () {
     var currState = this.stateFromStore();
     currState.position = 0
+    currState.remainingTime = 0
     currState.userSignedIn = SessionStore.isLoggedIn()
     return currState
   },
@@ -143,7 +152,7 @@ var ArticleDetail = React.createClass({
         {recent_posts_view}
         {follow_button}
         <hr />
-        <Comments disabled={!this.state.markedRead} article_id={this.state.article.id} comments={this.state.article.comments} />
+        <Comments commentTimer={this.state.remainingTime} disabled={!this.state.markedRead} article_id={this.state.article.id} comments={this.state.article.comments} />
       </main>
     );
   }

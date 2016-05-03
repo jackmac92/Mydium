@@ -19,7 +19,7 @@ var Comments = React.createClass({
 						{comments}
 					</ReactCSSTransitionGroup>
 				</ul>
-				<CommentForm disabled={this.props.disabled} className="comment-form" article_id={this.props.article_id} />
+				<CommentForm commentTimer={this.props.commentTimer} disabled={this.props.disabled} className="comment-form" article_id={this.props.article_id} />
 				<div style={{height:"200px"}} />
 			</section>
 		);

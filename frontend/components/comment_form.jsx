@@ -3,6 +3,9 @@ import ApiUtil from '../util/api_util'
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import SessionStore from '../stores/session'
+import LinearProgress from 'material-ui/LinearProgress';
+import * as Colors from 'material-ui/styles/colors';
+
 
 var CommentForm = React.createClass({
 	getInitialState: function() {
@@ -39,7 +42,8 @@ var CommentForm = React.createClass({
 		return (
 			<section style={{width:"60%",margin:"0 auto"}} >
 				<TextField style={{width:"500px"}} disabled={this.props.disabled} onChange={this.handleInput} value={this.state.body} floatingLabelText={label} />
-				<RaisedButton primary={true} disabled={this.props.disabled} style={{marginLeft:"40px"}} onClick={this.handleSubmit} label="Publish" />
+				<RaisedButton primary={true} disabled={this.props.disabled} style={{marginLeft:"40px",float:"right",marginTop:"20px"}} onClick={this.handleSubmit} label="Publish" />
+        <LinearProgress color={Colors.blue600} mode="determinate" value={this.props.commentTimer}/>
 			</section>
 		);
 	}
