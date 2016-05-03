@@ -23,7 +23,9 @@ var ArticleDetail = React.createClass({
     var currState = this.stateFromStore()
     currState.readTimeElapsed = false
     currState.scrolledToEnd = false
-    currState.markedRead = false
+    if (SessionStore.isLoggedIn()) {
+      currState.markedRead = currState.article.user.already_read
+    }
     currState.remainingTime = 0
     this.setState(currState);
     clearTimeout(this.readTimer)

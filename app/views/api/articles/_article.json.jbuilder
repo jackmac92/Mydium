@@ -46,5 +46,6 @@ if user_signed_in?
 		json.faved_article current_user.likes? article
 		json.bookmarked_article current_user.bookmarks.where(article_id: article.id).any?
 		json.follows_author current_user.follows? article.user
+		json.already_read current_user.read_articles.any? { |a| a.id == article.id}
 	end
 end

@@ -53,6 +53,7 @@ var ArticleForm = React.createClass({
 			availableTags: TagStore.all()
 		})
 	},
+	
 	__onChange: function () {
 		var draft = WritingStore.getDetail();
 		this.setState({
@@ -76,12 +77,9 @@ var ArticleForm = React.createClass({
 				tagQuery:"",
 				articleTags: currTags
 			})
-			// var that = this;
-			// ApiUtil.tagFollowCreate(input.value.props.tag.id)
-			// ApiUtil.markFollow("Tag", input.value.props.tag.id)
 		};
-		console.log(this.state.articleTags)
 	},
+	
 	handleFiles: function (picture) {
 		var picData = new FormData();
 		this.setState({loadingPic: true})
@@ -93,6 +91,7 @@ var ArticleForm = React.createClass({
 			})
 		}.bind(this))
 	},
+
 	handleSubmit: function (e) {
 		e.preventDefault();
 		var formData = new FormData();
@@ -105,11 +104,13 @@ var ArticleForm = React.createClass({
 		var router = this.context.router;
 		ApiUtil.createNewArticle(formData, function (articleId) {router.push('/article/'+articleId);})
 	},
+	
 	handlePublish: function (e) {
 		e.preventDefault()
 		var that = this;
 		ApiUtil.ArticlePublish(this.state.id, () => that.context.router.push("/article/"+that.state.id))
 	},
+
 	autoSave: function () {
 		this.setState({autoSaving: "loading"})
 		var articleData = {
@@ -117,7 +118,8 @@ var ArticleForm = React.createClass({
 			body_stylized: this.state.body_stylized,
 			body_plain_text: this.state.body_plain_text,
 			title: this.state.title,
-			subtitle: this.state.subTitle
+			subtitle: this.state.subTitle,
+			tag_ids: this.state.articleTags.map( t => t.id )
 		}
 		ApiUtil.autoSave(articleData, function () {this.setState({autoSaving: "hide"})}.bind(this))
 	},

@@ -57,6 +57,7 @@ class Api::ArticlesController < ApplicationController
 
   def autosave
     @article = Article.find(params[:id])
+    params[:article][:tag_ids].map!(&:to_i) if params[:article][:tag_ids]
     if @article.update(article_params)
       render json: {}
     else
@@ -90,6 +91,6 @@ class Api::ArticlesController < ApplicationController
 
   private
   def article_params
-    params.require(:article).permit(:title, :subtitle, :picture, :body_plain_text,:body_stylized, :published)
+    params.require(:article).permit(:title, :subtitle, :picture, :body_plain_text, :body_stylized, :published, tag_ids: [])
   end
 end
