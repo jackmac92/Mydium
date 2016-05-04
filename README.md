@@ -1,41 +1,44 @@
-## Mydium
+# Mydium
 A clone of [Medium]
 
 [See it live!][live]
 
-# Mydium
 ## Implementation
-* ### Technical Considerations
-    * AJAX-based authentication via Devise
-    * Editor uses regex to create links of user mentions on the fly
-    * Authentication state disables activities that requires registration
-    * Tracks views vs reads (reads determined by scroll and time on page), locking comment bar until article has been read
-    * Bookmarks auto removed on read articles
-* ### Languages
-    * Ruby
-    * JavaScript/ CoffeeScript
-    * HTML
-    * CSS
-    * Postgresql
-* ### Frameworks
-    * React
-    * Rails
-* ### Libraries
-    * ##### Backend
-        * Devise
-        * PgSearch
-        * Kaminari
-        * Figaro
-        * Paperclip
-        * Socialization
-        * PublicActivity
-        * Nokogiri
-    * ##### Frontend
-        * Material UI
-        * jQuery
-        * React Headroom
-        * React Quill
-        * React Dropzone
+### Technical Considerations
+* AJAX-based authentication via Devise
+* Editor uses regex to create links of user mentions on the fly
+* Authentication state disables activities that requires registration
+* Tracks views vs reads (reads determined by scroll and time on page), locking comment bar until article has been read
+* Bookmarks auto removed on read articles
+
+### Languages
+* Ruby
+* JavaScript/ CoffeeScript
+* HTML
+* CSS
+* Postgresql
+
+### Frameworks
+* React
+* Rails
+
+### Libraries
+##### Backend
+* Devise
+* PgSearch
+* Kaminari
+* Figaro
+* Paperclip
+* Socialization
+* PublicActivity
+* Nokogiri
+
+##### Frontend
+* Material UI
+* jQuery
+* React Headroom
+* React Quill
+* React Dropzone
 
 
 ## Features
