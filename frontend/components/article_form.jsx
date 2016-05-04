@@ -70,8 +70,8 @@ var ArticleForm = React.createClass({
 
 	handleTagChange: function (input, dataStoreId) {
 		if (dataStoreId) {
-			console.log("dataStoreId found")
 			var currTags = this.state.articleTags
+			console.log(input.value.props.tag)
 			currTags.push(input.value.props.tag)
 			this.setState({
 				tagQuery:"",
@@ -167,7 +167,7 @@ var ArticleForm = React.createClass({
 	formReady: function () {
 		if (this.state.title && this.state.title.length != 0 && this.state.body_plain_text && this.state.picture) {
 			return true
-		} 
+		}
 		return false;
 	},
 
@@ -176,9 +176,9 @@ var ArticleForm = React.createClass({
 		var newTags = []
 		for (var i = currTags.length - 1; i >= 0; i--) {
 			var tag = currTags[i]
-			if (!id === tag.id) {
+			if (!(id == tag["id"])) {
 				newTags.push(tag)
-			}
+			} 
 		}
 		this.setState({articleTags: newTags})
 	},
