@@ -2,6 +2,9 @@
 A clone of [Medium]
 
 [See it live!][live]
+![Index Image](./index_screenshot.png)
+![Search Image](./search_screenshot.png)
+![User Page Image](./user_page_screenshot.png)
 
 ## Implementation
 ### Technical Considerations

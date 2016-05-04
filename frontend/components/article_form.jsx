@@ -208,18 +208,16 @@ var ArticleForm = React.createClass({
   		<div>
   			<div className="article-attrs">
 	  			<TextField 
-	  				id="title-field" 
 	  				floatingLabelText="Title" 
 	  				value={this.state.title} 
 	  				onChange={this.updateTitle} />
-	  			<div />
 		  		<TextField 
-		  			id="subtitle-field" 
 		  			floatingLabelText="Subtitle" 
 		  			value={this.state.subTitle} 
 		  			onChange={this.updateSubTitle} />
-		  		<div>
+		  		<div id="tag-select">
 			  		<AutoComplete
+			  			id="article-tag-select"
 							searchText={this.state.query}
 			     		floatingLabelText="Tag this article"
 				    	filter={AutoComplete.fuzzyFilter}

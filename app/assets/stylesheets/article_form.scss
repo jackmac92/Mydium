@@ -5,12 +5,13 @@
 }
 
 #dropzone {
-  position: relative;
-  float: right;
-  margin-top: -70px;
+  position: absolute;
+  top: 10%;
+  right: 0;
   width: initial !important;
 }
 .article-attrs {
+  position: relative;
   overflow: auto;
   margin: 10px 50px;
 }
