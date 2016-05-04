@@ -207,9 +207,17 @@ var ArticleForm = React.createClass({
   	return (
   		<div>
   			<div className="article-attrs">
-	  			<TextField id="title-field" floatingLabelText="Title" value={this.state.title} onChange={this.updateTitle} />
+	  			<TextField 
+	  				id="title-field" 
+	  				floatingLabelText="Title" 
+	  				value={this.state.title} 
+	  				onChange={this.updateTitle} />
 	  			<div />
-		  		<TextField id="subtitle-field" floatingLabelText="Subtitle" value={this.state.subTitle} onChange={this.updateSubTitle} />
+		  		<TextField 
+		  			id="subtitle-field" 
+		  			floatingLabelText="Subtitle" 
+		  			value={this.state.subTitle} 
+		  			onChange={this.updateSubTitle} />
 		  		<div>
 			  		<AutoComplete
 							searchText={this.state.query}
