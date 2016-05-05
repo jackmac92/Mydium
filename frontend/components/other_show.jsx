@@ -3,7 +3,7 @@ import {Tab, Tabs} from 'material-ui/Tabs';
 import SessionStore from '../stores/session'
 import UserStore from '../stores/user'
 import { List, ListItem } from 'material-ui/List';
-import ApiUtil from '../util/api_util'
+import UserUtil from '../util/user'
 
 var OtherShow = React.createClass({
   contextTypes: {router: React.PropTypes.object.isRequired},
@@ -23,7 +23,7 @@ var OtherShow = React.createClass({
 	},
   componentDidMount: function() {
     this.userStoreToken = UserStore.addListener(this.__onChange)
-    ApiUtil.fetchUserInfo(this.props.params.id)
+    UserUtil.fetchUserInfo(this.props.params.id)
   },
   componentWillUnmount: function() {
     this.userStoreToken.remove()

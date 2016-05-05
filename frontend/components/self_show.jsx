@@ -3,7 +3,7 @@ import {Tab, Tabs} from 'material-ui/Tabs';
 import SessionStore from '../stores/session'
 import UserStore from '../stores/user'
 import {List,ListItem} from 'material-ui/List';
-import ApiUtil from '../util/api_util'
+import UserUtil from '../util/user'
 import TagSelector from './tag_selector'
 import IconButton from 'material-ui/IconButton'
 import TextField from 'material-ui/TextField'
@@ -32,11 +32,11 @@ var SelfShow = React.createClass({
   componentDidMount: function() {
     this.sessionStoreToken = SessionStore.addListener(this.__onChange)
     this.userStoreToken = UserStore.addListener(this.__onChange)
-    ApiUtil.fetchDrafts()
-    ApiUtil.fetchPublished()
-    ApiUtil.fetchBookmarkedArticles()
-    ApiUtil.fetchFavoritedArticles()
-    ApiUtil.fetchUserInfo(SessionStore.currentUser().id)
+    UserUtil.fetchDrafts()
+    UserUtil.fetchPublished()
+    UserUtil.fetchBookmarkedArticles()
+    UserUtil.fetchFavoritedArticles()
+    UserUtil.fetchUserInfo(SessionStore.currentUser().id)
   },
   componentWillUnmount: function() {
     this.sessionStoreToken.remove()
@@ -54,7 +54,7 @@ var SelfShow = React.createClass({
           <ListItem
             onTouchTap={() => this.context.router.push("/editor/"+d.id)}
             primaryText={d.title}
-            rightIconButton={<IconButton onClick={() => ApiUtil.destroyArticle(d.id)} iconClassName="fa fa-trash-o" />}
+            rightIconButton={<IconButton onClick={() => UserUtil.destroyArticle(d.id)} iconClassName="fa fa-trash-o" />}
             key={d.id} />
         );
         draftsection = (

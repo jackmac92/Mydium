@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import {Router, Route, IndexRoute, useRouterHistory} from 'react-router'
 import { createHashHistory } from 'history'
 
-import ApiUtil from './util/api_util'
+import AuthUtil from './util/auth'
 import SessionStore from './stores/session'
 
 import MaterialApp from './components/material_app'
@@ -19,7 +19,7 @@ import TagSelector from './components/tag_selector.jsx'
 
 function _requireLoggedIn(nextState, replace, asyncCompletionCallback) {
   if (!SessionStore.currentUserHasBeenFetched()) {
-    ApiUtil.fetchCurrentUser(_redirectIfNotLoggedIn);
+    AuthUtil.fetchCurrentUser(_redirectIfNotLoggedIn);
   } else {
     _redirectIfNotLoggedIn()
   }

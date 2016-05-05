@@ -1,7 +1,7 @@
 import React from 'react'
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
 import Tag from './tag'
-import ApiUtil from '../util/api_util'
+import UserUtil from '../util/user'
 import IconButton from 'material-ui/IconButton'
 import FontIcon from 'material-ui/FontIcon'
 import FlatButton from 'material-ui/FlatButton'
@@ -21,18 +21,18 @@ const ArticleCard = React.createClass({
  	toggleFavorite: function (article_id, e) {
  		e.preventDefault()
  		if (this.props.article.user.faved_article) {
- 			ApiUtil.unMarkFavorite("Article",this.props.article.id)
+ 			UserUtil.unMarkFavorite("Article",this.props.article.id)
  		} else {
- 			ApiUtil.markFavorite("Article",this.props.article.id)
+ 			UserUtil.markFavorite("Article",this.props.article.id)
  		}
  	},
 
  	toggleBookmark: function (article_id, e) {
  		e.preventDefault()
  		if (this.props.article.user.bookmarked_article) {
- 			ApiUtil.removeBookmark(this.props.article.id)
+ 			UserUtil.removeBookmark(this.props.article.id)
  		} else {
- 			ApiUtil.createBookmark(this.props.article.id)
+ 			UserUtil.createBookmark(this.props.article.id)
  		}
  	},
 

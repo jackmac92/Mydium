@@ -1,7 +1,8 @@
 import React from 'react';
 import ArticleStore from '../stores/articles'
 import SessionStore from '../stores/session'
-import ApiUtil from '../util/api_util'
+import ArticleUtil from '../util/article'
+import UserUtil from '../util/user'
 import Tag from './tag'
 import Comments from './comment_section'
 import Checkbox from 'material-ui/Checkbox';
@@ -48,14 +49,14 @@ var ArticleDetail = React.createClass({
   },
   tryMarkArticleRead: function () {
     if (this.state.readTimeElapsed && this.state.scrolledToEnd) {
-      ApiUtil.markArticleRead(this.state.article.id)
+      UserUtil.markArticleRead(this.state.article.id)
       this.setState({markedRead: true})
     };
   },
   componentWillReceiveProps: function (nextProps) {
     this.tryMarkArticleRead()
     $('html, body').animate({ scrollTop: 0 }, 'fast');
-    ApiUtil.fetchArticle(parseInt(nextProps.params.id));
+    ArticleUtil.fetchArticle(parseInt(nextProps.params.id));
   },
   __updateUser: function () {
     this.setState({userSignedIn: SessionStore.isLoggedIn()})
@@ -63,7 +64,7 @@ var ArticleDetail = React.createClass({
   componentDidMount: function () {
     this.articleStoreToken = ArticleStore.addListener(this.__onChange);
     this.SessionStoreToken = SessionStore.addListener(this.__updateUser);
-    ApiUtil.fetchArticle(parseInt(this.props.params.id));
+    ArticleUtil.fetchArticle(parseInt(this.props.params.id));
     $('html, body').animate({ scrollTop: 0 }, 'fast');
     window.addEventListener('scroll', this.handleScroll);
   },
@@ -75,15 +76,15 @@ var ArticleDetail = React.createClass({
 
   handleFollowAuthor: function () {
     if (this.state.article.user.follows_author) {
-      ApiUtil.unMarkFollow("User",this.state.article.author.id)
+      UserUtil.unMarkFollow("User",this.state.article.author.id)
     } else {
-      ApiUtil.markFollow("User",this.state.article.author.id)
+      UserUtil.markFollow("User",this.state.article.author.id)
     }
-    // ApiUtil.toggleFollow(this.state.article.author.id)
+    // UserUtil.toggleFollow(this.state.article.author.id)
   },
 
   handleUnpublish: function () {
-    ApiUtil.ArticleUnpublish(this.state.article.id, () => this.context.router.push('/editor/'+this.state.article.id))
+    UserUtil.ArticleUnpublish(this.state.article.id, () => this.context.router.push('/editor/'+this.state.article.id))
   },
 
   rawBody: function () {

@@ -1,6 +1,6 @@
 var React = require('react');
 var SearchStore = require('../stores/search')
-var ApiUtil = require('../util/api_util');
+var SearchUtil = require('../util/search');
 
 import AutoComplete from 'material-ui/AutoComplete';
 import { List, ListItem } from 'material-ui/List';
@@ -60,7 +60,7 @@ var Search = React.createClass({
   search: function (e) {
     this.setState({loading: true})
     var that = this;
-    ApiUtil.search(this.state.query, 1, () => that.setState({loading: false}));
+    SearchUtil.search(this.state.query, 1, () => that.setState({loading: false}));
   },
   
   nextPage: function () {
@@ -68,7 +68,7 @@ var Search = React.createClass({
     if (meta.page + 1 <= meta.total_pages) {
       var that = this;
       this.setState({loading: true})
-      ApiUtil.search(meta.query, meta.page + 1, () => that.setState({loading: false}) );
+      SearchUtil.search(meta.query, meta.page + 1, () => that.setState({loading: false}) );
     }
   },
 

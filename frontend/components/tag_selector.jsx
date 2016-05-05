@@ -3,7 +3,8 @@ import {List, ListItem} from 'material-ui/List'
 import AutoComplete from 'material-ui/AutoComplete';
 import TagStore from '../stores/tag'
 import SessionStore from '../stores/session'
-import ApiUtil from '../util/api_util'
+import ArticleUtil from '../util/article'
+import UserUtil from '../util/user'
 import { MenuItem } from 'material-ui/Menu';
 
 var TagSelector = React.createClass({
@@ -33,14 +34,14 @@ var TagSelector = React.createClass({
 	componentDidMount: function () {
 		this.tagStoreToken = TagStore.addListener(this.__onChange)
 		this.sessionStoreToken = SessionStore.addListener(this.__onChange)
-		ApiUtil.fetchTagsIndex()
-		ApiUtil.fetchUserTags()
+		ArticleUtil.fetchTagsIndex()
+		UserUtil.fetchUserTags()
 	},
 	handleRequest: function (input, dataStoreId) {
 		if (dataStoreId) {
 			this.setState({query:""})
 			var that = this;
-			ApiUtil.tagFollowCreate(input.value.props.tag.id)
+			UserUtil.tagFollowCreate(input.value.props.tag.id)
 			// ApiUtil.markFollow("Tag", input.value.props.tag.id)
 		};
 	},
@@ -55,7 +56,7 @@ var TagSelector = React.createClass({
 			})
 		}
 		var userTagList = this.state.userTags.map( t => 
-			<ListItem key={t.id} primaryText={t.name} onClick={() => ApiUtil.tagFollowDestroy(t.id)} />
+			<ListItem key={t.id} primaryText={t.name} onClick={() => UserUtil.tagFollowDestroy(t.id)} />
 		)
 		return (
 			<div>

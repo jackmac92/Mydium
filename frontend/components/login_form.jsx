@@ -1,11 +1,13 @@
-var React = require('react');
-var ApiUtil = require('../util/api_util');
+import React from 'react';
+
+import AuthUtil from '../util/auth';
 
 import TextField from 'material-ui/TextField'
 import Checkbox from 'material-ui/Checkbox'
 import RaisedButton from 'material-ui/RaisedButton'
 import FontIcon from 'material-ui/FontIcon'
 import * as Colors from 'material-ui/styles/colors'
+
 var LoginForm = React.createClass({
 
 	contextTypes: {router: React.PropTypes.object.isRequired},
@@ -23,7 +25,7 @@ var LoginForm = React.createClass({
 	handleSubmit: function (e) {
 		e.preventDefault();
 		var router = this.context.router;
-		ApiUtil.logInUser(this.state, function () {router.push('/');})
+		AuthUtil.logInUser(this.state, function () {router.push('/');})
 
 	},
 
@@ -72,7 +74,7 @@ var LoginForm = React.createClass({
 	demoStart: function (e) {
 		e.preventDefault()
 		var router = this.context.router
-		ApiUtil.logInUser({email:"jackmac79@gmail.com", password:"password"}, () => router.push('/'))
+		AuthUtil.logInUser({email:"jackmac79@gmail.com", password:"password"}, () => router.push('/'))
 	},
 	
 	render: function () {

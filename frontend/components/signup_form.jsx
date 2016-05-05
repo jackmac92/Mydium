@@ -1,5 +1,5 @@
 var React = require('react');
-var ApiUtil = require('../util/api_util');
+import AuthUtil from '../util/auth'
 
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -24,7 +24,7 @@ var LoginForm = React.createClass({
 		e.preventDefault();
 		var router = this.context.router;
 
-		ApiUtil.createNewUser(this.state, function () {router.push('/');})
+		AuthUtil.createNewUser(this.state, function () {router.push('/');})
 	},
 
 	updateEmail: function (e) {

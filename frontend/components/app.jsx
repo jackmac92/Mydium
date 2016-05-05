@@ -1,6 +1,6 @@
-var ApiUtil = require('../util/api_util');
-var SessionStore = require('../stores/session');
-var Header = require('../components/header');
+import AuthUtil from '../util/auth';
+import SessionStore from '../stores/session';
+import Header from '../components/header';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
@@ -15,7 +15,7 @@ var App = React.createClass({
   componentDidMount: function() {
     injectTapEventPlugin();
     this.sessionStoreToken = SessionStore.addListener(this.handleChange);
-    ApiUtil.fetchCurrentUser();
+    AuthUtil.fetchCurrentUser();
   },
   componentWillUnmount: function() {
     this.sessionStoreToken.remove();

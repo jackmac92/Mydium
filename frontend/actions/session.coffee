@@ -6,6 +6,7 @@ SessionActions =
     AppDispatcher.dispatch
       actionType: SessionConstants.CURRENT_USER_RECEIVED
       currentUser: currentUser
+
   logout: ->
   	AppDispatcher.dispatch
   		actionType: SessionConstants.LOGOUT

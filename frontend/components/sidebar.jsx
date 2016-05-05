@@ -3,7 +3,7 @@ import TagStore from '../stores/tag'
 import ArticleStore from '../stores/articles'
 import SessionStore from '../stores/session'
 import Tag from './tag'
-import ApiUtil from '../util/api_util'
+import ArticleUtil from '../util/article'
 
 import FlatButton from 'material-ui/FlatButton';
 import { List, ListItem } from 'material-ui/List';
@@ -34,8 +34,8 @@ var Sidebar = React.createClass({
 		componentDidMount: function () {
 			this.tagStoreToken = TagStore.addListener(this.__onChange)
 			this.articleStoreToken = ArticleStore.addListener(this.__onChange)
-			ApiUtil.fetchTagsIndex()
-			ApiUtil.fetchTopArticles()
+			ArticleUtil.fetchTagsIndex()
+			ArticleUtil.fetchTopArticles()
 			var sidebarSticky = document.querySelector('#sidebar-fixed');
 			var sidebarStickyPos = document.querySelector('#featured-tags').getBoundingClientRect().bottom;
 			window.addEventListener('scroll', () => {

@@ -1,5 +1,5 @@
-var React = require('react');
-import ApiUtil from '../util/api_util'
+import React from 'react';
+import CommentUtil from '../util/comment'
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import SessionStore from '../stores/session'
@@ -31,7 +31,7 @@ var CommentForm = React.createClass({
 	},
 	handleSubmit: function (e) {
 		e.preventDefault();
-		ApiUtil.createArticleComment(this.state);
+		CommentUtil.createArticleComment(this.state);
 		this.setState({body:""})
 	},
 	render: function() {

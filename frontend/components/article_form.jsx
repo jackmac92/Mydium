@@ -2,7 +2,9 @@ import React from 'react'
 import ReactQuill from 'react-quill'
 import ReactDOM from 'react-dom'
 
-import ApiUtil from '../util/api_util'
+import WritingUtil from '../util/writing'
+import ArticleUtil from '../util/article'
+import UserUtil from '../util/user'
 import RaisedButton from 'material-ui/RaisedButton';
 import Dropzone from 'react-dropzone'
 import TextField from 'material-ui/TextField';
@@ -37,9 +39,9 @@ var ArticleForm = React.createClass({
 	componentDidMount: function() {
 		this.writingStoreToken = WritingStore.addListener(this.__onChange)
 		this.tagStoreToken = TagStore.addListener(this.__tagChange)
-		ApiUtil.fetchTagsIndex()
+		ArticleUtil.fetchTagsIndex()
 		if (this.props.params.id) {
-			ApiUtil.fetchDraft(this.props.params.id)
+			UserUtil.fetchDraft(this.props.params.id)
 		}
 	},
 
@@ -84,7 +86,7 @@ var ArticleForm = React.createClass({
 		var picData = new FormData();
 		this.setState({loadingPic: true})
 		picData.append("picture", picture[0])
-		ApiUtil.setArticlePicture(this.state.id, picData, function (response) {
+		WritingUtil.setArticlePicture(this.state.id, picData, function (response) {
 			this.setState({
 				picture: response.picture,
 				loadingPic: false
@@ -92,23 +94,23 @@ var ArticleForm = React.createClass({
 		}.bind(this))
 	},
 
-	handleSubmit: function (e) {
-		e.preventDefault();
-		var formData = new FormData();
-		formData.append("article[picture]", this.state.picture);
-		formData.append("article[title]", this.state.title);
-		formData.append("article[subtitle]", this.state.subTitle);
-		formData.append("article[body_plain_text]", this.state.body_plain_text);
-		formData.append("article[body_stylized]", this.state.body_stylized);
+	// handleSubmit: function (e) {
+	// 	e.preventDefault();
+	// 	var formData = new FormData();
+	// 	formData.append("article[picture]", this.state.picture);
+	// 	formData.append("article[title]", this.state.title);
+	// 	formData.append("article[subtitle]", this.state.subTitle);
+	// 	formData.append("article[body_plain_text]", this.state.body_plain_text);
+	// 	formData.append("article[body_stylized]", this.state.body_stylized);
 
-		var router = this.context.router;
-		ApiUtil.createNewArticle(formData, function (articleId) {router.push('/article/'+articleId);})
-	},
+	// 	var router = this.context.router;
+	// 	ApiUtil.createNewArticle(formData, function (articleId) {router.push('/article/'+articleId);})
+	// },
 	
 	handlePublish: function (e) {
 		e.preventDefault()
 		var that = this;
-		ApiUtil.ArticlePublish(this.state.id, () => that.context.router.push("/article/"+that.state.id))
+		UserUtil.ArticlePublish(this.state.id, () => that.context.router.push("/article/"+that.state.id))
 	},
 
 	autoSave: function () {
@@ -121,11 +123,11 @@ var ArticleForm = React.createClass({
 			subtitle: this.state.subTitle,
 			tag_ids: this.state.articleTags.map( t => t.id )
 		}
-		ApiUtil.autoSave(articleData, function () {this.setState({autoSaving: "hide"})}.bind(this))
+		WritingUtil.autoSave(articleData, function () {this.setState({autoSaving: "hide"})}.bind(this))
 	},
 
 	setId: function () {
-		ApiUtil.setNewArticleId(this.state.title, function(id) {this.setState({id: id, idSet:true})}.bind(this))	
+		WritingUtil.setNewArticleId(this.state.title, function(id) {this.setState({id: id, idSet:true})}.bind(this))	
 	},
 	
 	updateTitle: function (e) {

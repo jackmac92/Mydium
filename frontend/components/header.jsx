@@ -1,6 +1,6 @@
 import React from 'react'
 import Search from './search'
-import ApiUtil from '../util/api_util'
+import AuthUtil from '../util/auth'
 import SessionStore from '../stores/session'
 import Headroom from 'react-headroom'
 import LoginForm from './login_form'
@@ -29,7 +29,8 @@ var Header = React.createClass({
 			open: false,
 			modalIsOpen: false,
 			formForSignIn: true,
-			currentUser: null
+			loggedIn: SessionStore.isLoggedIn(),
+			currentUser: SessionStore.currentUser()
 		};
 	},
 
@@ -42,6 +43,7 @@ var Header = React.createClass({
 
   updateUser: function () {
   	this.setState({
+			loggedIn: SessionStore.isLoggedIn(),
   		currentUser: SessionStore.currentUser()
   	})
   },
@@ -80,7 +82,8 @@ var Header = React.createClass({
   },
 
   logOut: function () {
-  	ApiUtil.logOutUser()
+  	var that = this;
+  	AuthUtil.logOutUser()
   	this.handleRequestClose()
   },
 
@@ -88,7 +91,7 @@ var Header = React.createClass({
 		var userActionButton, authForm;
 		var router = this.context.router
 		authForm = (this.state.formForSignIn) ? <LoginForm toggleAuth={this.toggleFormState} /> : <SignupForm toggleAuth={this.toggleFormState} /> 
-		if (this.state.currentUser) {
+		if (this.state.loggedIn) {
 			userActionButton = (
 					<div className="user-action-button-header">
 		        <IconMenu

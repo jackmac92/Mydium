@@ -1,5 +1,7 @@
 import React from 'react'
-import ApiUtil from '../util/api_util'
+import ArticleUtil from '../util/article'
+import UserUtil from '../util/user'
+import AuthUtil from '../util/auth'
 import ArticleStore from '../stores/articles'
 import SessionStore from '../stores/session'
 import ArticleIndexItem from './article_index_item'
@@ -40,16 +42,16 @@ var ArticleIndex = React.createClass ({
     var currPath = currProps.location.pathname.split("/")[1]; 
     switch (currPath) {
       case "":
-        ApiUtil.fetchArticles(pageNum, completionCallback);
+        ArticleUtil.fetchArticles(pageNum, completionCallback);
         break;
       case "me":
-        ApiUtil.fetchBookmarkedArticles(pageNum, completionCallback);
+        UserUtil.fetchBookmarkedArticles(pageNum, completionCallback);
         break;
       case "popular":
-        ApiUtil.fetchTopArticles(pageNum, completionCallback);
+        ArticleUtil.fetchTopArticles(pageNum, completionCallback);
         break;
       case "tags":
-        ApiUtil.fetchArticlesByTag(currProps.params.tag_name, pageNum, completionCallback);
+        ArticleUtil.fetchArticlesByTag(currProps.params.tag_name, pageNum, completionCallback);
         break;
       }
   },
@@ -87,7 +89,7 @@ var ArticleIndex = React.createClass ({
     this.articleStoreToken = ArticleStore.addListener(this.__onChange);
     this.SessionStoreToken = SessionStore.addListener(this.sessionChange)
     this.articleFetcher(this.props)
-    ApiUtil.fetchCurrentUser()
+    AuthUtil.fetchCurrentUser()
     window.addEventListener('scroll', this.handleScroll);
 
   },
