@@ -104,7 +104,7 @@ var ArticleForm = React.createClass({
 	// 	formData.append("article[body_stylized]", this.state.body_stylized);
 
 	// 	var router = this.context.router;
-	// 	ApiUtil.createNewArticle(formData, function (articleId) {router.push('/article/'+articleId);})
+	// 	UserUtil.createNewArticle(formData, function (articleId) {router.push('/article/'+articleId);})
 	// },
 	
 	handlePublish: function (e) {

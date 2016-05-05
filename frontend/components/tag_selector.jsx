@@ -42,7 +42,7 @@ var TagSelector = React.createClass({
 			this.setState({query:""})
 			var that = this;
 			UserUtil.tagFollowCreate(input.value.props.tag.id)
-			// ApiUtil.markFollow("Tag", input.value.props.tag.id)
+			// UserUtil.markFollow("Tag", input.value.props.tag.id)
 		};
 	},
 	render: function() {

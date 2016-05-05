@@ -9,7 +9,7 @@ UserUtil =
       success: (article) ->
         callback && callback()
       error: ->
-        console.log "ApiUtil#publish error"
+        console.log "UserUtil#publish error"
     
   ArticleUnpublish: (id, callback) ->
     $.ajax
@@ -19,7 +19,7 @@ UserUtil =
       success: (article) ->
         callback && callback()
       error: ->
-        console.log "ApiUtil#createNewArticle error"
+        console.log "UserUtil#createNewArticle error"
         
   fetchBookmarkedArticles: (page, callback) ->
     $.ajax
@@ -32,7 +32,7 @@ UserUtil =
       success: (articles) ->
         ApiActions.receiveBookmarkedArticles articles
       error: ->
-        console.log "ApiUtil#fetch bookmarked"
+        console.log "UserUtil#fetch bookmarked"
       complete: ->
         callback && callback()
   fetchFavoritedArticles: (page, callback) ->
@@ -46,7 +46,7 @@ UserUtil =
       success: (articles) ->
         ApiActions.receiveFavoritedArticles articles
       error: ->
-        console.log "ApiUtil#fetch favorited"
+        console.log "UserUtil#fetch favorited"
       complete: ->
         callback && callback()
   fetchDrafts: ->
@@ -97,7 +97,7 @@ UserUtil =
         ApiActions.receiveUserDrafts drafts
         callback && callback()
       error: ->
-        console.log "ApiUtil#destroyArticle error"
+        console.log "UserUtil#destroyArticle error"
 
   markFavorite: (type, id) ->
     $.ajax
@@ -219,7 +219,8 @@ UserUtil =
       url: "api/users/" + id
       success: (user) ->
         ApiActions.receiveUserInfo user
-      error: ->
-        console.log "ApiUtil#fetchUser error"
+      error: (e) ->
+        console.log e
+        console.log "UserUtil#fetchUser error"
 
 module.exports = UserUtil
