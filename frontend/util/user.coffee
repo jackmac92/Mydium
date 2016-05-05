@@ -220,6 +220,7 @@ UserUtil =
       success: (user) ->
         ApiActions.receiveUserInfo user
       error: (e) ->
+        console.log id
         console.log e
         console.log "UserUtil#fetchUser error"
 
