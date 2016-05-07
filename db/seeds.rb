@@ -21,18 +21,20 @@ ActiveRecord::Base.transaction do
     name = Faker::Name.name
     User.create email:Faker::Internet.email(name), password:"password", avatar:Faker::Avatar.image, name:name, username:Faker::Internet.user_name(name)
   end
-  article_pics = []
-  pathtoimages = 'app/assets/images' 
-  Dir.foreach(pathtoimages) do |pic|
-    if pic.split('.')[0] != 'missing' && pic.split('.')[0] != 'logo' && pic[0] != "."
-      article_pics << "app/assets/images/#{pic}"
-    end
+  article_pics = File.readlines('seedimglst').map do |pic_url|
+    pic_url.chomp!
+    File.open(pic_url)
   end
 
   tags = %w(tech fashion startups culture art stocks foreign finance celebrity politics DIY offbeat funny satire design business economcis UX life)
 
   25.times do
-    article = User.all.sample.articles.create!(title:Faker::StarWars.quote, subtitle:Faker::Hipster.sentence , body_plain_text:Faker::Hipster.paragraphs(20+rand(35)).join("\n\n"), picture:File.open(article_pics.pop))
+    article = User.all.sample.articles.create!(
+      title:Faker::StarWars.quote, 
+      subtitle:Faker::Hipster.sentence, 
+      body_plain_text:Faker::Hipster.paragraphs(20+rand(35)).join("\n\n"), 
+      picture:URI.parse(article_pics.pop)
+    )
     time = Time.now - rand(12).hours - rand(8).days - rand(60).minutes
     article.update! created_at: (time - 1.hour)
     if rand(8) >= 2
