@@ -1,6 +1,7 @@
 class Api::ArticlesController < ApplicationController
   include PublicActivity::StoreController
   def index
+    
     case params[:article_type]
     when "popular"
       @articles = Article.includes(:tags, :comments, :user).popular.page(params[:page]).per(5)

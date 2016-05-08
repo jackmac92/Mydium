@@ -45,7 +45,7 @@ $(document).ready(function () {
           <Route path="tagselect" component={TagSelector} />
           <Route path="me" onEnter={_requireLoggedIn} component={SelfShow} />
           <Route path="editor" component={ArticleForm} />
-          <Route path="editor/:id" component={ArticleForm} />
+          <Route path="editor/:id" onEnter={_requireLoggedIn} component={ArticleForm} />
           <Route path="search" component={Search}/>
           <Route path="login" component={LoginForm}/>
         </Route>

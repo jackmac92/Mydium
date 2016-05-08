@@ -21,25 +21,28 @@ var ArticleDetail = React.createClass({
     return {article: ArticleStore.getDetail()};
   },
   __onChange: function () {
+    clearTimeout(this.readTimer)
+    clearInterval(this.readTimerProgress)
     var currState = this.stateFromStore()
     currState.readTimeElapsed = false
     currState.scrolledToEnd = false
+    currState.remainingTime = 0
     if (SessionStore.isLoggedIn()) {
       currState.markedRead = currState.article.user.already_read
     }
-    currState.remainingTime = 0
     this.setState(currState);
-    clearTimeout(this.readTimer)
-    clearInterval(this.readTimerProgress)
-    var that = this;
-    this.readTimer = setTimeout(() => that.setState({readTimeElapsed: true}), 20000 * parseInt(currState.article.read_time))
-    this.readTimerProgress = setInterval(
-      () => {
-        that.setState({remainingTime: that.state.remainingTime + 1});
-      },
-      600 * parseInt(currState.article.read_time)
-    )
+    if (!currState.markedRead) {
+      var that = this;
+      this.readTimer = setTimeout(() => that.setState({readTimeElapsed: true}), 20000 * parseInt(currState.article.read_time))
+      this.readTimerProgress = setInterval(
+        () => {
+          that.setState({remainingTime: that.state.remainingTime + 1});
+        },
+        600 * parseInt(currState.article.read_time)
+      )      
+    }
   },
+
   getInitialState: function () {
     var currState = this.stateFromStore();
     currState.position = 0
@@ -47,12 +50,14 @@ var ArticleDetail = React.createClass({
     currState.userSignedIn = SessionStore.isLoggedIn()
     return currState
   },
+
   tryMarkArticleRead: function () {
     if (this.state.readTimeElapsed && this.state.scrolledToEnd) {
       UserUtil.markArticleRead(this.state.article.id)
       this.setState({markedRead: true})
     };
   },
+
   componentWillReceiveProps: function (nextProps) {
     this.tryMarkArticleRead()
     $('html, body').animate({ scrollTop: 0 }, 'fast');
@@ -80,7 +85,6 @@ var ArticleDetail = React.createClass({
     } else {
       UserUtil.markFollow("User",this.state.article.author.id)
     }
-    // UserUtil.toggleFollow(this.state.article.author.id)
   },
 
   handleUnpublish: function () {

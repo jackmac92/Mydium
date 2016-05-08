@@ -17,41 +17,42 @@ var Sidebar = React.createClass({
 			featured: TagStore.featured(),
 			user_tags: TagStore.user(),
 			top: ArticleStore.topArticles()
-			}
-		},
+		}
+	},
 	__onChange: function () {
-			this.setState(this.stateFromStore())
-		},
+		this.setState(this.stateFromStore())
+	},
 
-		getInitialState: function () {
-			return this.stateFromStore()
-		},
-		componentWillUnmount: function () {
-			this.tagStoreToken.remove()
-			this.articleStoreToken.remove()
-		},
+	getInitialState: function () {
+		return this.stateFromStore()
+	},
+	
+	componentWillUnmount: function () {
+		this.tagStoreToken.remove()
+		this.articleStoreToken.remove()
+	},
 		
-		componentDidMount: function () {
-			this.tagStoreToken = TagStore.addListener(this.__onChange)
-			this.articleStoreToken = ArticleStore.addListener(this.__onChange)
-			ArticleUtil.fetchTagsIndex()
-			ArticleUtil.fetchTopArticles()
-			var sidebarSticky = document.querySelector('#sidebar-fixed');
-			var sidebarStickyPos = document.querySelector('#featured-tags').getBoundingClientRect().bottom;
-			window.addEventListener('scroll', () => {
-				if (window.pageYOffset >= sidebarStickyPos + 77) {
-					sidebarSticky.style.position = 'fixed';
-					sidebarSticky.style.marginRight = "70px"
-					sidebarSticky.style.top = '67px'
+	componentDidMount: function () {
+		this.tagStoreToken = TagStore.addListener(this.__onChange)
+		this.articleStoreToken = ArticleStore.addListener(this.__onChange)
+		ArticleUtil.fetchTagsIndex()
+		ArticleUtil.fetchTopArticles()
+		var sidebarSticky = document.querySelector('#sidebar-fixed');
+		var sidebarStickyPos = document.querySelector('#featured-tags').getBoundingClientRect().bottom;
+		window.addEventListener('scroll', () => {
+			if (window.pageYOffset >= sidebarStickyPos + 77) {
+				sidebarSticky.style.position = 'fixed';
+				sidebarSticky.style.marginRight = "70px"
+				sidebarSticky.style.top = '67px'
 
-				} else {
-					sidebarSticky.style.position = 'static';
-					sidebarSticky.style.marginRight = ""
-					sidebarSticky.style.top = '';					
-				}
-			})
+			} else {
+				sidebarSticky.style.position = 'static';
+				sidebarSticky.style.marginRight = ""
+				sidebarSticky.style.top = '';					
+			}
+		})
 
-		},
+	},
 
 	render: function () {
 		var featured_tags, user_tags_section, top_stories;
