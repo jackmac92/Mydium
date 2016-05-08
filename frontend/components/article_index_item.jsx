@@ -53,10 +53,16 @@ const ArticleCard = React.createClass({
  	},
 
  	render: function() {
- 		var tags, bookmark_style, fav_style;
+ 		var tags;
+ 		var bookmark_style = <ActionBookmarkBorder />;
+ 		var fav_style = <ActionFavoriteBorder />;
  		if (this.props.article.user) {
- 			bookmark_style = (this.props.article.user.bookmarked_article) ? <ActionBookmark />: <ActionBookmarkBorder />;;
- 			fav_style = (this.props.article.user.faved_article) ? <ActionFavorite />: <ActionFavoriteBorder />;
+ 			if (this.props.article.user.bookmarked_article) {
+	 			bookmark_style = <ActionBookmark />;
+ 			}
+ 			if (this.props.article.user.faved_article) {
+	 			fav_style = <ActionFavorite />;
+ 			}
  		}
  		if (this.props.article.tags) {
  			tags = this.props.article.tags.map( t => <Tag key={t.id} tag={t} />);

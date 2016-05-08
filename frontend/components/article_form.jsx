@@ -79,6 +79,7 @@ var ArticleForm = React.createClass({
 				tagQuery:"",
 				articleTags: currTags
 			})
+			this.autoSave();
 		};
 	},
 	
@@ -160,12 +161,6 @@ var ArticleForm = React.createClass({
 	},
 	
 	
-	updatePublished: function () {
-		this.setState({
-			published: !this.state.published
-		})
-	},
-	
 	formReady: function () {
 		if (this.state.title && this.state.title.length != 0 && this.state.body_plain_text && this.state.picture) {
 			return true
@@ -182,7 +177,8 @@ var ArticleForm = React.createClass({
 				newTags.push(tag)
 			} 
 		}
-		this.setState({articleTags: newTags})
+		this.setState({articleTags: newTags});
+		this.autoSave();
 	},
 
   render: function () {
