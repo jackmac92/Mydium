@@ -50,6 +50,7 @@ var Header = React.createClass({
 
   componentDidMount: function() {
   	this.SessionStoreToken = SessionStore.addListener(this.updateUser)
+  	AuthUtil.fetchCurrentUser()
   },
 
   componentWillUnmount: function() {
