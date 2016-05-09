@@ -33,7 +33,8 @@ var ArticleDetail = React.createClass({
     this.setState(currState);
     if (!currState.markedRead) {
       var that = this;
-      this.readTimer = setTimeout(() => that.setState({readTimeElapsed: true}), 20000 * parseInt(currState.article.read_time))
+      // this.readTimer = setTimeout(() => that.setState({readTimeElapsed: true}), 20000 * parseInt(currState.article.read_time))
+      this.readTimer = setTimeout(() => that.setState({readTimeElapsed: true}), 7000 ) // For demo purposes keep the timer short
       this.readTimerProgress = setInterval(
         () => {
           that.setState({remainingTime: that.state.remainingTime + 1});

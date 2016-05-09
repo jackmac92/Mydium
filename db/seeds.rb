@@ -21,9 +21,15 @@ ActiveRecord::Base.transaction do
     name = Faker::Name.name
     User.create email:Faker::Internet.email(name), password:"password", avatar:Faker::Avatar.image, name:name, username:Faker::Internet.user_name(name)
   end
-  article_pics = File.readlines('seedimglst').map do |pic_url|
-    pic_url.chomp!
-    File.open(pic_url)
+  # article_pics = File.readlines('seedimglst').map do |pic_url|
+  #   pic_url.chomp!
+  #   File.open(pic_url)
+  # end
+  article_pics = []
+  seedPath = "/home/jackmac/mydiumSeedImgs"
+  Dir.foreach(seedPath) do |pic|
+    picPath = seedPath + "/#{pic}"
+    article_pics << File.open(picPath)
   end
 
   tags = %w(tech fashion startups culture art stocks foreign finance celebrity politics DIY offbeat funny satire design business economcis UX life)
