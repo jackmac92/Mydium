@@ -39,7 +39,8 @@ var ArticleDetail = React.createClass({
         () => {
           that.setState({remainingTime: that.state.remainingTime + 1});
         },
-        600 * parseInt(currState.article.read_time)
+        70
+        // 600 * parseInt(currState.article.read_time)
       )      
     }
   },
@@ -71,8 +72,10 @@ var ArticleDetail = React.createClass({
     this.articleStoreToken = ArticleStore.addListener(this.__onChange);
     this.SessionStoreToken = SessionStore.addListener(this.__updateUser);
     ArticleUtil.fetchArticle(parseInt(this.props.params.id));
+    AuthUtil.fetchCurrentUser();
     $('html, body').animate({ scrollTop: 0 }, 'fast');
     window.addEventListener('scroll', this.handleScroll);
+
   },
   componentWillUnmount: function () {
     this.tryMarkArticleRead()

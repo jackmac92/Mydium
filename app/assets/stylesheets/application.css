@@ -168,7 +168,12 @@ main {
   line-height: 1.77777;
 }
 
-
+.article-comment {
+  margin: 0 auto;
+}
+.comment-list {
+  margin: 0 auto;
+}
 
 img.article-detail-image {
   position: relative;

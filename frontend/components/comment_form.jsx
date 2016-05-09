@@ -42,7 +42,7 @@ var CommentForm = React.createClass({
 			var progressbar = (this.props.disabled && this.props.commentTimer < 100) ? <LinearProgress color={Colors.blue600} mode="determinate" value={this.props.commentTimer}/> : null 
 		return (
 			<section style={{width:"60%",margin:"0 auto"}} >
-				<TextField style={{width:"500px"}} disabled={this.props.disabled} onChange={this.handleInput} value={this.state.body} floatingLabelText={label} />
+				<TextField style={{width:"80%"}} disabled={this.props.disabled} onChange={this.handleInput} value={this.state.body} floatingLabelText={label} />
 				<RaisedButton primary={true} disabled={this.props.disabled} style={{float:"right",marginTop:"20px"}} onClick={this.handleSubmit} label="Publish" />
         {progressbar}
 			</section>

@@ -10,7 +10,7 @@ var Comments = React.createClass({
 		return (
 			<section>
 				<h3>Responses</h3>
-				<ul>
+				<ul className="comment-list">
           <ReactCSSTransitionGroup
             transitionName="auto"
             transitionEnterTimeout={500}
