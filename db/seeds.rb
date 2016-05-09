@@ -5,7 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
+require "open-uri"
 ActiveRecord::Base.transaction do
   PublicActivity.enabled = false
     PgSearch::Document.destroy_all
@@ -33,7 +33,7 @@ ActiveRecord::Base.transaction do
       title:Faker::StarWars.quote, 
       subtitle:Faker::Hipster.sentence, 
       body_plain_text:Faker::Hipster.paragraphs(20+rand(35)).join("\n\n"), 
-      picture:URI.parse(article_pics.pop)
+      picture:open(article_pics.pop)
     )
     time = Time.now - rand(12).hours - rand(8).days - rand(60).minutes
     article.update! created_at: (time - 1.hour)
