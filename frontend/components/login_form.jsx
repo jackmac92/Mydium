@@ -133,6 +133,7 @@ var LoginForm = React.createClass({
 					href="/users/auth/google_oauth2" 
 					linkButton={true} />
 				<RaisedButton 
+					backgroundColor={Colors.green500}
 					style={buttonStyle} 
 					className="auth-form-button" 
 					label="Try With Demo Account" 

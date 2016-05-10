@@ -10,12 +10,13 @@ class Api::ArticlesController < ApplicationController
     when "tag"
       @articles = Article.includes(:tags, :comments, :user).all_with_tag(params[:tag]).page(params[:page]).per(5)
     else
-      @articles = Article.includes(:tags, :comments, :user).viewable.page(params[:page]).per(3)
+      @articles = Article.includes(:tags, :comments, :user).viewable.page(params[:page]).per(5)
     end
   end
   
   def show
     @article = Article.includes(:tags, :user, comments: :user).find(params[:id])
+    @comments = @article.comments.order(created_at: :desc)
     unless @article.published
       unless current_user.id == @article.user.id
         render json: "Cannot view others unpublished articles", status: 401

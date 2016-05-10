@@ -6,6 +6,7 @@ import IconButton from 'material-ui/IconButton'
 import FontIcon from 'material-ui/FontIcon'
 import FlatButton from 'material-ui/FlatButton'
 
+import Waypoint from 'react-waypoint'
 import ActionFavorite from 'material-ui/svg-icons/action/favorite';
 import ActionFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 import ActionBookmark from 'material-ui/svg-icons/action/bookmark';
@@ -52,6 +53,10 @@ const ArticleCard = React.createClass({
  		this.fetchImage()
  	},
 
+ 	reveal: function () {
+		document.querySelector("#article-card-"+this.props.article.id).classList.add("visible") 		
+ 	},
+
  	render: function() {
  		var tags;
  		var bookmark_style = <ActionBookmarkBorder />;
@@ -70,7 +75,8 @@ const ArticleCard = React.createClass({
  			tags = <div />
  		}
  		return (
-			  <Card className="article-card" >
+			  <Card id={"article-card-"+this.props.article.id} className="article-card" >
+		 			<Waypoint onEnter={this.reveal} />
 			  	<CardTitle
 			  		subtitle={this.props.article.tags.map(t => t.name).join(" - ")}
 			  	/>
@@ -104,6 +110,7 @@ const ArticleCard = React.createClass({
 			      </IconButton>
 			    </CardActions>
 			  </Card>
+
 
  		);
  	}

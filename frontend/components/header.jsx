@@ -88,6 +88,11 @@ var Header = React.createClass({
   	this.handleRequestClose()
   },
 
+  demoLogin: function () {
+		var router = this.context.router
+  	AuthUtil.logInUser({email:"demo@gmail.com", password:"password"}, () => router.push('/'))
+  },
+
 	render: function() {
 		var userActionButton, authForm;
 		var router = this.context.router
@@ -97,7 +102,7 @@ var Header = React.createClass({
 					<div className="user-action-button-header">
 		        <IconMenu
 		        	className="header-right-nav"
-		        	iconButtonElement={<IconButton><ActionAccountCircle />}</IconButton>}
+		        	iconButtonElement={<IconButton><ActionAccountCircle/></IconButton>}
 		          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
 		          targetOrigin={{horizontal: 'left', vertical: 'top'}}
 		        >
@@ -124,6 +129,7 @@ var Header = React.createClass({
 						{authForm}
 					</Dialog>
 					<FlatButton onClick={this.modalOpen} className="user-login-button-header" label="Log In/ Sign Up" />
+					<FlatButton onClick={this.demoLogin} className="user-login-button-header" label="Try with demo account" />
 				</div>
 
 			)

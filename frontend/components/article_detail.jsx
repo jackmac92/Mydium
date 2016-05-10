@@ -3,6 +3,7 @@ import ArticleStore from '../stores/articles'
 import SessionStore from '../stores/session'
 import ArticleUtil from '../util/article'
 import UserUtil from '../util/user'
+import AuthUtil from '../util/auth'
 import Tag from './tag'
 import Comments from './comment_section'
 import Checkbox from 'material-ui/Checkbox';

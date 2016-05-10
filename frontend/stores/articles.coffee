@@ -64,7 +64,7 @@ setFollowOfDetail = (status) ->
   `_articleDetail.user.follows_author = status`
 
 addComment = (comment) ->
-  _articleDetail.comments.push comment
+  _articleDetail.comments.unshift comment
 
 removeComment = (commentId) ->
   ids = _articleDetail.comments.map (c) -> c.id

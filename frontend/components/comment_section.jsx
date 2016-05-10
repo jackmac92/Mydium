@@ -10,21 +10,21 @@ var Comments = React.createClass({
 		return (
 			<section>
 				<h3>Responses</h3>
+				<CommentForm commentTimer={this.props.commentTimer} disabled={this.props.disabled} className="comment-form" article_id={this.props.article_id} />
 				<ul className="comment-list">
           <ReactCSSTransitionGroup
-            transitionName="auto"
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={500}
+            transitionName="comment"
+            transitionEnterTimeout={900}
+            transitionLeaveTimeout={900}
           >
 						{comments}
 					</ReactCSSTransitionGroup>
 				</ul>
-				<CommentForm commentTimer={this.props.commentTimer} disabled={this.props.disabled} className="comment-form" article_id={this.props.article_id} />
-				<div style={{height:"200px"}} />
 			</section>
 		);
 	}
 
 });
+				// <div style={{height:"200px"}} />
 
 module.exports = Comments;

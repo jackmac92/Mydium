@@ -1,0 +1,30 @@
+.article-detail {
+  width: 90%;
+  margin: 15px auto;
+  font-size: 19px;
+  background: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  line-height: 1.77777;
+}
+
+
+img.article-detail-image {
+  position: relative;
+  width: 100%;
+}
+
+.article-detail > h1 {
+  font-size: 30px;
+}
+
+.unpublish-button > div > div {
+  background: red;
+}
+.article-progress {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 10;
+}

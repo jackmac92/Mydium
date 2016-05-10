@@ -1,32 +1,36 @@
-.article-card button > span{
-  width: 30px;
-  margin: auto;
+div.article-card {
+  opacity: 0.01;
+  transform: translateX(-500%);
+  transition: opacity 500ms, transform 800ms !important;
+  transition-timing-function: cubic-bezier(.22,.64,.6,1.11) !important;
+}
+
+div.article-card.visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 button.article-index-bookmark {
   float: right;
-  height: 50px;
 }
 
-#user-icon {
-  color:black;
-}
 .article-card-image > img {
   max-width: 100%;
   max-height: 100%;
   object-fit: cover;
 }
+
 .article-card-image:hover {
   cursor: pointer;
 }
+
 .article-card-title:hover {
   cursor: pointer;
 }
-
-
-.article-card {
-  margin: 10px;
-}
 .article-card-header:hover {
   cursor: pointer;
+}
+
+.article-card {
+  margin: 20px;
 }

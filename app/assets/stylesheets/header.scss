@@ -2,20 +2,16 @@ header.header {
   background: white;
   height: 70px;
 }
+
 .header-nav {
-  // height: 60px;
   width: 90%;
-  // display: block;
   font-size: 24px;
 }
-
-
 #searchbutton {
   float: right;
   top: 13px;
   margin-right: 20px;
 }
-
 .header-right {
   float: right;
   width: 500px;
@@ -35,27 +31,15 @@ header.header {
   cursor: pointer;
 }
 .user-login-button-header {
-  text-transform: none !important;
-  top: 18px;
   float: right;
   margin-right: 20px !important;
+  top: 18px;
+  text-transform: none !important;
 }
 .user-action-button-header {
   float: right;
-  // padding: 6px !important;
+  margin-right: 10px;
+  top: 13px;
   position: relative;
   width: 50px !important;
-  top: 13px;
-  margin-right: 10px;
 }
-// .user-action-button-header > * {
-//   float: left;
-// }
-// #header-user-icon {
-//   height: 100% !important;
-//   width: 100% !important;
-// }
-// .user-action-button-header > .header-right-nav > button {
-//   height: 50px !important;
-//   width: 50px !important;
-// }

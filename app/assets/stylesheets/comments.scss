@@ -1,0 +1,33 @@
+.comment-form {
+  margin-bottom: 100px;
+}
+.article-comment {
+  margin: 0 auto;
+}
+.comment-list {
+  margin: 0 auto;
+}
+
+.comment-enter {
+  opacity: 0.01;
+  transform: translateY(-100px);
+}
+
+.comment-enter.comment-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms, transform 900ms;
+  transition-timing-function: cubic-bezier(.22,.64,.6,1.11) !important;
+
+}
+
+.comment-leave {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.comment-leave.comment-leave-active {
+  opacity: 0.01;
+  transform: translateX(200%);
+  transition: opacity 500ms, transform 900ms;
+}
