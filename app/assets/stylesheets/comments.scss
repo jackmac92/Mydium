@@ -1,11 +1,13 @@
 .comment-form {
-  margin-bottom: 100px;
+  margin-bottom: 60px;
+  width: calc(90% - 90px) !important;
 }
 .article-comment {
   margin: 0 auto;
 }
 .comment-list {
   margin: 0 auto;
+  padding: 0;
 }
 
 .comment-enter {
@@ -30,4 +32,7 @@
   opacity: 0.01;
   transform: translateX(200%);
   transition: opacity 500ms, transform 900ms;
+}
+.comment-body {
+
 }

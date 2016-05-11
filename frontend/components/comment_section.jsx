@@ -2,6 +2,7 @@ var React = require('react');
 import Comment from './comment';
 import CommentForm from './comment_form';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import {List} from 'material-ui/List'
 
 var Comments = React.createClass({
 
@@ -11,7 +12,7 @@ var Comments = React.createClass({
 			<section>
 				<h3>Responses</h3>
 				<CommentForm commentTimer={this.props.commentTimer} disabled={this.props.disabled} className="comment-form" article_id={this.props.article_id} />
-				<ul className="comment-list">
+				<List className="comment-list">
           <ReactCSSTransitionGroup
             transitionName="comment"
             transitionEnterTimeout={900}
@@ -19,7 +20,7 @@ var Comments = React.createClass({
           >
 						{comments}
 					</ReactCSSTransitionGroup>
-				</ul>
+				</List>
 			</section>
 		);
 	}

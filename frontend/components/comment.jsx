@@ -1,24 +1,37 @@
-var React = require('react');
+import React from 'react';
 import CommentUtil from '../util/comment'
-import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import * as Colors from 'material-ui/styles/colors';
+import { ListItem } from 'material-ui/List'
+import Avatar from 'material-ui/Avatar';
+import IconButton from 'material-ui/IconButton';
+
+
+
+
 var Comment = React.createClass({
 
 	handleDelete: function (id) {
 		CommentUtil.destroyArticleComment(id)
 	},
 
+
+
 	render: function() {
 		var deleteButton;
 		if (this.props.comment.userMadeComment) {
-			deleteButton = <FlatButton label="Delete" onClick={this.handleDelete.bind(this, this.props.comment.id)} />
+			deleteButton = <IconButton onClick={this.handleDelete.bind(this, this.props.comment.id)} tooltip="delete" iconClassName="fa fa-trash-o" />
 		}
+					 
+
 		return (
-			<li className="article-comment">
-				<img className="author-thumb" src={this.props.comment.user.avatar} />
-				<p className="author-email">{this.props.comment.user.email}</p>
-				{this.props.comment.body}
-				{deleteButton}
-			</li>
+			<ListItem
+				leftAvatar={ <Avatar src={this.props.comment.user.avatar} />}
+				primaryText={this.props.comment.body}
+				secondaryText={this.props.comment.user.username}
+				rightIconButton={deleteButton}
+			/>
 		);
 	}
 

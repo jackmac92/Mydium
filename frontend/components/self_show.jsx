@@ -54,7 +54,7 @@ var SelfShow = React.createClass({
           <ListItem
             onTouchTap={() => this.context.router.push("/editor/"+d.id)}
             primaryText={d.title}
-            rightIconButton={<IconButton onClick={() => UserUtil.destroyArticle(d.id)} iconClassName="fa fa-trash-o" />}
+            rightIconButton={<IconButton tooltip="delete" onClick={() => UserUtil.destroyArticle(d.id)} iconClassName="fa fa-trash-o" />}
             key={d.id} />
         );
         draftsection = (

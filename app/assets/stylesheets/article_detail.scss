@@ -1,26 +1,29 @@
+.article-detail-view {
+  max-width: 900px;
+  margin: 0 auto;
+  
+}
 .article-detail {
+  margin: 0 auto;
   width: 90%;
-  margin: 15px auto;
   font-size: 19px;
   background: white;
-  padding: 20px;
+  padding: 50px 20px 20px 20px;
   border: 1px solid #ccc;
   line-height: 1.77777;
 }
 
-
 img.article-detail-image {
-  position: relative;
-  width: 100%;
+  object-fit: cover;
+  width: auto;
+  height: 100%;
 }
 
-.article-detail > h1 {
+.article-detail > div > h1 {
   font-size: 30px;
+  margin-bottom: 20px;
 }
 
-.unpublish-button > div > div {
-  background: red;
-}
 .article-progress {
   position: fixed;
   top: 0px;
@@ -28,3 +31,4 @@ img.article-detail-image {
   width: 100%;
   z-index: 10;
 }
+
