@@ -6,7 +6,7 @@ import UserUtil from '../util/user'
 import AuthUtil from '../util/auth'
 import Tag from './tag'
 import Comments from './comment_section'
-import Checkbox from 'material-ui/Checkbox';
+import Toggle from 'material-ui/Toggle';
 import {List,ListItem} from 'material-ui/List';
 
 import RaisedButton from 'material-ui/RaisedButton';
@@ -22,17 +22,18 @@ var ArticleDetail = React.createClass({
     return {article: ArticleStore.getDetail()};
   },
   __onChange: function () {
-    clearTimeout(this.readTimer)
-    clearInterval(this.readTimerProgress)
     var currState = this.stateFromStore()
-    currState.readTimeElapsed = false
-    currState.scrolledToEnd = false
-    currState.remainingTime = 0
+    currState.markedRead = true;
     if (SessionStore.isLoggedIn()) {
       currState.markedRead = currState.article.user.already_read
     }
     this.setState(currState);
     this.fetchImage()
+    // currState.readTimeElapsed = false
+    // currState.scrolledToEnd = false
+    // currState.remainingTime = 0
+    // clearTimeout(this.readTimer)
+    // clearInterval(this.readTimerProgress)
     // if (!currState.markedRead) {
       // var that = this;
       // this.readTimer = setTimeout(() => that.setState({readTimeElapsed: true}), 20000 * parseInt(currState.article.read_time))
@@ -139,7 +140,15 @@ var ArticleDetail = React.createClass({
         }
         delete_button = <RaisedButton className="unpublish-button" style={delStyle} label="Unpublish" onClick={this.handleUnpublish}/>
       } else {
-        follow_button = <Checkbox checked={this.state.article.user.follows_author} onCheck={this.handleFollowAuthor} label={"Follow " + this.state.article.author.name} />
+        follow_button = (
+          <ListItem
+          rightToggle={
+            <Toggle 
+              toggled={this.state.article.user.follows_author} 
+              onToggle={this.handleFollowAuthor} />
+          }
+          primaryText={"Follow " + this.state.article.author.name} />
+        )
       }
     }
 
@@ -150,6 +159,7 @@ var ArticleDetail = React.createClass({
           <hr />
           <List>
             <h4>{"Other Articles authored by " + this.state.article.author.name}</h4>
+            {follow_button}
             {article_items}
           </List>
         </div>
@@ -179,7 +189,6 @@ var ArticleDetail = React.createClass({
             />
           </article>
           {recent_posts_view}
-          {follow_button}
           <hr />
           <Comments commentTimer={this.state.remainingTime} disabled={!this.state.markedRead} article_id={this.state.article.id} comments={this.state.article.comments} />
         </section>
