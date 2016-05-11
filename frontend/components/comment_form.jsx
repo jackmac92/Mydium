@@ -42,7 +42,8 @@ var CommentForm = React.createClass({
 			var progressbar = (this.props.disabled && this.props.commentTimer < 100) ? <LinearProgress color={Colors.blue600} mode="determinate" value={this.props.commentTimer}/> : null 
 		return (
 			<section style={{width:"90%",margin:"0 auto"}} >
-				<TextField 
+				<TextField
+					multiLine={true}
 					className="comment-form"
 					disabled={this.props.disabled} 
 					onChange={this.handleInput} 
