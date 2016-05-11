@@ -24,11 +24,11 @@ var ArticleDetail = React.createClass({
   __onChange: function () {
     var currState = this.stateFromStore()
     currState.markedRead = true;
-    if (SessionStore.isLoggedIn()) {
-      currState.markedRead = currState.article.user.already_read
-    }
     this.setState(currState);
     this.fetchImage()
+    // if (SessionStore.isLoggedIn()) {
+    //   currState.markedRead = currState.article.user.already_read
+    // }
     // currState.readTimeElapsed = false
     // currState.scrolledToEnd = false
     // currState.remainingTime = 0
