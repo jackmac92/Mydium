@@ -1,13 +1,14 @@
-var React = require('react');
+import React from 'react';
 import AuthUtil from '../util/auth'
 
 import TextField from 'material-ui/TextField'
+import Checkbox from 'material-ui/Checkbox'
 import RaisedButton from 'material-ui/RaisedButton'
 import FontIcon from 'material-ui/FontIcon'
 import * as Colors from 'material-ui/styles/colors'
 
 
-var LoginForm = React.createClass({
+var AuthForm = React.createClass({
 
 	contextTypes: {router: React.PropTypes.object.isRequired},
 
@@ -16,15 +17,20 @@ var LoginForm = React.createClass({
 			email: "", 
 			password: "",
 			password_confirm: "",
-			username: ""
+			username: "",
+			remember_me: true,
+			type: "login"
 			};
 	},
 
 	handleSubmit: function (e) {
 		e.preventDefault();
 		var router = this.context.router;
-
-		AuthUtil.createNewUser(this.state, function () {router.push('/');})
+		if (this.state.type == "login") {
+			AuthUtil.logInUser(this.state, () => router.push('/'))
+		} else {
+			AuthUtil.createNewUser(this.state, function () {router.push('/');})
+		}
 	},
 
 	updateEmail: function (e) {
@@ -39,6 +45,16 @@ var LoginForm = React.createClass({
 	},
 	updatePasswordConfirm: function (e) {
 		this.setState({password_confirm:e.currentTarget.value})
+	},
+
+	updateRememberStatus: function (e) {
+		this.setState({remember_me: (!this.state.remember_me)});
+	},
+
+
+	toggleAuth: function () {
+		var newState = (this.state.type == "login") ? "signup" : "login";
+		this.setState({type:newState})
 	},
 	
 	passwordErrors: function () {
@@ -58,43 +74,78 @@ var LoginForm = React.createClass({
 	},
 
 	formReady: function () {
-		if (!this.passwordErrors() && this.state.email.length > 0 && this.state.username.length > 0) {
-			return true
-		} 
+		if (this.state.type == "login") {
+			if (!this.passwordErrors() && this.state.email.length > 0) {
+				return true
+			}
+		} else {
+			if (!this.passwordErrors() && this.state.email.length > 0 && this.state.username.length > 0) {
+				return true
+			}			
+		}
 		return false;
 	},
 	
 	render: function () {
-		var buttonStyle = {
+		var rememberStatus, buttonStyle, buttonStyleLabel, userNameField, emailField, passwordField, passwordConfirmField;
+		buttonStyle = {
 			width:'100%',
 			margin:'5px',
 		}
-		var buttonStyleLabel = {
+
+		buttonStyleLabel = {
 			textTransform:"none !important"
 		}
+		
+		emailField = (
+			<TextField 
+				error={this.emailErrors()} 
+				type="email" onChange={this.updateEmail} 
+				floatingLabelText="Email"
+				value={this.state.email} />
+		)
+		passwordField = (
+			<TextField 
+				floatingLabelText="Password" 
+				type="password" 
+				onChange={this.updatePassword} 
+				value={this.state.password}/>
+		)
+		if (this.state.type == "signup") {
+			userNameField = (
+				<TextField 
+					type="text" 
+					onChange={this.updateUsername} 
+					floatingLabelText="Username" 
+					value={this.state.username}/>
+			)
+			passwordConfirmField = (
+				<TextField 
+					floatingLabelText="Confirm Password" 
+					error={this.passwordErrors()}
+					type="password" 
+					onChange={this.updatePasswordConfirm} 
+					value={this.state.password_confirm}/>
+			)			
+		} else {
+			rememberStatus = (
+				<Checkbox 
+					label="Remember Me" 
+					onCheck={this.updateRememberStatus} 
+					checked={this.state.remember_me} />
+			)
+		}
+		
+		
+
+
 		return (
 			<div className="auth-form-container">
-				<form className="auth-form">				
-					<TextField 
-						error={this.emailErrors()} 
-						type="email" onChange={this.updateEmail} 
-						floatingLabelText="Email" value={this.state.email}/>
-					<TextField 
-						type="text" 
-						onChange={this.updateUsername} 
-						floatingLabelText="Username" 
-						value={this.state.username}/>
-					<TextField 
-						floatingLabelText="Password" 
-						type="password" 
-						onChange={this.updatePassword} 
-						value={this.state.password}/>
-					<TextField 
-						floatingLabelText="Password" 
-						error={this.passwordErrors()} 
-						type="password" 
-						onChange={this.updatePasswordConfirm} 
-						value={this.state.password_confirm}/>
+				<form className="auth-form">
+					{emailField}
+					{userNameField}
+					{passwordField}
+					{passwordConfirmField}
 					<RaisedButton 
 						style={buttonStyle} 
 						labelStyle={buttonStyleLabel}
@@ -126,11 +177,11 @@ var LoginForm = React.createClass({
 					style={buttonStyle} 
 					labelStyle={buttonStyleLabel}
 					className="auth-form-button" 
-					label="Already have an Account?" 
-					onClick={this.props.toggleAuth} />
+					label={(this.state.type == "login") ? "Create a new account" : "Already have an Account?"} 
+					onClick={this.toggleAuth} />
 			</div>
 		)	
 	}
 });
 
-module.exports = LoginForm;
+module.exports = AuthForm;

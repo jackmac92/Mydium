@@ -116,7 +116,7 @@ var ArticleDetail = React.createClass({
   },
 
   handleScroll: function (e) {
-    var scrollPercent = 100 * $(window).scrollTop() / ($("article").height() - $(window).height());
+    var scrollPercent = 100 * $(window).scrollTop() / ($(".scroll-area").height() - $(window).height());
     this.setState({position: scrollPercent})
     if (scrollPercent >= 98 && !this.state.markedRead && this.state.userSignedIn) {
       this.setState({scrolledToEnd: true})
@@ -158,8 +158,8 @@ var ArticleDetail = React.createClass({
         <div>
           <hr />
           <List>
-            <h4>{"Other Articles authored by " + this.state.article.author.name}</h4>
             {follow_button}
+            <h4>{"Other Articles authored by " + this.state.article.author.name}</h4>
             {article_items}
           </List>
         </div>
@@ -171,27 +171,31 @@ var ArticleDetail = React.createClass({
         <div className="article-progress">
           <LinearProgress color={Colors.green600} mode="determinate" value={this.state.position}/>
         </div>
+        <div className="scroll-area">
         <div className="image-container article-detail-image placeholder" id={"placeholder-"+this.state.article.id} data-large={this.state.article.picture} >
           <img src={this.state.article.loading_pic} className="img-small"/>
           <div style={{paddingBottom: "50%"}}></div>
         </div>
-        <section className="article-detail-view">
-          <article className="article-detail">
-            <div>
-              {delete_button}
-              <h1>{this.state.article.title}</h1>
-            </div>
-            <img className="author-thumb" src={this.state.article.author.avatar} />
-            <p className="author-name">{this.state.article.author.name}</p>
-            {tags}
-            <div
-              dangerouslySetInnerHTML={this.rawBody()}
-            />
-          </article>
+          <section className="article-detail-view">
+            <article className="article-detail">
+              <div>
+                {delete_button}
+                <h1>{this.state.article.title}</h1>
+              </div>
+              <img className="author-thumb" src={this.state.article.author.avatar} />
+              <p className="author-name">{this.state.article.author.name}</p>
+              {tags}
+              <div
+                dangerouslySetInnerHTML={this.rawBody()}
+              />
+            </article>
+          </section>
+        </div>
+        <div className="article-detail-view">
           {recent_posts_view}
           <hr />
           <Comments commentTimer={this.state.remainingTime} disabled={!this.state.markedRead} article_id={this.state.article.id} comments={this.state.article.comments} />
-        </section>
+        </div>
       </div>
     );
   }

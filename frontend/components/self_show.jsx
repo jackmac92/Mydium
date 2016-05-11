@@ -22,6 +22,7 @@ var SelfShow = React.createClass({
       bookmarks: SessionStore.userBookmarks(),
       favorites: SessionStore.userFavorites(),
       drafts: SessionStore.userDrafts(),
+      mentions: SessionStore.userMentions(),
       published: SessionStore.userPublished(),
       profile: UserStore.detail()
     }

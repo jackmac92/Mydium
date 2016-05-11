@@ -7,8 +7,7 @@ import AuthUtil from './util/auth'
 import SessionStore from './stores/session'
 
 import MaterialApp from './components/material_app'
-import LoginForm from './components/login_form'
-import SignUpForm from './components/signup_form'
+import AuthForm from './components/auth_form'
 import SelfShow from './components/self_show'
 import OtherShow from './components/other_show'
 import ArticleIndex from './components/article_index'
@@ -47,7 +46,7 @@ $(document).ready(function () {
           <Route path="editor" component={ArticleForm} />
           <Route path="editor/:id" onEnter={_requireLoggedIn} component={ArticleForm} />
           <Route path="search" component={Search}/>
-          <Route path="login" component={LoginForm}/>
+          <Route path="login" component={AuthForm}/>
         </Route>
       </Router>,
     $('#root')[0]

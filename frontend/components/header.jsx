@@ -3,9 +3,8 @@ import Search from './search'
 import AuthUtil from '../util/auth'
 import SessionStore from '../stores/session'
 import Headroom from 'react-headroom'
-import LoginForm from './login_form'
-import SignupForm from './signup_form'
 
+import AuthForm from './auth_form'
 import Popover from 'material-ui/Popover';
 import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
@@ -69,10 +68,6 @@ var Header = React.createClass({
   	})
   },
 
-  toggleFormState: function () {
-  	this.setState({formForSignIn:!this.state.formForSignIn})
-  },
-
   handleRequestClose: function () {
   	this.setState({open:false})
   },
@@ -96,7 +91,7 @@ var Header = React.createClass({
 	render: function() {
 		var userActionButton, authForm;
 		var router = this.context.router
-		authForm = (this.state.formForSignIn) ? <LoginForm toggleAuth={this.toggleFormState} /> : <SignupForm toggleAuth={this.toggleFormState} /> 
+		authForm = <AuthForm />
 		if (this.state.loggedIn) {
 			userActionButton = (
 					<div className="user-action-button-header">
@@ -106,9 +101,18 @@ var Header = React.createClass({
 		          anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
 		          targetOrigin={{horizontal: 'left', vertical: 'top'}}
 		        >
-		        	<MenuItem rightIcon={<FontIcon className="fa fa-plus"/>} onTouchTap={this.goTo.bind(this,"/editor")} primaryText="New Article"/>
-		        	<MenuItem rightIcon={<FontIcon className="fa fa-user"/>} onTouchTap={() => this.context.router.push("/me")} primaryText="Account"/>
-	            <MenuItem rightIcon={<FontIcon className="fa fa-sign-out"/>} onTouchTap={this.logOut} primaryText="Sign Out"/>
+		        	<MenuItem 
+		        		rightIcon={<FontIcon className="fa fa-plus"/>} 
+		        		onTouchTap={() => this.context.router.push("/editor")} 
+		        		primaryText="New Article"/>
+		        	<MenuItem 
+		        		rightIcon={<FontIcon className="fa fa-user"/>} 
+		        		onTouchTap={() => this.context.router.push("/me")} 
+		        		primaryText="Account"/>
+	            <MenuItem 
+	            	rightIcon={<FontIcon className="fa fa-sign-out"/>} 
+	            	onTouchTap={this.logOut} 
+	            	primaryText="Sign Out"/>
 		        </IconMenu>
 					</div>
 			)

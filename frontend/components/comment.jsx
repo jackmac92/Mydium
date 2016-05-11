@@ -27,6 +27,7 @@ var Comment = React.createClass({
 
 		return (
 			<ListItem
+				disabled={true}
 				leftAvatar={ <Avatar src={this.props.comment.user.avatar} />}
 				primaryText={this.props.comment.body}
 				secondaryText={this.props.comment.user.username}

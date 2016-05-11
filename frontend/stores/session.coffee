@@ -8,6 +8,7 @@ SessionStore = new Store AppDispatcher
 `_currentUser = null`
 `_currentUserHasBeenFetched = false`
 `_userDrafts = []`
+`_userMentions = []`
 `_userPublished = []`
 `_userFavorites = []`
 `_userBookmarks = []`
@@ -23,6 +24,8 @@ SessionStore.isLoggedIn = ->
 
 SessionStore.userDrafts = ->
 	`_userDrafts.slice()`
+SessionStore.userMentions = ->
+	`_userMentions.slice()`
 SessionStore.userPublished = ->
 	`_userPublished.slice()`
 SessionStore.userFavorites = ->
