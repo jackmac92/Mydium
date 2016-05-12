@@ -56,6 +56,7 @@ var Sidebar = React.createClass({
 
 	render: function () {
 		var featured_tags, user_tags_section, top_stories;
+
 		if (this.state.featured.length > 0) {
 			featured_tags = this.state.featured.map (t => <Tag key={t.id} tag={t}/> )
 			if (SessionStore.isLoggedIn() && this.state.user_tags.length > 0) {
@@ -72,8 +73,13 @@ var Sidebar = React.createClass({
 					)
 			}
 		}
+
 		top_stories = this.state.top.map( a => 
-			<ListItem onClick={() => this.context.router.push("/article/"+a.id)} key={a.id} primaryText={a.title} secondaryText={"By "+a.author.name+" in "+a.tags[0].name} /> 
+			<ListItem 
+				key={a.id} 
+				primaryText={a.title} 
+				onClick={() => this.context.router.push("/article/"+a.id)} 
+				secondaryText={"By "+a.author.name+" in "+a.tags[0].name} /> 
 		)
 		return (
 			<div id="sidebar-wrap">

@@ -23,6 +23,23 @@ class Article < ActiveRecord::Base
   has_many :users_who_viewed, through: :article_views, source: :user
   has_many :users_who_read, through: :article_reads, source: :user
 
+
+  has_many(
+    :mentions,
+    class_name: "Mention",
+    source: :mentioner,
+    source_type: "Article",
+    foreign_key: :mentioner_id
+  )
+  has_many(
+    :mentioned_users, 
+    through: :mentions,
+    source: :mentionable,
+    source_type: "User",
+    foreign_key: :mentionable_id 
+  )
+
+
   scope :popular, -> { 
     select("articles.*, count(article_views.id) AS views_count")
     .where(published: true)

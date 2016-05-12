@@ -1,8 +1,8 @@
-var React = require('react');
+import React from 'react';
 import Comment from './comment';
 import CommentForm from './comment_form';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-import {List} from 'material-ui/List'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {List} from 'material-ui/List';
 
 var Comments = React.createClass({
 

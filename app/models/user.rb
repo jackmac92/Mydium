@@ -22,9 +22,91 @@ class User < ActiveRecord::Base
   has_many :article_views, dependent: :destroy
   has_many :article_reads, dependent: :destroy
   
+
   has_many :viewed_articles, through: :article_views, source: :article
   has_many :read_articles, through: :article_reads, source: :article
   has_many :bookmarked_articles, through: :bookmarks, source: :article
+
+  ### Favorites
+  has_many(
+    :favs, 
+    class_name: "Like", 
+    source: :liker, 
+    source_type: "User", 
+    foreign_key: :liker_id
+  )
+
+  has_many( 
+    :favorite_articles,
+    through: :favs,
+    source: :liker, 
+    foreign_key: :likeable_id,
+    source_type: "User"
+  )
+
+  ### Follows
+  has_many(
+    :follows,
+    class_name: "Follow",
+    source: :follower,
+    source_type: "User",
+    foreign_key: :follower_id
+  )
+
+  has_many(
+    :followed_tags,
+    through: :follows,
+    source: :follower,
+    foreign_key: :followable_id,
+    source_type: "Tag"
+  )
+
+  has_many(
+    :followed_authors,
+    through: :follows,
+    source: :follower,
+    foreign_key: :followable_id,
+    source_type: "User"
+  )
+
+  has_many(
+    :followings,
+    class_name: "Follow",
+    source: :followee,
+    source_type: "User",
+    foreign_key: :follower_id
+  )
+
+  has_many(
+    :sheep,
+    through: :followings,
+    source: :followable,
+    source_type: "User",
+    foreign_key: :followable_id,
+  )
+
+  ### Mentions
+  has_many(
+    :mentions,
+    class_name: "Mention",
+    source: :mentionable,
+    source_type: "User",
+    foreign_key: :mentionable_id
+  )
+
+  has_many(
+    :article_mentioners,
+    through: :mentions,
+    source: :mentioner,
+    source_type: "Article",
+    foreign_key: :mentioner_id 
+  )
+
+
+  has_many :user_mentioners, through: :article_mentioners, source: :user    
+
+  has_many :mentioned_users, through: :articles, source: :mentioned_users
+
 
   acts_as_liker
   acts_as_mentionable
@@ -39,9 +121,9 @@ class User < ActiveRecord::Base
                   }
 
 
-  def favorite_articles
-    Article.where(id: likees(Article).map(&:id))
-  end
+  # def favorite_articles
+  #   Article.where(id: likees(Article).map(&:id))
+  # end
 
   def followed_users
     User.where(id: followees(User).map(&:id))
