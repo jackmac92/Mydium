@@ -53,4 +53,8 @@ class Api::UsersController < ApplicationController
 			end
 		end
 	end
+	private
+	def user_params
+		params.require(:user).permit(:username, :name, :email, tag_ids: [])
+	end
 end

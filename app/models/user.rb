@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   has_many(
     :favs, 
     class_name: "Like", 
+    dependent: :destroy,
     source: :liker, 
     source_type: "User", 
     foreign_key: :liker_id
@@ -48,6 +49,7 @@ class User < ActiveRecord::Base
   has_many(
     :follows,
     class_name: "Follow",
+    dependent: :destroy,
     source: :follower,
     source_type: "User",
     foreign_key: :follower_id
@@ -62,9 +64,9 @@ class User < ActiveRecord::Base
   )
 
   has_many(
-    :followed_authors,
+    :followed_users,
     through: :follows,
-    source: :follower,
+    source: :followable,
     foreign_key: :followable_id,
     source_type: "User"
   )
@@ -72,23 +74,25 @@ class User < ActiveRecord::Base
   has_many(
     :followings,
     class_name: "Follow",
+    dependent: :destroy,
     source: :followee,
     source_type: "User",
-    foreign_key: :follower_id
+    foreign_key: :followable_id
   )
 
   has_many(
     :sheep,
     through: :followings,
-    source: :followable,
+    source: :follower,
     source_type: "User",
-    foreign_key: :followable_id,
+    foreign_key: :follower_id,
   )
 
   ### Mentions
   has_many(
     :mentions,
     class_name: "Mention",
+    dependent: :destroy,
     source: :mentionable,
     source_type: "User",
     foreign_key: :mentionable_id
@@ -121,20 +125,12 @@ class User < ActiveRecord::Base
                   }
 
 
-  # def favorite_articles
-  #   Article.where(id: likees(Article).map(&:id))
-  # end
-
-  def followed_users
-    User.where(id: followees(User).map(&:id))
-  end
-
   def followed_tags
-    Tag.where(id: followees(Tag).map(&:id))
+    Tag.where(id: followees(Tag).pluck(:id))
   end
 
   def activity_list
-    PublicActivity::Activity.where owner_type: "User", owner_id: self.id
+    PublicActivity::Activity.where owner_type: "User", owner_id: id
   end
 
   def toggle_bookmark article_id

@@ -1,9 +1,10 @@
-var React = require('react');
-import {Tab, Tabs} from 'material-ui/Tabs';
+import React from 'react';
 import SessionStore from '../stores/session'
-import UserStore from '../stores/user'
-import {List,ListItem} from 'material-ui/List';
 import UserUtil from '../util/user'
+import UserStore from '../stores/user'
+
+import {Tab, Tabs} from 'material-ui/Tabs';
+import {List,ListItem} from 'material-ui/List';
 import TagSelector from './tag_selector'
 import IconButton from 'material-ui/IconButton'
 import TextField from 'material-ui/TextField'
@@ -175,8 +176,15 @@ var SelfShow = React.createClass({
         <Tab onClick={this.handleChange.bind(this,"b")} label="Bookmarks" value="b">
           {bookmarksection}
         </Tab>
+
       </Tabs>
     );
+    // mentions
+    // mentioned_by
+    // following
+    // followed_by
+    // favorite tags
+    
   }
 
 });

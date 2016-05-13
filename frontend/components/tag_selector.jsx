@@ -1,5 +1,5 @@
-import React from 'react';
 import { List, ListItem } from 'material-ui/List'
+import React from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
 import TagStore from '../stores/tag'
 import SessionStore from '../stores/session'

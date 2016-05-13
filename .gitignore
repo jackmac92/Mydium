@@ -24,3 +24,4 @@ questions
 npm-degbug.log
 oldheader
 *.sublime*
+.eslintrc.json
